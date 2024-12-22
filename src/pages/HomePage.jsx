@@ -21,7 +21,7 @@ const HomePage = () => {
       {/* Skills Section */}
       <section className="py-12">
         <h2 className="text-2xl font-bold text-center mb-6">My Skills</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
             <img src="HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform hover:scale-110" alt="HTML/CSS/JS Icon"/>
           </div>
@@ -58,11 +58,11 @@ const HomePage = () => {
       {/* Bio Section */}
       <section className="py-12">
         <h2 className="text-2xl font-bold text-center mb-6">About Me</h2>
-        <div className="flex flex-col sm:flex-row items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-6 p-10">
           <img
-            src="https://via.placeholder.com/150"
+            src="Profile-pic.jpg"
             alt="Profile"
-            className="rounded-full w-32 h-32 shadow"
+            className="rounded-full w-24 h-24 shadow"
           />
           <p className="text-gray-700 dark:text-gray-300 max-w-lg text-center sm:text-left">
             Hi, I’m Nick Hanson Sr., a passionate web developer. I love building
