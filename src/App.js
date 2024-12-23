@@ -1,3 +1,20 @@
+/**
+ * File: App.js
+ * Author: Nick Hanson
+ * Created On: December 21, 2024
+ * Last Updated: December 23, 2024
+ * Description: The main app file
+ *
+ * Props:
+ *
+ * Notes:
+ * - Uses Tailwind CSS classes for styling.
+ * - Responsive design included for mobile and desktop views.
+ *
+ * Dependencies:
+ * - React
+ */
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "./components/NavBar";
