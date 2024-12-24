@@ -18,13 +18,16 @@ exports.handler = async (event) => {
   // Parse form data from the request body
   const data = JSON.parse(event.body);
 
+  // For local testing
+  require('dotenv').config();
+
   // Set SendGrid API Key
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   // Define email details
   const msg = {
     to: 'nick@nickhanson.me', // Your email
-    from: 'no-reply@nickhanson.me', // A verified sender email
+    from: 'nick@nickhanson.me', // A verified sender email
     subject: `New Contact Form Submission from ${data.name}`,
     text: `You have a new message from ${data.name} (${data.email}):\n\n${data.message}`,
   };
