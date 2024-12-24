@@ -30,14 +30,14 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="dark:bg-gray-600 max-w-5xl mx-auto p-8">
+    <div className="bg-gray-100 dark:bg-gray-600 max-w-5xl mx-auto p-8">
       <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-6">My Projects</h1>
       <p className="dark:text-gray-200 text-center text-gray-700 mb-8">
         Here are some of the projects I’ve worked on, showcasing my skills in web development, problem-solving, and design.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
-          <div key={index} className="border rounded-lg shadow-md overflow-hidden hover:scale-110">
+          <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
             <img
               src={project.image}
               alt={`${project.title} thumbnail`}

@@ -22,13 +22,9 @@ import React, {useEffect} from 'react';
 const HomePage = () => {
   useEffect(() => {
     document.title = "Home - Nick Hanson Showcase";
+    document.body.classList.add('bg-gray-200');
      // Add the dark mode class to the body when the component mounts
-     document.body.classList.add('dark:bg-gray-900');
-
-     // Optional: Remove the class when the component unmounts
-     return () => {
-       document.body.classList.remove('dark:bg-gray-900');
-     };
+    document.body.classList.add('dark:bg-gray-900');
   }, []);
 
   return (
@@ -51,22 +47,22 @@ const HomePage = () => {
       <section className="py-12">
         <h2 className="text-2xl font-bold text-center mb-6">My Skills</h2>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform hover:scale-110" alt="HTML/CSS/JS Icon"/>
           </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
+          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="React-logo.png" className="transition transform hover:scale-110" alt="React Logo"/>
           </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
+          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="Tailwind-icon.png" className="transition transform hover:scale-110" alt="Tailwind Logo"/>
           </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
+          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="Angular-icon.png" className="transition transform hover:scale-110" alt="Angular Logo"/>
           </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
+          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="PHP-Logo.png" className="transition transform hover:scale-110" alt="PHP Logo"/>
           </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow justify-center content-center">
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="Node.js-logo.png" className="w-24 h-12 transition transform hover:scale-110" alt="Node.js Logo"/>
           </div>
           {/* Add more skills as needed */}
@@ -77,7 +73,7 @@ const HomePage = () => {
       <section className="py-12 bg-gray-100 dark:bg-gray-800 justify-items-center">
         <h2 className="text-2xl font-bold text-center mb-6">Featured Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5">
-          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow">
+          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
             <img src="/images/RiffTrax-Collection-thumbnail.png" alt="Project Thumbnail"
                     className="rounded w-full h-auto mb-4 text-gray-100 dark:text-gray-800" />
             <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">RiffTrax Collection</h3>
@@ -85,14 +81,14 @@ const HomePage = () => {
               An app that stores info on my Rifftrax Collection.
             </p>
           </div>
-          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow">
+          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
             <img src="/images/D&D-App-logo.jpg" alt="Project Thumbnail" className="rounded w-full h-auto mb-4 text-gray-100 dark:text-gray-800" />
             <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">DnD App</h3>
             <p className="text-gray-300 dark:text-gray-700">
               An app for Dungeons & Dragons Info.
             </p>
           </div>
-          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow">
+          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
             <img src="/images/TaskMaster-App-logo.webp" alt="Project Thumbnail" className="rounded w-full h-auto mb-4 text-gray-100 dark:text-gray-800" />
             <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">Todo App</h3>
             <p className="text-gray-300 dark:text-gray-700">
