@@ -59,7 +59,7 @@ export default function Blogs() {
       : blogs.filter((blog) => blog.category === selectedCategory);
 
   return (
-    <div className="blogs-page container mx-auto px-4 py-8">
+    <div className="blogs-page container mx-auto px-4 py-8 mb-20">
       <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-8">Nick's Blogs</h1>
 
       {/* Dynamic Category Buttons */}
@@ -85,7 +85,7 @@ export default function Blogs() {
           {filteredBlogs.map((post) => (
             <div
               key={post.id}
-              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer hover:scale-110"
+              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md dark:shadow-dark p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow cursor-pointer hover:scale-105"
               onClick={() => handlePostClick(post)}
             >
               <h2 className="text-2xl dark:text-gray-200 font-semibold mb-2">{post.title}</h2>

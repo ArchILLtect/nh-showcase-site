@@ -1,5 +1,15 @@
 
 
+TTD:
+   // TODO: Make a DB for projects
+   // TODO: Implement and admin role
+   // TODO: Implement functionality for adding/editing blogs.
+   // TODO: Implement functionality for adding/editing projects.
+   // TODO: Update 
+
+
+
+
 Project File Structure:
 my-showcase-site/
 ├── backend/                       # Backend-related files

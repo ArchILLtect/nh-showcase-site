@@ -28,25 +28,26 @@ const HomePage = () => {
   }, []);
 
   return (
-    <main className="p-4 w-5/6 mx-auto dark:bg-gray-600 dark:text-white">
+    <main className="p-4 w-5/6 mx-auto dark:bg-gray-600 text-gray-100">
       {/* Hero Section */}
-      <section className="text-center py-12 bg-gray-100 dark:bg-gray-800 dark:text-white">
-        <h1 className="text-4xl font-bold mb-4">Welcome to My Personal Site!</h1>
-        <p className="text-lg text-gray-700 mb-6 dark:text-gray-300">
-          This is where I showcase my projects, share my resume, and more.
+      <section className="relative text-center py-12 bg-gray-100 dark:bg-gray-800 bg-hero-pattern bg-center bg-auto">
+        <div className="absolute inset-0 bg-gray-800 bg-opacity-85"></div>
+        <h1 className="relative z-10 text-4xl font-bold mb-4">Hello World! My name is Nick.</h1>
+        <p className="relative z-10 text-lg mb-6 text-gray-200">
+          This is where I showcase my projects, share my blogs, and more.
         </p>
-        <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition duration-500">
+        <button className="relative z-10 px-6 py-3 bg-blue-500 text-gray-100 text-sm rounded hover:bg-blue-600 transition duration-500">
           Explore My Projects
         </button>
-        <p className="text-lg text-gray-700 mb-6 dark:text-gray-300">
-          This is where I showcase my projects, share my resume, and more.
+        <p className="relative z-10 text-xl text-gray-200 mt-10">🚧This site is under heavy construction.🚧</p>
+        <p className="relative z-10 text-xl text-gray-200 mt-10">🚧Please be patient with me and check back often for updated content.🚧
         </p>
       </section>
 
       {/* Skills Section */}
       <section className="py-12">
-        <h2 className="text-2xl font-bold text-center mb-6">My Skills</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">My Skills</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4">
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform hover:scale-110" alt="HTML/CSS/JS Icon"/>
           </div>
@@ -71,7 +72,7 @@ const HomePage = () => {
 
       {/* Projects Section */}
       <section className="py-12 bg-gray-100 dark:bg-gray-800 justify-items-center">
-        <h2 className="text-2xl font-bold text-center mb-6">Featured Projects</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">Featured Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5">
           <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
             <img src="/images/RiffTrax-Collection-thumbnail.png" alt="Project Thumbnail"
@@ -103,14 +104,14 @@ const HomePage = () => {
 
       {/* Bio Section */}
       <section className="py-12">
-        <h2 className="text-2xl font-bold text-center mb-6">About Me</h2>
-        <div className="flex flex-col sm:flex-row items-center gap-6 p-10">
+        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">About Me</h2>
+        <div className="flex flex-col sm:flex-row gap-6 p-10 items-center justify-center">
           <img
             src="Profile-pic.jpg"
             alt="Profile"
             className="rounded-full w-24 h-24 shadow"
           />
-          <p className="text-gray-700 dark:text-gray-300 max-w-lg text-center sm:text-left">
+          <p className="text-gray-700 dark:text-gray-300 max-w-lgsm:text-left max-w-xl">
             Hi, I’m Nick Hanson Sr., a passionate web developer. I love building
             intuitive, accessible, and visually appealing applications. When I’m
             not coding, I enjoy exploring new technologies and sharing my
