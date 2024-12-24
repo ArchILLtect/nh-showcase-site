@@ -1,0 +1,36 @@
+
+
+[
+    {
+        "id": 1,
+        "category": "work",
+        "title": "My Journey into Web Development",
+        "excerpt": "How I got started with coding and why I love it...",
+        "content": "Full blog post content goes here...",
+        "date": "2024-12-23"
+    },
+    {
+        "id": 2,
+        "category": "work",
+        "title": "Debugging is Fun!",
+        "excerpt": "Tips and tricks to make debugging less frustrating...",
+        "content": "Full blog post content goes here...",
+        "date": "2024-12-20"
+    },
+    {
+        "id": 3,
+        "category": "school",
+        "title": "Learning Java: My First Impressions",
+        "excerpt": "Why Java is exciting and challenging as a student...",
+        "content": "Full blog post content goes here...",
+        "date": "2024-12-15"
+    },
+    {
+        "id": 4,
+        "category": "school",
+        "title": "Top 5 Study Tips for Web Dev Students",
+        "excerpt": "Tips to stay productive and focused while learning web development...",
+        "content": "Full blog post content goes here...",
+        "date": "2024-12-10"
+      }
+  ]

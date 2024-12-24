@@ -22,6 +22,13 @@ import React, {useEffect} from 'react';
 const HomePage = () => {
   useEffect(() => {
     document.title = "Home - Nick Hanson Showcase";
+     // Add the dark mode class to the body when the component mounts
+     document.body.classList.add('dark:bg-gray-900');
+
+     // Optional: Remove the class when the component unmounts
+     return () => {
+       document.body.classList.remove('dark:bg-gray-900');
+     };
   }, []);
 
   return (

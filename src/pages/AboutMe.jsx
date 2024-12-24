@@ -49,27 +49,31 @@ const AboutMe = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-6">About Me</h1>
+    <div className="dark:bg-gray-600 xl:max-w-6xl lg:max-w-4xl mx-auto p-4">
+      <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-6">About Me</h1>
       {sections.map((section, index) => (
-        <div key={index} className="mb-4 border-b border-gray-300">
+        <div key={index} className="dark:bg-gray-300 mb-4 border-b border-gray-300 dark:border-gray-800">
           <button
             className="w-full text-left py-2 px-4 font-semibold text-lg flex justify-between items-center"
             onClick={() => toggleSection(index)}
           >
             {section.title}
-            <span className="text-gray-500">
+            <span className="text-gray-500 dark:text-gray-800">
               {expanded === index ? "▲" : "▼"}
             </span>
           </button>
-          <p className="px-4 py-2 text-gray-700">{section.summary}</p>
+          <p className="px-4 py-2 text-gray-700 hover:text-lg">{section.summary}</p>
           {expanded === index && (
-            <div className="px-4 pb-4 text-gray-600">
+            <div className="px-4 pb-4 text-gray-600 hover:text-lg">
               {section.details}
             </div>
           )}
         </div>
       ))}
+      <div className="mt-24 pb-24 flex flex-col text-center content-center flex-wrap hover:scale-110">
+        <h2 className="dark:text-gray-100 text-3xl font-bold">Powered By:</h2>
+        <img src="/images/NH-Circuit-Logo.webp" width="30%" alt="Nick Hanson Circuit Logo" />
+      </div>
     </div>
   );
 };

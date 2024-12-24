@@ -37,8 +37,8 @@ const NavBar = () => {
             to="/home"
             className={({ isActive }) =>
               isActive
-                ? "text-yellow-400 px-5 py-2 no-underline"
-                : "text-white px-5 py-2 no-underline hover:text-yellow-400"
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
             }
           >
             Home
@@ -49,8 +49,8 @@ const NavBar = () => {
             to="/projects"
             className={({ isActive }) =>
               isActive
-                ? "text-yellow-400 px-5 py-2 no-underline"
-                : "text-white px-5 py-2 no-underline hover:text-yellow-400"
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
             }
           >
             Projects
@@ -61,8 +61,8 @@ const NavBar = () => {
             to="/about"
             className={({ isActive }) =>
               isActive
-                ? "text-yellow-400 px-5 py-2 no-underline"
-                : "text-white px-5 py-2 no-underline hover:text-yellow-400"
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
             }
           >
             About Me
@@ -73,8 +73,8 @@ const NavBar = () => {
             to="/blog"
             className={({ isActive }) =>
               isActive
-                ? "text-yellow-400 px-5 py-2 no-underline"
-                : "text-white px-5 py-2 no-underline hover:text-yellow-400"
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
             }
           >
             Blog
@@ -85,8 +85,8 @@ const NavBar = () => {
             to="/contact"
             className={({ isActive }) =>
               isActive
-                ? "text-yellow-400 px-5 py-2 no-underline"
-                : "text-white px-5 py-2 no-underline hover:text-yellow-400"
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
             }
           >
             Contact
@@ -98,7 +98,7 @@ const NavBar = () => {
         {isLoggedIn() ? (
           <button
             onClick={handleLogout}
-            className="text-white px-5 py-2 no-underline hover:text-yellow-400 flex gap-2 items-center"
+            className="hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg flex gap-2 items-center"
           >
             Logout
             <svg
@@ -127,7 +127,7 @@ const NavBar = () => {
             className={({ isActive }) =>
               isActive
                 ? "text-yellow-400 px-5 py-2 no-underline flex gap-2 items-center flex-row"
-                : "text-white px-5 py-2 no-underline flex gap-2 items-center flex-row hover:text-yellow-400"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg flex gap-2 items-center flex-row"
             }
           >
             Login
