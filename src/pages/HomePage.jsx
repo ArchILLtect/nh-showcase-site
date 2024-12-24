@@ -28,9 +28,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <main className="p-4 w-5/6 mx-auto dark:bg-gray-600 text-gray-100">
+    <main className="p-4 w-5/6 mx-auto dark:bg-gray-600 text-gray-100 sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
       {/* Hero Section */}
-      <section className="relative text-center py-12 bg-gray-100 dark:bg-gray-800 bg-hero-pattern bg-center bg-auto">
+      <section className="relative lg:max-w-4xl text-center py-12 bg-gray-100 dark:bg-gray-800 bg-hero-pattern bg-center bg-auto">
         <div className="absolute inset-0 bg-gray-800 bg-opacity-85"></div>
         <h1 className="relative z-10 text-4xl font-bold mb-4">Hello World! My name is Nick.</h1>
         <p className="relative z-10 text-lg mb-6 text-gray-200">
@@ -47,7 +47,7 @@ const HomePage = () => {
       {/* Skills Section */}
       <section className="py-12">
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">My Skills</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-2 gap-y-8 justify-items-center">
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
             <img src="HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform hover:scale-110" alt="HTML/CSS/JS Icon"/>
           </div>
