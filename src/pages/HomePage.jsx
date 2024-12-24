@@ -28,13 +28,16 @@ const HomePage = () => {
     <main className="p-4 w-5/6 mx-auto dark:bg-gray-600 dark:text-white">
       {/* Hero Section */}
       <section className="text-center py-12 bg-gray-100 dark:bg-gray-800 dark:text-white">
-        <h1 className="text-4xl font-bold mb-4">Welcome to My Personal Site</h1>
+        <h1 className="text-4xl font-bold mb-4">Welcome to My Personal Site!</h1>
         <p className="text-lg text-gray-700 mb-6 dark:text-gray-300">
           This is where I showcase my projects, share my resume, and more.
         </p>
         <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition duration-500">
           Explore My Projects
         </button>
+        <p className="text-lg text-gray-700 mb-6 dark:text-gray-300">
+          This is where I showcase my projects, share my resume, and more.
+        </p>
       </section>
 
       {/* Skills Section */}
