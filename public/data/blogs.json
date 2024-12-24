@@ -32,5 +32,53 @@
         "excerpt": "Tips to stay productive and focused while learning web development...",
         "content": "Full blog post content goes here...",
         "date": "2024-12-10"
-      }
+    },
+    {
+        "id": 5,
+        "category": "other",
+        "title": "Something or rather",
+        "excerpt": "Tips to do something or rather...",
+        "content": "Full blog post content goes here...",
+        "date": "2023-01-15"
+    },
+    {
+        "id": 6,
+        "category": "other",
+        "title": "HERE I GO TO TOWN ON YOU",
+        "excerpt": "Don't expect a lot of different things here...",
+        "content": "Full blog post content goes here...",
+        "date": "2023-01-15"
+    },
+    {
+        "id": 7,
+        "category": "other",
+        "title": "Something or rather",
+        "excerpt": "Tips to do something or rather...",
+        "content": "Full blog post content goes here...",
+        "date": "2023-01-15"
+    },
+    {
+        "id": 8,
+        "category": "other",
+        "title": "HERE I GO TO TOWN ON YOU",
+        "excerpt": "Don't expect a lot of different things here...",
+        "content": "Full blog post content goes here...",
+        "date": "2023-01-15"
+    },
+    {
+        "id": 9,
+        "category": "other",
+        "title": "Something or rather",
+        "excerpt": "Tips to do something or rather...",
+        "content": "Full blog post content goes here...",
+        "date": "2023-01-15"
+    },
+    {
+        "id": 10,
+        "category": "other",
+        "title": "HERE I GO TO TOWN ON YOU",
+        "excerpt": "Don't expect a lot of different things here...",
+        "content": "Full blog post content goes here...",
+        "date": "2023-01-15"
+    }
   ]
