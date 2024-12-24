@@ -70,14 +70,14 @@ const NavBar = () => {
         </li>
         <li>
           <NavLink
-            to="/resume"
+            to="/blog"
             className={({ isActive }) =>
               isActive
                 ? "text-yellow-400 px-5 py-2 no-underline"
                 : "text-white px-5 py-2 no-underline hover:text-yellow-400"
             }
           >
-            Resume
+            Blog
           </NavLink>
         </li>
         <li>

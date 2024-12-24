@@ -1,0 +1,26 @@
+[
+    {
+      "title": "ToDo App",
+      "image": "../images/TaskMaster-App-Logo.webp",
+      "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
+      "techStack": ["React", "Node.js", "MySQL"],
+      "liveDemo": "https://todo-app.example.com",
+      "github": "https://github.com/username/todo-app"
+    },
+    {
+      "title": "Media Tracker",
+      "image": "../images/RiffTrax-Collection-thumbnail.png",
+      "description": "Track movies, shows, and games with detailed stats and recommendations.",
+      "techStack": ["Next.js", "MongoDB"],
+      "liveDemo": "https://media-tracker.example.com",
+      "github": "https://github.com/username/media-tracker"
+    },
+    {
+        "title": "My D&D-API-Interface",
+        "image": "../images/D&D-App-logo.jpg",
+        "description": "Displays info using the DnD API.",
+        "techStack": ["React", "Node.js", "MySQL"],
+        "liveDemo": "https://archilltect.github.io/API_Interface/",
+        "github": "https://github.com/ArchILLtect/API_Interface/tree/main/D%26D_API_5e"
+      }
+  ]

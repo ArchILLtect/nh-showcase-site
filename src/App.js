@@ -21,10 +21,16 @@ import NavBar from "./components/NavBar";
 import PrivateRoute from "./components/PrivateRoute";
 import './App.scss';
 import HomePage from './pages/HomePage'
+import Projects from "./pages/Projects";
+import AboutMe from "./pages/AboutMe";
+import BlogPage from "./pages/Blog";
+import Contact from "./pages/Contact";
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Dashboard from './pages/Dashboard'
 import Footer from "./components/Footer";
+
+
 
 function App() {
   return (
@@ -33,6 +39,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<AboutMe />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route
