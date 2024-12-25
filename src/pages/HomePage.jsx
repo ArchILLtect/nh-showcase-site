@@ -32,7 +32,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative lg:max-w-4xl text-center py-12 bg-gray-100 dark:bg-gray-800 bg-hero-pattern bg-center bg-auto">
         <div className="absolute inset-0 bg-gray-800 bg-opacity-85"></div>
-        <h1 className="relative z-10 text-4xl font-bold mb-4">Hello World! My name is Nick.</h1>
+        <h1 className="relative z-10 text-4xl font-mono font-bold mb-4"><span className="text-blue-600">&lt;Hello World /&gt;</span> My name is Nick.</h1>
         <p className="relative z-10 text-lg mb-6 text-gray-200">
           This is where I showcase my projects, share my blogs, and more.
         </p>
