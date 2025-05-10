@@ -18,44 +18,67 @@
         "date": "2024-12-20"
     },
     {
-        "id": 3,
+        "id": 11,
+        "author": "Nick Hanson",
         "category": "school",
-        "title": "Learning Java: My First Impressions",
-        "excerpt": "Why Java is exciting and challenging as a student...",
-        "content": "Full blog post content goes here...",
-        "date": "2024-12-15"
-    },
-    {
-        "id": 4,
-        "category": "school",
-        "title": "Top 5 Study Tips for Web Dev Students",
-        "excerpt": "Tips to stay productive and focused while learning web development...",
-        "content": "Full blog post content goes here...",
-        "date": "2024-12-10"
-    },
-    {
-        "id": 5,
-        "category": "other",
-        "title": "Something or rather",
-        "excerpt": "Tips to do something or rather...",
-        "content": "Full blog post content goes here...",
-        "date": "2023-01-15"
-    },
-    {
-        "id": 7,
-        "category": "other",
-        "title": "Something or rather",
-        "excerpt": "Tips to do something or rather...",
-        "content": "Full blog post content goes here...",
-        "date": "2023-01-15"
-    },
+        "title": "Building the Cosmic Database: A Final Project Journey",
+        "excerpt": "What started as a class project became something much bigger—a story-building app for a galaxy I’ve been dreaming up.
+                    The Cosmic Database is part web app, part writing tool, and part crash course in object-oriented PHP, database design,
+                    and just barely beating the deadline. This is the story of how I built it, broke it, fixed it, and learned more than I
+                    expected along the way.",
+        "content": "For my PHP & MySQL final project, I decided to do more than just meet the minimum requirements. I wanted to build
+                    something I could actually use and expand upon beyond the class. So I created the Cosmic Database: a full-featured,
+                    multi-module web application to manage alien species, characters, and worldbuilding elements for a sci-fi story I’m
+                    developing.
+                    This blog reflects the chaotic (but rewarding) process of building, breaking, debugging, deploying, and polishing a
+                    full-stack PHP project on both Windows and Linux environments. Spoiler alert: it got done. Barely.
 
-    {
-        "id": 9,
-        "category": "other",
-        "title": "Something or rather",
-        "excerpt": "Tips to do something or rather...",
-        "content": "Full blog post content goes here...",
-        "date": "2023-01-15"
+                    The Goal
+                    The vision for the Cosmic Database was a story-building tool: something that could handle not just species and characters,
+                    but eventually planets, ships, and factions too. But for Phase 1, I narrowed it to:
+                    Add/edit/delete species and characters
+                    Associate characters with species (many-to-many via a junction table)
+                    User login/signup system with admin/user roles
+                    Admin-only deletion/edit permissions
+                    Profile editing (name, username, password, profile pic)
+                    Sticky header/footer and styled interface via Bootstrap
+                    Full object-oriented backend using PHP classes
+
+                    The Stack
+                    PHP (OOP)
+                    MySQL (via mysqli with prepared statements)
+                    Apache (XAMPP locally, then deployed to Linux server)
+                    Bootstrap for UI
+                    Sessions for access control
+                    Highlights (and Hiccups)
+                    ✅ Object-Oriented Refactor
+                    After the base version was working, I refactored species and characters into full PHP classes, complete with:
+                    Private properties
+                    Getters and setters
+                    insert(), queryAll(), and display methods
+                    This not only made things cleaner, but modular enough to scale in the future.
+
+                    🛠️ Hidden Gotchas
+                    Session issues: Clicking links worked fine locally, but failed silently on the Linux server due to misconfigured $_GET params and session_start() being too late.
+                    Pathing madness: __DIR__ and file system paths worked locally but failed on Linux until I switched to clean web paths (e.g., /projects/project4/images/...)
+                    Foreign key constraints: Attempting to delete characters before clearing junction table entries caused FK constraint failures until I added a proper cascade or manual delete-first logic.
+                    Password fields: Pre-filling password fields caused "passwords don’t match" errors until I stripped the value attribute entirely. Rookie mistake.
+                    🎯 Last-Minute Polish
+                    Added a sticky footer with a logout link for clean UX
+                    Cleaned up the navmenu to show/hide links based on user access level
+                    Made sure delete icons (trash cans) only show for admins
+                    Implemented file upload limits and basic image validation
+                    Deployment Panic
+                    The app was due by midnight. I deployed to the required Linux server around 3:30am. Everything mostly worked, except for broken paths, FK issues, and profile image loading failing due to file permission errors.
+                    Did I submit late? Yeah. Did I email my instructor a quick heads-up and hope for mercy? Also yes.
+                    Final Thoughts
+                    This project pushed every single skill I learned in the course: from handling SQL joins and secure form input, to using sessions, and writing real object-oriented PHP. But more than that, I got to build something I care about—a tool that ties into a creative project I want to keep working on.
+                    Would I do it again? In a heartbeat. But maybe next time I’ll submit before 3:30am.
+                    Bonus Lesson:
+                    If you're ever 99% sure your URL param is correct... check anyway. It’s always the 1% assumption that breaks everything.
+                    Thanks for following the journey!
+
+                    Nick HansonWeb Software Developer (in progress)",
+        "date": "2025-5-10"
     }
   ]
