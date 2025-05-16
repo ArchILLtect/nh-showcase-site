@@ -22,7 +22,7 @@ const AboutMe = () => {
   const sections = [
     {
       title: "Introduction",
-      summary: "Hi, I’m Nick Hanson, a former project manager with 15 years of experience, now transitioning into web development to turn my passion for coding into a career.",
+      summary: "Hi, I’m Nick Hanson. I spent most of my career working in construction and production fields, and I’m now transitioning into web development to turn my passion for coding into a new path. I’ve *always* been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development — creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.",
       details: "I’ve always been fascinated by technology and problem-solving. After a fulfilling career in project management, I decided to pursue my passion for coding, creating web applications, and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.",
     },
     {
