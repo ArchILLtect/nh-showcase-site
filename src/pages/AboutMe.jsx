@@ -22,13 +22,13 @@ const AboutMe = () => {
   const sections = [
     {
       title: "Introduction",
-      summary: "Hi, I’m Nick Hanson. I spent most of my career working in construction and production fields, and I’m now transitioning into web development to turn my passion for coding into a new path. I’ve *always* been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development — creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.",
-      details: "I’ve always been fascinated by technology and problem-solving. After a fulfilling career in project management, I decided to pursue my passion for coding, creating web applications, and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.",
+      summary: "Hi, I’m Nick Hanson. I spent most of my career working in construction and production fields, and I’m now transitioning into web development to turn my passion for coding into a new path.",
+      details: " I’ve *always* been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development — creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.",
     },
     {
       title: "Education",
-      summary: "Currently pursuing an Associate’s Degree in Web Software Development at Madison College, with plans to transfer for a BS in Computer Science.",
-      details: "In addition to my degree, I’ve completed numerous online courses covering topics such as Python programming, JavaScript frameworks, and web accessibility. I’ve achieved high grades in my classes, including over 100% in advanced programming courses.",
+      summary: "Currently pursuing an Associate’s Degree in Web Software Development at Madison College, with plans to transfer to UW-Whitewater for a BS in Computer Science.",
+      details: "My coursework has focused on programming, web development, and software engineering fundamentals. I’ve consistently earned high grades — including over 100% in advanced programming courses — and am gaining practical experience through academic projects and reverse engineering assignments.",
     },
     {
       title: "Career Pivot",
@@ -37,8 +37,8 @@ const AboutMe = () => {
     },
     {
       title: "Ongoing Learning",
-      summary: "I’m continuously learning through online courses like Python programming and staying ahead with the latest in web technologies.",
-      details: "I’ve taken courses from platforms like Coursera and Codecademy, covering areas such as backend development, responsive design, and cloud technologies. I also plan to earn certifications in AWS and advanced Java programming.",
+      summary: "Beyond formal education, I’m committed to continuous learning through online courses, certifications, and tech communities.",
+      details: "I’ve completed self-paced courses on platforms like Coursera and Codecademy in topics such as Python, backend development, responsive design, and cloud infrastructure. I’m currently preparing for AWS certification and plan to pursue advanced Java programming credentials. Staying current with evolving tech stacks is a key part of how I want to continue growing as a developer.",
     },
     {
       title: "What People Are Saying",
