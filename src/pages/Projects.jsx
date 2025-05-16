@@ -17,6 +17,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import AppModal from '../components/AppModal';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -49,14 +50,7 @@ const Projects = () => {
               <p className="dark:text-gray-300 text-sm text-gray-500 mb-4">Tech Stack: {project.techStack.join(', ')}</p>
               <div className="flex space-x-4">
                 {project.liveDemo && (
-                  <a
-                    href={project.liveDemo}
-                    className="dark:text-blue-300 text-blue-700 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live Demo
-                  </a>
+                  <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
                 )}
                 {project.github && (
                   <a

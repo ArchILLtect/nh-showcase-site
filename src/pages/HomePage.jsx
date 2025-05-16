@@ -45,6 +45,7 @@ const HomePage = () => {
       </section>
 
       {/* Skills Section */}
+      {/* TODO: Add Java, Python, C#, C++ and .NET */}
       <section className="py-12">
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">My Skills</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-2 gap-y-8 justify-items-center">
