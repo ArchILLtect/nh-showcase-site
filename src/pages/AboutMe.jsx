@@ -23,7 +23,7 @@ const AboutMe = () => {
     {
       title: "Introduction",
       summary: "Hi, I’m Nick Hanson. I spent most of my career working in construction and production fields, and I’m now transitioning into web development to turn my passion for coding into a new path.",
-      details: " I’ve *always* been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development — creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.",
+      details: (<>I have <strong>always</strong> been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development — creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.</>),
     },
     {
       title: "Education",
