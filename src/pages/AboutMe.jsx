@@ -40,6 +40,11 @@ const AboutMe = () => {
       summary: "I’m continuously learning through online courses like Python programming and staying ahead with the latest in web technologies.",
       details: "I’ve taken courses from platforms like Coursera and Codecademy, covering areas such as backend development, responsive design, and cloud technologies. I also plan to earn certifications in AWS and advanced Java programming.",
     },
+    {
+      title: "What People Are Saying",
+      summary: "I’ve received positive feedback from peers and instructors, highlighting my dedication, problem-solving skills, and ability to learn quickly.",
+      details: "My instructors have praised my ability to grasp complex concepts quickly and apply them effectively in projects. Peers have noted my collaborative spirit and willingness to help others, making me a valuable team member."
+    }
   ];
 
   const [expanded, setExpanded] = useState(null);
