@@ -43,7 +43,7 @@ const AboutMe = () => {
     {
       title: "What People Are Saying",
       summary: "I’ve received positive feedback from peers and instructors, highlighting my dedication, problem-solving skills, and ability to learn quickly.",
-      details: "My instructors have praised my ability to grasp complex concepts quickly and apply them effectively in projects. Peers have noted my collaborative spirit and willingness to help others, making me a valuable team member."
+      details: "“You are such a great writer! This is perfect!!! I don't think anything needs to be changed.”— Paula Waite, Honors Program Instructor"
     }
   ];
 
