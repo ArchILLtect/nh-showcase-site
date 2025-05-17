@@ -20,7 +20,7 @@
         "image": "../images/D&D-App-logo.jpg",
         "description": "Displays info using the DnD API.",
         "techStack": ["React", "Node.js", "MySQL"],
-        "liveDemo": "https://archilltect.github.io/API_Interface/D&D_API_5e/index.html",
+        "liveDemo": "https://archilltect.github.io/API_Interface/",
         "github": "https://github.com/ArchILLtect/API_Interface/tree/main/D%26D_API_5e"
     }
 ]
