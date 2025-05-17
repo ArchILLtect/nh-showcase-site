@@ -17,7 +17,6 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from "./components/NavBar";
 import PrivateRoute from "./components/PrivateRoute";
 import './App.scss';
 import HomePage from './pages/HomePage'
@@ -28,33 +27,31 @@ import Contact from "./pages/Contact";
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Dashboard from './pages/Dashboard'
-import Footer from "./components/Footer";
-
-
+import Layout from "./components/Layout";
 
 function App() {
   return (
       <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<AboutMe />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      <Footer />
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/about" element={<AboutMe />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Layout>
       </Router>
     );
   }
