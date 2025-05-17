@@ -50,22 +50,25 @@ const HomePage = () => {
         <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">My Skills</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-2 gap-y-8 justify-items-center">
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform hover:scale-110" alt="HTML/CSS/JS Icon"/>
+            <img src="icons/HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform hover:scale-110" alt="HTML/CSS/JS Icon"/>
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="React-logo.png" className="transition transform hover:scale-110" alt="React Logo"/>
+            <img src="icons/React-logo.png" className="transition transform hover:scale-110" alt="React Logo"/>
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="Tailwind-icon.png" className="transition transform hover:scale-110" alt="Tailwind Logo"/>
+            <img src="icons/Tailwind-icon.png" className="transition transform hover:scale-110" alt="Tailwind Logo"/>
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="Angular-icon.png" className="transition transform hover:scale-110" alt="Angular Logo"/>
+            <img src="icons/Angular-icon.png" className="transition transform hover:scale-110" alt="Angular Logo"/>
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="PHP-Logo.png" className="transition transform hover:scale-110" alt="PHP Logo"/>
+            <img src="icons/PHP-Logo.png" className="transition transform hover:scale-110" alt="PHP Logo"/>
           </div>
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="Node.js-logo.png" className="w-24 h-12 transition transform hover:scale-110" alt="Node.js Logo"/>
+            <img src="icons/Node.js-logo.png" className="w-24 h-12 transition transform hover:scale-110" alt="Node.js Logo"/>
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
+            <img src="icons/java-icon.webp" className="w-24 h-12 transition transform hover:scale-110" alt="Java Logo"/>
           </div>
           {/* Add more skills as needed */}
         </div>
