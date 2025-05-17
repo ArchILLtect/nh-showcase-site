@@ -4,8 +4,8 @@
       "image": "../images/TaskMaster-App-Logo.webp",
       "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
       "techStack": ["React", "Node.js", "MySQL"],
-      "liveDemo": "https://todo-app.example.com",
-      "github": "https://github.com/username/todo-app"
+      "liveDemo": "https://taskmaster.nickhanson.me/",
+      "github": "https://github.com/ArchILLtect/taskmaster"
     },
     {
       "title": "Media Tracker",
