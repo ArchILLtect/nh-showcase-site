@@ -54,8 +54,8 @@ const AboutMe = () => {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-600 xl:max-w-6xl lg:max-w-4xl mx-auto p-4">
-      <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-6">About Me</h1>
+    <div className="bg-gray-300 dark:bg-gray-600 xl:max-w-6xl lg:max-w-4xl mx-auto p-4">
+      <h1 className="text-gray-300 dark:text-gray-900 text-4xl font-bold text-center mb-6">About Me</h1>
       {sections.map((section, index) => (
         <div key={index} className="dark:bg-gray-300 mb-4 border-b border-gray-300 dark:border-gray-800">
           <button
