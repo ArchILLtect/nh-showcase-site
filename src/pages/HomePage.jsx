@@ -68,7 +68,7 @@ const HomePage = () => {
             <img src="icons/Node.js-logo.png" className="w-24 h-12 transition transform hover:scale-110" alt="Node.js Logo"/>
           </div>
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="icons/java-icon.webp" className="w-24 h-12 transition transform hover:scale-110" alt="Java Logo"/>
+            <img src="icons/java-icon.webp" className="transition transform hover:scale-110" alt="Java Logo"/>
           </div>
           {/* Add more skills as needed */}
         </div>
@@ -101,9 +101,10 @@ const HomePage = () => {
             </p>
           </div>
         </div>
+        <a href="/projects" className="flex justify-center mt-6">
         <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition duration-500">
           View All Projects
-        </button>
+        </button></a>
       </section>
 
       {/* Bio Section */}
