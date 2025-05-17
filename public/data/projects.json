@@ -1,6 +1,6 @@
 [
     {
-      "title": "ToDo App",
+      "title": "TaskMaster App",
       "image": "../images/TaskMaster-App-Logo.webp",
       "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
       "techStack": ["React", "Node.js", "MySQL"],
