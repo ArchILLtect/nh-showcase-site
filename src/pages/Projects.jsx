@@ -69,6 +69,11 @@ const Projects = () => {
             </div>
           ) : (
           <div className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md dark:shadow-dark overflow-hidden">
+              <img
+                src={project.image}
+                alt={`${project.title} thumbnail`}
+                className="w-full h-48 object-contain"
+              />
             <div className="p-4">
               <h2 className="dark:text-gray-200 text-xl font-semibold mb-2">{project.title}</h2>
               <p className="dark:text-gray-300 text-gray-600 mb-4">{project.description}</p>
