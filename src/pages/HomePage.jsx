@@ -18,6 +18,7 @@
 
 
 import React, {useEffect} from 'react';
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   useEffect(() => {
@@ -101,10 +102,11 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-        <a href="/projects" className="flex justify-center mt-6">
+        <Link to="/projects" className="flex justify-center mt-6">
         <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition duration-500">
           View All Projects
-        </button></a>
+        </button>
+        </Link>
       </section>
 
       {/* Bio Section */}
