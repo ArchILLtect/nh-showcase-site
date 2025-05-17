@@ -68,7 +68,7 @@ const HomePage = () => {
             <img src="icons/Node.js-logo.png" className="w-24 h-12 transition transform hover:scale-110" alt="Node.js Logo"/>
           </div>
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark justify-center content-center">
-            <img src="icons/java-icon.webp" className="transition transform hover:scale-110" alt="Java Logo"/>
+            <img src="icons/java-icon.webp" className="w-24 h-24 transition transform hover:scale-110" alt="Java Logo"/>
           </div>
           {/* Add more skills as needed */}
         </div>
