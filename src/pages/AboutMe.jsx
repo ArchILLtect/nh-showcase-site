@@ -27,7 +27,7 @@ const AboutMe = () => {
     },
     {
       title: "Education",
-      summary: "Currently pursuing an Associate’s Degree in Web Software Development at Madison College, with plans to transfer to UW-Whitewater for a BS in Computer Science.",
+      summary: "Currently pursuing (in my last semester) an Associate’s Degree in Web Software Development at Madison College, with plans to transfer to UW-Whitewater for a BS in Computer Science.",
       details: "My coursework has focused on programming, web development, and software engineering fundamentals. I’ve consistently earned high grades — including over 100% in advanced programming courses — and am gaining practical experience through academic projects and reverse engineering assignments.",
     },
     {
