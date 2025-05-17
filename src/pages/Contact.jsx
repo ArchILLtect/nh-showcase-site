@@ -66,7 +66,7 @@ const Contact = () => {
       </div>
 
       <div>
-        <h2 className="dark:text-gray-100 text-2xl font-semibold mb-4">Contact Form</h2>
+        <h2 className="text-gray-600 dark:text-gray-100 text-2xl font-semibold mb-4">Contact Form</h2>
         {submitted ? (
           <p className="text-green-600">Thank you for reaching out! I'll get back to you soon.</p>
         ) : (
