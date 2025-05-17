@@ -37,9 +37,12 @@ const HomePage = () => {
         <p className="relative z-10 text-lg mb-6 text-gray-200">
           This is where I showcase my projects, share my blogs, and more.
         </p>
-        <button className="relative z-10 px-6 py-3 bg-blue-500 text-gray-100 text-sm rounded hover:bg-blue-600 transition duration-500">
-          Explore My Projects
-        </button>
+        <Link to="/projects" className="flex justify-center mt-6">
+          <button className="relative z-10 px-6 py-3 bg-blue-500 text-gray-100 text-sm rounded hover:bg-blue-600 transition duration-500">
+            Explore My Projects
+          </button>
+        </Link>
+
         <p className="relative z-10 text-xl text-gray-200 mt-10">🚧This site is under heavy construction.🚧</p>
         <p className="relative z-10 text-xl text-gray-200 mt-10">🚧Please be patient with me and check back often for updated content.🚧
         </p>
@@ -103,9 +106,9 @@ const HomePage = () => {
           </div>
         </div>
         <Link to="/projects" className="flex justify-center mt-6">
-        <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition duration-500">
-          View All Projects
-        </button>
+          <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition duration-500">
+            View All Projects
+          </button>
         </Link>
       </section>
 
