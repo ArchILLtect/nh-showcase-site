@@ -33,6 +33,6 @@
       "techStack": ["Next.js", "MongoDB"],
       "liveDemo": "https://media-tracker.example.com",
       "github": "https://github.com/username/media-tracker",
-      "status": "Not Deployed Yet"
+      "status": "None"
     }
 ]
