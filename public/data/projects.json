@@ -3,9 +3,28 @@
       "title": "TaskMaster App",
       "image": "../images/TaskMaster-App-Logo.webp",
       "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
-      "techStack": ["React", "Node.js", "MySQL"],
+      "techStack": ["React", "Node.js", "MySQL", "Netlify"],
       "liveDemo": "https://taskmaster.nickhanson.me/",
-      "github": "https://github.com/ArchILLtect/taskmaster"
+      "github": "https://github.com/ArchILLtect/taskmaster",
+      "status": "MVP - Work in Progress"
+    },
+    {
+      "title": "Cosmic DB",
+      "image": "../images/CosmicDB-header.png",
+      "description": "Track worldbuilding elements for a novel/game project I am working on with some people--including my son.",
+      "techStack": ["PHP", "MySQL/MariaDB", "Bluehost"],
+      "liveDemo": "https://media-tracker.example.com",
+      "github": "https://github.com/username/media-tracker",
+      "status": "MVP - Work in Progress"
+    },
+    {
+      "title": "My D&D-API-Interface",
+      "image": "../images/D&D-App-logo.jpg",
+      "description": "Displays info using the DnD API.",
+      "techStack": ["React", "Node.js", "MySQL", "GitHub Pages"],
+      "liveDemo": "https://archilltect.github.io/API_Interface/D&D_API_5e/index.html",
+      "github": "https://github.com/ArchILLtect/API_Interface/tree/main/D%26D_API_5e",
+      "status": "MVP - Work in Progress"
     },
     {
       "title": "Media Tracker",
@@ -13,14 +32,7 @@
       "description": "Track movies, shows, and games with detailed stats and recommendations.",
       "techStack": ["Next.js", "MongoDB"],
       "liveDemo": "https://media-tracker.example.com",
-      "github": "https://github.com/username/media-tracker"
-    },
-    {
-        "title": "My D&D-API-Interface",
-        "image": "../images/D&D-App-logo.jpg",
-        "description": "Displays info using the DnD API.",
-        "techStack": ["React", "Node.js", "MySQL"],
-        "liveDemo": "https://archilltect.github.io/API_Interface/D&D_API_5e/index.html",
-        "github": "https://github.com/ArchILLtect/API_Interface/tree/main/D%26D_API_5e"
+      "github": "https://github.com/username/media-tracker",
+      "status": "Not Deployed Yet"
     }
 ]

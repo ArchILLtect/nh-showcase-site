@@ -37,34 +37,48 @@ const Projects = () => {
         Here are some of the projects I’ve worked on, showcasing my skills in web development, problem-solving, and design.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Map through the projects array and display each project */}
         {projects.map((project, index) => (
-          <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
-            <img
-              src={project.image}
-              alt={`${project.title} thumbnail`}
-              className="w-full h-48 object-contain"
-            />
+          projects.status !== 'Not Deployed Yet' ? (
+            <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
+              <img
+                src={project.image}
+                alt={`${project.title} thumbnail`}
+                className="w-full h-48 object-contain"
+              />
+              <div className="p-4">
+                <h2 className="dark:text-gray-200 text-xl font-semibold mb-2">{project.title}</h2>
+                <p className="dark:text-gray-300 text-gray-600 mb-4">{project.description}</p>
+                <p className="dark:text-gray-300 text-sm text-gray-500 mb-4">Tech Stack: {project.techStack.join(', ')}</p>
+                <div className="flex space-x-4">
+                  {project.liveDemo && (
+                    <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      className="dark:text-blue-300 text-blue-700 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+          <div className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md dark:shadow-dark overflow-hidden">
             <div className="p-4">
               <h2 className="dark:text-gray-200 text-xl font-semibold mb-2">{project.title}</h2>
               <p className="dark:text-gray-300 text-gray-600 mb-4">{project.description}</p>
               <p className="dark:text-gray-300 text-sm text-gray-500 mb-4">Tech Stack: {project.techStack.join(', ')}</p>
               <div className="flex space-x-4">
-                {project.liveDemo && (
-                  <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    className="dark:text-blue-300 text-blue-700 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                )}
+                <p>Project Not Yet Deployed</p>
               </div>
             </div>
           </div>
+          )
         ))}
       </div>
     </div>
