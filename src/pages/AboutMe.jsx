@@ -57,7 +57,7 @@ const AboutMe = () => {
     <div className="bg-gray-300 dark:bg-gray-600 xl:max-w-6xl lg:max-w-4xl mx-auto p-4">
       <h1 className="text-gray-600 dark:text-gray-300 text-4xl font-bold text-center mb-6">About Me</h1>
       {sections.map((section, index) => (
-        <div key={index} className="text-gray-600 dark:text-gray-300 dark:bg-gray-300 mb-4 border-b border-gray-300 dark:border-gray-800">
+        <div key={index} className="text-gray-800 dark:bg-gray-300 mb-4 border-b border-gray-300 dark:border-gray-800">
           <button
             className="w-full text-left py-2 px-4 font-semibold text-lg flex justify-between items-center"
             onClick={() => toggleSection(index)}
