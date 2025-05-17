@@ -13,8 +13,8 @@
       "image": "../images/CosmicDB-header.png",
       "description": "Track worldbuilding elements for a novel/game project I am working on with some people--including my son.",
       "techStack": ["PHP", "MySQL/MariaDB", "Bluehost"],
-      "liveDemo": "https://media-tracker.example.com",
-      "github": "https://github.com/username/media-tracker",
+      "liveDemo": "https://www.cosmicdb.nickhanson.me/index.php",
+      "github": "https://github.com/ArchILLtect/cosmic-db",
       "status": "MVP - Work in Progress"
     },
     {
