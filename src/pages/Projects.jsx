@@ -40,7 +40,8 @@ const Projects = () => {
         {/* Map through the projects array and display each project */}
         {projects.map((project, index) => (
           project.status?.trim() !== "None" ? (
-            <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
+            <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300 rounded-lg shadow-md
+                dark:shadow-dark overflow-hidden hover:scale-110">
               <img
                 src={project.image}
                 alt={`${project.title} thumbnail`}
