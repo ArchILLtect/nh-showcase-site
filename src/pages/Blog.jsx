@@ -96,7 +96,7 @@ export default function Blogs() {
         </div>
       ) : (
         <div className="bg-gray-100 dark:bg-gray-600 p-5">
-            <div className="bg-gray-200 dark:bg-gray-800 blog-post bg-white rounded-lg shadow-md p-6">
+            <div className="bg-gray-200 dark:bg-gray-800 blog-post rounded-lg shadow-md p-6">
             <button
                 onClick={handleBackClick}
                 className="text-blue-600 hover:text-blue-800 mb-4 font-medium"
