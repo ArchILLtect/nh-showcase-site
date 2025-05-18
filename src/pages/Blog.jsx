@@ -60,7 +60,7 @@ export default function Blogs() {
 
   return (
     <div className="blogs-page container mx-auto px-4 py-8 mb-20">
-      <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-8">Nick's Blogs</h1>
+      <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-8">Nick&apos;s Blogs</h1>
 
       {/* Dynamic Category Buttons */}
       <div className="categories flex justify-center gap-4 mb-6">
@@ -69,8 +69,8 @@ export default function Blogs() {
             key={category}
             className={`px-4 py-2 rounded-md ${
               selectedCategory === category
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-blue-600 text-white font-semibold"
+                : "text-gray-900 bg-gray-200 font-semibold hover:bg-gray-300"
             }`}
             onClick={() => handleCategoryClick(category)}
           >
@@ -81,14 +81,16 @@ export default function Blogs() {
 
       {/* Blog List or Post View */}
       {!selectedPost ? (
-        <div className="bg-gray-100 dark:bg-gray-600 mb-20 blog-list grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-5">
+        <div className="bg-gray-100 dark:bg-gray-600 mb-20 blog-list grid gap-6 md:grid-cols-2
+            lg:grid-cols-3 p-5">
           {filteredBlogs.map((post) => (
             <div
               key={post.id}
-              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md dark:shadow-dark p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow cursor-pointer hover:scale-105"
+              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md dark:shadow-dark
+                  p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow cursor-pointer hover:scale-105"
               onClick={() => handlePostClick(post)}
             >
-              <h2 className="text-2xl dark:text-gray-200 font-semibold mb-2">{post.title}</h2>
+              <h2 className="text-2xl text-gray-900 dark:text-gray-200 font-semibold mb-2">{post.title}</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">{post.excerpt}</p>
               <p className="text-sm text-gray-500 dark:text-gray-300">{post.date}</p>
             </div>
