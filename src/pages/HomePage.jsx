@@ -29,11 +29,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <main className="p-4 w-5/6 mx-auto dark:bg-gray-600 text-gray-100 sm:max-w-lg md:max-w-2xl
+    <main className="w-5/6 mx-auto dark:bg-gray-600 text-gray-100 sm:max-w-lg md:max-w-2xl
         lg:max-w-4xl xl:max-w-5xl">
       {/* Hero Section */}
       <section className="relative lg:max-w-4xl text-center py-12 bg-gray-100 dark:bg-gray-800
-          bg-hero-pattern bg-center bg-auto">
+          bg-hero-pattern bg-center bg-auto m-auto">
         <div className="absolute inset-0 bg-gray-800 bg-opacity-85"></div>
         <h1 className="relative z-10 text-4xl font-mono font-bold mb-4">
           <span className="text-blue-600">
@@ -59,9 +59,9 @@ const HomePage = () => {
       </section>
 
       {/* Skills Section */}
-      {/* TODO: Add Java, Python, C#, C++ and .NET */}
+      {/* TODO: Add C#, C++ and .NET */}
       <section className="py-12">
-        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">
+        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mb-6">
           My Skills
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6
@@ -69,39 +69,96 @@ const HomePage = () => {
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
               justify-center content-center">
             <img src="icons/HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform
-                hover:scale-110" alt="HTML/CSS/JS Icon"/>
+                hover:scale-110" alt="HTML/CSS/JS Icon" title="HTML/CSS/JavaScript" />
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
               dark:shadow-dark justify-center content-center">
             <img src="icons/React-logo.png" className="transition transform hover:scale-110"
-                alt="React Logo"/>
+                alt="React Logo" title="React" />
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
               dark:shadow-dark justify-center content-center">
             <img src="icons/Tailwind-icon.png" className="transition transform hover:scale-110"
-                alt="Tailwind Logo"/>
+                alt="Tailwind Logo" title="Tailwind CSS" />
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
               dark:shadow-dark justify-center content-center">
             <img src="icons/Angular-icon.png" className="transition transform hover:scale-110"
-                alt="Angular Logo"/>
+                alt="Angular Logo" title="Angular" />
           </div>
           <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
               dark:shadow-dark justify-center content-center">
             <img src="icons/PHP-Logo.png" className="transition transform hover:scale-110"
-                alt="PHP Logo"/>
+                alt="PHP Logo" title="PHP" />
           </div>
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
               justify-center content-center">
             <img src="icons/Node.js-logo.png" className="w-24 h-12 transition
-                transform hover:scale-110" alt="Node.js Logo"/>
+                transform hover:scale-110" alt="Node.js Logo" title="Node.js" />
           </div>
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
               justify-center content-center">
             <img src="icons/java-icon.webp" className="w-24 h-24 transition
-                transform hover:scale-110" alt="Java Logo"/>
+                transform hover:scale-110" alt="Java Logo" title="Java" />
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/Python-Logo.png" className="w-24 h-24 transition
+                transform hover:scale-110" alt="Python Logo" title="Python" />
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/AWS-Web-Services-Logo.webp" className="w-24 h-24 transition
+                transform hover:scale-110" alt="AWS Logo" title="Amazon Web Services" />
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/VSCode-Logo.jpg" className="w-24 h-24 transition
+                transform hover:scale-110" alt="VS Code Logo" title="VS Code" />
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/MySQL-Logo.webp" className="w-24 h-24 transition
+                transform hover:scale-110" alt="MySQL Logo" title="MySQL Database" />
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/DynamoDB-Logo.png" className="w-24 h-24 transition
+                transform hover:scale-110" alt="DynamoDB Logo" title="Dynamo Database" />
+          </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/MongoDb-Logo.png" className="w-24 h-24 transition
+                transform hover:scale-110" alt="MongoDB Logo" title="Mongo Database" />
           </div>
           {/* Add more skills as needed */}
+        </div>
+        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-10 mb-6">
+          My Process
+        </h2>
+        <div className="flex  justify-around">
+          <div className="w-44 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/AGILE.png" className="h-24 transition
+                transform hover:scale-110" alt="AWS Logo" title="AGILE Development Practices" />
+          </div>
+          <div className="w-56 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/Dev-Ops-Logo.png" className="h-24 transition
+                transform hover:scale-110" alt="AWS Logo" title="Development Operations" />
+          </div>
+          <div className="w-36 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/CI-CD-Logo.png" className="h-24 transition
+                transform hover:scale-110" alt="AWS Logo"
+                title="CI/CD Pipeline - Continuous Integration & Deployment" />
+          </div>
+          <div className="w-40 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/Git&GitHub-Logo.png" className="h-24 transition
+                transform hover:scale-110" alt="AWS Logo" title="Git & Github" />
+          </div>
+          {/* Add more workflow/processes as needed */}
         </div>
       </section>
 
@@ -151,16 +208,16 @@ const HomePage = () => {
 
       {/* Bio Section */}
       <section className="py-12">
-        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">
+        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-6">
           About Me
         </h2>
-        <div className="flex flex-col sm:flex-row gap-6 p-10 items-center justify-center">
+        <div className="flex flex-col sm:flex-row gap-6 p-5 items-center justify-center">
           <img
             src="Profile-pic.jpg"
             alt="Profile"
             className="rounded-full w-24 h-24 shadow"
           />
-          <p className="text-gray-700 dark:text-gray-300 max-w-lgsm:text-left max-w-xl">
+          <p className="text-gray-300 dark:text-gray-300 max-w-lgsm:text-left max-w-xl">
             Hi, I’m Nick Hanson Sr., a passionate web developer. I love building
             intuitive, accessible, and visually appealing applications. When I’m
             not coding, I enjoy exploring new technologies and sharing my
