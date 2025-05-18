@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from 'prop-types';
 
-AppModal.propTypes = {
-    site: PropTypes.object.isRequired
-};
-
 const AppModal = ({ site }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -48,6 +44,10 @@ const AppModal = ({ site }) => {
         )}
     </>
   );
+};
+
+AppModal.propTypes = {
+    site: PropTypes.object.isRequired
 };
 
 export default AppModal;

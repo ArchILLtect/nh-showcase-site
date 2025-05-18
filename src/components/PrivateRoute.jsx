@@ -21,12 +21,12 @@ import { Navigate } from "react-router-dom";
 import { isLoggedIn } from "../utils/auth.js"; // Import the helper function
 import PropTypes from 'prop-types';
 
-PrivateRoute.propTypes = {
-    children: PropTypes.object.isRequired
-};
-
 const PrivateRoute = ({ children }) => {
   return isLoggedIn() ? children : <Navigate to="/login" />; // Redirect if not logged in
+};
+
+PrivateRoute.propTypes = {
+    children: PropTypes.object.isRequired
 };
 
 export default PrivateRoute;
