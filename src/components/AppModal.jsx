@@ -47,7 +47,7 @@ const AppModal = ({ site }) => {
 };
 
 AppModal.propTypes = {
-    site: PropTypes.object.isRequired
+    site: PropTypes.node.isRequired
 };
 
 export default AppModal;
