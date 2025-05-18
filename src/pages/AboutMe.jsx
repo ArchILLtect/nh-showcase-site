@@ -78,7 +78,7 @@ const AboutMe = () => {
         </div>
       ))}
       <div className="mt-24 pb-24 flex flex-col text-center content-center flex-wrap hover:scale-110">
-        <h2 className="dark:text-gray-100 text-3xl font-bold">Powered By:</h2>
+        <h2 className="text-gray-600 dark:text-gray-100 text-3xl font-bold">Powered By:</h2>
         <img src="/images/NH-Circuit-Logo.webp" width="30%" alt="Nick Hanson Circuit Logo" />
       </div>
     </div>
