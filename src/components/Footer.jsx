@@ -23,7 +23,8 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-gray-800 text-gray-100 flex flex-col sm:flex-row text-center py-2 fixed w-full bottom-0 justify-around items-center">
+        <footer className="bg-gray-800 text-gray-100 flex flex-col sm:flex-row text-center py-2
+                fixed w-full bottom-0 justify-around items-center">
             <p>&copy; {currentYear} Nick Hanson Sr.</p>
             <DarkModeToggle />
         </footer>

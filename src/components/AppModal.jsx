@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
+import PropTypes from 'prop-types';
+
+AppModal.propTypes = {
+    site: PropTypes.object.isRequired
+};
 
 const AppModal = ({ site }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -11,7 +16,8 @@ const AppModal = ({ site }) => {
       {/* Live Demo Button */}
       <button
         onClick={toggleModal}
-        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-600 hover:bg-blue-700 text-white font-bold border border-gray-300
+          dark:border-gray-600 shadow-md py-2 px-4 rounded"
       >
         Live Demo
       </button>
@@ -24,7 +30,8 @@ const AppModal = ({ site }) => {
               {/* Close Button */}
               <button
                 onClick={toggleModal}
-                className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1 rounded-full"
+                className="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold
+                    px-3 py-1 rounded-full"
               >
                 X
               </button>

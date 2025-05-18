@@ -1,6 +1,11 @@
-
+import React from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import PropTypes from 'prop-types';
+
+Layout.propTypes = {
+    children: PropTypes.object.isRequired
+};
 
 export default function Layout({ children }) {
   return (

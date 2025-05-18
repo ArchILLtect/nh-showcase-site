@@ -38,7 +38,8 @@ const NavBar = () => {
             className={({ isActive }) =>
               isActive
                 ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
-                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5" +
+                    "py-2 no-underline hover:text-lg"
             }
           >
             Home
