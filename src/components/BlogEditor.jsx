@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import PropTypes from 'prop-types';
+
+BlogEditor.propTypes = {
+    onSave: PropTypes.node.isRequired
+};
 
 export default function BlogEditor({ onSave }) {
   const [content, setContent] = useState("");
