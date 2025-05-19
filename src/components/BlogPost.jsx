@@ -28,19 +28,19 @@ BlogPost.propTypes = {
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                    p: ({ node, ...props }) => (
+                    p: ({ node: _node, ...props }) => (
                     <p className="text-gray-700 leading-relaxed dark:text-gray-400" {...props} />
                     ),
-                    h1: ({ node, ...props }) => (
+                    h1: ({ node: _node, ...props }) => (
                     <h1 className="text-3xl font-bold mt-6 mb-2 dark:text-white" {...props} />
                     ),
-                    h2: ({ node, ...props }) => (
+                    h2: ({ node: _node, ...props }) => (
                     <h2 className="text-2xl font-bold mt-4 mb-2 dark:text-white" {...props} />
                     ),
-                    li: ({ node, ...props }) => (
+                    li: ({ node: _node, ...props }) => (
                     <li className="ml-6 list-disc dark:text-gray-300" {...props} />
                     ),
-                    code: ({ node, inline, ...props }) =>
+                    code: ({ node: _node, inline, ...props }) =>
                     inline ? (
                         <code className="bg-gray-300 dark:bg-gray-700 px-1 rounded text-sm" {...props} />
                     ) : (
