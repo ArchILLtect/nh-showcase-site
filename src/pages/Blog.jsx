@@ -19,6 +19,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import BlogPost from "../components/BlogPost";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -97,19 +98,9 @@ export default function Blogs() {
           ))}
         </div>
       ) : (
-        <div className="bg-gray-100 dark:bg-gray-600 p-5">
-            <div className="bg-gray-200 dark:bg-gray-800 blog-post rounded-lg shadow-md p-6">
-            <button
-                onClick={handleBackClick}
-                className="text-blue-600 hover:text-blue-800 mb-4 font-medium"
-            >
-                ← Back to Blogs
-            </button>
-            <h2 className="text-3xl font-bold mb-4 dark:text-gray-200">{selectedPost.title}</h2>
-            <p className="text-sm text-gray-500 mb-6 dark:text-gray-300">{selectedPost.date}</p>
-            <p className="text-gray-700 leading-relaxed dark:text-gray-400">{selectedPost.content}</p>
-            </div>
-        </div>
+
+        <BlogPost post={selectedPost} onBack={handleBackClick} />
+
       )}
     </div>
   );
