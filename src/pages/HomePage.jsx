@@ -131,6 +131,11 @@ const HomePage = () => {
             <img src="icons/MongoDb-Logo.png" className="w-24 h-24 transition
                 transform hover:scale-110" alt="MongoDB Logo" title="Mongo Database" />
           </div>
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/ChakraUI-Logo.png" className="w-24 h-24 transition
+                transform hover:scale-110" alt="Chakra UI Logo" title="Chakra UI" />
+          </div>
           {/* Add more skills as needed */}
         </div>
         <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-10 mb-6">
