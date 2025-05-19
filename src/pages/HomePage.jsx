@@ -175,17 +175,6 @@ const HomePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5">
           <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark
               hover:scale-105">
-            <img src="/images/RiffTrax-Collection-thumbnail.png" alt="Project Thumbnail"
-                    className="rounded w-full h-auto mb-4 text-gray-100 dark:text-gray-800" />
-            <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">
-              RiffTrax Collection
-            </h3>
-            <p className="text-gray-300 dark:text-gray-700">
-              An app that stores info on my Rifftrax Collection.
-            </p>
-          </div>
-          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark
-              hover:scale-105">
             <img src="/images/D&D-App-logo.jpg" alt="Project Thumbnail" className="rounded w-full
                 h-auto mb-4 text-gray-100 dark:text-gray-800" />
             <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">DnD App</h3>
