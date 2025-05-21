@@ -39,28 +39,43 @@ const LoginPage = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const attemptLogin = async () => {
+    const response = await axios.post(`${API_BASE_URL}/login`, formData);
+    const { token, user } = response.data;
+
+    console.log("Login successful:", token, user);
+    login(token, user);
+    alert("Login successful!");
+
+    if (user.role === "admin") {
+      navigate("/admin/dashboard");
+    } else {
+      navigate("/dashboard");
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post(`${API_BASE_URL}/login`, formData);
-      const token = response.data.token;
-      const user = response.data.user;
-      console.log("Login successful:", token);
-      console.log(user);
-
-      // Save token to localStorage
-      login(token, user);
-
-      // Redirect to dashboard
-      alert("Login successful!");
-      if (user.role === "admin") {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/dashboard"); // or wherever non-admin users should land
-      }
+      await attemptLogin();
     } catch (error) {
-      console.error("Login failed:", error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || "Error logging in");
+      const isServerError = error.response?.status === 500;
+
+      if (isServerError) {
+        alert("Temporary server issue. Retrying login...");
+        setTimeout(async () => {
+          try {
+            await attemptLogin();
+          } catch (retryErr) {
+            alert("Retry failed. Please try again later.");
+            console.error("Retry login failed:", retryErr);
+          }
+        }, 1000);
+      } else {
+        alert(error.response?.data?.message || "Error logging in");
+        console.error("Login failed:", error);
+      }
     }
   };
 
