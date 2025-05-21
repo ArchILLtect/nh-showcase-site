@@ -18,7 +18,7 @@
 
 // TODO: add basic client-side validation for email/password inputs to improve UX.
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../utils/auth";
 import axios from "axios";
@@ -30,6 +30,8 @@ const LoginPage = () => {
     username: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const passwordRef = useRef(null);
   const navigate = useNavigate(); // For redirecting after login
 
   const handleChange = (e) => {
@@ -60,6 +62,10 @@ const LoginPage = () => {
       console.error("Login failed:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Error logging in");
     }
+  };
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -97,7 +103,8 @@ const LoginPage = () => {
             Password
           </label>
           <input
-            type="password"
+            ref={passwordRef}
+            type={showPassword ? "text" : "password"}
             id="password"
             name="password"
             value={formData.password}
@@ -105,6 +112,15 @@ const LoginPage = () => {
             className="w-full px-4 py-2 border rounded dark:bg-gray-700 text-gray-700 dark:text-gray-100"
             required
           />
+          <input
+            type="checkbox"
+            id="show_password_check"
+            checked={showPassword}
+            onChange={togglePassword}
+          />
+          <label htmlFor="show_password_check" className="w-full px-4 py-2 dark:bg-gray-700 text-gray-700 dark:text-gray-100">
+            {showPassword ? "Hide Password" : "Show Password"}
+          </label>
         </div>
         <button
           type="submit"
