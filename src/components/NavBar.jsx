@@ -16,19 +16,34 @@
  * - React
  */
 
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../utils/auth.js"; // Import the helper function
+import { isLoggedIn, getLoggedInUser } from "../utils/auth.js";
+import { roleHierarchy } from "../constants/roles.js";
 
 const NavBar = () => {
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken"); // Clear token
-    console.log("User logged out!");
-    navigate("/login"); // Redirect to login page
-  };
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const user = getLoggedInUser();
+  const userLevel = user?.role ? roleHierarchy[user.role] ?? 0 : 0;
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setLoggedIn(isLoggedIn());
+    };
+
+    // Listen for storage changes (e.g., login/logout from another tab)
+    window.addEventListener("storage", handleStorageChange);
+
+    // Optional: manual trigger if something else modifies localStorage
+    const interval = setInterval(handleStorageChange, 500);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <nav className="bg-gray-800 p-4">
       <ul className="flex justify-around items-center list-none flex-col sm:flex-row">
@@ -96,35 +111,33 @@ const NavBar = () => {
         <li>
       {/* Login/Logout Button */}
       <div>
-        {isLoggedIn() ? (
-          <button
-            onClick={handleLogout}
-            className="hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg flex gap-2 items-center"
+        {loggedIn ? (
+          userLevel > 1 ? (
+          <NavLink
+            to="/admin/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
+            }
           >
-            Logout
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              viewBox="0 0 16 16"
-              className="text-xl"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
-              ></path>
-              <path
-                fillRule="evenodd"
-                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"
-              ></path>
-            </svg>
-          </button>
+            Admin Dashboard
+          </NavLink>
+           ) : (
+          <NavLink
+            to="/Dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
+            }
+          >
+            Dashboard
+          </NavLink>
+           )         
         ) : (
           <NavLink
-            to="/login"
+            to="/Login"
             className={({ isActive }) =>
               isActive
                 ? "text-yellow-400 px-5 py-2 no-underline flex gap-2 items-center flex-row"

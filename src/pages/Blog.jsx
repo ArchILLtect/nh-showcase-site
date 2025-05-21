@@ -21,6 +21,8 @@
 import React, { useState, useEffect } from "react";
 import BlogPost from "../components/BlogPost";
 
+const BLOG_API_ENDPOINT = "https://0khffs67k4.execute-api.us-east-2.amazonaws.com/dev/";
+
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -29,15 +31,30 @@ export default function Blogs() {
 
   // Fetch blogs from JSON file
   useEffect(() => {
-    fetch("/data/blogs.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setBlogs(data);
+    const fetchMetadata = async () => {
+      try {
+        const response = await fetch(BLOG_API_ENDPOINT);
+        const data = await response.json();
+        console.log("Fetched metadata:", data); // 👈 sanity check
 
-        // Extract unique categories and include "all"
-        const uniqueCategories = ["all", ...new Set(data.map((blog) => blog.category))];
+        // Safe fallback to array
+        const blogArray = Array.isArray(data)
+          ? data
+          : Array.isArray(data.Items)
+            ? data.Items
+            : [];
+
+        setBlogs(blogArray);
+
+        const uniqueCategories = ["all", ...new Set(blogArray.map((blog) => blog.category))];
         setCategories(uniqueCategories);
-      });
+      } catch (err) {
+        console.error("Failed to fetch blog metadata:", err);
+        setBlogs([]); // fallback to empty array
+      }
+    };
+
+    fetchMetadata();
   }, []);
 
   const handleCategoryClick = (category) => {
@@ -53,6 +70,8 @@ export default function Blogs() {
     setSelectedPost(null);
   };
 
+  
+
   // Filter blogs based on the selected category
   const filteredBlogs =
     selectedCategory === "all"
@@ -61,7 +80,7 @@ export default function Blogs() {
 
   return (
     <div className="blogs-page container mx-auto px-4 py-8 mb-20">
-      <h1 className="dark:text-gray-100 text-4xl font-bold text-center mb-8">Nick&apos;s Blogs</h1>
+      <h1 className="text-gray-700 dark:text-gray-200 text-4xl font-bold text-center mb-8">Nick&apos;s Blogs</h1>
 
       {/* Dynamic Category Buttons */}
       <div className="categories flex justify-center gap-4 mb-6">
@@ -86,14 +105,16 @@ export default function Blogs() {
             lg:grid-cols-3 p-5">
           {filteredBlogs.map((post) => (
             <div
-              key={post.id}
-              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md dark:shadow-dark
-                  p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow cursor-pointer hover:scale-105"
+              key={post.postId}
+              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md
+                  dark:shadow-dark p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow
+                  cursor-pointer hover:scale-105"
               onClick={() => handlePostClick(post)}
             >
               <h2 className="text-2xl text-gray-900 dark:text-gray-200 font-semibold mb-2">{post.title}</h2>
+              <hr className="my-4 border-gray-500"/>
               <p className="text-gray-600 dark:text-gray-300 mb-4">{post.excerpt}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-300">{post.date}</p>
+              <p className="text-sm text-gray-800 dark:text-gray-200">{post.createdAt}</p>
             </div>
           ))}
         </div>

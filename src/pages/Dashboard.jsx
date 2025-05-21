@@ -21,9 +21,30 @@
 // TODO: Add a welcome message or additional UI elements to enhance the experience.
 
 import React from "react";
+import { getLoggedInUser } from '../utils/auth';
+import { Navigate } from "react-router-dom";
+import { roleHierarchy } from "../constants/roles.js";
+
 
 const Dashboard = () => {
-  return <h1>Dashboard</h1>;
+    const user = getLoggedInUser();
+    const userLevel = user?.role ? roleHierarchy[user.role] ?? 0 : 0;
+    if (userLevel > 0) {
+        let username = user.username;
+        let role = user.role;
+
+        return (
+        <div>
+            <h1 className="text-gray-600 dark:text-gray-300 text-4xl font-bold text-center mb-6">User Dashboard</h1>
+
+            <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mb-6">
+            Welcome {username}, you have {role} access
+            </h2>
+        </div>
+        )
+    } else {
+        return <Navigate to="/" replace />;
+    }
 };
 
 export default Dashboard;

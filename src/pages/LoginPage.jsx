@@ -20,6 +20,7 @@
 
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { login } from "../utils/auth";
 import axios from "axios";
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
@@ -41,14 +42,20 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/login`, formData);
       const token = response.data.token;
+      const user = response.data.user;
       console.log("Login successful:", token);
+      console.log(user);
 
       // Save token to localStorage
-      localStorage.setItem("authToken", token);
+      login(token, user);
 
       // Redirect to dashboard
       alert("Login successful!");
-      navigate("/dashboard");
+      if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/dashboard"); // or wherever non-admin users should land
+      }
     } catch (error) {
       console.error("Login failed:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Error logging in");
@@ -62,7 +69,7 @@ const LoginPage = () => {
         onSubmit={handleLogin}
         className="bg-white dark:bg-gray-800 p-6 rounded shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center dark:text-gray-100">
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-700 dark:text-gray-100">
           Login
         </h2>
         <div className="mb-4">
@@ -78,7 +85,7 @@ const LoginPage = () => {
             name="username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+            className="w-full px-4 py-2 border rounded dark:bg-gray-700 text-gray-700 dark:text-gray-100"
             required
           />
         </div>
@@ -95,7 +102,7 @@ const LoginPage = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+            className="w-full px-4 py-2 border rounded dark:bg-gray-700 text-gray-700 dark:text-gray-100"
             required
           />
         </div>

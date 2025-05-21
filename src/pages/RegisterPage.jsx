@@ -16,8 +16,6 @@
  * - React
  */
 
-// TODO: Add a confirm password field
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -28,6 +26,7 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    confirmPassword: '',
     email: "",
   });
   const navigate = useNavigate();
@@ -39,8 +38,19 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    const dataToSend = {
+      ...formData,
+      role: "user"
+    };
+
     try {
-      const response = await axios.post(`${API_BASE_URL}/register`, formData);
+      const response = await axios.post(`${API_BASE_URL}/register`, dataToSend);
       console.log("Registration successful:", response.data);
       alert("User registered successfully!");
       navigate("/login"); // Redirect to login page after successful registration
@@ -111,6 +121,20 @@ const RegisterPage = () => {
             required
           />
         </div>
+        <div className="mb-4">
+        <label htmlFor="confirmPassword" className="block mb-2 text-gray-700 dark:text-gray-300">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+          required
+        />
+      </div>
         <button
           type="submit"
           className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"

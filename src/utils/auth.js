@@ -14,17 +14,34 @@
 
 // TODO: For future security upgrades, consider integrating token expiration handling.
 
-
 export const isLoggedIn = () => {
-    const token = localStorage.getItem('authToken'); // Check for token in localStorage
+    const token = localStorage.getItem("authToken"); // Check for token in localStorage
     // TODO: Validate the token (optional: implement validation with backend)
     return !!token; // Convert to boolean (true if token exists, false otherwise)
-  };
-  
-  export const login = (token) => {
-    localStorage.setItem('authToken', token); // Save token to localStorage
-  };
-  
-  export const logout = () => {
-    localStorage.removeItem('authToken'); // Remove token from localStorage
-  };
+};
+
+export const getLoggedInUser = () => {
+    const userData = localStorage.getItem("userData");
+    if (!userData) return null;
+    try {
+        return JSON.parse(userData);
+    } catch (e) {
+        console.error("Failed to parse userData:", e);
+        return null;
+    }
+};
+
+export const login = (token, user) => {
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("userData", JSON.stringify(user));
+};
+
+export const logout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userData");
+
+    // Clean up legacy or unused keys
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("currentUser");
+};

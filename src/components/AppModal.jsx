@@ -1,3 +1,28 @@
+/**
+ * File: AppModal.jsx
+ * Author: Nick Hanson
+ * Created On: December 21, 2024
+ * Last Updated: December 23, 2024
+ * Description: A modal component that displays a live demo of the app.
+ * 
+ * Props:
+ * - site: The URL of the site to be displayed in the modal.
+ * 
+ * Notes:
+ * - Uses React Portal to render the modal outside of the main DOM hierarchy.
+ * - Uses Tailwind CSS classes for styling.
+ * - Responsive design included for mobile and desktop views.
+ * 
+ * Dependencies:
+ * - React
+ * - PropTypes: A library for type checking React props.
+ * - createPortal: A React function for rendering children into a DOM node
+ *   outside of the parent component's DOM hierarchy.
+ * - useState: A React hook for managing state.
+ *  
+ * 
+ */
+
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from 'prop-types';

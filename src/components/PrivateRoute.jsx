@@ -14,19 +14,39 @@
  *
  * Dependencies:
  * - React
+ * - React Router DOM: A library for routing in React applications.
+ * - PropTypes: A library for type checking React props.
+ * - roleHierarchy: A constant that defines the role hierarchy for access control.
+ * - isLoggedIn: A utility function to check if the user is logged in.
+ * - getLoggedInUser: A utility function to get the logged-in user's information.
+ * - Navigate: A component from React Router DOM for navigation.
+ * 
  */
 
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { isLoggedIn } from "../utils/auth.js"; // Import the helper function
+import { roleHierarchy } from "../constants/roles";
+import { isLoggedIn, getLoggedInUser } from "../utils/auth.js"; // Import the helper function
 import PropTypes from 'prop-types';
 
-const PrivateRoute = ({ children }) => {
-  return isLoggedIn() ? children : <Navigate to="/login" />; // Redirect if not logged in
-};
+export default function PrivateRoute({ children, requiredRole = "user" }) {
+  if (!isLoggedIn()) return <Navigate to="/login" replace />;
+
+  const user = getLoggedInUser();
+  if (!user || !user.role) return <Navigate to="/login" replace />;
+
+  const userLevel = roleHierarchy[user.role] ?? 0;
+  const requiredLevel = roleHierarchy[requiredRole] ?? 0;
+
+  if (userLevel < requiredLevel) {
+    alert("You don't have the required access permissions to visit this page!"); 
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
 
 PrivateRoute.propTypes = {
-    children: PropTypes.object.isRequired
+  children: PropTypes.node.isRequired,
+  requiredRole: PropTypes.string,
 };
-
-export default PrivateRoute;
