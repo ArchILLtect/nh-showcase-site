@@ -45,8 +45,13 @@ const LoginPage = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const attemptLogin = async () => {
-    const response = await axios.post(`${API_BASE_URL}/login`, formData);
+  const attemptLogin = async (ip) => {
+
+    const response = await axios.post(`${API_BASE_URL}/login`, {
+      ...formData,
+      ip
+    });
+
     const { token, user } = response.data;
 
     console.log("Login successful:", token, user);
@@ -63,8 +68,11 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    const ipResponse = await fetch("https://api.ipify.org?format=json");
+    const { ip } = await ipResponse.json();
+
     try {
-      await attemptLogin();
+      await attemptLogin(ip);
     } catch (error) {
       const isServerError = error.response?.status === 500;
 
@@ -72,7 +80,7 @@ const LoginPage = () => {
         alert("Temporary server issue. Retrying login...");
         setTimeout(async () => {
           try {
-            await attemptLogin();
+            await attemptLogin(ip);
           } catch (retryErr) {
             alert("Retry failed. Please try again later.");
             console.error("Retry login failed:", retryErr);
