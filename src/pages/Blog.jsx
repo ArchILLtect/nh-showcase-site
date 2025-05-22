@@ -19,6 +19,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { trackVisit } from "../utils/visitTracker";
 import BlogPost from "../components/BlogPost";
 
 const BLOG_API_ENDPOINT = "https://0khffs67k4.execute-api.us-east-2.amazonaws.com/dev/";
@@ -28,6 +29,10 @@ export default function Blogs() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPost, setSelectedPost] = useState(null);
+
+  useEffect(() => {
+    trackVisit();
+  }, []);
 
   // Fetch blogs from JSON file
   useEffect(() => {

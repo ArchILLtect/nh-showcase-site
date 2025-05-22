@@ -18,9 +18,14 @@
 
 import React, { useEffect, useState } from 'react';
 import AppModal from '../components/AppModal';
+import { trackVisit } from "../utils/visitTracker";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    trackVisit();
+  }, []);
 
   useEffect(() => {
     // Example: Fetch projects from a local JSON file or API

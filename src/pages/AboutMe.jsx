@@ -16,9 +16,15 @@
  * - React
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { trackVisit } from "../utils/visitTracker";
 
 const AboutMe = () => {
+
+  useEffect(() => {
+    trackVisit();
+  }, []);
+
   const sections = [
     {
       title: "Introduction",

@@ -18,18 +18,24 @@
 
 // TODO: add basic client-side validation for email/password inputs to improve UX.
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { trackVisit } from "../utils/visitTracker";
 import { login } from "../utils/auth";
 import axios from "axios";
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
 const LoginPage = () => {
+
+  useEffect(() => {
+      trackVisit();
+    }, []);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const passwordRef = useRef(null);
   const navigate = useNavigate(); // For redirecting after login

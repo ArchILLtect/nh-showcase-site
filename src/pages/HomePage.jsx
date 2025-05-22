@@ -19,13 +19,19 @@
 
 import React, {useEffect} from 'react';
 import { Link } from "react-router-dom";
+import { trackVisit } from "../utils/visitTracker";
 
 const HomePage = () => {
+
   useEffect(() => {
     document.title = "Home - Nick Hanson Showcase";
     document.body.classList.add('bg-gray-200');
      // Add the dark mode class to the body when the component mounts
     document.body.classList.add('dark:bg-gray-900');
+  }, []);
+
+  useEffect(() => {
+    trackVisit();
   }, []);
 
   return (

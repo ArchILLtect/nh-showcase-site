@@ -20,7 +20,8 @@
 
 // TODO: Add a welcome message or additional UI elements to enhance the experience.
 
-import React from "react";
+import React, { useEffect } from "react";
+import { trackVisit } from "../utils/visitTracker";
 import { getLoggedInUser } from '../utils/auth';
 import { Navigate } from "react-router-dom";
 import { roleHierarchy } from "../constants/roles.js";
@@ -29,6 +30,11 @@ import { roleHierarchy } from "../constants/roles.js";
 const Dashboard = () => {
     const user = getLoggedInUser();
     const userLevel = user?.role ? roleHierarchy[user.role] ?? 0 : 0;
+    
+    useEffect(() => {
+        trackVisit();
+    }, []);
+
     if (userLevel > 0) {
         let username = user.username;
         let role = user.role;
