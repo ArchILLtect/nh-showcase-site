@@ -1,3 +1,22 @@
+/**
+ * File: visitTracker.js
+ * Author: Nick Hanson
+ * Created On: May 22, 2025
+ * Last Updated: May 22, 2025
+ * Description: Utility function to track user visits to the site.
+ *
+ * Props:
+ * // - None
+ *
+ * Notes:
+ * - This function tracks user visits to the site and logs them to an API.
+ * - It uses localStorage to manage cooldown periods for session and visit tracking.
+ * - The function is designed to be called on page load.
+ *
+ * Dependencies:
+ * - None
+ */
+
 const VISIT_API_ENDPOINT =
     "https://9hxx3na0o7.execute-api.us-east-2.amazonaws.com/dev/";
 const SESSION_COOLDOWN_MINUTES = 120;
@@ -6,8 +25,9 @@ const VISIT_COOLDOWN_MINUTES = 30;
 export async function trackVisit() {
     try {
         const path = window.location.pathname;
-        const sessionCooldownKey = `session_cooldown_${path}`;
-        const visitCooldownKey = `visit_cooldown_${path}`;
+        const normalizedPath = path?.toLowerCase() || "/";
+        const sessionCooldownKey = `session_cooldown_${normalizedPath}`;
+        const visitCooldownKey = `visit_cooldown_${normalizedPath}`;
         const now = Date.now();
 
         const initialVisit = parseInt(
