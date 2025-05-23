@@ -110,6 +110,7 @@ const Contact = () => {
               className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
                   border-gray-300 rounded"
               required
+              autoComplete='name'
             />
             <input
               type="email"
@@ -120,6 +121,7 @@ const Contact = () => {
               className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
                   border-gray-300 rounded"
               required
+              autoComplete='email'
             />
             <textarea
               name="message"

@@ -87,20 +87,25 @@ export default function BlogEditor ({ onSave }) {
     <div className="max-w-3xl mx-auto p-6 text-white">
       <h2 className="text-2xl mb-4">Create a New Blog Post</h2>
       <input
+        name="category"
         type="text"
         className="w-full mb-4 p-2 rounded text-black"
         placeholder="Category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
+        autoComplete="on"
       />
       <input
+        name="author"
         type="text"
         className="w-full mb-4 p-2 rounded text-black"
         placeholder="Author Name"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
+        autoComplete="name"
       />
       <input
+        name="title"
         type="text"
         className="w-full mb-4 p-2 rounded text-black"
         placeholder="Post Title"
@@ -108,6 +113,7 @@ export default function BlogEditor ({ onSave }) {
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
+        name="excerpt"
         type="text"
         className="w-full mb-4 p-2 rounded text-black"
         placeholder="Post Excerpt"
@@ -116,11 +122,13 @@ export default function BlogEditor ({ onSave }) {
       />
       <SimpleMDE value={content} onChange={setContent} />
       <input
+        name="filename"
         type="text"
         className="w-full mb-4 p-2 rounded text-black"
         placeholder="Filename (e.g., post.md)"
         value={filename}
         onChange={(e) => setFilename(e.target.value)}
+        autoComplete="off"
       />
       <button
         onClick={handleSubmit}
