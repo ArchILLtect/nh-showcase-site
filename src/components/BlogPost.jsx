@@ -1,8 +1,8 @@
 /**
  * File: AppModal.jsx
  * Author: Nick Hanson
- * Created On: December 21, 2024
- * Last Updated: December 23, 2024
+ * Created On: May 21, 2025
+ * Last Updated: May 22, 2025
  * Description: A modal component that displays a live demo of the app.
  * 
  * Props:

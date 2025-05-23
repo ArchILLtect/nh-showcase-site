@@ -2,7 +2,7 @@
  * File: NavBar.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: December 23, 2024
+ * Last Updated: May 22, 2025
  * Description: The navigation component for the showcase site.
  *
  * Props:
@@ -125,7 +125,7 @@ const NavBar = () => {
           </NavLink>
            ) : (
           <NavLink
-            to="/Dashboard"
+            to="/dashboard"
             className={({ isActive }) =>
               isActive
                 ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
@@ -137,7 +137,7 @@ const NavBar = () => {
            )         
         ) : (
           <NavLink
-            to="/Login"
+            to="/login"
             className={({ isActive }) =>
               isActive
                 ? "text-yellow-400 px-5 py-2 no-underline flex gap-2 items-center flex-row"
