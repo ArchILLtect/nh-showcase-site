@@ -20,17 +20,36 @@
 
 // TODO: Add a welcome message or additional UI elements to enhance the experience.
 
-import React from "react";
+import React, { useState } from "react";
 import { getLoggedInUser } from '../utils/auth';
 import { Navigate } from "react-router-dom";
 import { roleHierarchy } from "../constants/roles.js";
+import Toolbar from "../components/ToolBar.jsx";
 import BlogManager from "./BlogManager.jsx";
+//import TrackingManager from "./TrackingManager.jsx";
+import VisitLogsDashboard from "../components/VisitLogsDashboard.jsx";
+
 
 const AdminDashboard = () => {
+
+  const [showAddBlog, setShowAddBlog] = useState(false);
+  const [showTracking, setShowTracking] = useState(false);
+
+  const handleTrackingClick = () => {
+    setShowTracking(true);
+    setShowAddBlog(false);
+  }
+
+  const handleAddBlogClick = () => {
+    setShowAddBlog(true);
+    setShowTracking(false);
+  }
+
   const user = getLoggedInUser();
   const username = user.username;
   const role = user?.role || "guest"; // Default to "guest" if no role is found
   const userLevel = roleHierarchy[role] || 0; // Default to 0 if role is not found
+  const ipInfo = user?.knownIps || [];
 
   if (!user) return <Navigate to="/login" replace />; // Redirect to login if user is not logged in
   if (userLevel <= 1) return <Navigate to="/dashboard" replace />; // Redirect to login if user is not an admin
@@ -43,8 +62,28 @@ const AdminDashboard = () => {
         Welcome {username}, you have {role} access
       </h2>
 
-      <BlogManager />
-
+      <div className="flex justify-center">
+        <Toolbar
+          actions={[
+            { label: "Tracking", onClick: handleTrackingClick, minLevel: roleHierarchy.admin },
+            { label: "Add Blog", onClick: handleAddBlogClick, minLevel: roleHierarchy.admin },
+          ]}
+        />
+      </div>
+      
+      {showAddBlog ? (
+        <BlogManager />
+      ) : showTracking ? (
+        //<TrackingManager />
+        <VisitLogsDashboard ipInfo={ipInfo} />
+      ) : (
+        <div className="text-center">
+          <p className="text-gray-700 dark:text-gray-300 text-lg">
+            Select an action from the toolbar above.
+          </p>
+        </div>
+      )
+    }
     </div>
   )
 };
