@@ -20,7 +20,7 @@
  * 
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import PropTypes from 'prop-types';
@@ -30,11 +30,48 @@ Layout.propTypes = {
 };
 
 export default function Layout({ children }) {
+
+  const [showScroll, setShowScroll] = useState(false);
+
+  useEffect(() => {
+    const toggleScrollButton = () => {
+      setShowScroll(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", toggleScrollButton);
+    return () => window.removeEventListener("scroll", toggleScrollButton);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-gray-300 dark:bg-gray-900 text-white">
       <NavBar />
         <main className="p-4">{children}</main>
       <Footer />
+
+      {/* Scroll to top button */}
+      {showScroll && (
+        <div className="text-center">
+          <button
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            className="fixed bottom-16 z-50 bg-opacity-70 bg-blue-600 text-white hover:bg-blue-700 transition rounded-full p-3 shadow-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
