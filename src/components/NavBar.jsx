@@ -168,8 +168,6 @@ const NavBar = () => {
       </div>
         </li>
       </ul>
-
-
     </nav>
   );
 };
