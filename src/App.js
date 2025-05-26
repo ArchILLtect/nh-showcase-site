@@ -2,17 +2,28 @@
  * File: App.js
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: December 23, 2024
+ * Last Updated: May 25, 2025
  * Description: The main app file
  *
  * Props:
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.
  * - Responsive design included for mobile and desktop views.
+ * - Implements React Router for navigation.
+ * - Contains private routes for user and admin dashboards.
+ * - Uses a custom PrivateRoute component to handle authentication and authorization.
+ * - Layout component wraps all pages for consistent header and footer.
+ * - Includes pages for Home, Projects, About Me, Blog, Contact, Login, Register, User Dashboard, and Admin Dashboard.
+ *
  *
  * Dependencies:
  * - React
+ * - React Router DOM
+ * - Custom components: PrivateRoute, Layout
+ * - Custom styles: App.scss
+ *
  */
 
 import React from "react";
@@ -29,7 +40,6 @@ import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import AdminDashboard from "./admin/AdminDashboard";
-import BlogManager from "./admin/BlogManager";
 
 function App() {
     return (
