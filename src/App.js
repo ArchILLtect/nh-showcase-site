@@ -60,14 +60,6 @@ function App() {
                             </PrivateRoute>
                         }
                     />
-                    <Route
-                        path="/admin/blogs"
-                        element={
-                            <PrivateRoute requiredRole="admin">
-                                <BlogManager />
-                            </PrivateRoute>
-                        }
-                    />
                 </Routes>
             </Layout>
         </Router>
