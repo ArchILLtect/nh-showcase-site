@@ -148,7 +148,7 @@ const LoginPage = () => {
             checked={showPassword}
             onChange={togglePassword}
           />
-          <label htmlFor="show_password_check" className="w-full px-4 py-2 dark:bg-gray-700 text-gray-700 dark:text-gray-100">
+          <label htmlFor="show_password_check" className="w-full px-4 py-2 text-gray-700 dark:text-gray-100">
             {showPassword ? "Hide Password" : "Show Password"}
           </label>
         </div>
