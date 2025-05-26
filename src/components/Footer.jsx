@@ -6,7 +6,7 @@
  * Description: The footer component for the showcase site.
  *
  * Props:
- * // TODO: Add content in these comment sections
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.

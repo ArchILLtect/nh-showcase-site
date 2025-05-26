@@ -6,15 +6,30 @@
  * Description: Utility function to track user visits to the site.
  * 
  * Props:
- * // - None
+ * - ipInfo: An array of objects containing IP information.
+ * 
+ * Dependencies:
+ * - React
+ * - PropTypes
+ * - useEffect
+ * - useState
+ * - fetch
+ * - localStorage
+ * - Date
+ * 
+ * Example usage:
+ * <VisitLogsDashboard ipInfo={ipInfo} />
+ * 
+ *  -> This will render the visit logs dashboard with the provided IP information.
  * 
  * Notes:
  * - This function tracks user visits to the site and logs them to an API.
  * - It uses localStorage to manage cooldown periods for session and visit tracking.
  * - The function is designed to be called on page load.
+ * - The component fetches visit logs from an API and displays them in a table.
+ * - It also provides a summary of the visit logs, including total visits, most visited page, first visit, and last visit.
+ * - The component uses local storage to cache the visit logs for 24 hours.
  * 
- * Dependencies:
- * - None
  */
 
 import React, { useEffect, useState } from "react";

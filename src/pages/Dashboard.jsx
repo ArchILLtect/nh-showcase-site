@@ -2,12 +2,12 @@
  * File: Dashboard.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: May 22, 2025
+ * Last Updated: May 24, 2025
  * Description: The dashboard page for the showcase site. This is were the
  *              user lands after successful login.
  *
  * Props:
- * // TODO: Add content in these comment sections
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.

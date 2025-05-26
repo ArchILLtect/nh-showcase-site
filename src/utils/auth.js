@@ -6,13 +6,21 @@
  * Description: Utility functions for user auth operations across the showcase website.
  *
  * Functions:
- * - // TODO: Add content in these comment sections
+ * - isLoggedIn: Checks if the user is logged in by checking for a token in localStorage.
+ * - getLoggedInUser: Retrieves the logged-in user's data from localStorage.
+ * - login: Stores the user's token and data in localStorage.
+ * - logout: Clears the user's token and data from localStorage.
+ *
+ * Props:
+ * - None
  *
  * Notes:
  * - Functions are pure and do not modify input parameters.
+ * - Uses localStorage for storing user data and token.
+ * - Assumes the token is a string and user data is a JSON object.
  */
 
-// TODO: For future security upgrades, consider integrating token expiration handling.
+// TODO: Integrating token expiration handling.
 
 export const isLoggedIn = () => {
     const token = localStorage.getItem("authToken"); // Check for token in localStorage

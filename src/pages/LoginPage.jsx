@@ -2,11 +2,12 @@
  * File: LoginPage.jsx
  * Author: Nick Hanson
  * Created On: December 22, 2024
- * Last Updated: December 23, 2024
+ * Last Updated: May 23, 2025
  * Description: The login page for the showcase site.
+ * This is where the user can log in to their account.
  *
  * Props:
- * // TODO: Add content in these comment sections
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.

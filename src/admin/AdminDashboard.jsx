@@ -2,12 +2,15 @@
  * File: Dashboard.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: December 23, 2024
- * Description: The dashboard page for the showcase site. This is were the
- *              user lands after successful login.
+ * Last Updated: May 25, 2025
+ * Description: This component renders the admin dashboard for the application.
+ * It includes options for user tracking, admin tracking, and adding blogs.
+ * It uses the Toolbar component to provide navigation options.
+ * The dashboard is only accessible to users with admin or higher roles.
+ * It also handles redirection for unauthorized users.
  *
  * Props:
- * None
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.

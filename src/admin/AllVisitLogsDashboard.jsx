@@ -1,3 +1,30 @@
+/**
+ * File: AllVisitLogsDashboard.jsx
+ * Author: Nick Hanson
+ * Created On: December May 25, 2024
+ * Last Updated: May 25, 2025
+ * Description: This component fetches and displays all visit logs from the API.
+ * It includes a search bar, sorting functionality, and highlights recent visits.
+ * It also provides summary statistics for total visits, unique visitors, top page, and busiest day.
+ * The component uses local storage to cache the data for 24 hours.
+ * It handles loading and error states gracefully.
+ * The component is styled using Tailwind CSS classes.
+ * 
+ * Props:
+ * - None
+ * 
+ * Notes:
+ * - The component uses the Fetch API to retrieve data from the API endpoint.
+ * - The data is cached in local storage to improve performance and reduce API calls.
+ * - The component uses the checkRecent utility function to determine if a visit is recent.
+ * - The component uses PropTypes for type checking.
+ * 
+ * Dependencies:
+ * - React
+ * - PropTypes
+ * - Tailwind CSS
+ * - checkRecent utility function
+ */
 import React, { useEffect, useState } from "react";
 import { checkRecent } from "../utils/time";
 import PropTypes from "prop-types";

@@ -2,12 +2,12 @@
  * File: BlogManager.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: December 23, 2024
+ * Last Updated: May 24, 2025
  * Description: The blog manager page for the showcase site. This is where the
  *              user can create and manage blog posts.
  * 
  * Props:
- * None
+ * - None
  * 
  * Notes:
  * - Uses Tailwind CSS classes for styling.

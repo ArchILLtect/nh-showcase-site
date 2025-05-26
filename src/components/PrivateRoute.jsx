@@ -2,11 +2,12 @@
  * File: HomePage.jsx
  * Author: Nick Hanson
  * Created On: December 22, 2024
- * Last Updated: December 23, 2024
+ * Last Updated: May 22, 2024
  * Description: The private route component for the showcase site.
  *
  * Props:
- * // TODO: Add content in these comment sections
+ * - children: The child components to be rendered if the user has access.
+ * - requiredRole: The role required to access the route (default is "user").
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.

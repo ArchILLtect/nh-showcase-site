@@ -6,7 +6,7 @@
  * Description: This is the component for toggling dark mode
  *
  * Props:
- * // TODO: Add content in these comment sections
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.

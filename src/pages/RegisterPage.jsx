@@ -2,11 +2,11 @@
  * File: RegisterPage.jsx
  * Author: Nick Hanson
  * Created On: December 22, 2024
- * Last Updated: December 23, 2024
+ * Last Updated: May 22, 2025
  * Description: The registration page for the showcase site.
  *
  * Props:
- * // TODO: Add content in these comment sections
+ * - None
  *
  * Notes:
  * - Uses Tailwind CSS classes for styling.
