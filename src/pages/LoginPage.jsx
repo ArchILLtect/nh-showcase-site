@@ -24,6 +24,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { trackVisit } from "../utils/visitTracker";
 import { login } from "../utils/auth";
 import axios from "axios";
+import { roleHierarchy } from "../constants/roles";
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
@@ -55,11 +56,12 @@ const LoginPage = () => {
 
     const { token, user } = response.data;
 
-    console.log("Login successful:", token, user);
     login(token, user);
     alert("Login successful!");
 
-    if (user.role === "admin") {
+    const userLevel = user?.role ? roleHierarchy[user.role] ?? 0 : 0;
+
+    if (userLevel >= roleHierarchy.admin ) {
       navigate("/admin/dashboard");
     } else {
       navigate("/dashboard");
