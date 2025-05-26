@@ -6,7 +6,10 @@
  * Description: Utility function to track user visits to the site.
  *
  * Props:
- * // - None
+ * - None
+ *
+ * Functions:
+ * - trackVisit: Tracks user visits to the site and logs them to an API.
  *
  * Notes:
  * - This function tracks user visits to the site and logs them to an API.
