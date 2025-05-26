@@ -17,32 +17,38 @@
  * - React
  */
 
-
-// TODO: Add a welcome message or additional UI elements to enhance the experience.
-
 import React, { useState } from "react";
 import { getLoggedInUser } from '../utils/auth';
 import { Navigate } from "react-router-dom";
 import { roleHierarchy } from "../constants/roles.js";
 import Toolbar from "../components/ToolBar.jsx";
 import BlogManager from "./BlogManager.jsx";
-//import TrackingManager from "./TrackingManager.jsx";
 import VisitLogsDashboard from "../components/VisitLogsDashboard.jsx";
+import AllVisitLogsDashboard from "./AllVisitLogsDashboard.jsx";
 
 
 const AdminDashboard = () => {
 
   const [showAddBlog, setShowAddBlog] = useState(false);
-  const [showTracking, setShowTracking] = useState(false);
+  const [showUserTracking, setShowUserTracking] = useState(false);
+  const [showAdminTracking, setShowAdminTracking] = useState(false);
 
-  const handleTrackingClick = () => {
-    setShowTracking(true);
+  const handleUserTrackingClick = () => {
+    setShowUserTracking(true);
+    setShowAdminTracking(false);
+    setShowAddBlog(false);
+  }
+
+  const handleAdminTrackingClick = () => {
+    setShowUserTracking(false);
+    setShowAdminTracking(true);
     setShowAddBlog(false);
   }
 
   const handleAddBlogClick = () => {
+    setShowUserTracking(false);
+    setShowAdminTracking(false);
     setShowAddBlog(true);
-    setShowTracking(false);
   }
 
   const user = getLoggedInUser();
@@ -65,17 +71,19 @@ const AdminDashboard = () => {
       <div className="flex justify-center">
         <Toolbar
           actions={[
-            { label: "Tracking", onClick: handleTrackingClick, minLevel: roleHierarchy.admin },
+            { label: "User Tracking", onClick: handleUserTrackingClick, minLevel: roleHierarchy.admin },
+            { label: "All Tracking", onClick: handleAdminTrackingClick, minLevel: roleHierarchy.admin },
             { label: "Add Blog", onClick: handleAddBlogClick, minLevel: roleHierarchy.admin },
           ]}
         />
       </div>
       
-      {showAddBlog ? (
-        <BlogManager />
-      ) : showTracking ? (
-        //<TrackingManager />
+      {showUserTracking ? (
         <VisitLogsDashboard ipInfo={ipInfo} />
+      ) : showAdminTracking ? (
+        <AllVisitLogsDashboard />
+      ) : showAddBlog ? (
+        <BlogManager />
       ) : (
         <div className="text-center">
           <p className="text-gray-700 dark:text-gray-300 text-lg">
