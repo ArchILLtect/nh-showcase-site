@@ -67,7 +67,7 @@ const HomePage = () => {
       {/* Skills Section */}
       {/* TODO: Add C#, C++ and .NET */}
       <section className="py-12">
-        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mb-6">
+        <h2 id="skills" className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mb-6">
           My Skills
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6
@@ -147,7 +147,7 @@ const HomePage = () => {
         <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-10 mb-6">
           My Process
         </h2>
-        <div className="flex  justify-around">
+        <div className="flex justify-around">
           <div className="w-44 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
               justify-center content-center">
             <img src="icons/AGILE.png" className="h-24 transition
