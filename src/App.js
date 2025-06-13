@@ -33,6 +33,7 @@ import "./App.scss";
 import HomePage from "./pages/HomePage";
 import Projects from "./pages/Projects";
 import AboutMe from "./pages/AboutMe";
+import Experience from "./pages/Experience";
 import BlogPage from "./pages/Blog";
 import Contact from "./pages/Contact";
 import LoginPage from "./pages/LoginPage";
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/about" element={<AboutMe />} />
+                    <Route path="/experience" element={<Experience />} />
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<LoginPage />} />

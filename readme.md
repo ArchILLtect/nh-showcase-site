@@ -41,9 +41,6 @@ Compares password using bcrypt
 
 Returns:
 
-json
-Copy
-Edit
 {
 "token": "<jwt or mock token>",
 "user": {

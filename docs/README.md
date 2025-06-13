@@ -2,7 +2,9 @@ TTD:
 // TODO: Make a DB for projects
 // TODO: Implement functionality for editing blogs.
 // TODO: Implement functionality for adding/editing projects.
-// TODO: Update
+// TODO: Create a 'badges' section - CREDLY: https://www.credly.com/users/nick-hanson.9f30707d
+// TODO: Add seperate pages for 'education', 'tech stack', and 'experience'.
+// TODO: Ensure that resume links for these newly created sections are updated.
 
 Project File Structure:
 my-showcase-site/
