@@ -1,3 +1,21 @@
+/**
+ * File: Certificates.jsx
+ * Author: Nick Hanson
+ * Created On: June 13, 2025
+ * Last Updated: June 13, 2025
+ * Description: The certificate page for the showcase site.
+ *
+ * Props:
+ * - None
+ *
+ * Notes:
+ * - Uses Tailwind CSS classes for styling.
+ * - Responsive design included for mobile and desktop views.
+ *
+ * Dependencies:
+ * - React
+ */
+
 import React, { useEffect } from 'react';
 import { trackVisit } from "../utils/visitTracker";
 

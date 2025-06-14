@@ -2,7 +2,7 @@
  * File: App.js
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: May 25, 2025
+ * Last Updated: June 13, 2025
  * Description: The main app file
  *
  * Props:
