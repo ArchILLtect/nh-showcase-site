@@ -41,6 +41,7 @@ import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import AdminDashboard from "./admin/AdminDashboard";
+import Certificates from "./pages/Certificates";
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/about" element={<AboutMe />} />
                     <Route path="/experience" element={<Experience />} />
+                    <Route path="/certificates" element={<Certificates />} />
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<LoginPage />} />
