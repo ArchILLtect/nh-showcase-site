@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import AppModal from '../components/AppModal'; // Reuse modal
+import React, { useEffect } from 'react';
 import { trackVisit } from "../utils/visitTracker";
 
 const certs = [
