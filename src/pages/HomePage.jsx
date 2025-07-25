@@ -16,6 +16,7 @@
  * - React
  */
 
+// TODO: Add cookies or at least data gathering disclosure.
 
 import React, {useEffect} from 'react';
 import { Link } from "react-router-dom";
