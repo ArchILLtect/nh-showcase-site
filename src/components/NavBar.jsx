@@ -46,7 +46,7 @@ const NavBar = () => {
 
   return (
     <nav className="bg-gray-800 p-4">
-      <ul className="flex justify-around items-center list-none flex-col sm:flex-row">
+      <ul className="flex justify-around items-center list-none flex-col sm:flex-row h-8">
         <li>
           <NavLink
             to="/home"
@@ -100,7 +100,7 @@ const NavBar = () => {
             to="/contact"
             className={({ isActive }) =>
               isActive
-                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg h-28"
                 : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
             }
           >
@@ -108,64 +108,64 @@ const NavBar = () => {
             </NavLink>
         </li>
         <li>
-      {/* Login/Logout Button */}
-      <div>
-        {loggedIn ? (
-          userLevel > 1 ? (
-          <NavLink
-            to="/admin/dashboard"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
-                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
-            }
-          >
-            Admin Dashboard
-          </NavLink>
-           ) : (
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
-                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
-            }
-          >
-            Dashboard
-          </NavLink>
-           )         
-        ) : (
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive
-                ? "text-yellow-400 px-5 py-2 no-underline flex gap-2 items-center flex-row"
-                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg flex gap-2 items-center flex-row"
-            }
-          >
-            Login
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              viewBox="0 0 16 16"
-              className="text-xl"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"
-              ></path>
-              <path
-                fillRule="evenodd"
-                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
-              ></path>
-            </svg>
-          </NavLink>
-        )}
-      </div>
+        {/* Login/Logout Button */}
+          <div>
+            {loggedIn ? (
+              userLevel > 1 ? (
+              <NavLink
+                to="/admin/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg h-15"
+                    : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg h-15"
+                }
+              >
+                Admin Dashboard
+              </NavLink>
+              ) : (
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
+                    : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
+                }
+              >
+                Dashboard
+              </NavLink>
+              )         
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-gray-300 text-orange-600 hover:font-medium px-5 py-2 no-underline flex gap-2 items-center flex-row max-h-10"
+                    : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline flex gap-2 items-center flex-row"
+                }
+              >
+                Login
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  strokeWidth="0"
+                  viewBox="0 0 16 16"
+                  className="text-xl"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"
+                  ></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
+                  ></path>
+                </svg>
+              </NavLink>
+            )}
+          </div>
         </li>
       </ul>
     </nav>

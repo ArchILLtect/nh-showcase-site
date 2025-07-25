@@ -33,14 +33,14 @@ const Footer = () => {
 
     return (
         <footer className="bg-gray-800 text-gray-100 flex flex-col sm:flex-row text-center py-2
-                fixed w-full bottom-0 justify-around items-center">
+                fixed w-full bottom-0 justify-around items-center h-12">
             <p>&copy; {currentYear} Nick Hanson Sr.</p>
             {/* Login/Logout Button */}
             <div>
                 {isLoggedIn() ? (
                     <button
                         onClick={handleLogout}
-                        className="hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg flex gap-2 items-center"
+                        className="hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-0.5 no-underline hover:text-lg flex gap-2 items-center"
                     >
                         Logout
                         <svg
