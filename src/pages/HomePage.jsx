@@ -2,7 +2,7 @@
  * File: HomePage.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: May 23, 2025
+ * Last Updated: July 17, 2025
  * Description: The homepage for the showcase site.
  *
  * Props:
