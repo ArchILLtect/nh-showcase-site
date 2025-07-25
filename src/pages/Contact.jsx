@@ -2,7 +2,7 @@
  * File: Contact.jsx
  * Author: Nick Hanson
  * Created On: December 23, 2024
- * Last Updated: May 23, 2025
+ * Last Updated: July 25, 2025
  * Description: The contact page for the showcase site.
  *
  * Props:
@@ -14,12 +14,18 @@
  *
  * Dependencies:
  * - React
+ * - useState: A React hook for managing state.
+ * - useEffect: A React hook for side effects.
+ * - trackVisit
+ * - LoadingSpinner: A component for display a spinner during loading times.
  */
 
 import React, { useState, useEffect } from 'react';
 import { trackVisit } from "../utils/visitTracker";
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
@@ -34,8 +40,9 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    const start = Date.now();
     try {
+      setLoading(true); // start loading
       const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -53,6 +60,10 @@ const Contact = () => {
     } catch (error) {
       console.error('Error:', error);
       alert('An error occurred. Please try again later.');
+    } finally {
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, 500 - elapsed);
+      setTimeout(() => setLoading(false), remaining);
     }
   };
 
@@ -95,53 +106,60 @@ const Contact = () => {
         <h2 className="text-gray-600 dark:text-gray-100 text-2xl font-semibold mb-4">
           Contact Form
         </h2>
-        {submitted ? (
-          <p className="text-green-600">
-            Thank you for reaching out! I&apos;ll get back to you soon.
-          </p>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
-                  border-gray-300 rounded"
-              required
-              autoComplete='name'
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
-                  border-gray-300 rounded"
-              required
-              autoComplete='email'
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
-                  border-gray-300 rounded"
-              rows="4"
-              required
-            />
-            <button
-              type="submit"
-              className="bg-blue-500 text-gray-900 dark:text-white font-semibold py-2 px-4
-                  rounded hover:bg-blue-600"
-            >
-              Send Message
-            </button>
-          </form>
-        )}
+
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {submitted ? (
+            <p className="text-green-600">
+              Thank you for reaching out! I&apos;ll get back to you soon.
+            </p>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
+                    border-gray-300 rounded"
+                required
+                autoComplete='name'
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
+                    border-gray-300 rounded"
+                required
+                autoComplete='email'
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                className="dark:bg-gray-300 dark:placeholder-gray-800 w-full p-2 border
+                    border-gray-300 rounded"
+                rows="4"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-gray-900 dark:text-white font-semibold py-2 px-4
+                    rounded hover:bg-blue-600"
+              >
+                Send Message
+              </button>
+            </form>
+          )}
+        </>
+      )}
       </div>
     </div>
   );

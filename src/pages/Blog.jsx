@@ -2,7 +2,7 @@
  * File: Blog.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: May 23, 2025
+ * Last Updated: July 25, 2025
  * Description: The blog page for the showcase site.
  *
  * Props:
@@ -14,17 +14,25 @@
  *
  * Dependencies:
  * - React
+ * - useState: A React hook for managing state.
+ * - useEffect: A React hook for side effects.
+ * - trackVisit: A utility function to track visits to the blog page.
+ * - BlogPost: A component to display individual blog posts.
+ * - LoadingSpinner: A component for display a spinner during loading times.
  * 
- * // TODO: Decide what to do when there are > 9 categories.
  */
 
 import React, { useState, useEffect } from "react";
 import { trackVisit } from "../utils/visitTracker";
 import BlogPost from "../components/BlogPost";
+import LoadingSpinner from "../components/LoadingSpinner";
+
+// TODO: Decide what to do when there are > 9 categories.
 
 const BLOG_API_ENDPOINT = "https://0khffs67k4.execute-api.us-east-2.amazonaws.com/dev/";
 
 export default function Blogs() {
+  const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -37,7 +45,9 @@ export default function Blogs() {
   // Fetch blogs from JSON file
   useEffect(() => {
     const fetchMetadata = async () => {
+      const start = Date.now();
       try {
+        setLoading(true); // start loading
         const response = await fetch(BLOG_API_ENDPOINT);
         const data = await response.json();
         console.log("Fetched metadata:", data); // 👈 sanity check
@@ -56,6 +66,10 @@ export default function Blogs() {
       } catch (err) {
         console.error("Failed to fetch blog metadata:", err);
         setBlogs([]); // fallback to empty array
+      } finally {
+          const elapsed = Date.now() - start;
+          const remaining = Math.max(0, 500 - elapsed);
+          setTimeout(() => setLoading(false), remaining);
       }
     };
 
@@ -87,46 +101,50 @@ export default function Blogs() {
     <div className="blogs-page container mx-auto px-4 py-8 mb-20">
       <h1 className="text-gray-700 dark:text-gray-200 text-4xl font-bold text-center mb-8">Nick&apos;s Blogs</h1>
 
-      {/* Dynamic Category Buttons */}
-      <div className="categories flex justify-center gap-4 mb-6">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`px-4 py-2 rounded-md ${
-              selectedCategory === category
-                ? "bg-blue-600 text-white font-semibold"
-                : "text-gray-900 bg-gray-200 font-semibold hover:bg-gray-300"
-            }`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category === "all" ? "All" : category.charAt(0).toUpperCase() + category.slice(1)}
-          </button>
-        ))}
-      </div>
-
-      {/* Blog List or Post View */}
-      {!selectedPost ? (
-        <div className="bg-gray-100 dark:bg-gray-600 mb-20 blog-list grid gap-6 md:grid-cols-2
-            lg:grid-cols-3 p-5">
-          {filteredBlogs.map((post) => (
-            <div
-              key={post.postId}
-              className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md
-                  dark:shadow-dark p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow
-                  cursor-pointer hover:scale-105"
-              onClick={() => handlePostClick(post)}
-            >
-              <h2 className="text-2xl text-gray-900 dark:text-gray-200 font-semibold mb-2">{post.title}</h2>
-              <hr className="my-4 border-gray-500"/>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{post.excerpt}</p>
-              <p className="text-sm text-gray-800 dark:text-gray-200">{post.createdAt}</p>
-            </div>
-          ))}
-        </div>
+      {loading ? (
+        <LoadingSpinner />
       ) : (
+        <>
+          {/* Dynamic Category Buttons */}
+          <div className="categories flex justify-center gap-4 mb-6">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`px-4 py-2 rounded-md ${
+                  selectedCategory === category
+                    ? "bg-blue-600 text-white font-semibold"
+                    : "text-gray-900 bg-gray-200 font-semibold hover:bg-gray-300"
+                }`}
+                onClick={() => handleCategoryClick(category)}
+              >
+                {category === "all" ? "All" : category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
+            ))}
+          </div>
 
-        <BlogPost post={selectedPost} onBack={handleBackClick} />
-
+          {/* Blog List or Post View */}
+          {!selectedPost ? (
+            <div className="bg-gray-100 dark:bg-gray-600 mb-20 blog-list grid gap-6 md:grid-cols-2
+                lg:grid-cols-3 p-5">
+              {filteredBlogs.map((post) => (
+                <div
+                  key={post.postId}
+                  className="bg-gray-200 dark:bg-gray-800 blog-card rounded-lg shadow-md
+                      dark:shadow-dark p-6 hover:shadow-lg dark:hover:shadow-darklg transition-shadow
+                      cursor-pointer hover:scale-105"
+                  onClick={() => handlePostClick(post)}
+                >
+                  <h2 className="text-2xl text-gray-900 dark:text-gray-200 font-semibold mb-2">{post.title}</h2>
+                  <hr className="my-4 border-gray-500"/>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{post.excerpt}</p>
+                  <p className="text-sm text-gray-800 dark:text-gray-200">{post.createdAt}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <BlogPost post={selectedPost} onBack={handleBackClick} />
+          )}
+      </>
       )}
     </div>
   );

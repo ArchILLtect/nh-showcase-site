@@ -2,7 +2,7 @@
  * File: Projects.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: May 23, 2025
+ * Last Updated: July 25, 2025
  * Description: The projects page for the showcase site.
  * This is where the user can view projects.
  *
@@ -15,25 +15,45 @@
  *
  * Dependencies:
  * - React
+ * - useState: A React hook for managing state.
+ * - useEffect: A React hook for side effects.
+ * - AppModal: A component to display a modal with a live demo of the app.
+ * - trackVisit: A utility function to track visits to the projects page.
+ * - LoadingSpinner: A component for display a spinner during loading times.
+
  */
 
 import React, { useEffect, useState } from 'react';
 import AppModal from '../components/AppModal';
 import { trackVisit } from "../utils/visitTracker";
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     trackVisit();
   }, []);
 
   useEffect(() => {
-    // Example: Fetch projects from a local JSON file or API
-    fetch('data/projects.json')
-      .then((response) => response.json())
-      .then((data) => setProjects(data))
-      .catch((error) => console.error("Error fetching projects:", error));
+    const loadProjects = async () => {
+      const start = Date.now();
+      try {
+        setLoading(true); // show spinner
+        const response = await fetch('data/projects.json');
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        const elapsed = Date.now() - start;
+        const delay = Math.max(0, 500 - elapsed);
+        setTimeout(() => setLoading(false), delay); // ⏳ delay cleanup
+      }
+    };
+
+    loadProjects();
   }, []);
 
   return (
@@ -46,17 +66,57 @@ const Projects = () => {
         Here are some of the projects I’ve worked on, showcasing my skills in web development,
         problem-solving, and design.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Map through the projects array and display each project */}
-        {projects.map((project, index) => (
-          project.status?.trim() !== "None" ? (
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Map through the projects array and display each project */}
+          {projects.map((project, index) => (
+            project.status?.trim() !== "None" ? (
+              <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300
+                  rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
+                <img
+                  src={project.image}
+                  alt={`${project.title} thumbnail`}
+                  className="w-full h-48 object-contain"
+                />
+                <div className="p-4">
+                  <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-2">
+                    {project.title}
+                  </h2>
+                  <p className="dark:text-gray-300 text-gray-600 mb-4">
+                    {project.description}
+                  </p>
+                  <p className="dark:text-gray-300 text-sm text-gray-500 font-semibold mb-4">
+                    Tech Stack: {project.techStack.join(', ')}
+                  </p>
+                  <div className="flex space-x-4">
+                    {project.liveDemo && (
+                      <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
+                    )}
+                    {project.github && (
+                      <div className="flex items-center">
+                        <a
+                          href={project.github}
+                          className="dark:text-blue-300 text-blue-700 hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          GitHub
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
             <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300
-                rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
-              <img
-                src={project.image}
-                alt={`${project.title} thumbnail`}
-                className="w-full h-48 object-contain"
-              />
+                rounded-lg shadow-md dark:shadow-dark overflow-hidden opacity-50">
+                <img
+                  src={project.image}
+                  alt={`${project.title} thumbnail`}
+                  className="w-full h-48 object-contain"
+                />
               <div className="p-4">
                 <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-2">
                   {project.title}
@@ -64,56 +124,20 @@ const Projects = () => {
                 <p className="dark:text-gray-300 text-gray-600 mb-4">
                   {project.description}
                 </p>
-                <p className="dark:text-gray-300 text-sm text-gray-500 font-semibold mb-4">
+                <p className="dark:text-gray-300 text-sm text-gray-500 mb-4">
                   Tech Stack: {project.techStack.join(', ')}
                 </p>
                 <div className="flex space-x-4">
-                  {project.liveDemo && (
-                    <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
-                  )}
-                  {project.github && (
-                    <div className="flex items-center">
-                      <a
-                        href={project.github}
-                        className="dark:text-blue-300 text-blue-700 hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        GitHub
-                      </a>
-                    </div>
-                  )}
+                  <p className="text-gray-700 dark:text-red-500">
+                    Project Not Yet Deployed
+                  </p>
                 </div>
               </div>
             </div>
-          ) : (
-          <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300
-              rounded-lg shadow-md dark:shadow-dark overflow-hidden opacity-50">
-              <img
-                src={project.image}
-                alt={`${project.title} thumbnail`}
-                className="w-full h-48 object-contain"
-              />
-            <div className="p-4">
-              <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-2">
-                {project.title}
-              </h2>
-              <p className="dark:text-gray-300 text-gray-600 mb-4">
-                {project.description}
-              </p>
-              <p className="dark:text-gray-300 text-sm text-gray-500 mb-4">
-                Tech Stack: {project.techStack.join(', ')}
-              </p>
-              <div className="flex space-x-4">
-                <p className="text-gray-700 dark:text-red-500">
-                  Project Not Yet Deployed
-                </p>
-              </div>
-            </div>
-          </div>
-          )
-        ))}
-      </div>
+            )
+          ))}
+        </div>
+      )}
     </div>
   );
 };
