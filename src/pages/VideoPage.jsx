@@ -10,7 +10,7 @@ const VideoPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 p-6 mb-6">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6">
-        Temporary Video Page
+        The Impact of AI Coding Assistants on Web Development 🚀
       </h1>
 
       <div className="w-full max-w-3xl aspect-video">
