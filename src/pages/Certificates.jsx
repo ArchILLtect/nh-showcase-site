@@ -41,12 +41,19 @@ const certs = [
     image: "certificates/Introduction_to_VueJS_Framework.png",
     certUrl: "https://coursera.org/share/64755d94b9c8f788267aa79761dd6ec7",
   },
-{
+  {
     title: "Animation with JavaScript and jQuery",
     issuer: "Coursera/UCDavis",
     date: "Sept 2023",
     image: "certificates/Animation_with_JS_and_jQuery.jpg",
     certUrl: "https://coursera.org/share/0272faccb45729db7ed29ccd6655864f",
+  },
+  {
+    title: "JavaScript for Beginners - Specialization",
+    issuer: "Coursera/UCDavis",
+    date: "Sept 2023",
+    image: "certificates/JS_For_Beginners_Spec.jpg",
+    certUrl: "https://coursera.org/share/e2648f09290bf975baf748342135b335",
   },
 ];
 
