@@ -42,7 +42,6 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import AdminDashboard from "./admin/AdminDashboard";
 import Certificates from "./pages/Certificates";
-import VideoPage from "./pages/VideoPage";
 
 function App() {
     return (
@@ -59,7 +58,6 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/video" element={<VideoPage />} />
                     <Route
                         path="/dashboard"
                         element={

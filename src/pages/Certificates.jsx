@@ -80,7 +80,7 @@ const Certificates = () => {
             </p>
             <div className="flex justify-center mt-4">
               <a
-                href="https://coursera.org/verify/XYZ123"
+                href={cert.certUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
