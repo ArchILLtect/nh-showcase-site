@@ -2,7 +2,7 @@
  * File: AboutMe.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: May 23, 2025
+ * Last Updated: August 20, 2025
  * Description: The about me page for the showcase site.
  *
  * Props:
@@ -14,9 +14,11 @@
  *
  * Dependencies:
  * - React
+ * - React Router DOM
  */
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { trackVisit } from "../utils/visitTracker";
 
 const AboutMe = () => {
@@ -62,6 +64,12 @@ const AboutMe = () => {
   return (
     <div className="bg-gray-200 dark:bg-gray-600 xl:max-w-6xl lg:max-w-4xl mx-auto p-4">
       <h1 className="text-gray-600 dark:text-gray-300 text-4xl font-bold text-center mb-6">About Me</h1>
+      <Link to="/certificates" className="flex justify-center my-6">
+        <button className="relative z-10 px-6 py-3 bg-blue-500 text-gray-100 text-sm rounded
+            hover:bg-blue-600 transition duration-500">
+          Certificates
+        </button>
+      </Link>
       {sections.map((section, index) => (
         <div key={index} className="text-gray-800 bg-gray-300 dark:bg-gray-300 mb-4 border-b
             border-gray-500 dark:border-gray-800">
