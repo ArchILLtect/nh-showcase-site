@@ -31,6 +31,7 @@ export default function DetailsModal({ isOpen, onClose, badge }) {
   if (!isOpen || !badge) return null;
 
   const closeBtnRef = useRef(null);
+
   // Prevent page scroll while modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -66,10 +67,8 @@ export default function DetailsModal({ isOpen, onClose, badge }) {
     skills = [],
     image,
     badgeUrl,
+    criteria
   } = badge || {};
-
-  // handle both "criteria" and "Criteria" spellings
-  const criteria = badge?.criteria || badge?.Criteria || [];
 
   return createPortal(
     <div
