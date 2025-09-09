@@ -1,0 +1,86 @@
+[
+    {
+        "title": "High Honors",
+        "issuer": "Madison College",
+        "date": "Aug 26, 2025",
+        "description": "According to Madison College scholastic records, this individual has achieved a grade point average of 3.75 or better. This accomplishment earns a place on the Dean's List at Madison Area Technical College for the associated term. In our competitive society, academic honors are not easily achieved. This recognition is proof of your ability, perseverance, dedication, and hard work.",
+        "skills": [
+            "Academic Achievement",
+            "Commitment",
+            "Persistence",
+            "Personal Resilience",
+            "Work Ethic"
+        ],
+        "image": "../badges/Credly-MATC-High_Honors.png",
+        "Criteria": ["Grade point average of 3.75 or better"],
+        "certUrl": "https://www.credly.com/badges/79e50688-ca66-401d-a2b1-6a638d6e0d75"
+    },
+    {
+        "title": "High Honors",
+        "issuer": "Madison College",
+        "date": "Dec 20, 2024",
+        "description": "According to Madison College scholastic records, this individual has achieved a grade point average of 3.75 or better. This accomplishment earns a place on the Dean's List at Madison Area Technical College for the associated term. In our competitive society, academic honors are not easily achieved. This recognition is proof of your ability, perseverance, dedication, and hard work.",
+        "skills": [
+            "Academic Achievement",
+            "Commitment",
+            "Persistence",
+            "Personal Resilience",
+            "Work Ethic"
+        ],
+        "image": "../badges/Credly-MATC-High_Honors.png",
+        "Criteria": ["Grade point average of 3.75 or better"],
+        "certUrl": "https://www.credly.com/badges/61b4dcc3-4bc6-4900-9002-f3c4aa268630"
+    },
+    {
+        "title": "Perfect Honors",
+        "issuer": "Madison College",
+        "date": "Jun 05, 2025",
+        "description": "According to Madison College scholastic records, this individual has achieved a grade point average of 4.00 or better. This accomplishment earns a place on the Dean's List at Madison Area Technical College for the associated term. In our competitive society, academic honors are not easily achieved. This recognition is proof of your ability, perseverance, dedication, and hard work.",
+        "skills": [
+            "Academic Achievement",
+            "Commitment",
+            "Persistence",
+            "Personal Resilience",
+            "Work Ethic"
+        ],
+        "image": "../badges/Credly-MATC-Perfect_Honors.png",
+        "Criteria": ["Grade point average of 4.00 or better"],
+        "certUrl": "https://www.credly.com/badges/649b60ca-e241-4e5f-a068-1a626ba98c10"
+    },
+    {
+        "title": "Core Workforce Skills: Teamwork (v.02)",
+        "issuer": "Madison College",
+        "date": "Oct 29, 2024",
+        "description": "Core Workforce Skills are a collection of soft skills employers list as important. To earn this badge, instructors rate a student artifact or assignment produced in a course that targets Teamwork. Examples of artifacts include a research paper, group presentation, project, or skill demonstration. Badges are awarded when adequate evidence is present. The skills are measured through observable behavior or performance.",
+        "skills": ["Respect Diversity", "Social Interaction", "Teamwork"],
+        "image": "../badges/Credly-MATC-Teamwork.png",
+        "Criteria": [
+            "Work cooperatively to support common goals",
+            "Contribute to group with ideas, suggestions, and effort",
+            "Complete own share of tasks necessary to complete a project",
+            "Empower team members by active listening and validating other's contributions",
+            "Respect diversity"
+        ],
+        "certUrl": "https://www.credly.com/badges/74eef77f-83db-4b82-b69d-cb25d807f0d4"
+    },
+    {
+        "title": "Web Accessibility Fundamentals (v.01)",
+        "issuer": "Madison College",
+        "date": "Dec 13, 2024",
+        "description": "The curriculum provides an overview of important web accessibility concepts, including technical standards and user experience fundamentals. Students investigate different disabilities and their related challenges. Topics include an explanation of WCAG guidelines, WAI-ARIA, universal design, and best coding practices. Students implement these concepts in a fully accessible website.",
+        "skills": [
+            "Accessible Forms",
+            "ARIA",
+            "HTML5 Semantics",
+            "Search Engine Optimization (SEO)",
+            "Web Accessibility Tests",
+            "Web Navigation"
+        ],
+        "image": "../badges/Credly-MATC-Web_Accessibility_Fundamentals.png",
+        "Criteria": [
+            "Student must earn a 93% or above on accessibility quiz.",
+            "Student must earn a 93% or above on final project demonstrating full comprehension of course objectives."
+        ],
+        "certUrl": "https://www.credly.com/badges/abec2773-4f5f-415e-a07c-9af7125a6a04"
+    }
+]
