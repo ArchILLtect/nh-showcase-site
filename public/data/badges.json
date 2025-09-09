@@ -11,7 +11,7 @@
             "Personal Resilience",
             "Work Ethic"
         ],
-        "image": "badges/Credly-MATC-High_Honors.png",
+        "image": "images/badges/Credly-MATC-High_Honors.png",
         "Criteria": ["Grade point average of 3.75 or better"],
         "badgeUrl": "https://www.credly.com/badges/79e50688-ca66-401d-a2b1-6a638d6e0d75"
     },
@@ -27,7 +27,7 @@
             "Personal Resilience",
             "Work Ethic"
         ],
-        "image": "badges/Credly-MATC-High_Honors.png",
+        "image": "images/badges/Credly-MATC-High_Honors.png",
         "Criteria": ["Grade point average of 3.75 or better"],
         "badgeUrl": "https://www.credly.com/badges/61b4dcc3-4bc6-4900-9002-f3c4aa268630"
     },
@@ -43,7 +43,7 @@
             "Personal Resilience",
             "Work Ethic"
         ],
-        "image": "badges/Credly-MATC-Perfect_Honors.png",
+        "image": "images/badges/Credly-MATC-Perfect_Honors.png",
         "Criteria": ["Grade point average of 4.00 or better"],
         "badgeUrl": "https://www.credly.com/badges/649b60ca-e241-4e5f-a068-1a626ba98c10"
     },
@@ -53,7 +53,7 @@
         "date": "Oct 29, 2024",
         "description": "Core Workforce Skills are a collection of soft skills employers list as important. To earn this badge, instructors rate a student artifact or assignment produced in a course that targets Teamwork. Examples of artifacts include a research paper, group presentation, project, or skill demonstration. Badges are awarded when adequate evidence is present. The skills are measured through observable behavior or performance.",
         "skills": ["Respect Diversity", "Social Interaction", "Teamwork"],
-        "image": "badges/Credly-MATC-Teamwork.png",
+        "image": "images/badges/Credly-MATC-Teamwork.png",
         "Criteria": [
             "Work cooperatively to support common goals",
             "Contribute to group with ideas, suggestions, and effort",
@@ -76,7 +76,7 @@
             "Web Accessibility Tests",
             "Web Navigation"
         ],
-        "image": "badges/Credly-MATC-Web_Accessibility_Fundamentals.png",
+        "image": "images/badges/Credly-MATC-Web_Accessibility_Fundamentals.png",
         "Criteria": [
             "Student must earn a 93% or above on accessibility quiz.",
             "Student must earn a 93% or above on final project demonstrating full comprehension of course objectives."

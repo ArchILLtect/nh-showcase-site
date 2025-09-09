@@ -35,7 +35,7 @@ const Certificates = () => {
       const start = Date.now();
       try {
         setLoadingCerts(true); // show spinner
-        const response = await fetch('/data/certificates.json');
+        const response = await fetch('data/certificates.json');
         const data = await response.json();
         setCerts(data);
       } catch (error) {
@@ -136,8 +136,7 @@ const Certificates = () => {
                   rel="noopener noreferrer"
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
                   >
-                  Verify Badge
-                  </a>
+                  Badge Details                  </a>
               </div>
             </div>
           ))}

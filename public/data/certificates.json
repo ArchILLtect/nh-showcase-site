@@ -3,35 +3,35 @@
         "title": "Interactivity with JavaScript and jQuery",
         "issuer": "Coursera/UCDavis",
         "date": "Sept 2023",
-        "image": "certificates/Interactivity_with_JSt&jQuery.png",
+        "image": "images/certificates/Interactivity_with_JSt&jQuery.png",
         "certUrl": "https://coursera.org/share/1f5673fdbfac30d7904362588fc6bd74"
     },
     {
         "title": "Data Manipulation in JavaScript",
         "issuer": "Coursera/UCDavis",
         "date": "Oct 2023",
-        "image": "certificates/Data_Manipulation_in_JS.png",
+        "image": "images/certificates/Data_Manipulation_in_JS.png",
         "certUrl": "https://coursera.org/share/fb2d3df796f87e45865954120015286c"
     },
     {
         "title": "Introduction to VueJS Framework",
         "issuer": "Coursera/Codio",
         "date": "May 2024",
-        "image": "certificates/Introduction_to_VueJS_Framework.png",
+        "image": "images/certificates/Introduction_to_VueJS_Framework.png",
         "certUrl": "https://coursera.org/share/64755d94b9c8f788267aa79761dd6ec7"
     },
     {
         "title": "Animation with JavaScript and jQuery",
         "issuer": "Coursera/UCDavis",
         "date": "Sept 2023",
-        "image": "certificates/Animation_with_JS_and_jQuery.jpg",
+        "image": "images/certificates/Animation_with_JS_and_jQuery.jpg",
         "certUrl": "https://coursera.org/share/0272faccb45729db7ed29ccd6655864f"
     },
     {
         "title": "JavaScript for Beginners - Specialization",
         "issuer": "Coursera/UCDavis",
         "date": "Sept 2023",
-        "image": "certificates/JS_For_Beginners_Spec.jpg",
+        "image": "images/certificates/JS_For_Beginners_Spec.jpg",
         "certUrl": "https://coursera.org/share/e2648f09290bf975baf748342135b335"
     }
 ]
