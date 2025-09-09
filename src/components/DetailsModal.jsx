@@ -31,6 +31,24 @@ export default function DetailsModal({ isOpen, onClose, badge }) {
   if (!isOpen || !badge) return null;
 
   const closeBtnRef = useRef(null);
+  // Prevent page scroll while modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  // Trap focus within the modal for accessibility
+  useEffect(() => {
+    const focusable = [...document.querySelectorAll('[data-modal] a, [data-modal] button, [data-modal] input, [data-modal] textarea, [data-modal] select, [data-modal] [tabindex]:not([tabindex="-1"])')];
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    const onKey = (e) => {
+      if (e.key !== 'Tab' || focusable.length === 0) return;
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
 
   // Allow Esc to close + focus the Close button for accessibility
   useEffect(() => {
@@ -62,7 +80,7 @@ export default function DetailsModal({ isOpen, onClose, badge }) {
       onClick={onClose} // click backdrop to close
     >
       <div
-        className="max-w-3xl w-[92%] sm:w-11/12 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 relative border-4 border-gray-300 dark:border-gray-600 max-h-[90vh] overflow-y-auto"
+        className="max-w-3xl w-[92%] sm:w-11/12 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 relative border-4 border-gray-300 dark:border-gray-600 max-h-[90vh] overflow-y-auto  animate-fadeIn"
         onClick={(e) => e.stopPropagation()} // prevent backdrop close on content click
       >
         {/* Close (X) */}
