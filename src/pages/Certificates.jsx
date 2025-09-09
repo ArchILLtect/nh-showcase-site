@@ -148,11 +148,13 @@ const Certificates = () => {
         </div>
       )}
       {/* Modal */}
-      <DetailsModal
-        isOpen={isBadgeModalOpen}
-        onClose={() => setIsBadgeModalOpen(false)}
-        badge={selectedBadge}
-      />
+      {isBadgeModalOpen && (
+        <DetailsModal
+          isOpen
+          onClose={() => setIsBadgeModalOpen(false)}
+          badge={selectedBadge}
+        />
+      )}
     </div>
   );
 };
