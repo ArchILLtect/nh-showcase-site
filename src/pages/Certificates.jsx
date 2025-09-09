@@ -22,7 +22,9 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Certificates = () => {
   const [certs, setCerts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [badges, setBadges] = useState([]);
+  const [loadingCerts, setLoadingCerts] = useState(true);
+  const [loadingBadges, setLoadingBadges] = useState(true);
 
   useEffect(() => {
     trackVisit();
@@ -32,7 +34,7 @@ const Certificates = () => {
     const loadCertificates = async () => {
       const start = Date.now();
       try {
-        setLoading(true); // show spinner
+        setLoadingCerts(true); // show spinner
         const response = await fetch('/data/certificates.json');
         const data = await response.json();
         setCerts(data);
@@ -41,22 +43,38 @@ const Certificates = () => {
       } finally {
         const elapsed = Date.now() - start;
         const delay = Math.max(0, 500 - elapsed);
-        setTimeout(() => setLoading(false), delay); // ⏳ delay cleanup
+        setTimeout(() => setLoadingCerts(false), delay); // ⏳ delay cleanup
+      }
+    };
+    const loadBadges = async () => {
+      const start = Date.now();
+      try {
+        setLoadingBadges(true); // show spinner
+        const response = await fetch('/data/badges.json');
+        const data = await response.json();
+        setBadges(data);
+      } catch (error) {
+        console.error("Error fetching badges:", error);
+      } finally {
+        const elapsed = Date.now() - start;
+        const delay = Math.max(0, 500 - elapsed);
+        setTimeout(() => setLoadingBadges(false), delay); // ⏳ delay cleanup
       }
     };
 
     loadCertificates();
+    loadBadges();
   }, []);
 
   return (
     <div className="bg-gray-200 dark:bg-gray-800 min-h-screen p-6">
-      <h1 className="text-4xl font-bold text-center text-gray-700 dark:text-gray-200 mb-10">
+      <h1 className="text-4xl font-bold text-center text-gray-700 dark:text-gray-200 mb-6">
         Certifications
       </h1>
-      {loading ? (
+      {loadingCerts ? (
         <LoadingSpinner />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-6 border-2 border-gray-300 dark:border-gray-600 p-8 rounded-lg">
           {certs.map((cert, idx) => (
             <div
               key={idx}
@@ -81,6 +99,44 @@ const Certificates = () => {
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
                   >
                   Verify Certificate
+                  </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <h1 className="text-4xl font-bold text-center text-gray-700 dark:text-gray-200 mb-6">
+        Badges
+      </h1>
+      {loadingBadges ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-10 border-2 border-gray-300 dark:border-gray-600 p-8 rounded-lg">
+          {badges.map((badge, idx) => (
+            // TODO: Switch to modal for full info with current info as is, and then verify link in modal.
+            <div
+              key={idx}
+              className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden p-4 flex flex-col justify-between"
+            >
+              <img
+                src={badge.image}
+                alt={`${badge.title} badge`}
+                className="h-32 object-contain mx-auto mb-4"
+              />
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 text-center">
+                {badge.title}
+              </h2>
+              <p className="text-sm text-center text-gray-600 dark:text-gray-300">
+                {badge.issuer} · {badge.date}
+              </p>
+              <div className="flex justify-center mt-4">
+                <a
+                  href={badge.badgeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
+                  >
+                  Verify Badge
                   </a>
               </div>
             </div>
