@@ -19,12 +19,15 @@
 import React, { useEffect, useState } from 'react';
 import { trackVisit } from "../utils/visitTracker";
 import LoadingSpinner from '../components/LoadingSpinner';
+import DetailsModal from '../components/DetailsModal';
 
 const Certificates = () => {
   const [certs, setCerts] = useState([]);
   const [badges, setBadges] = useState([]);
   const [loadingCerts, setLoadingCerts] = useState(true);
   const [loadingBadges, setLoadingBadges] = useState(true);
+  const [selectedBadge, setSelectedBadge] = useState(null);
+  const [isBadgeModalOpen, setIsBadgeModalOpen] = useState(false);
 
   useEffect(() => {
     trackVisit();
@@ -35,7 +38,7 @@ const Certificates = () => {
       const start = Date.now();
       try {
         setLoadingCerts(true); // show spinner
-        const response = await fetch('data/certificates.json');
+        const response = await fetch('/data/certificates.json');
         const data = await response.json();
         setCerts(data);
       } catch (error) {
@@ -130,18 +133,26 @@ const Certificates = () => {
                 {badge.issuer} · {badge.date}
               </p>
               <div className="flex justify-center mt-4">
-                <a
-                  href={badge.badgeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => {
+                    setSelectedBadge(badge);
+                    setIsBadgeModalOpen(true);
+                  }}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
-                  >
-                  Badge Details                  </a>
+                >
+                  Badge Details
+                </button>
               </div>
             </div>
           ))}
         </div>
       )}
+      {/* Modal */}
+      <DetailsModal
+        isOpen={isBadgeModalOpen}
+        onClose={() => setIsBadgeModalOpen(false)}
+        badge={selectedBadge}
+      />
     </div>
   );
 };
