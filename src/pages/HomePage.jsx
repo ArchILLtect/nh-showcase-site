@@ -46,10 +46,10 @@ const HomePage = () => {
   }, []);
 
   return (
-    <main className="w-5/6 mx-auto dark:bg-gray-600 text-gray-100 sm:max-w-lg md:max-w-2xl
+    <main className="dark:bg-gray-600 text-gray-100 pt-5 w-5/6 mx-auto sm:max-w-lg md:max-w-2xl
         lg:max-w-4xl xl:max-w-5xl">
       {/* Hero Section */}
-      <section className="relative lg:max-w-4xl text-center py-12 bg-gray-100 dark:bg-gray-800
+      <section className="relative lg:max-w-4xl text-center py-20 bg-gray-100 dark:bg-gray-800
           bg-hero-pattern bg-center bg-auto m-auto">
         <div className="absolute inset-0 bg-gray-800 bg-opacity-85"></div>
         <h1 className="relative z-10 text-4xl font-mono font-bold mb-4">
@@ -66,13 +66,6 @@ const HomePage = () => {
             Explore My Projects
           </button>
         </Link>
-
-        <p className="relative z-10 text-xl text-gray-200 mt-10">
-          🚧This site is under heavy construction.🚧
-        </p>
-        <p className="relative z-10 text-xl text-gray-200 mt-10">
-          🚧Please be patient with me and check back often for updated content.🚧
-        </p>
       </section>
 
       {/* Skills Section */}
@@ -218,8 +211,8 @@ const HomePage = () => {
       </section>
 
       {/* Bio Section */}
-      <section className="py-12">
-        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-6">
+      <section className="pt-8 pb-16">
+        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200">
           About Me
         </h2>
         <div className="flex flex-col sm:flex-row gap-6 p-5 items-center justify-center">
