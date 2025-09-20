@@ -152,6 +152,11 @@ const HomePage = () => {
           My Process
         </h2>
         <div className="flex justify-around">
+          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
+              justify-center content-center">
+            <img src="icons/Figma-Logo.png" className="h-24 transition
+                transform hover:scale-110" alt="Figma Logo" title="Figma" />
+          </div>
           <div className="w-44 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
               justify-center content-center">
             <img src="icons/AGILE.png" className="h-24 transition
