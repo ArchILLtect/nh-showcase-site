@@ -52,6 +52,9 @@ export default function Privacy() {
           Change cookie settings
         </button>
       </div>
+      <p className="text-gray-600 dark:text-gray-300 text-sm mt-3 text-center">
+        After changing your settings, the consent banner will appear again so you can review and choose your preferences.
+      </p>
     </div>
   );
 }
