@@ -22,11 +22,25 @@
 
 const VISIT_API_ENDPOINT =
     "https://9hxx3na0o7.execute-api.us-east-2.amazonaws.com/dev/";
+const CONSENT_KEY = "cookieConsent"; // "accepted" | "rejected"
 const SESSION_COOLDOWN_MINUTES = 120;
 const VISIT_COOLDOWN_MINUTES = 30;
 
 export async function trackVisit() {
     try {
+        // Respect consent: skip visit logging unless user accepted
+        let consent;
+        try {
+            consent = localStorage.getItem(CONSENT_KEY);
+        } catch (e) {
+            console.warn("[visitTracker] localStorage unavailable:", e);
+            return;
+        }
+        if (consent !== "accepted") {
+            console.log("[visitTracker] Skipped (no consent)");
+            return;
+        }
+
         const path = window.location.pathname;
         const normalizedPath = path?.toLowerCase() || "/";
         const sessionCooldownKey = `session_cooldown_${normalizedPath}`;
