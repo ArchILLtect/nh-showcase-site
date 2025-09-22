@@ -29,6 +29,32 @@ export default function CookieNotice() {
     }
   }, []);
 
+  // Allow reopening the banner after user clears consent (from Privacy page or other tabs)
+  useEffect(() => {
+    const reevaluate = () => {
+      try {
+        const value = localStorage.getItem(CONSENT_KEY);
+        setVisible(!value);
+      } catch (e) {
+        setVisible(true);
+      }
+    };
+
+    const onCustomShow = () => reevaluate();
+    const onStorage = (e) => {
+      if (!e || e.key === null || e.key === CONSENT_KEY) {
+        reevaluate();
+      }
+    };
+
+    window.addEventListener('cookie-consent:show', onCustomShow);
+    window.addEventListener('storage', onStorage);
+    return () => {
+      window.removeEventListener('cookie-consent:show', onCustomShow);
+      window.removeEventListener('storage', onStorage);
+    };
+  }, []);
+
   const accept = () => {
     try {
       localStorage.setItem(CONSENT_KEY, "accepted");

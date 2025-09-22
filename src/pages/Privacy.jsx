@@ -13,6 +13,16 @@ export default function Privacy() {
     document.title = "Privacy & Cookies - Nick Hanson Showcase";
   }, []);
 
+  const clearConsent = () => {
+    try {
+      localStorage.removeItem('cookieConsent');
+    } catch (e) {
+      // noop
+    }
+    // Notify banner to re-check visibility
+    window.dispatchEvent(new Event('cookie-consent:show'));
+  };
+
   return (
     <div className="bg-gray-100 dark:bg-gray-600 max-w-3xl mx-auto p-6 mb-20 rounded">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">Privacy & Cookies</h1>
@@ -34,6 +44,14 @@ export default function Privacy() {
       <p className="text-gray-700 dark:text-gray-200">
         You can clear stored data anytime from your browser settings.
       </p>
+      <div className="mt-6 flex justify-center">
+        <button
+          onClick={clearConsent}
+          className="px-4 py-2 rounded bg-gray-800 text-gray-100 dark:bg-gray-700 hover:bg-gray-700"
+        >
+          Change cookie settings
+        </button>
+      </div>
     </div>
   );
 }
