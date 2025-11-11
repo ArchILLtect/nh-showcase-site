@@ -66,47 +66,12 @@ const Projects = () => {
         Here are some of the projects I’ve worked on, showcasing my skills in web development,
         problem-solving, and design.
       </p>
-      <div>
-        <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-4">Videos:</h2>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <div className="mb-6 ml-3 border-2 border-gray-400 p-4 rounded">
-            <p className="dark:text-gray-200 text-gray-700 font-semibold text-lg mb-4">Project Lombok:</p>
-            <div className="mb-4">
-              <p className="dark:text-gray-200 text-gray-700 font-semibold mb-2">Description:</p>
-              <p className="dark:text-gray-200 text-gray-700 text-sm mb-2">This full presentation explores how Project Lombok can drastically simplify Java development by reducing boilerplate code and improving readability — all without sacrificing functionality.</p>
-              <p className="dark:text-gray-200 text-gray-700 text-sm">I take you through a real-world example from my CodeForge project, where I integrated Lombok into an existing entity class and immediately saw the benefits:</p>
-              <ul className="list-disc list-inside">
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">120 lines of repetitive getters, setters, and constructors reduced to just 49.</li>
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Clearer, more maintainable code.</li>
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">A few spicy bugs along the way (and what they taught me about Hibernate and reflection).</li>
-              </ul>
-            </div>
-            <p className="dark:text-gray-200 text-gray-700 font-semibold mb-2">We&apos;ll look at:</p>
-            <div className="mb-4">
-              <ol className="list-decimal list-inside mb-4">
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">What Lombok is and how it works behind the scenes (compile-time annotation magic).</li>
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">How to integrate it cleanly using Maven.</li>
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">The before-and-after refactor of the Challenge class.</li>
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Results, debugging, and lessons learned.</li>
-                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Reflections on professional growth — from code cleanup to clear communication.</li>
-              </ol>
-              <p className="dark:text-gray-200 text-gray-700 text-sm">Throughout the talk, I blend humor with practical insights — proving that writing clean Java code doesn’t have to be boring. 🌶️</p>
-            </div>
-            <div className="flex flex-col">
-              <p className="dark:text-gray-200 text-gray-700 text-sm">YouTube video<a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/iCxZS0Pwx80" target="_blank" rel="noopener noreferrer">Part 1</a></p>
-              <p className="dark:text-gray-200 text-gray-700 text-sm">YouTube video<a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/JoKJuyTOpwk" target="_blank" rel="noopener noreferrer">Part 2</a></p>
-            </div>
-          </div>
-        )}
-      </div>
-      <div>
+      <div className="mb-10">
         <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-4">Demos:</h2>
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Map through the projects array and display each project */}
           {projects.map((project, index) => (
             project.status?.trim() !== "None" ? (
@@ -175,6 +140,46 @@ const Projects = () => {
           ))}
         </div>
       )}
+      </div>
+      <div>
+        {/* TODO: Change this to "loadingVideos" check
+        and fetch video data from videos JSON like certs/badges
+        using the Videos component to render each video
+        */}
+        <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-4">Videos:</h2>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="mb-6 border-2 border-gray-400 p-4 rounded">
+            {/* TODO: Create Video component to use cards containing video info */}
+            <p className="dark:text-gray-200 text-gray-700 font-semibold text-lg mb-4">Project Lombok:</p>
+            <div className="mb-4">
+              <p className="dark:text-gray-200 text-gray-700 font-semibold mb-2">Description:</p>
+              <p className="dark:text-gray-200 text-gray-700 text-sm mb-2">This full presentation explores how Project Lombok can drastically simplify Java development by reducing boilerplate code and improving readability — all without sacrificing functionality.</p>
+              <p className="dark:text-gray-200 text-gray-700 text-sm">I take you through a real-world example from my CodeForge project, where I integrated Lombok into an existing entity class and immediately saw the benefits:</p>
+              <ul className="list-disc list-inside">
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">120 lines of repetitive getters, setters, and constructors reduced to just 49.</li>
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Clearer, more maintainable code.</li>
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">A few spicy bugs along the way (and what they taught me about Hibernate and reflection).</li>
+              </ul>
+            </div>
+            <p className="dark:text-gray-200 text-gray-700 font-semibold mb-2">We&apos;ll look at:</p>
+            <div className="mb-4">
+              <ol className="list-decimal list-inside mb-4">
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">What Lombok is and how it works behind the scenes (compile-time annotation magic).</li>
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">How to integrate it cleanly using Maven.</li>
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">The before-and-after refactor of the Challenge class.</li>
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Results, debugging, and lessons learned.</li>
+                <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Reflections on professional growth — from code cleanup to clear communication.</li>
+              </ol>
+              <p className="dark:text-gray-200 text-gray-700 text-sm">Throughout the talk, I blend humor with practical insights — proving that writing clean Java code doesn’t have to be boring. 🌶️</p>
+            </div>
+            <div className="flex flex-col">
+              <p className="dark:text-gray-200 text-gray-700 text-sm">YouTube video<a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/iCxZS0Pwx80" target="_blank" rel="noopener noreferrer">Part 1</a></p>
+              <p className="dark:text-gray-200 text-gray-700 text-sm">YouTube video<a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/JoKJuyTOpwk" target="_blank" rel="noopener noreferrer">Part 2</a></p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
