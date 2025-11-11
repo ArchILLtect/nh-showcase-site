@@ -66,6 +66,22 @@ const Projects = () => {
         Here are some of the projects I’ve worked on, showcasing my skills in web development,
         problem-solving, and design.
       </p>
+      <div>
+        <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-4">Videos:</h2>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="mb-6 ml-3 border-2 border-gray-400 p-4 rounded">
+            <p className="dark:text-gray-200 text-gray-700 font-semibold">Project Lombok:</p>
+            <div className="flex flex-col">
+              <a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/iCxZS0Pwx80">Part 1</a>
+              <a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/JoKJuyTOpwk">Part 2</a>
+            </div>
+          </div>
+        )}
+      </div>
+      <div>
+        <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-4">Demos:</h2>
       {loading ? (
         <LoadingSpinner />
       ) : (
@@ -138,6 +154,7 @@ const Projects = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };
