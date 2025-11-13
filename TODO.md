@@ -4,7 +4,8 @@
 
 -   [x] Structure
 -   [x] Desctription
--   [ ] Move new "Videos" section under projects
--   [ ] Create a new Videos component
--   [ ] Add PDP to videos.json
--   [ ] Move current PDP links into an actual card item in "Videos" section
+-   [x] Move new "Videos" section under projects
+-   [x] Create a new Videos component
+-   [x] Add PDP to videos.json
+-   [x] Move current PDP links into an actual card item in "Videos" section
+-   [ ] Update Certifications Page to implement new changes

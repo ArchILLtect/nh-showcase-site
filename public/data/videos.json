@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Project Lombok",
+        "image": "../images/TaskMaster-App-Logo.webp",
+        "descriptionTitle": "Making Java Less Boring with Project Lombok:",
+        "descriptionTitle2": "We'll look at:",
+        "description": [
+            "This full presentation explores how Project Lombok can drastically simplify Java development by reducing boilerplate code and improving readability — all without sacrificing functionality.",
+            "I take you through a real-world example from my CodeForge project, where I integrated Lombok into an existing entity class and immediately saw the benefits:"
+        ],
+        "descriptionBullets": {
+            "type": "ul",
+            "items": [
+                "120 lines of repetitive getters, setters, and constructors reduced to just 49.",
+                "Clearer, more maintainable code.",
+                "A few spicy bugs along the way (and what they taught me about Hibernate and reflection).",
+                "Enhanced productivity with less boilerplate."
+            ]
+        },
+        "descriptionBullets2": {
+            "type": "ol",
+            "items": [
+                "What Lombok is and how it works behind the scenes (compile-time annotation magic).",
+                "How to integrate it cleanly using Maven.",
+                "The before-and-after refactor of the Challenge class.",
+                "Results, debugging, and lessons learned.",
+                "Reflections on professional growth — from code cleanup to clear communication."
+            ]
+        },
+        "description2": [
+            "Throughout the talk, I blend humor with practical insights — proving that writing clean Java code doesn’t have to be boring. 🌶️"
+        ],
+        "videoLinksTitle": "Watch the Full Presentation Below:",
+        "videoLinks": [
+            {
+                "title": "Professional Development Presentation: Lombok Part 1",
+                "url": "https://youtu.be/iCxZS0Pwx80"
+            },
+            {
+                "title": "Professional Development Presentation: Lombok Part 2",
+                "url": "https://youtu.be/JoKJuyTOpwk"
+            }
+        ],
+        "techStack": ["React", "Node.js", "MySQL", "Netlify"],
+        "liveDemo": "https://taskmaster.nickhanson.me/",
+        "github": "https://github.com/ArchILLtect/taskmaster",
+        "status": "MVP - Work in Progress"
+    }
+]
