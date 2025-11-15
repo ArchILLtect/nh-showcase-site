@@ -9,6 +9,24 @@
         "status": "MVP - Work in Progress"
     },
     {
+        "title": "CodeForge",
+        "image": "../images/CodeForge-logo.png",
+        "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",
+        "techStack": [
+            "Java",
+            "JSP",
+            "Tomcat",
+            "MySQL",
+            "Elastic Beanstalk",
+            "AWS CloudFront",
+            "Cognito",
+            "Maven"
+        ],
+        "liveDemo": "https://codeforge.nickhanson.me/",
+        "github": "https://github.com/ArchILLtect/code-forge",
+        "status": "MVP - Work in Progress"
+    },
+    {
         "title": "Cosmic DB",
         "image": "../images/CosmicDB-header.png",
         "description": "Track worldbuilding elements for a novel/game project I am working on with some people--including my son.",
