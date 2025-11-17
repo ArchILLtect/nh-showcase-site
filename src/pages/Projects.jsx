@@ -105,15 +105,27 @@ const Projects = () => {
                     <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-2">
                       {project.title}
                     </h2>
-                    <p className="dark:text-gray-300 text-gray-600 mb-4">
+                    <p className="dark:text-gray-300 text-gray-600 mb-4 h-24 overflow-y-auto scrollbar-custom p-0.5">
                       {project.description}
                     </p>
-                    <p className="dark:text-gray-300 text-sm text-gray-500 font-semibold mb-4">
+                    <p className="dark:text-gray-300 text-sm text-gray-500 font-semibold mb-4 h-12 overflow-y-auto scrollbar-custom">
                       Tech Stack: {project.techStack.join(', ')}
                     </p>
-                    <div className="flex space-x-4">
+                    <div className="flex justify-between items-center">
                       {project.liveDemo && (
                         <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
+                      )}
+                      {project.siteLink && (
+                        <div className="flex items-center">
+                          <a
+                            href={project.siteLink}
+                            className="dark:text-green-300 text-green-700 text-2xl hover:underline font-bold"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Site
+                          </a>
+                        </div>
                       )}
                       {project.github && (
                         <div className="flex items-center">
@@ -128,6 +140,14 @@ const Projects = () => {
                         </div>
                       )}
                     </div>
+                    {project.status && (
+                      <div className="flex items-center p-2 mt-3 justify-center
+                          bg-yellow-100 dark:bg-yellow-800 rounded">
+                        <p className="dark:text-yellow-300 text-yellow-700 font-semibold">
+                          {project.status}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               ) : (
