@@ -95,7 +95,6 @@
             "LocalStorage Persistence",
             "Node Utilities for Data Normalization"
         ],
-        "siteLink": "https://budgetizer.nickhanson.me/",
         "github": "https://github.com/nickhanson-dev/budgetizer",
         "status": "Active Development – Accounts Sync, Savings Goals, and Monthly Reconciliation Live"
     },

@@ -127,6 +127,13 @@ const Projects = () => {
                           </a>
                         </div>
                       )}
+                      {!project.siteLink && !project.liveDemo && (
+                        <div className="flex items-center">
+                          <p className="dark:text-red-500 text-red-700">
+                            No Live Demo Available Yet
+                          </p>
+                        </div>
+                      )}
                       {project.github && (
                         <div className="flex items-center">
                           <a
