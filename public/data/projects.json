@@ -20,7 +20,7 @@
         ],
         "siteLink": "https://sameboatplatform.com/",
         "github": "https://github.com/sameboat-platform/",
-        "status": "MVP In Progress – Auth Complete, Stories Next"
+        "status": "MVP In Progress – Stories and Trust Metric Next"
     },
     {
         "title": "TaskMaster App",
@@ -77,12 +77,35 @@
         "status": "MVP - Work in Progress"
     },
     {
+        "title": "Budgetizer",
+        "image": "../images/budgetizer-logo.png",
+        "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on your showcase site.",
+        "techStack": [
+            "React 19",
+            "JavaScript / TypeScript Hybrid Components",
+            "Vite",
+            "Chakra UI",
+            "Zustand (Persist Middleware)",
+            "Day.js",
+            "PapaParse (CSV Import)",
+            "React Router 6",
+            "Custom JWT Auth",
+            "Netlify",
+            "AWS Lambda / API Gateway (Auth Endpoint)",
+            "LocalStorage Persistence",
+            "Node Utilities for Data Normalization"
+        ],
+        "siteLink": "https://budgetizer.nickhanson.me/",
+        "github": "https://github.com/nickhanson-dev/budgetizer",
+        "status": "Active Development – Accounts Sync, Savings Goals, and Monthly Reconciliation Live"
+    },
+    {
         "title": "Media Tracker",
         "image": "../images/RiffTrax-Collection-thumbnail.png",
         "description": "Track movies, shows, and games with detailed stats and recommendations.",
         "techStack": ["Next.js", "MongoDB"],
         "liveDemo": "https://media-tracker.example.com",
-        "github": "https://github.com/username/media-tracker",
+        "github": "https://github.com/ArchILLtect/media-tracker-extension",
         "status": "None"
     }
 ]

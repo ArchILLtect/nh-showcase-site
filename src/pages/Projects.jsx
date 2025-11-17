@@ -91,7 +91,7 @@ const Projects = () => {
           <LoadingSpinner />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Map through the projects array and display each project */}
+            {/* TODO: Extract the following as a reusable component "<ProjectCard></ProjectCard>" */}
             {projects.map((project, index) => (
               project.status?.trim() !== "None" ? (
                 <div key={index} className="bg-gray-200 dark:bg-gray-800 border border-gray-300
@@ -123,7 +123,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Site
+                            Live Site
                           </a>
                         </div>
                       )}
