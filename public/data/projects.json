@@ -1,5 +1,28 @@
 [
     {
+        "title": "SameBoat Platform",
+        "image": "../images/sameboat-logo.png",
+        "description": "A secure, full-stack mental-health support platform featuring anonymous user authentication, story sharing, trigger-warning safety systems, and an evolving trust metric. Built as a semester-long honors project with production-grade tooling, CI/CD, and cloud deployment.",
+        "techStack": [
+            "React 19",
+            "TypeScript",
+            "Vite",
+            "Chakra UI",
+            "Zustand",
+            "Spring Boot 3 (Java 21)",
+            "PostgreSQL (Neon)",
+            "Flyway",
+            "JPA / Hibernate",
+            "Netlify",
+            "Render",
+            "Docker",
+            "GitHub Actions CI"
+        ],
+        "siteLink": "https://sameboatplatform.com/",
+        "github": "https://github.com/sameboat-platform/",
+        "status": "MVP In Progress – Auth Complete, Stories Next"
+    },
+    {
         "title": "TaskMaster App",
         "image": "../images/TaskMaster-App-Logo.webp",
         "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
@@ -10,7 +33,7 @@
     },
     {
         "title": "CodeForge",
-        "image": "../images/CodeForge-logo.png",
+        "image": "../images/codeforge-logo.png",
         "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",
         "techStack": [
             "Java",
@@ -24,7 +47,7 @@
         ],
         "liveDemo": "https://codeforge.nickhanson.me/",
         "github": "https://github.com/ArchILLtect/code-forge",
-        "status": "MVP - Work in Progress"
+        "status": "MVP In Progress - Evaluation Engine Next"
     },
     {
         "title": "Cosmic DB",
