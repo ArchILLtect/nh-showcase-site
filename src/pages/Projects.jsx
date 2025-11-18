@@ -83,7 +83,8 @@ const Projects = () => {
       </h1>
       <p className="dark:text-gray-200 text-center text-gray-700 font-semibold mb-8">
         Here are some of the projects I’ve worked on, showcasing my skills in web development,
-        problem-solving, and design.
+        problem-solving, and design. All of these projects are built from the ground up by me
+        and are still being developed, improved, and maintained.
       </p>
       <div className="mb-10">
         <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-4">Demos:</h2>
