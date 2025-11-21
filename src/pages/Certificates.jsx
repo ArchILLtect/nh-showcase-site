@@ -20,15 +20,18 @@ import React, { useEffect, useState } from 'react';
 import { trackVisit } from "../utils/visitTracker";
 import LoadingSpinner from '../components/LoadingSpinner';
 import DetailsModal from '../components/DetailsModal';
+import Video from '../components/Video';
 
 const Certificates = () => {
   const [certs, setCerts] = useState([]);
   const [badges, setBadges] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [loadingCerts, setLoadingCerts] = useState(true);
   const [loadingBadges, setLoadingBadges] = useState(true);
+  const [loadingVideos, setLoadingVideos] = useState(true);
   const [selectedBadge, setSelectedBadge] = useState(null);
   const [isBadgeModalOpen, setIsBadgeModalOpen] = useState(false);
-
+  
   useEffect(() => {
     trackVisit();
   }, []);
@@ -64,9 +67,25 @@ const Certificates = () => {
         setTimeout(() => setLoadingBadges(false), delay); // ⏳ delay cleanup
       }
     };
+    const loadVideos = async () => {
+      const start = Date.now();
+      try {
+        setLoadingVideos(true); // show spinner
+        const response = await fetch('data/videos.json');
+        const data = await response.json();
+        setVideos(data);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      } finally {
+        const elapsed = Date.now() - start;
+        const delay = Math.max(0, 500 - elapsed);
+        setTimeout(() => setLoadingVideos(false), delay); // ⏳ delay cleanup
+      }
+    };
 
     loadCertificates();
     loadBadges();
+    loadVideos();
   }, []);
 
   return (
@@ -154,37 +173,12 @@ const Certificates = () => {
         and fetch video data from videos JSON like certs/badges
         using the Videos component to render each video
       */}
-      {loadingBadges ? (
+      {loadingVideos ? (
         <LoadingSpinner />
       ) : (
-        <div className="mb-20 ml-3 border-2 border-gray-300 dark:border-gray-700 p-8 rounded-lg">
-          <p className="dark:text-gray-200 text-gray-700 font-semibold text-lg mb-4">Project Lombok:</p>
-          <div className="mb-4">
-            <p className="dark:text-gray-200 text-gray-700 font-semibold mb-2">Description:</p>
-            <p className="dark:text-gray-200 text-gray-700 text-sm mb-2">This full presentation explores how Project Lombok can drastically simplify Java development by reducing boilerplate code and improving readability — all without sacrificing functionality.</p>
-            <p className="dark:text-gray-200 text-gray-700 text-sm">I take you through a real-world example from my CodeForge project, where I integrated Lombok into an existing entity class and immediately saw the benefits:</p>
-            <ul className="list-disc list-inside">
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">120 lines of repetitive getters, setters, and constructors reduced to just 49.</li>
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Clearer, more maintainable code.</li>
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">A few spicy bugs along the way (and what they taught me about Hibernate and reflection).</li>
-            </ul>
-          </div>
-          <p className="dark:text-gray-200 text-gray-700 font-semibold mb-2">We&apos;ll look at:</p>
-          <div className="mb-4">
-            <ol className="list-decimal list-inside mb-4">
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">What Lombok is and how it works behind the scenes (compile-time annotation magic).</li>
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">How to integrate it cleanly using Maven.</li>
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">The before-and-after refactor of the Challenge class.</li>
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Results, debugging, and lessons learned.</li>
-              <li className="dark:text-gray-200 text-gray-700 text-sm ml-3">Reflections on professional growth — from code cleanup to clear communication.</li>
-            </ol>
-            <p className="dark:text-gray-200 text-gray-700 text-sm">Throughout the talk, I blend humor with practical insights — proving that writing clean Java code doesn’t have to be boring. 🌶️</p>
-          </div>
-          <div className="flex flex-col">
-            <p className="dark:text-gray-200 text-gray-700 text-sm">YouTube video<a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/iCxZS0Pwx80" target="_blank" rel="noopener noreferrer">Part 1</a></p>
-            <p className="dark:text-gray-200 text-gray-700 text-sm">YouTube video<a className="text-blue-500 hover:underline ml-4" href="https://youtu.be/JoKJuyTOpwk" target="_blank" rel="noopener noreferrer">Part 2</a></p>
-          </div>
-        </div>
+          videos.map((video, index) => (
+            <Video key={index} video={video} />
+          ))
       )}
       {/* Modal */}
       {isBadgeModalOpen && (
