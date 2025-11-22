@@ -3,7 +3,7 @@
  * Author: Nick Hanson
  * Created On: December 21, 2024
  * Last Updated: May 25, 2024
- * Description: A modal component that displays a live demo of the app.
+ * Description: The layout component that wraps around all pages.
  * 
  * Props:
  * - children: The content to be displayed inside the layout.
