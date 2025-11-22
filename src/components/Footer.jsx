@@ -33,7 +33,7 @@ const Footer = () => {
 
     return (
         <footer className="bg-gray-800 text-gray-100 flex flex-col sm:flex-row text-center py-2
-                fixed w-full bottom-0 justify-around items-center h-12">
+                fixed w-full bottom-0 justify-around items-center">
             <p>&copy; {currentYear} Nick Hanson Sr. · <Link to="/privacy" className="underline hover:text-gray-300">Privacy</Link></p>
             {/* Login/Logout Button */}
             <div>

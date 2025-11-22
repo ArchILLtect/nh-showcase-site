@@ -47,7 +47,7 @@ const NavBar = () => {
 
   return (
     <nav className="bg-gray-800 p-4">
-      <ul className="flex justify-around items-center list-none flex-col sm:flex-row h-8">
+      <ul className="flex justify-around items-center list-none flex-col sm:flex-row">
         <li>
           <NavLink
             to="/home"
