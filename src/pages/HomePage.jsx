@@ -46,8 +46,8 @@ const HomePage = () => {
   }, []);
 
   return (
-    <main className="dark:bg-gray-600 text-gray-100 pt-5 w-5/6 mx-auto sm:max-w-lg md:max-w-2xl
-        lg:max-w-4xl xl:max-w-5xl">
+    <main className="dark:bg-gray-600 text-gray-100 pt-5 w-full mx-auto sm:max-w-lg md:max-w-2xl
+        lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
       {/* Hero Section */}
       <section className="relative lg:max-w-4xl text-center py-20 bg-gray-100 dark:bg-gray-800
           bg-hero-pattern bg-center bg-auto m-auto">
@@ -151,7 +151,7 @@ const HomePage = () => {
         <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-10 mb-6">
           My Process
         </h2>
-        <div className="flex justify-around">
+        <div className="flex justify-around flex-wrap gap-6">
           <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
               justify-center content-center">
             <img src="icons/Figma-Logo.png" className="h-24 transition
