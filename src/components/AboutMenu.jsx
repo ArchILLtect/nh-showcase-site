@@ -41,7 +41,7 @@ function AboutMenu() {
         aria-haspopup="menu"
         aria-expanded={open ? "true" : "false"}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1 hover:bg-gray-300 text-white hover:text-gray-800 px-5 py-2 no-underline rounded hover:text-lg"
+        className="flex items-center gap-1 hover:bg-gray-300 hover:font-medium text-white hover:text-gray-800 px-5 py-2 no-underline hover:text-md"
       >
         About Me
         <svg
