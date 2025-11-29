@@ -9,3 +9,5 @@
 -   [x] Add PDP to videos.json
 -   [x] Move current PDP links into an actual card item in "Videos" section
 -   [ ] Update Certifications Page to implement new changes
+
+### Add more TODOs
