@@ -1,12 +1,3 @@
-TTD:
-// TODO: Make a DB for projects
-// TODO: Implement functionality for editing blogs.
-// TODO: Implement functionality for adding/editing projects in markdown.
-// TODO: Add seperate pages for 'education' and 'tech stack'(?).
-// TODO: Add new pages (Cert, Exp, Edu, and Tech Stack(?)) to dropdown for 'About Me'
-// TODO: Add missing certs from Coursera and codefinity, etc.
-// TODO: Add Dean's List letters to achievements page.
-
 Project File Structure:
 my-showcase-site/
 ├── backend/ # Backend-related files

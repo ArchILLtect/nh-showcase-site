@@ -13,3 +13,6 @@
 ### Add more TODOs
 
 -   [ ] Github API implementation.
+-   [ ] Make a DB for projects
+-   [ ] Add missing certs from Coursera and codefinity, etc.
+-   [ ] Add Dean's List letters to achievements page.
