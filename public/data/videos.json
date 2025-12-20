@@ -1,7 +1,6 @@
 [
     {
         "title": "Project Lombok",
-        "image": "../images/TaskMaster-App-Logo.webp",
         "descriptionTitle": "Making Java Less Boring with Project Lombok:",
         "descriptionTitle2": "We'll look at:",
         "description": [
@@ -43,7 +42,64 @@
         ],
         "techStack": ["React", "Node.js", "MySQL", "Netlify"],
         "liveDemo": "https://taskmaster.nickhanson.me/",
-        "github": "https://github.com/ArchILLtect/taskmaster",
+        "github": "https://github.com/ArchILLtect/code-forge/tree/main/docs/projects/pd-presentation",
         "status": "MVP - Work in Progress"
+    },
+    {
+        "title": "CodeForge Project Walkthrough Presentation",
+        "descriptionTitle": "Building an Enterprise Java Application from the Ground Up:",
+        "descriptionTitle2": "We'll look at:",
+        "description": [
+            "This presentation is a full walkthrough of CodeForge — an Enterprise Java web application built from scratch to explore authentication, request lifecycles, persistence, evaluation pipelines, and real-world deployment challenges.",
+            "Rather than relying on heavy frameworks, CodeForge intentionally embraces the servlet-level stack to expose how modern Java web applications actually work under the hood."
+        ],
+        "descriptionBullets": {
+            "type": "ul",
+            "items": [
+                "End-to-end request flow using servlets, filters, services, and DAOs.",
+                "Authentication and authorization with AWS Cognito and custom servlet filters.",
+                "Challenge and drill execution pipelines with outcome tracking and telemetry.",
+                "Hibernate persistence with explicit session management and DAOs.",
+                "Production deployment on AWS Elastic Beanstalk — including environment and secrets management."
+            ]
+        },
+        "descriptionBullets2": {
+            "type": "ol",
+            "items": [
+                "High-level architecture and system design decisions.",
+                "Authentication flow and request lifecycle (filters → servlets → services).",
+                "Challenge execution, evaluation logic, and telemetry logging.",
+                "Database persistence, entity relationships, and DAO patterns.",
+                "Deployment lessons learned, tradeoffs, and post-MVP next steps."
+            ]
+        },
+        "description2": [
+            "Throughout the walkthrough, I focus on clarity, tradeoffs, and lessons learned — highlighting not just what worked, but why certain decisions were made and what I would evolve next."
+        ],
+        "videoLinksTitle": "Watch the Walkthrough Presentation Below:",
+        "videoLinks": [
+            {
+                "title": "CodeForge Presentation",
+                "url": "https://www.youtube.com/watch?v=0w7RZdypvMs"
+            }
+        ],
+        "techStack": [
+            "Java",
+            "Jakarta Servlets",
+            "JSP",
+            "Hibernate / JPA",
+            "MySQL",
+            "AWS Elastic Beanstalk",
+            "AWS RDS",
+            "AWS Cognito",
+            "Maven",
+            "Tomcat",
+            "JUnit",
+            "SLF4J / Logback",
+            "GitHub"
+        ],
+        "liveDemo": "https://codeforge.nickhanson.me/",
+        "github": "https://github.com/ArchILLtect/code-forge/tree/main/docs/projects/walkthrough-presentation",
+        "status": "MVP Complete — Actively Evolving"
     }
 ]

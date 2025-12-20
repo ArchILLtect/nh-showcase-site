@@ -44,7 +44,7 @@ const Video = ({ video = {} }) => {
     }, [videoLinks]);
 
     return (
-        <div className="border-2 border-gray-400 p-6 rounded">
+        <div className="border-2 border-gray-400 p-6 rounded mb-5">
             <p className="dark:text-gray-200 text-gray-700 font-semibold text-lg mb-4">{video.title}:</p>
             <div className="mb-4">
               {video.descriptionTitle && (
