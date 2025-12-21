@@ -8,11 +8,7 @@
 -   [x] Create a new Videos component
 -   [x] Add PDP to videos.json
 -   [x] Move current PDP links into an actual card item in "Videos" section
--   [ ] Update Certifications Page to implement new changes
--   [ ] Add new CodeForge Presentation to showcase site
-
-### Add more TODOs
-
+-   [x] Add new CodeForge Presentation to showcase site
 -   [ ] Github API implementation.
 -   [ ] Make a DB for projects
 -   [ ] Add missing certs from Coursera and codefinity, etc.
