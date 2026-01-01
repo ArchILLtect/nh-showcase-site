@@ -9,6 +9,7 @@
 -   [x] Add PDP to videos.json
 -   [x] Move current PDP links into an actual card item in "Videos" section
 -   [x] Add new CodeForge Presentation to showcase site
+- [x] Convert to Windows 11
 -   [ ] Switch to new verion of TaskMaster
 -   [ ] Github API implementation.
 -   [ ] Make a DB for projects
