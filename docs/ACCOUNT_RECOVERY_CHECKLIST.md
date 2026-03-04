@@ -2,6 +2,9 @@
 
 Use this as the execution checklist for password reset/account recovery rollout.
 
+Marker legend:
+- `[YOU]` = Action that typically requires your AWS/infra/domain/production access.
+
 ## Planning
 - [ ] Confirm recovery entry point (`username`, `email`, or both).
 - [ ] Define reset token TTL (recommended: 15–30 minutes).
@@ -10,6 +13,9 @@ Use this as the execution checklist for password reset/account recovery rollout.
 - [ ] Define session invalidation strategy (`tokenVersion` recommended).
 
 ## Backend
+- [ ] [YOU] Create/deploy Lambda functions for forgot/reset handlers.
+- [ ] [YOU] Create API Gateway routes/integrations for reset endpoints.
+- [ ] [YOU] Configure IAM permissions and environment variables/secrets for recovery flows.
 - [ ] Add `POST /forgot-password` endpoint.
 - [ ] Add `POST /reset-password` endpoint.
 - [ ] Add secure token generation utility (CSPRNG).
@@ -21,15 +27,15 @@ Use this as the execution checklist for password reset/account recovery rollout.
 
 ## Data Layer (DynamoDB)
 - [ ] Add user attributes: `passwordChangedAt`, `tokenVersion`.
-- [ ] Create `PasswordResetTokens` table with TTL.
-- [ ] Add index(es) required for user-based token cleanup.
-- [ ] Add cleanup policy for stale/expired records.
+- [ ] [YOU] Create `PasswordResetTokens` table with TTL.
+- [ ] [YOU] Add index(es) required for user-based token cleanup.
+- [ ] [YOU] Add cleanup policy for stale/expired records.
 
 ## Email
 - [ ] Implement forgot-password template with reset link and expiry note.
 - [ ] Implement password-changed confirmation email.
-- [ ] Verify sender identity and domain auth (SPF/DKIM/DMARC).
-- [ ] Add monitoring for bounces/complaints.
+- [ ] [YOU] Verify sender identity and domain auth (SPF/DKIM/DMARC).
+- [ ] [YOU] Add monitoring for bounces/complaints.
 
 ## Frontend (React)
 - [ ] Add `Forgot password?` link on login page.
@@ -43,7 +49,7 @@ Use this as the execution checklist for password reset/account recovery rollout.
 - [ ] Ensure forgot-password endpoint does not reveal account existence.
 - [ ] Ensure no raw tokens/passwords are logged.
 - [ ] Add audit events for request, issue, consume, and failure states.
-- [ ] Add anomaly alerts for spikes in reset activity.
+- [ ] [YOU] Add anomaly alerts for spikes in reset activity.
 - [ ] Add cooldown to repeated requests per account.
 
 ## Testing
@@ -54,10 +60,10 @@ Use this as the execution checklist for password reset/account recovery rollout.
 - [ ] Verify rate limits and abuse controls trigger as expected.
 
 ## Rollout
-- [ ] Deploy backend and data changes first.
-- [ ] Validate in dev/staging with test accounts.
+- [ ] [YOU] Deploy backend and data changes first.
+- [ ] [YOU] Validate in dev/staging with test accounts.
 - [ ] Enable frontend UI in staged rollout.
-- [ ] Monitor metrics/logs after release.
+- [ ] [YOU] Monitor metrics/logs after release.
 - [ ] Prepare rollback plan and support FAQ.
 
 ## Post-Launch
