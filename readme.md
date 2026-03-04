@@ -88,3 +88,43 @@ Backend: AWS Lambda, API Gateway, DynamoDB, bcrypt
 Frontend: React, Axios, React Router
 
 Security: Basic token storage (can be extended with real JWT validation)
+
+🧭 User Journey (Visitor → User → Admin)
+
+```mermaid
+flowchart TD
+	A[Visitor lands on /home or /] --> B{Browse public pages}
+	B --> B1[/projects/]
+	B --> B2[/about, /experience, /certificates/]
+	B --> B3[/blog/]
+	B --> B4[/contact/]
+	B --> B5[/privacy/]
+
+	A --> C[/login/]
+	A --> D[/register/]
+
+	D --> E[POST /register to API Gateway Lambda]
+	E --> C
+
+	C --> F[POST /login to API Gateway Lambda]
+	F --> G[Save authToken + userData in localStorage]
+	G --> H{roleHierarchy check}
+
+	H -->|user| I[/dashboard/]
+	H -->|admin| J[/admin/dashboard/]
+
+	I --> I1[View personal visit logs]
+	J --> J1[User Tracking]
+	J --> J2[All Tracking]
+	J --> J3[Add Blog]
+
+	A --> K[Cookie notice]
+	K -->|accept| L[Enable visit telemetry]
+	K -->|decline| M[Skip telemetry]
+```
+
+Role-based route behavior (at a glance):
+
+- Visitor (guest): can access all public pages, login, and registration.
+- User: gets redirected to /dashboard after login and can view personal visit analytics.
+- Admin: gets redirected to /admin/dashboard after login and can access tracking tools and blog publishing.
