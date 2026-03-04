@@ -1,6 +1,12 @@
 🔐 Custom Authentication Flow
 This project uses a custom-built authentication system, not a third-party provider like Auth0 or Firebase.
 
+📚 Related Auth Docs
+- Full auth docs index: [docs/AUTH_DOCS_INDEX.md](docs/AUTH_DOCS_INDEX.md)
+- Account recovery implementation: [docs/ACCOUNT_RECOVERY_IMPLEMENTATION.md](docs/ACCOUNT_RECOVERY_IMPLEMENTATION.md)
+- Legacy concerns: [docs/ACCOUNT_RECOVERY_LEGACY.md](docs/ACCOUNT_RECOVERY_LEGACY.md)
+- Implementation checklist: [docs/ACCOUNT_RECOVERY_CHECKLIST.md](docs/ACCOUNT_RECOVERY_CHECKLIST.md)
+
 ✅ Summary
 Auth credentials are stored in DynamoDB
 

@@ -1,4 +1,8 @@
 Project File Structure:
+
+Related docs:
+- Auth docs index: [AUTH_DOCS_INDEX.md](AUTH_DOCS_INDEX.md)
+
 my-showcase-site/
 ├── backend/ # Backend-related files
 │ ├── node_modules/ # Backend dependencies
