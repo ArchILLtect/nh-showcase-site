@@ -6,7 +6,7 @@
  * Description: Utility function for contact operations across the showcase website.
  *
  * Functions:
- * - // TODO: Add content in these comment sections
+ * - sendContactEmail: Handles sending contact form submissions via email using SendGrid.
  *
  * Notes:
  * - Functions are pure and do not modify input parameters.
