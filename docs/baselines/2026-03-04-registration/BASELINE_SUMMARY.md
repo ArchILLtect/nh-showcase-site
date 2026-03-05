@@ -70,12 +70,12 @@ Use this file to summarize current-state findings before registration hardening 
 ### Prioritized Hardening Actions (from baseline)
 
 #### P0 (implement now)
-- [ ] Add server-side validation in registration Lambda for `username`, `email`, and `password` (required + format/length checks).
-- [ ] Normalize inbound data before persistence (`username` trim, `email` trim + lowercase).
-- [ ] Replace unconditional DynamoDB `put` with conditional write to prevent username overwrite (`attribute_not_exists(username)`).
-- [ ] Return stable, safe API errors (`400` validation, `409` duplicate username, `500` internal) with non-sensitive messages.
-- [ ] Keep successful response backward-compatible (`201` + success message) so current frontend does not break.
-- [ ] Publish Lambda version and smoke test valid + invalid + duplicate registration paths.
+- [x] Add server-side validation in registration Lambda for `username`, `email`, and `password` (required + format/length checks).
+- [x] Normalize inbound data before persistence (`username` trim, `email` trim + lowercase).
+- [x] Replace unconditional DynamoDB `put` with conditional write to prevent username overwrite (`attribute_not_exists(username)`).
+- [x] Return stable, safe API errors (`400` validation, `409` duplicate username, `500` internal) with non-sensitive messages.
+- [x] Keep successful response backward-compatible (`201` + success message) so current frontend does not break.
+- [x] Publish Lambda version and smoke test valid + invalid + duplicate registration paths.
 
 #### P1 (next short phase)
 - [ ] Tighten IAM from `AmazonDynamoDBFullAccess` to least-privilege table-scoped actions required by registration.

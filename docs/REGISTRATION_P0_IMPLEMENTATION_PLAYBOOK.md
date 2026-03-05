@@ -84,20 +84,32 @@ Acceptance:
 ## Test Matrix (Smoke + Edge)
 
 ### Positive
-- [ ] New unique username + valid email/password -> `201`
+- [x] New unique username + valid email/password -> `201`
 
 ### Negative: Validation
-- [ ] Missing username -> `400`
-- [ ] Invalid email format -> `400`
-- [ ] Weak password -> `400`
-- [ ] Extra unexpected fields do not break handler
+- [x] Missing username -> `400`
+- [x] Invalid email format -> `400`
+- [x] Weak password -> `400`
+- [x] Extra unexpected fields do not break handler
 
 ### Negative: Conflict
-- [ ] Existing username -> `409` and no overwrite
+- [x] Existing username -> `409` and no overwrite
 
 ### Failure Safety
 - [ ] Simulated internal exception -> `500` generic response
 - [ ] No sensitive data exposed in response body
+
+#### Temporary failure-safety test toggle (safe procedure)
+Use this only to validate the `500` contract, then turn it back off.
+
+1. In Lambda environment variables, set `ENABLE_INTERNAL_ERROR_TEST=true`.
+2. Deploy/publish and make sure API Gateway uses this updated version/alias.
+3. Send a valid registration payload that includes `"__simulateInternalError": true`.
+4. Verify response is HTTP `500` with generic body:
+  - `{"code":"INTERNAL_ERROR","message":"Error registering user"}`
+5. Verify response body does not include stack traces, AWS internals, or secrets.
+6. Remove or set `ENABLE_INTERNAL_ERROR_TEST=false`.
+7. Re-deploy/publish and rerun a normal success payload to confirm `201` path still works.
 
 ## Rollback Procedure
 1. Revert API integration/alias to previous Lambda version.
@@ -106,10 +118,10 @@ Acceptance:
 4. Document incident + root cause in baseline notes.
 
 ## Deliverables
-- [ ] Updated Lambda source for P0 safety patch
-- [ ] Test evidence (request/response captures)
-- [ ] Deployment record (version + timestamp)
-- [ ] Updated baseline notes with outcomes
+- [x] Updated Lambda source for P0 safety patch
+- [x] Test evidence (request/response captures)
+- [x] Deployment record (version + timestamp)
+- [x] Updated baseline notes with outcomes
 
 ## Exit Criteria
 - No silent overwrite on duplicate username.
