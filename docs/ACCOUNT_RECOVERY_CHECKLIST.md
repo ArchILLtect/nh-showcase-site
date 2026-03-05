@@ -6,11 +6,38 @@ Marker legend:
 - `[YOU]` = Action that typically requires your AWS/infra/domain/production access.
 
 ## Planning
-- [ ] Confirm recovery entry point (`username`, `email`, or both).
-- [ ] Define reset token TTL (recommended: 15–30 minutes).
-- [ ] Define password policy and validation errors.
-- [ ] Confirm success/failure UX copy (generic forgot-password response).
-- [ ] Define session invalidation strategy (`tokenVersion` recommended).
+- [x] Confirm recovery entry point (`username`, `email`, or both).
+	- Locked: `email` only (all accounts require email).
+	- Definition details:
+		- Accepted input(s): `<email only>`
+		- Normalization rules: `<trim/lowercase/etc.>`
+		- Handling for unknown email: `<same generic response>`
+- [x] Define reset token TTL (recommended: 15–30 minutes).
+	- Locked: `15 minutes`.
+	- Definition details:
+		- TTL value: `<15 minutes>`
+		- Re-request cooldown: `<e.g., 60s>`
+		- Max requests per window: `<e.g., 3/hour/account, 5/15min/IP>`
+- [ ] Document/confirm existing policy is reused for reset.
+	- Definition details:
+		- Minimum length: `<...>`
+		- Complexity requirements: `<...>`
+		- Reuse restrictions: `<...>`
+		- Validation error contract (code/message): `<...>`
+		- Backend is source of truth: `<confirmed yes/no>`
+- [x] Confirm success/failure UX copy (generic forgot-password response).
+	- Locked generic response: `If an account exists, password reset instructions were sent.`
+	- Definition details:
+		- Response status for forgot-password: `<always 200>`
+		- UI success banner text: `<...>`
+		- Error copy for rate-limit/temporary failure: `<...>`
+- [x] Define session invalidation strategy (`tokenVersion` recommended).
+	- Locked: increment `tokenVersion` on password reset and reject stale token versions.
+	- Definition details:
+		- When `tokenVersion` increments: `<on successful password reset>`
+		- Where version is checked: `<auth middleware/API gateway/lambda>`
+		- Behavior for stale tokens: `<force re-login / 401>`
+		- Cross-device logout behavior: `<all active sessions invalidated>`
 
 ## Backend
 - [ ] [YOU] Create/deploy Lambda functions for forgot/reset handlers.
