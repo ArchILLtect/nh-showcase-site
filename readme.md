@@ -9,6 +9,8 @@ This project uses a custom-built authentication system, not a third-party provid
 - Registration hardening checklist: [docs/REGISTRATION_HARDENING_CHECKLIST.md](docs/REGISTRATION_HARDENING_CHECKLIST.md)
 - Registration baseline capture checklist: [docs/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md](docs/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
 - Registration P0 implementation playbook: [docs/REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md](docs/REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+- Lambda in-repo migration checklist: [docs/LAMBDA_MIGRATION_CHECKLIST.md](docs/LAMBDA_MIGRATION_CHECKLIST.md)
+- Lambda functions workflow: [lambda-functions/README.md](lambda-functions/README.md)
 
 ✅ Summary
 Auth credentials are stored in DynamoDB

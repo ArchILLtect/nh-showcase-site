@@ -23,3 +23,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# lambda functions
+/lambda-functions/**/*.zip
+/lambda-functions/**/node_modules/
+/lambda-functions/archive/

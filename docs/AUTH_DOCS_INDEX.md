@@ -22,6 +22,12 @@ Central index for authentication and account recovery documentation.
 - [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
   - Step-by-step execution guide for the first registration hardening patch.
 
+## Lambda Source Management
+- [Lambda In-Repo Migration Checklist](./LAMBDA_MIGRATION_CHECKLIST.md)
+  - Checklist to keep Lambda source in-repo with safe deploy/rollback hygiene.
+- [Lambda Functions Folder README](../lambda-functions/README.md)
+  - Structure and manual deploy/rollback workflow for current Lambda source folders.
+
 ## Project Structure Reference
 - [File Structure](./FILE_STRUCTURE.md)
   - High-level layout of frontend/backend folders and key files.
@@ -34,3 +40,4 @@ Central index for authentication and account recovery documentation.
 5. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
 6. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
 7. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+8. [Lambda In-Repo Migration Checklist](./LAMBDA_MIGRATION_CHECKLIST.md)
