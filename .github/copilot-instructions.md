@@ -39,6 +39,15 @@ React (CRA) + Tailwind frontend with Netlify Functions for server-side tasks and
 -   New function: `netlify/functions/<name>.js` exporting `handler(event)`; call from UI at `/.netlify/functions/<name>`.
 -   Data-driven content: put JSON in `public/data/` and fetch via relative path.
 
+## Lambda function workflow (project-specific)
+
+-   Current active AWS Lambda source code lives in-repo under `lambda-functions/<functionName>/` (for example: `lambda-functions/showcaseRegistration/`, `lambda-functions/showcaseLogin/`).
+-   Before replacing or rewriting a Lambda function, first archive the current source snapshot under `lambda-functions/archive/<functionName>/<date-or-version>/`.
+-   Keep archive snapshots for rollback/reference, but keep active code in `lambda-functions/<functionName>/` so changes are versioned with the app.
+-   The deployment zip artifact stored in `lambda-functions/` (for example `showcaseRegistration.zip`) is the same artifact uploaded to AWS Lambda.
+-   Do not commit `node_modules` for Lambda folders. Keep only source + `package.json` + lockfile in git; zip artifacts and archive folders are ignored via `.gitignore`.
+-   When deploying Lambda updates, record the current deployed Lambda version/ARN first so rollback target is always known.
+
 ## Gotchas
 
 -   Keep SPA redirect: `/* /index.html 200` in `public/_redirects`.
