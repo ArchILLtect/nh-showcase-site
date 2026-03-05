@@ -6,6 +6,8 @@ This project uses a custom-built authentication system, not a third-party provid
 - Account recovery implementation: [docs/ACCOUNT_RECOVERY_IMPLEMENTATION.md](docs/ACCOUNT_RECOVERY_IMPLEMENTATION.md)
 - Legacy concerns: [docs/ACCOUNT_RECOVERY_LEGACY.md](docs/ACCOUNT_RECOVERY_LEGACY.md)
 - Implementation checklist: [docs/ACCOUNT_RECOVERY_CHECKLIST.md](docs/ACCOUNT_RECOVERY_CHECKLIST.md)
+- Registration hardening checklist: [docs/REGISTRATION_HARDENING_CHECKLIST.md](docs/REGISTRATION_HARDENING_CHECKLIST.md)
+- Registration baseline capture checklist: [docs/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md](docs/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
 
 ✅ Summary
 Auth credentials are stored in DynamoDB
