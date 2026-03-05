@@ -87,6 +87,7 @@ const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -98,6 +99,10 @@ const RegisterPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = async (e) => {
@@ -137,7 +142,7 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
         className="bg-white dark:bg-gray-800 p-6 rounded shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center dark:text-gray-100">
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-700 dark:text-gray-100">
           Register
         </h2>
         {loading ? (
@@ -157,7 +162,7 @@ const RegisterPage = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+                className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-900 caret-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:caret-gray-100"
                 required
               />
             </div>
@@ -174,7 +179,7 @@ const RegisterPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+                className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-900 caret-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:caret-gray-100"
                 required
               />
             </div>
@@ -186,12 +191,12 @@ const RegisterPage = () => {
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+                className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-900 caret-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:caret-gray-100"
                 required
               />
             </div>
@@ -200,14 +205,25 @@ const RegisterPage = () => {
                 Confirm Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-gray-100"
+                className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-900 caret-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:caret-gray-100"
                 required
               />
+            </div>
+            <div className="mb-4">
+              <input
+                type="checkbox"
+                id="show_password_check"
+                checked={showPassword}
+                onChange={togglePassword}
+              />
+              <label htmlFor="show_password_check" className="w-full px-4 py-2 text-gray-700 dark:text-gray-100">
+                {showPassword ? "Hide Password" : "Show Password"}
+              </label>
             </div>
             <button
               type="submit"
