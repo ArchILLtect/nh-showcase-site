@@ -19,6 +19,8 @@ Central index for authentication and account recovery documentation.
   - Practical checklist to secure the current registration Lambda/API path before larger SSAF modernization.
 - [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
   - Step-by-step AWS config capture checklist (DynamoDB/API Gateway/Lambda/IAM/logs) before hardening changes.
+- [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+  - Step-by-step execution guide for the first registration hardening patch.
 
 ## Project Structure Reference
 - [File Structure](./FILE_STRUCTURE.md)
@@ -31,3 +33,4 @@ Central index for authentication and account recovery documentation.
 4. [Execution Checklist](./ACCOUNT_RECOVERY_CHECKLIST.md)
 5. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
 6. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
+7. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
