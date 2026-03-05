@@ -21,6 +21,23 @@ This folder contains the current source-of-truth code for deployed Lambda functi
 6. Verify API Gateway integration still points to the expected function/version/alias.
 7. Run smoke tests for success and failure cases.
 
+## Deploy Workflow (Scripted)
+Use the helper script from repo root to archive current source and build the deployment zip:
+
+```powershell
+./scripts/package-lambda.ps1 -FunctionName showcaseRegistration
+```
+
+Optional (also installs dependencies before zipping):
+
+```powershell
+./scripts/package-lambda.ps1 -FunctionName showcaseRegistration -InstallDependencies
+```
+
+Notes:
+- Archive snapshot is written to `lambda-functions/archive/<functionName>/<timestamp>/`.
+- Deployable zip is written to `lambda-functions/<functionName>.zip`.
+
 ## Rollback Workflow
 1. Revert API Gateway integration/alias to previous known-good Lambda version.
 2. Re-run smoke tests.
