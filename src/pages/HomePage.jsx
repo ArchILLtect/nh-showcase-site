@@ -217,16 +217,16 @@ const HomePage = () => {
 
       {/* Bio Section */}
       <section className="pt-8 pb-16">
-        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200">
+        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200">
           About Me
         </h2>
         <div className="flex flex-col sm:flex-row gap-6 p-5 items-center justify-center">
           <img
-            src="Profile-pic.jpg"
+            src="images/Profile-pic.jpg"
             alt="Profile"
             className="rounded-full w-24 h-24 shadow"
           />
-          <p className="text-gray-300 dark:text-gray-300 max-w-lgsm:text-left max-w-xl">
+          <p className="text-gray-700 dark:text-gray-300 max-w-lgsm:text-left max-w-xl">
             Hi, I’m Nick Hanson Sr., a passionate web developer. I love building
             intuitive, accessible, and visually appealing applications. When I’m
             not coding, I enjoy exploring new technologies and sharing my

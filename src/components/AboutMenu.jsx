@@ -68,9 +68,6 @@ function AboutMenu() {
           <NavLink to="/about" role="menuitem" className={({ isActive }) => submenuItem(isActive)}>
             Overview
           </NavLink>
-          <NavLink to="/experience" role="menuitem" className={({ isActive }) => submenuItem(isActive)}>
-            Experience
-          </NavLink>
           <NavLink to="/certificates" role="menuitem" className={({ isActive }) => submenuItem(isActive)}>
             Certifications
           </NavLink>
