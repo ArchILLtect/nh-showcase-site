@@ -71,6 +71,7 @@ export const handler = async (event) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const createdAt = new Date().toISOString();
 
     const putParams = {
       TableName: TABLE_NAME,
@@ -78,7 +79,7 @@ export const handler = async (event) => {
         username,
         password: hashedPassword,
         email,
-        createdAt: new Date().toISOString(),
+        createdAt,
         role: "user",
       },
       ConditionExpression: "attribute_not_exists(username)",
