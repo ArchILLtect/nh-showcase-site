@@ -23,7 +23,7 @@ Out of scope (for initial release):
 
 ## End-to-End User Flow
 1. User clicks **Forgot password** on login page.
-2. User submits username or email.
+2. User submits username and email.
 3. API responds with generic success message regardless of account existence.
 4. If account exists, backend generates single-use reset token and sends email with secure link.
 5. User opens reset link to frontend reset page.
@@ -38,7 +38,8 @@ Out of scope (for initial release):
 Request:
 ```json
 {
-  "identifier": "username_or_email"
+  "username": "user123",
+  "email": "user@example.com"
 }
 ```
 Response (always 200):
@@ -48,8 +49,8 @@ Response (always 200):
 }
 ```
 Behavior:
-- Normalize identifier.
-- Lookup matching user.
+- Normalize username and email.
+- Lookup user by username and verify normalized email matches the same account.
 - If found, create single-use reset token record and send email.
 - Always return generic response.
 

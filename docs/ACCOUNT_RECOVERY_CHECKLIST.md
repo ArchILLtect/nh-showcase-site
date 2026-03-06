@@ -7,10 +7,10 @@ Marker legend:
 
 ## Planning
 - [x] Confirm recovery entry point (`username`, `email`, or both).
-	- Locked: `email` only (all accounts require email).
+	- Locked: `username + email` (account-scoped recovery with email reuse allowed).
 	- Definition details:
-		- Accepted input(s): `<email only>`
-		- Normalization rules: `<trim/lowercase/etc.>`
+		- Accepted input(s): `<username and email>`
+		- Normalization rules: `<username trim, email trim+lowercase>`
 		- Handling for unknown email: `<same generic response>`
 - [x] Define reset token TTL (recommended: 15–30 minutes).
 	- Locked: `15 minutes`.
@@ -41,7 +41,9 @@ Marker legend:
 
 ## Backend
 - [ ] [YOU] Create/deploy Lambda functions for forgot/reset handlers.
-- [ ] [YOU] Create API Gateway routes/integrations for reset endpoints.
+- [x] [YOU] Create API Gateway routes for reset endpoints.
+	- Created: `POST /forgot-password`, `POST /reset-password` on `ShowcaseRegisterAPI`.
+- [ ] [YOU] Attach API Gateway integrations for reset endpoints.
 - [ ] [YOU] Configure IAM permissions and environment variables/secrets for recovery flows.
 - [ ] Add `POST /forgot-password` endpoint.
 - [ ] Add `POST /reset-password` endpoint.
