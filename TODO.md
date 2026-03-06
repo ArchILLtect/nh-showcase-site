@@ -1,3 +1,26 @@
+
+## TOP Priorities
+- [ ] Create a page for future projects that I intend to work on and add it to the navbar.
+  - [ ] Add a new entry for creating (an) npm package(s) for React components and utilities--specifically any helpers I have that are and/or could be reusable across projects (e.g., auth utilities, API clients, custom hooks).
+  - [ ] Add a new entry for creating (a) YouTube channel(s) to share knowledge, tutorials, and project walkthroughs related to my work and learning journey.
+
+- [ ] Catch up on my blogs and add them to the site.
+  - [ ] Add a new entry for writing and publishing blog posts about my projects, learning experiences, and insights in software development, web technologies, and related topics and add them to the blog section of the site.
+
+
+- [ ] Add server-side validation and duplicate prevention to registration Lambda to fix critical bugs and security issues in current flow (P0).
+- [ ] Define safe, SSAF-aligned modernization plan for auth/API architecture to enable future improvements without risking current stability (P1).
+- [ ] Implement email verification flow and account recovery features to meet basic auth hardening standards (P2).
+- [ ] Add structured logging, monitoring, and alerting to auth flows to improve observability and incident response.
+- [ ] Conduct thorough inventory and documentation of current auth-related assets and contracts to inform modernization design and migration strategy.
+- [ ] Execute safe, staged rollout of auth improvements with rollback plans and monitoring gates to minimize risk during changes.
+- [ ] Publish comprehensive documentation of current state, baseline findings, hardening checklist, and modernization plan to ensure team alignment and future maintainability.
+- [ ] Add new auth-related AWS resources (Lambdas, DynamoDB indexes, IAM policies) with careful naming and ownership documentation to prevent future confusion and ensure clear responsibility.
+- [ ] Add automated tests for auth flows (registration, login, recovery) covering success paths, validation errors, duplicate attempts, and edge cases to prevent regressions and ensure contract stability.
+
+
+
+
 ## Auth / Account Recovery
 - [ ] Add email confirmation during account creation (send verification email + require confirmation before account activation/login).
 
