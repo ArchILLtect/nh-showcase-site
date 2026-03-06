@@ -87,3 +87,5 @@ Use this file to summarize current-state findings before registration hardening 
 ## Sign-off
 - Ready for hardening: `yes`
 - Notes: baseline is sufficient for P0 Lambda hardening patch; next data improvements (email uniqueness strategy via index/table redesign, PITR/backups, least-privilege IAM) can follow in later phases.
+- P0 closure update (2026-03-06): failure-safety simulation validated (`500` generic), test toggle cleanup completed, production alias `prod` confirmed on Lambda version `3`, and normal registration path reconfirmed with `201`.
+- P1 IAM closure update (2026-03-06): registration role moved to least-privilege (`dynamodb:PutItem` on `Users` table), `AmazonDynamoDBFullAccess` removed, post-cutover tests remained green (`201/409/400`), and CloudWatch invocation visibility remained healthy.

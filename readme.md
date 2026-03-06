@@ -9,6 +9,8 @@ This project uses a custom-built authentication system, not a third-party provid
 - Registration hardening checklist: [docs/REGISTRATION_HARDENING_CHECKLIST.md](docs/REGISTRATION_HARDENING_CHECKLIST.md)
 - Registration baseline capture checklist: [docs/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md](docs/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
 - Registration P0 implementation playbook: [docs/REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md](docs/REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+- Registration P1 IAM least-privilege playbook: [docs/REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md](docs/REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
+- Registration P1 IAM console click path: [docs/REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md](docs/REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
 - Lambda in-repo migration checklist: [docs/LAMBDA_MIGRATION_CHECKLIST.md](docs/LAMBDA_MIGRATION_CHECKLIST.md)
 - Lambda functions workflow: [lambda-functions/README.md](lambda-functions/README.md)
 

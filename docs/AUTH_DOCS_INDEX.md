@@ -21,6 +21,10 @@ Central index for authentication and account recovery documentation.
   - Step-by-step AWS config capture checklist (DynamoDB/API Gateway/Lambda/IAM/logs) before hardening changes.
 - [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
   - Step-by-step execution guide for the first registration hardening patch.
+- [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
+  - Exact IAM policy JSON and safe rollout sequence to replace broad DynamoDB access for registration Lambda.
+- [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
+  - Fast, step-by-step AWS Console procedure to apply least-privilege IAM changes safely.
 
 ## Lambda Source Management
 - [Lambda In-Repo Migration Checklist](./LAMBDA_MIGRATION_CHECKLIST.md)
@@ -40,4 +44,6 @@ Central index for authentication and account recovery documentation.
 5. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
 6. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
 7. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
-8. [Lambda In-Repo Migration Checklist](./LAMBDA_MIGRATION_CHECKLIST.md)
+8. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
+9. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
+10. [Lambda In-Repo Migration Checklist](./LAMBDA_MIGRATION_CHECKLIST.md)

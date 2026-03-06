@@ -66,6 +66,14 @@ Paste command outputs here (or reference exported JSON files in this folder).
 	body: {"code":"INTERNAL_ERROR","message":"Error registering user"}
 	note: verified generic internal error contract; no sensitive details returned in response body.
 
-8) Post-simulation cleanup (pending user action)
-	expected: set ENABLE_INTERNAL_ERROR_TEST=false (or remove), republish/version, and confirm normal registration path returns 201.
+8) Post-simulation cleanup -> complete
+	action: test toggle disabled for production, new version published, alias prod pointed to version 3.
+	verification: normal registration test returned 201 with body {"message":"User registered successfully"}.
+
+9) P1 IAM least-privilege cutover -> complete
+	action: attached `showcaseRegistration-DynamoDBPutItem-Users`; detached `AmazonDynamoDBFullAccess`; kept `AWSLambdaBasicExecutionRole` attached.
+	verification after detach: valid registration -> 201, duplicate username -> 409, missing required fields -> 400.
+	CloudWatch monitor/log tables: recent invocations present, no failed invocation entries observed.
+	version note: IAM-only change produced no publishable Lambda version delta (expected behavior).
+	live app path: registration and login both succeeded after IAM cutover.
 ```
