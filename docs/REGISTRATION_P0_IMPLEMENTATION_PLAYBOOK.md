@@ -96,8 +96,8 @@ Acceptance:
 - [x] Existing username -> `409` and no overwrite
 
 ### Failure Safety
-- [ ] Simulated internal exception -> `500` generic response
-- [ ] No sensitive data exposed in response body
+- [x] Simulated internal exception -> `500` generic response
+- [x] No sensitive data exposed in response body
 
 #### Temporary failure-safety test toggle (safe procedure)
 Use this only to validate the `500` contract, then turn it back off.

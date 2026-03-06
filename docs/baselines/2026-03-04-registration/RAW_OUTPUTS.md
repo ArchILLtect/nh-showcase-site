@@ -62,7 +62,10 @@ Paste command outputs here (or reference exported JSON files in this folder).
 	body: {"message":"User registered successfully"}
 	note: confirms nested objects/extra fields are safely handled by current P0 handler.
 
-7) Temporary internal error simulation (pending)
-	expected body: {"code":"INTERNAL_ERROR","message":"Error registering user"}
-	note: run only while ENABLE_INTERNAL_ERROR_TEST=true, then disable and reverify normal 201 path.
+7) Temporary internal error simulation -> 500
+	body: {"code":"INTERNAL_ERROR","message":"Error registering user"}
+	note: verified generic internal error contract; no sensitive details returned in response body.
+
+8) Post-simulation cleanup (pending user action)
+	expected: set ENABLE_INTERNAL_ERROR_TEST=false (or remove), republish/version, and confirm normal registration path returns 201.
 ```
