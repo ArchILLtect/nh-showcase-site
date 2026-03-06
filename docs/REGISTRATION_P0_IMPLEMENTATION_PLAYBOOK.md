@@ -12,12 +12,12 @@ This playbook covers only the P0 safety patch:
 
 Out of scope:
 - New DynamoDB indexes or table redesign
-- Email uniqueness model redesign
+- Email identity-policy redesign decisions
 - Full IAM least-privilege refactor
 
 ## Future Items (Post-P0)
-- [ ] Add DynamoDB index/table strategy to enforce email uniqueness at data-layer level.
-- [ ] Implement full email uniqueness model redesign and migration/backfill plan.
+- [ ] Finalize and document email identity policy decisions for verification/recovery.
+- [ ] Implement account-scoped verification/recovery flow (`username` + `email`) if email reuse remains allowed.
 - [ ] Replace broad IAM access with least-privilege, table-scoped policy set.
 
 ## Preconditions

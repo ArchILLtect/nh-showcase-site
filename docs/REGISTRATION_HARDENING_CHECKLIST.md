@@ -16,7 +16,7 @@ Purpose: secure the current registration path quickly (without full architecture
 - [ ] Add request correlation id and structured logs for register attempts.
 
 ## P1 (Next)
-- [ ] Add explicit uniqueness strategy for both username and email.
+- [ ] Define and document account identity policy (`username` unique; email reuse allowed).
 - [ ] Add account creation metadata: `emailVerified`, `tokenVersion`, `passwordChangedAt`, `updatedAt`.
 - [ ] Add rate limiting and abuse controls (per IP + per identifier).
 - [ ] Add robust CORS + JSON response headers for all outcomes.
@@ -43,12 +43,12 @@ Purpose: secure the current registration path quickly (without full architecture
 
 ## Error Contract (Suggested)
 - [ ] `400` invalid input with stable machine code (e.g., `VALIDATION_ERROR`).
-- [ ] `409` duplicate email/username conflict (`ACCOUNT_EXISTS`).
+- [ ] `409` duplicate username conflict (`USERNAME_EXISTS`).
 - [ ] `429` throttled (`RATE_LIMITED`).
 - [ ] `500` generic internal error (`INTERNAL_ERROR`) with no sensitive details.
 
 ## DynamoDB Checks
-- [ ] Confirm key schema supports non-destructive uniqueness strategy.
+- [ ] Confirm key schema supports chosen identity policy (`username` unique, email reusable).
 - [ ] Confirm condition expressions are used in writes.
 - [ ] Confirm table/index naming and ownership documentation exists.
 - [ ] Confirm TTL usage (if applicable) and backup/PITR settings.
