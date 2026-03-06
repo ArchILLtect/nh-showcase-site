@@ -76,4 +76,9 @@ Paste command outputs here (or reference exported JSON files in this folder).
 	CloudWatch monitor/log tables: recent invocations present, no failed invocation entries observed.
 	version note: IAM-only change produced no publishable Lambda version delta (expected behavior).
 	live app path: registration and login both succeeded after IAM cutover.
+
+10) Email policy realignment cleanup -> complete
+	action: reverted registration to username-only uniqueness (email reuse allowed), deleted `UserEmailIndex` table, and narrowed custom policy back to `dynamodb:PutItem` on `Users` only.
+	verification: new username + reused email -> 201; duplicate username -> 409 `USERNAME_EXISTS`; invalid email -> 400 `VALIDATION_ERROR`.
+	logging check: CloudWatch logging policy remains attached and logs continue to appear.
 ```

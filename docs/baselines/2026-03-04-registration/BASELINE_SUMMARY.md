@@ -78,14 +78,18 @@ Use this file to summarize current-state findings before registration hardening 
 - [x] Publish Lambda version and smoke test valid + invalid + duplicate registration paths.
 
 #### P1 (next short phase)
-- [ ] Tighten IAM from `AmazonDynamoDBFullAccess` to least-privilege table-scoped actions required by registration.
+- [x] Tighten IAM from `AmazonDynamoDBFullAccess` to least-privilege table-scoped actions required by registration.
 - [ ] Add `emailVerified`, `tokenVersion`, `passwordChangedAt`, and `updatedAt` fields for forward compatibility.
-- [ ] Define email uniqueness strategy (GSI + conditional checks, or dedicated identity table pattern).
+- [x] Define email identity policy (`username` unique, email reuse allowed) via [../../REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md](../../REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md).
 - [ ] Enable basic data resilience controls (at minimum PITR and/or scheduled backups).
 - [ ] Set CloudWatch log retention to cost-aware period (e.g., 7–14 days) and add minimal alerting for registration failures.
 
 ## Sign-off
 - Ready for hardening: `yes`
-- Notes: baseline is sufficient for P0 Lambda hardening patch; next data improvements (email uniqueness strategy via index/table redesign, PITR/backups, least-privilege IAM) can follow in later phases.
+- Notes: baseline is sufficient for P0 Lambda hardening patch; next data improvements (email identity policy alignment, PITR/backups, least-privilege IAM) can follow in later phases.
 - P0 closure update (2026-03-06): failure-safety simulation validated (`500` generic), test toggle cleanup completed, production alias `prod` confirmed on Lambda version `3`, and normal registration path reconfirmed with `201`.
 - P1 IAM closure update (2026-03-06): registration role moved to least-privilege (`dynamodb:PutItem` on `Users` table), `AmazonDynamoDBFullAccess` removed, post-cutover tests remained green (`201/409/400`), and CloudWatch invocation visibility remained healthy.
+- Policy decision update (2026-03-06): email reuse is intentionally allowed; registration remains username-unique.
+- Next execution step: align verification/recovery design to account-scoped flows (`username + email`) using [../../REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md](../../REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md).
+- Cleanup closure update (2026-03-06): optional `UserEmailIndex` table removed, custom registration IAM narrowed to `Users` table only, and post-cleanup smoke tests remained green (`201` reused-email success, `409 USERNAME_EXISTS`, `400 VALIDATION_ERROR`).
+- Next auth execution playbook: implement account-scoped recovery (`username + email`) via [../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md](../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md).
