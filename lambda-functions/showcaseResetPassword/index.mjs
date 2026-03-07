@@ -1,3 +1,13 @@
+import AWS from "aws-sdk";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const USERS_TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
+const RESET_TOKENS_TABLE_NAME = process.env.RESET_TOKENS_TABLE_NAME || "PasswordResetTokens";
+const TOKEN_HASH_PEPPER = process.env.TOKEN_HASH_PEPPER || "";
+const MIN_PASSWORD_LENGTH = 8;
+
 const jsonResponse = (statusCode, payload) => ({
   statusCode,
   headers: {
@@ -8,6 +18,56 @@ const jsonResponse = (statusCode, payload) => ({
   },
   body: JSON.stringify(payload),
 });
+
+const extractIpAddress = (event) => {
+  const forwardedFor = event?.headers?.["x-forwarded-for"] || event?.headers?.["X-Forwarded-For"];
+  if (typeof forwardedFor === "string" && forwardedFor.length > 0) {
+    return forwardedFor.split(",")[0].trim();
+  }
+
+  return event?.requestContext?.http?.sourceIp || "unknown";
+};
+
+const hashResetTokenSecret = (tokenSecret) =>
+  crypto.createHash("sha256").update(`${tokenSecret}${TOKEN_HASH_PEPPER}`).digest("hex");
+
+const parseCompositeResetToken = (token) => {
+  const tokenParts = token.split(".");
+  if (tokenParts.length !== 2) {
+    return null;
+  }
+
+  const tokenId = tokenParts[0]?.trim();
+  const tokenSecret = tokenParts[1]?.trim();
+
+  if (!tokenId || !tokenSecret) {
+    return null;
+  }
+
+  return { tokenId, tokenSecret };
+};
+
+const validatePasswordPolicy = (newPassword) => {
+  if (newPassword.length < MIN_PASSWORD_LENGTH) {
+    return `password must be at least ${MIN_PASSWORD_LENGTH} characters`;
+  }
+
+  const hasUpper = /[A-Z]/.test(newPassword);
+  const hasLower = /[a-z]/.test(newPassword);
+  const hasNumber = /\d/.test(newPassword);
+
+  if (!hasUpper || !hasLower || !hasNumber) {
+    return "password must include uppercase, lowercase, and a number";
+  }
+
+  return null;
+};
+
+const invalidResetTokenResponse = () =>
+  jsonResponse(400, {
+    code: "INVALID_OR_EXPIRED_TOKEN",
+    message: "Reset token is invalid or expired",
+  });
 
 export const handler = async (event) => {
   if (event?.requestContext?.http?.method === "OPTIONS") {
@@ -42,9 +102,119 @@ export const handler = async (event) => {
     });
   }
 
-  return jsonResponse(501, {
-    code: "NOT_IMPLEMENTED",
-    message: "Reset password logic is not implemented yet",
-    stub: true,
-  });
+  const passwordPolicyError = validatePasswordPolicy(newPassword);
+  if (passwordPolicyError) {
+    return jsonResponse(400, {
+      code: "VALIDATION_ERROR",
+      message: passwordPolicyError,
+    });
+  }
+
+  const tokenParts = parseCompositeResetToken(token);
+  if (!tokenParts) {
+    return invalidResetTokenResponse();
+  }
+
+  const { tokenId, tokenSecret } = tokenParts;
+  const tokenHash = hashResetTokenSecret(tokenSecret);
+  const nowEpochSeconds = Math.floor(Date.now() / 1000);
+
+  try {
+    const tokenRecordResult = await dynamoDB
+      .get({
+        TableName: RESET_TOKENS_TABLE_NAME,
+        Key: { tokenId },
+      })
+      .promise();
+
+    const tokenRecord = tokenRecordResult?.Item;
+    if (!tokenRecord) {
+      return invalidResetTokenResponse();
+    }
+
+    const username =
+      typeof tokenRecord.username === "string"
+        ? tokenRecord.username
+        : typeof tokenRecord.userId === "string"
+          ? tokenRecord.userId
+          : "";
+
+    if (!username) {
+      return invalidResetTokenResponse();
+    }
+
+    const tokenIsExpired =
+      typeof tokenRecord.expiresAt !== "number" || tokenRecord.expiresAt <= nowEpochSeconds;
+    const tokenIsActive = tokenRecord.status === "active";
+    const tokenMatches = tokenRecord.tokenHash === tokenHash;
+
+    if (!tokenIsActive || tokenIsExpired || !tokenMatches) {
+      return invalidResetTokenResponse();
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const nowIso = new Date().toISOString();
+
+    await dynamoDB
+      .transactWrite({
+        TransactItems: [
+          {
+            Update: {
+              TableName: RESET_TOKENS_TABLE_NAME,
+              Key: { tokenId },
+              UpdateExpression:
+                "SET #status = :used, usedAt = :usedAt, consumedIp = :consumedIp, consumedUserAgent = :consumedUserAgent",
+              ConditionExpression: "#status = :active AND tokenHash = :tokenHash AND expiresAt > :nowEpochSeconds",
+              ExpressionAttributeNames: {
+                "#status": "status",
+              },
+              ExpressionAttributeValues: {
+                ":used": "used",
+                ":usedAt": nowIso,
+                ":consumedIp": extractIpAddress(event),
+                ":consumedUserAgent":
+                  event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
+                ":active": "active",
+                ":tokenHash": tokenHash,
+                ":nowEpochSeconds": nowEpochSeconds,
+              },
+            },
+          },
+          {
+            Update: {
+              TableName: USERS_TABLE_NAME,
+              Key: { username },
+              UpdateExpression:
+                "SET #password = :password, passwordChangedAt = :passwordChangedAt, updatedAt = :updatedAt, tokenVersion = if_not_exists(tokenVersion, :zero) + :inc",
+              ConditionExpression: "attribute_exists(username)",
+              ExpressionAttributeNames: {
+                "#password": "password",
+              },
+              ExpressionAttributeValues: {
+                ":password": hashedPassword,
+                ":passwordChangedAt": nowIso,
+                ":updatedAt": nowIso,
+                ":zero": 0,
+                ":inc": 1,
+              },
+            },
+          },
+        ],
+      })
+      .promise();
+
+    return jsonResponse(200, {
+      message: "Password reset successful",
+    });
+  } catch (error) {
+    if (error?.code === "TransactionCanceledException" || error?.code === "ConditionalCheckFailedException") {
+      return invalidResetTokenResponse();
+    }
+
+    console.error("Reset password error:", error);
+    return jsonResponse(500, {
+      code: "INTERNAL_ERROR",
+      message: "Error resetting password",
+    });
+  }
 };
