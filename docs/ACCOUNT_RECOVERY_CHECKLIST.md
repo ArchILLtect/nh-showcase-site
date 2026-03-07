@@ -18,13 +18,14 @@ Marker legend:
 		- TTL value: `<15 minutes>`
 		- Re-request cooldown: `<e.g., 60s>`
 		- Max requests per window: `<e.g., 3/hour/account, 5/15min/IP>`
-- [ ] Document/confirm existing policy is reused for reset.
+- [x] Document/confirm existing policy is reused for reset.
+	- Locked: same backend policy as registration (`min 8`, upper/lower/number).
 	- Definition details:
-		- Minimum length: `<...>`
-		- Complexity requirements: `<...>`
-		- Reuse restrictions: `<...>`
-		- Validation error contract (code/message): `<...>`
-		- Backend is source of truth: `<confirmed yes/no>`
+		- Minimum length: `<8>`
+		- Complexity requirements: `<uppercase + lowercase + number>`
+		- Reuse restrictions: `<not yet enforced>`
+		- Validation error contract (code/message): `<VALIDATION_ERROR + explicit message>`
+		- Backend is source of truth: `<confirmed yes>`
 - [x] Confirm success/failure UX copy (generic forgot-password response).
 	- Locked generic response: `If an account exists, password reset instructions were sent.`
 	- Definition details:
@@ -40,25 +41,36 @@ Marker legend:
 		- Cross-device logout behavior: `<all active sessions invalidated>`
 
 ## Backend
-- [ ] [YOU] Create/deploy Lambda functions for forgot/reset handlers.
+- [x] [YOU] Create/deploy Lambda functions for forgot/reset handlers.
+	- Created/deployed: `showcaseForgotPassword`, `showcaseResetPassword` (non-stub).
 - [x] [YOU] Create API Gateway routes for reset endpoints.
 	- Created: `POST /forgot-password`, `POST /reset-password` on `ShowcaseRegisterAPI`.
-- [ ] [YOU] Attach API Gateway integrations for reset endpoints.
-- [ ] [YOU] Configure IAM permissions and environment variables/secrets for recovery flows.
-- [ ] Add `POST /forgot-password` endpoint.
-- [ ] Add `POST /reset-password` endpoint.
-- [ ] Add secure token generation utility (CSPRNG).
-- [ ] Store only hashed reset tokens.
-- [ ] Mark tokens single-use and enforce expiry.
-- [ ] Update password hash and `passwordChangedAt` on reset.
+- [x] [YOU] Attach API Gateway integrations for reset endpoints.
+	- Attached Lambda integrations for both new routes.
+- [x] [YOU] Configure IAM permissions and environment variables/secrets for recovery flows.
+	- Configured env vars on both Lambdas (`USERS_TABLE_NAME`, `RESET_TOKENS_TABLE_NAME`, `RESET_TOKEN_TTL_MINUTES`, `TOKEN_HASH_PEPPER`, `RETURN_RESET_TOKEN_FOR_TESTING`).
+	- IAM validated for current flow (`GetItem`/`PutItem` on forgot path, `GetItem`/`UpdateItem` on reset path).
+- [x] Add `POST /forgot-password` endpoint.
+	- Implemented behavior: account-scoped lookup (`username + email`) + enumeration-safe generic `200` response.
+- [x] Add `POST /reset-password` endpoint.
+	- Implemented behavior: token validation/consume + password update + `tokenVersion` increment.
+- [x] Add secure token generation utility (CSPRNG).
+- [x] Store only hashed reset tokens.
+- [x] Mark tokens single-use and enforce expiry.
+- [x] Update password hash and `passwordChangedAt` on reset.
 - [ ] Invalidate active sessions/tokens after reset.
+	- `tokenVersion` increments on reset, but stale-token rejection enforcement in auth middleware/token validation is still pending.
 - [ ] Add per-IP and per-identifier rate limiting.
 
 ## Data Layer (DynamoDB)
-- [ ] Add user attributes: `passwordChangedAt`, `tokenVersion`.
-- [ ] [YOU] Create `PasswordResetTokens` table with TTL.
-- [ ] [YOU] Add index(es) required for user-based token cleanup.
-- [ ] [YOU] Add cleanup policy for stale/expired records.
+- [x] Add user attributes: `passwordChangedAt`, `tokenVersion`.
+	- Applied lazily on successful reset (`passwordChangedAt`, `updatedAt`, `tokenVersion = if_not_exists + 1`).
+- [x] [YOU] Create `PasswordResetTokens` table with TTL.
+	- Table created with PK `tokenId`; TTL enabled on `expiresAt`.
+- [x] [YOU] Add index(es) required for user-based token cleanup.
+	- Not required for v1 tokenId-based consume flow.
+- [x] [YOU] Add cleanup policy for stale/expired records.
+	- DynamoDB TTL on `expiresAt` is active.
 
 ## Email
 - [ ] Implement forgot-password template with reset link and expiry note.
@@ -75,22 +87,24 @@ Marker legend:
 - [ ] Add success redirect to login.
 
 ## Security & Abuse Prevention
-- [ ] Ensure forgot-password endpoint does not reveal account existence.
-- [ ] Ensure no raw tokens/passwords are logged.
+- [x] Ensure forgot-password endpoint does not reveal account existence.
+- [x] Ensure no raw tokens/passwords are logged.
+	- `RETURN_RESET_TOKEN_FOR_TESTING` set back to `false` for normal operation.
 - [ ] Add audit events for request, issue, consume, and failure states.
 - [ ] [YOU] Add anomaly alerts for spikes in reset activity.
 - [ ] Add cooldown to repeated requests per account.
 
 ## Testing
 - [ ] Unit tests for token generation/hash/expiry/single-use behavior.
-- [ ] Integration tests for forgot/reset endpoints.
+- [x] Integration tests for forgot/reset endpoints.
+	- Manual Lambda/API tests validated happy-path and invalid/expired token behavior.
 - [ ] E2E tests for happy path and failure states.
 - [ ] Verify old sessions fail immediately after reset.
 - [ ] Verify rate limits and abuse controls trigger as expected.
 
 ## Rollout
-- [ ] [YOU] Deploy backend and data changes first.
-- [ ] [YOU] Validate in dev/staging with test accounts.
+- [x] [YOU] Deploy backend and data changes first.
+- [x] [YOU] Validate in dev/staging with test accounts.
 - [ ] Enable frontend UI in staged rollout.
 - [ ] [YOU] Monitor metrics/logs after release.
 - [ ] Prepare rollback plan and support FAQ.

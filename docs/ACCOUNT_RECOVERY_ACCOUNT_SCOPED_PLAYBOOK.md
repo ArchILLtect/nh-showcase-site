@@ -33,7 +33,7 @@ Response (always 200):
 Behavior:
 - Normalize `username` (`trim`) and `email` (`trim().toLowerCase()`).
 - Lookup user by `username` and compare normalized email.
-- If match: issue reset token and send email.
+- If match: issue reset token (email send wiring is a separate pending step).
 - If no match: return same generic response.
 
 ### POST `/reset-password`
@@ -49,7 +49,7 @@ Request:
 Response:
 - `200` success
 - `400` validation failure
-- `410` expired/used token
+- `400` expired/used token (`INVALID_OR_EXPIRED_TOKEN`)
 
 ## Data/Token Requirements
 - Keep `tokenVersion` on user record; increment on successful reset.
@@ -72,7 +72,7 @@ Response:
   - Update password hash.
   - Set `passwordChangedAt`.
   - Increment `tokenVersion`.
-- Existing sessions become invalid (stale version rejected).
+- Existing sessions become invalid only when auth middleware/token checks enforce stale `tokenVersion` rejection (pending).
 
 ## Rollout Steps
 1. Update backend endpoint validation and lookup logic to require `username + email`.
@@ -81,11 +81,11 @@ Response:
 4. Monitor reset success/failure and abuse metrics.
 
 ## Required Smoke Tests
-- Valid username+email -> generic `200`, email sent.
+- Valid username+email -> generic `200`, token record issued.
 - Valid username + wrong email -> same generic `200`, no token issued.
 - Unknown username + any email -> same generic `200`.
-- Valid token reset -> `200` and old sessions invalid.
-- Expired token -> `410`.
+- Valid token reset -> `200`; token becomes single-use.
+- Reused/expired/invalid token -> `400 INVALID_OR_EXPIRED_TOKEN`.
 
 ## Exit Criteria
 - Recovery remains enumeration-safe.

@@ -3,6 +3,13 @@
 ## Goal
 Implement secure self-service password reset and account recovery for the existing custom auth stack (React frontend + AWS API Gateway/Lambda + DynamoDB), with backward compatibility and minimal disruption to current login/register flows.
 
+## Current Status (2026-03-07)
+- Implemented and deployed backend endpoints: `POST /forgot-password`, `POST /reset-password`.
+- Forgot flow: account-scoped validation (`username + email`), secure token issuance, hashed token storage with TTL metadata, generic enumeration-safe response.
+- Reset flow: composite token verification, single-use + expiry enforcement, password update, `passwordChangedAt`/`updatedAt` write, `tokenVersion` increment.
+- Implemented for testing and then disabled in normal operation: `RETURN_RESET_TOKEN_FOR_TESTING`.
+- Pending: email delivery wiring, frontend forgot/reset pages, auth middleware enforcement for stale `tokenVersion` sessions.
+
 ## Scope
 - Add forgot-password and reset-password user flows.
 - Add backend endpoints and token lifecycle handling.
@@ -25,12 +32,12 @@ Out of scope (for initial release):
 1. User clicks **Forgot password** on login page.
 2. User submits username and email.
 3. API responds with generic success message regardless of account existence.
-4. If account exists, backend generates single-use reset token and sends email with secure link.
+4. If account exists, backend generates single-use reset token record (and sends email once email wiring is enabled).
 5. User opens reset link to frontend reset page.
 6. Frontend submits token + new password.
-7. Backend verifies token, applies password policy, updates password hash, revokes existing sessions, marks token used.
+7. Backend verifies token, applies password policy, updates password hash, and marks token used.
 8. User sees success message and is redirected to login.
-9. Confirmation email is sent to account email.
+9. Optional confirmation email is sent once email wiring is enabled.
 
 ## API Design
 
@@ -51,7 +58,7 @@ Response (always 200):
 Behavior:
 - Normalize username and email.
 - Lookup user by username and verify normalized email matches the same account.
-- If found, create single-use reset token record and send email.
+- If found, create single-use reset token record (and send email when configured).
 - Always return generic response.
 
 ### 2) POST `/reset-password`
@@ -65,8 +72,7 @@ Request:
 ```
 Response:
 - `200` success
-- `400` invalid input/policy failure
-- `410` expired/used token
+- `400` validation failure, invalid token, expired token, or reused token
 
 Behavior:
 - Validate token format.
@@ -74,8 +80,9 @@ Behavior:
 - Reject if expired/used/revoked.
 - Enforce password policy.
 - Update user password hash + passwordChangedAt.
-- Mark token used and invalidate active sessions.
-- Send reset confirmation email.
+- Mark token used.
+- Increment `tokenVersion` for downstream session invalidation enforcement.
+- Send reset confirmation email when configured.
 
 ### Optional: 3) GET `/reset-token-status`
 - Used for improved UX to pre-check whether a token is valid before showing form.
@@ -111,7 +118,7 @@ Indexes (recommended):
 - Token validity: 15–30 minutes.
 - Single-use only.
 - Include token in URL query parameter:
-  - `https://your-site/reset-password?token=<raw_token>`
+  - `https://your-site/reset-password?token=<tokenId.tokenSecret>`
 - Avoid putting PII in the URL.
 
 ## Security Controls
@@ -122,12 +129,12 @@ Indexes (recommended):
 - Add cooldown between reset requests per account.
 - Password policy enforcement (length, complexity, breached-password check if available).
 - Session invalidation after reset:
-  - Increment `tokenVersion` in user record.
-  - Reject tokens with stale version on future authenticated requests.
+  - Increment `tokenVersion` in user record. (Implemented)
+  - Reject tokens with stale version on future authenticated requests. (Pending middleware/auth-token enforcement)
 - Audit logs for all reset lifecycle events.
 - Prevent token replay by strict single-use semantics.
 
-## Email Requirements
+## Email Requirements (Pending)
 Forgot-password email:
 - Subject: `Password reset request`
 - Include clear call-to-action reset link.
@@ -161,6 +168,12 @@ Password reset confirmation email:
 - Add session invalidation support (e.g., tokenVersion check).
 - Add structured logs and correlation IDs.
 
+Implementation state:
+- Handlers and token lifecycle utilities are implemented.
+- `tokenVersion` increment on reset is implemented.
+- Full stale-session enforcement by tokenVersion at auth-check time is pending.
+- Email dispatch integration is pending.
+
 ## Rollout Plan
 1. Deploy backend data model and endpoints (dark launch).
 2. Validate via Postman/integration tests.
@@ -176,3 +189,9 @@ Password reset confirmation email:
 - Password update succeeds and old sessions no longer work.
 - Security events are logged and observable.
 - Frontend provides clear UX for success/failure states.
+
+## Validated Outcomes (Current)
+- Forgot endpoint returns generic `200` and writes hashed reset token records to `PasswordResetTokens`.
+- Reset endpoint accepts valid composite token (`tokenId.tokenSecret`) and returns `200`.
+- Reset endpoint rejects reused/invalid/expired tokens with `400 INVALID_OR_EXPIRED_TOKEN`.
+- `passwordChangedAt` is written and password login with new credential succeeds.
