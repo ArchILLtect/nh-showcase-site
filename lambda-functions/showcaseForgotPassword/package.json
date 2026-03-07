@@ -2,6 +2,9 @@
   "name": "showcaseforgotpassword",
   "version": "1.0.0",
   "main": "index.mjs",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
