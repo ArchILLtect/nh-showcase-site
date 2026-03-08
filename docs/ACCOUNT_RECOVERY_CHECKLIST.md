@@ -58,8 +58,8 @@ Marker legend:
 - [x] Store only hashed reset tokens.
 - [x] Mark tokens single-use and enforce expiry.
 - [x] Update password hash and `passwordChangedAt` on reset.
-- [ ] Invalidate active sessions/tokens after reset.
-	- `tokenVersion` increments on reset, but stale-token rejection enforcement in auth middleware/token validation is still pending.
+- [x] Invalidate active sessions/tokens after reset.
+	- Implemented via `POST /session/validate` + protected-route server validation using JWT `tokenVersion` checks.
 - [ ] Add per-IP and per-identifier rate limiting.
 
 ## Data Layer (DynamoDB)
@@ -106,7 +106,8 @@ Marker legend:
 	- Manual Lambda/API tests validated happy-path and invalid/expired token behavior.
 - [x] E2E tests for happy path and failure states.
 	- Manual end-to-end verification completed (forgot email delivery, reset success, login with new password, reused token rejected).
-- [ ] Verify old sessions fail immediately after reset.
+- [x] Verify old sessions fail immediately after reset.
+	- Validated with separate browser sessions: old session redirected to login after password reset.
 - [ ] Verify rate limits and abuse controls trigger as expected.
 
 ## Rollout

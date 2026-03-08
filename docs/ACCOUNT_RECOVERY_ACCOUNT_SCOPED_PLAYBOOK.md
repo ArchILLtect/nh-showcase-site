@@ -72,7 +72,7 @@ Response:
   - Update password hash.
   - Set `passwordChangedAt`.
   - Increment `tokenVersion`.
-- Existing sessions become invalid only when auth middleware/token checks enforce stale `tokenVersion` rejection (pending).
+- Existing sessions are invalidated by stale `tokenVersion` rejection via server session validation (`POST /session/validate`) on protected-route access.
 
 ## Rollout Steps
 1. Update backend endpoint validation and lookup logic to require `username + email`.

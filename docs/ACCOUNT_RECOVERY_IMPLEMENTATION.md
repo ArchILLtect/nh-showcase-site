@@ -3,7 +3,7 @@
 ## Goal
 Implement secure self-service password reset and account recovery for the existing custom auth stack (React frontend + AWS API Gateway/Lambda + DynamoDB), with backward compatibility and minimal disruption to current login/register flows.
 
-## Current Status (2026-03-07)
+## Current Status (2026-03-08)
 - Implemented and deployed backend endpoints: `POST /forgot-password`, `POST /reset-password`.
 - Forgot flow: account-scoped validation (`username + email`), secure token issuance, hashed token storage with TTL metadata, generic enumeration-safe response.
 - Forgot email wiring: AWS SES integration added in Lambda (`subject/text/html` reset email) and reset URL composition via `RESET_URL_BASE`.
@@ -11,7 +11,8 @@ Implement secure self-service password reset and account recovery for the existi
 - Implemented for testing and then disabled in normal operation: `RETURN_RESET_TOKEN_FOR_TESTING`.
 - SES sender verification and production access are complete; forgot-password email delivery validated in production mode.
 - Frontend minimal recovery UI is implemented (`/forgot-password`, `/reset-password`, login-page link).
-- Pending: email monitoring (bounces/complaints), password-changed confirmation email, and auth middleware enforcement for stale `tokenVersion` sessions.
+- Session invalidation enforcement is implemented and validated via `POST /session/validate` and protected-route checks.
+- Pending: email monitoring (bounces/complaints), password-changed confirmation email, and rate-limiting/abuse controls.
 
 ## Scope
 - Add forgot-password and reset-password user flows.
@@ -133,7 +134,7 @@ Indexes (recommended):
 - Password policy enforcement (length, complexity, breached-password check if available).
 - Session invalidation after reset:
   - Increment `tokenVersion` in user record. (Implemented)
-  - Reject tokens with stale version on future authenticated requests. (Pending middleware/auth-token enforcement)
+  - Reject tokens with stale version on future authenticated requests. (Implemented via session validation endpoint)
 - Audit logs for all reset lifecycle events.
 - Prevent token replay by strict single-use semantics.
 
@@ -174,10 +175,10 @@ Password reset confirmation email:
 Implementation state:
 - Handlers and token lifecycle utilities are implemented.
 - `tokenVersion` increment on reset is implemented.
-- Full stale-session enforcement by tokenVersion at auth-check time is pending.
+- Full stale-session enforcement by tokenVersion at auth-check time is implemented (`POST /session/validate` + frontend protected-route validation).
 - Forgot email dispatch integration is implemented (AWS SES).
 - SES sender/domain verification and production access are complete.
-- Remaining: password-changed confirmation email, email observability hooks, and stale-session enforcement using `tokenVersion`.
+- Remaining: password-changed confirmation email, email observability hooks, and abuse controls (rate limits/cooldowns).
 
 ## Rollout Plan
 1. Deploy backend data model and endpoints (dark launch).
@@ -200,3 +201,4 @@ Implementation state:
 - Reset endpoint accepts valid composite token (`tokenId.tokenSecret`) and returns `200`.
 - Reset endpoint rejects reused/invalid/expired tokens with `400 INVALID_OR_EXPIRED_TOKEN`.
 - `passwordChangedAt` is written and password login with new credential succeeds.
+- Session validation endpoint rejects stale sessions after reset and protected routes redirect to login for invalidated sessions.
