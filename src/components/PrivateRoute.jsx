@@ -24,14 +24,48 @@
  * 
  */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { roleHierarchy } from "../constants/roles";
-import { isLoggedIn, getLoggedInUser } from "../utils/auth.js"; // Import the helper function
+import { isLoggedIn, getLoggedInUser, validateSessionWithServer } from "../utils/auth.js"; // Import the helper function
 import PropTypes from 'prop-types';
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function PrivateRoute({ children, requiredRole = "user" }) {
-  if (!isLoggedIn()) return <Navigate to="/login" replace />;
+  const [sessionValidated, setSessionValidated] = useState(false);
+  const [sessionValid, setSessionValid] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const runValidation = async () => {
+      if (!isLoggedIn()) {
+        if (isMounted) {
+          setSessionValid(false);
+          setSessionValidated(true);
+        }
+        return;
+      }
+
+      const isServerSessionValid = await validateSessionWithServer();
+      if (isMounted) {
+        setSessionValid(isServerSessionValid);
+        setSessionValidated(true);
+      }
+    };
+
+    runValidation();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  if (!sessionValidated) {
+    return <LoadingSpinner />;
+  }
+
+  if (!sessionValid) return <Navigate to="/login" replace />;
 
   const user = getLoggedInUser();
   if (!user || !user.role) return <Navigate to="/login" replace />;
