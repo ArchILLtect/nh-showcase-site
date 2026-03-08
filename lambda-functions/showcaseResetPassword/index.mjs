@@ -3,10 +3,14 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const ses = new AWS.SES();
 const USERS_TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const RESET_TOKENS_TABLE_NAME = process.env.RESET_TOKENS_TABLE_NAME || "PasswordResetTokens";
 const TOKEN_HASH_PEPPER = process.env.TOKEN_HASH_PEPPER || "";
 const MIN_PASSWORD_LENGTH = 8;
+const PASSWORD_RESET_FROM_EMAIL = process.env.PASSWORD_RESET_FROM_EMAIL || "";
+const PASSWORD_RESET_REPLY_TO = process.env.PASSWORD_RESET_REPLY_TO || "";
+const PASSWORD_CHANGE_SUPPORT_EMAIL = process.env.PASSWORD_CHANGE_SUPPORT_EMAIL || "";
 
 const jsonResponse = (statusCode, payload) => ({
   statusCode,
@@ -68,6 +72,48 @@ const invalidResetTokenResponse = () =>
     code: "INVALID_OR_EXPIRED_TOKEN",
     message: "Reset token is invalid or expired",
   });
+
+const sendPasswordChangedConfirmationEmail = async ({ toEmail, username, changedAtIso }) => {
+  if (!toEmail || !PASSWORD_RESET_FROM_EMAIL) {
+    console.warn(
+      "Password-changed email send skipped: missing recipient email or PASSWORD_RESET_FROM_EMAIL",
+    );
+    return;
+  }
+
+  const supportLine = PASSWORD_CHANGE_SUPPORT_EMAIL
+    ? `If you did not make this change, contact support immediately at ${PASSWORD_CHANGE_SUPPORT_EMAIL}.`
+    : "If you did not make this change, contact support immediately.";
+
+  const params = {
+    Source: PASSWORD_RESET_FROM_EMAIL,
+    Destination: {
+      ToAddresses: [toEmail],
+    },
+    Message: {
+      Subject: {
+        Data: "Your password was changed",
+        Charset: "UTF-8",
+      },
+      Body: {
+        Text: {
+          Data: `Hi ${username},\n\nYour account password was changed on ${changedAtIso}.\n\n${supportLine}\n\nIf this was you, no further action is needed.`,
+          Charset: "UTF-8",
+        },
+        Html: {
+          Data: `<p>Hi ${username},</p><p>Your account password was changed on ${changedAtIso}.</p><p>${supportLine}</p><p>If this was you, no further action is needed.</p>`,
+          Charset: "UTF-8",
+        },
+      },
+    },
+  };
+
+  if (PASSWORD_RESET_REPLY_TO) {
+    params.ReplyToAddresses = [PASSWORD_RESET_REPLY_TO];
+  }
+
+  await ses.sendEmail(params).promise();
+};
 
 export const handler = async (event) => {
   if (event?.requestContext?.http?.method === "OPTIONS") {
@@ -202,6 +248,19 @@ export const handler = async (event) => {
         ],
       })
       .promise();
+
+    const recipientEmail =
+      typeof tokenRecord.emailNormalized === "string" ? tokenRecord.emailNormalized : "";
+
+    try {
+      await sendPasswordChangedConfirmationEmail({
+        toEmail: recipientEmail,
+        username,
+        changedAtIso: nowIso,
+      });
+    } catch (emailError) {
+      console.error("Password-changed confirmation email error:", emailError);
+    }
 
     return jsonResponse(200, {
       message: "Password reset successful",
