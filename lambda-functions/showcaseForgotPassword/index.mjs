@@ -5,9 +5,15 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const ses = new AWS.SES();
 const USERS_TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const RESET_TOKENS_TABLE_NAME = process.env.RESET_TOKENS_TABLE_NAME || "PasswordResetTokens";
+const RESET_RATE_LIMITS_TABLE_NAME = process.env.RESET_RATE_LIMITS_TABLE_NAME || "";
 const RESET_TOKEN_TTL_MINUTES = Number(process.env.RESET_TOKEN_TTL_MINUTES || "15");
 const TOKEN_HASH_PEPPER = process.env.TOKEN_HASH_PEPPER || "";
 const RETURN_RESET_TOKEN_FOR_TESTING = process.env.RETURN_RESET_TOKEN_FOR_TESTING === "true";
+const FORGOT_PER_IP_MAX_ATTEMPTS = Number(process.env.FORGOT_PER_IP_MAX_ATTEMPTS || "5");
+const FORGOT_PER_IP_WINDOW_SECONDS = Number(process.env.FORGOT_PER_IP_WINDOW_SECONDS || "900");
+const FORGOT_PER_ACCOUNT_MAX_ATTEMPTS = Number(process.env.FORGOT_PER_ACCOUNT_MAX_ATTEMPTS || "3");
+const FORGOT_PER_ACCOUNT_WINDOW_SECONDS = Number(process.env.FORGOT_PER_ACCOUNT_WINDOW_SECONDS || "3600");
+const FORGOT_ACCOUNT_COOLDOWN_SECONDS = Number(process.env.FORGOT_ACCOUNT_COOLDOWN_SECONDS || "60");
 const GENERIC_FORGOT_PASSWORD_MESSAGE = "If account details are valid, password reset instructions were sent.";
 const PASSWORD_RESET_FROM_EMAIL = process.env.PASSWORD_RESET_FROM_EMAIL || "";
 const PASSWORD_RESET_REPLY_TO = process.env.PASSWORD_RESET_REPLY_TO || "";
@@ -40,6 +46,70 @@ const genericForgotPasswordResponse = () =>
   jsonResponse(200, {
     message: GENERIC_FORGOT_PASSWORD_MESSAGE,
   });
+
+const safeNumber = (value, fallback) =>
+  Number.isFinite(Number(value)) ? Number(value) : fallback;
+
+const checkAndRecordRateLimit = async ({ key, windowSeconds, maxAttempts, cooldownSeconds = 0 }) => {
+  if (!RESET_RATE_LIMITS_TABLE_NAME || !key) {
+    return { allowed: true };
+  }
+
+  const normalizedWindowSeconds = safeNumber(windowSeconds, 900);
+  const normalizedMaxAttempts = safeNumber(maxAttempts, 5);
+  const normalizedCooldownSeconds = safeNumber(cooldownSeconds, 0);
+  const now = Math.floor(Date.now() / 1000);
+
+  try {
+    const currentRecord = await dynamoDB
+      .get({
+        TableName: RESET_RATE_LIMITS_TABLE_NAME,
+        Key: { key },
+      })
+      .promise();
+
+    const item = currentRecord?.Item || null;
+    const previousCount = typeof item?.count === "number" ? item.count : 0;
+    const previousWindowStart = typeof item?.windowStart === "number" ? item.windowStart : 0;
+    const previousLastAttemptAt = typeof item?.lastAttemptAt === "number" ? item.lastAttemptAt : 0;
+    const withinWindow = previousWindowStart > 0 && now - previousWindowStart < normalizedWindowSeconds;
+
+    if (
+      normalizedCooldownSeconds > 0 &&
+      previousLastAttemptAt > 0 &&
+      now - previousLastAttemptAt < normalizedCooldownSeconds
+    ) {
+      return { allowed: false, reason: "cooldown" };
+    }
+
+    if (withinWindow && previousCount >= normalizedMaxAttempts) {
+      return { allowed: false, reason: "rate_limit" };
+    }
+
+    const nextWindowStart = withinWindow ? previousWindowStart : now;
+    const nextCount = withinWindow ? previousCount + 1 : 1;
+    const expiresAt = nextWindowStart + normalizedWindowSeconds + 300;
+
+    await dynamoDB
+      .put({
+        TableName: RESET_RATE_LIMITS_TABLE_NAME,
+        Item: {
+          key,
+          count: nextCount,
+          windowStart: nextWindowStart,
+          lastAttemptAt: now,
+          expiresAt,
+          updatedAt: new Date(now * 1000).toISOString(),
+        },
+      })
+      .promise();
+
+    return { allowed: true };
+  } catch (error) {
+    console.error("Forgot password rate-limit check failed (fail-open):", error);
+    return { allowed: true };
+  }
+};
 
 const buildResetUrl = (resetToken) => {
   if (!RESET_URL_BASE) {
@@ -106,8 +176,29 @@ export const handler = async (event) => {
 
   const username = typeof parsedBody.username === "string" ? parsedBody.username.trim() : "";
   const email = typeof parsedBody.email === "string" ? parsedBody.email.trim().toLowerCase() : "";
+  const requestIp = extractIpAddress(event);
 
   if (!username || !email) {
+    return genericForgotPasswordResponse();
+  }
+
+  const perIpResult = await checkAndRecordRateLimit({
+    key: `forgot:ip:${requestIp}`,
+    windowSeconds: FORGOT_PER_IP_WINDOW_SECONDS,
+    maxAttempts: FORGOT_PER_IP_MAX_ATTEMPTS,
+  });
+  if (!perIpResult.allowed) {
+    return genericForgotPasswordResponse();
+  }
+
+  const normalizedAccountKey = `forgot:account:${username.toLowerCase()}#${email}`;
+  const perAccountResult = await checkAndRecordRateLimit({
+    key: normalizedAccountKey,
+    windowSeconds: FORGOT_PER_ACCOUNT_WINDOW_SECONDS,
+    maxAttempts: FORGOT_PER_ACCOUNT_MAX_ATTEMPTS,
+    cooldownSeconds: FORGOT_ACCOUNT_COOLDOWN_SECONDS,
+  });
+  if (!perAccountResult.allowed) {
     return genericForgotPasswordResponse();
   }
 
@@ -145,7 +236,7 @@ export const handler = async (event) => {
           status: "active",
           createdAt: createdAt.toISOString(),
           expiresAt,
-          requestIp: extractIpAddress(event),
+          requestIp,
           requestUserAgent: event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
         },
         ConditionExpression: "attribute_not_exists(tokenId)",
