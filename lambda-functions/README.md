@@ -41,6 +41,10 @@ Notes:
 - Archive snapshot is written to `lambda-functions/archive/<functionName>/<timestamp>/`.
 - Deployable zip is written to `lambda-functions/<functionName>.zip`.
 - Ensure required env vars are configured before publish (for recovery: `USERS_TABLE_NAME`, `RESET_TOKENS_TABLE_NAME`, `RESET_TOKEN_TTL_MINUTES`, `TOKEN_HASH_PEPPER`, `RETURN_RESET_TOKEN_FOR_TESTING`, `PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`, optional `PASSWORD_CHANGE_SUPPORT_EMAIL`).
+- Rate limiting (optional, recommended):
+	- `RESET_RATE_LIMITS_TABLE_NAME` (DynamoDB table with PK `key` and TTL `expiresAt`)
+	- Forgot flow: `FORGOT_PER_IP_MAX_ATTEMPTS`, `FORGOT_PER_IP_WINDOW_SECONDS`, `FORGOT_PER_ACCOUNT_MAX_ATTEMPTS`, `FORGOT_PER_ACCOUNT_WINDOW_SECONDS`, `FORGOT_ACCOUNT_COOLDOWN_SECONDS`
+	- Reset flow: `RESET_PER_IP_MAX_ATTEMPTS`, `RESET_PER_IP_WINDOW_SECONDS`
 - Ensure auth/session env vars are configured for login/session validation (`USERS_TABLE_NAME`, `JWT_SECRET`, optional `JWT_EXPIRES_IN`).
 
 ## Rollback Workflow
