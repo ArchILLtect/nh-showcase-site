@@ -12,7 +12,7 @@ Implement secure self-service password reset and account recovery for the existi
 - SES sender verification and production access are complete; forgot-password email delivery validated in production mode.
 - Frontend minimal recovery UI is implemented (`/forgot-password`, `/reset-password`, login-page link).
 - Session invalidation enforcement is implemented and validated via `POST /session/validate` and protected-route checks.
-- Pending: email monitoring (bounces/complaints), password-changed confirmation email, and rate-limiting/abuse controls.
+- Pending: email monitoring (bounces/complaints) and rate-limiting/abuse controls.
 
 ## Scope
 - Add forgot-password and reset-password user flows.
@@ -178,7 +178,7 @@ Implementation state:
 - Full stale-session enforcement by tokenVersion at auth-check time is implemented (`POST /session/validate` + frontend protected-route validation).
 - Forgot email dispatch integration is implemented (AWS SES).
 - SES sender/domain verification and production access are complete.
-- Remaining: password-changed confirmation email, email observability hooks, and abuse controls (rate limits/cooldowns).
+- Remaining: email observability hooks and abuse controls (rate limits/cooldowns).
 
 ## Rollout Plan
 1. Deploy backend data model and endpoints (dark launch).

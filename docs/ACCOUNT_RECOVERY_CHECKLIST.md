@@ -75,7 +75,8 @@ Marker legend:
 ## Email
 - [x] Implement forgot-password template with reset link and expiry note.
 	- Implemented in forgot Lambda using AWS SES payload (`subject/text/html`) and `RESET_URL_BASE?token=<tokenId.tokenSecret>`.
-- [ ] Implement password-changed confirmation email.
+- [x] Implement password-changed confirmation email.
+	- Implemented in reset Lambda via SES (`Your password was changed`) with support instruction/contact.
 - [x] [YOU] Verify SES sender/domain identity and production access.
 	- Verified sender identity and granted SES production access in `us-east-2`.
 - [x] [YOU] Configure email provider env vars in Lambda (`PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`).

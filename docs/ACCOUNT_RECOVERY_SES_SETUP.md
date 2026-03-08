@@ -4,8 +4,9 @@ Use this guide to configure Amazon SES for forgot-password email delivery in thi
 
 ## Scope
 - Lambda: `showcaseForgotPassword`
+- Lambda: `showcaseResetPassword` (password-changed confirmation email)
 - Region: `us-east-2` (match your existing Lambda/API stack)
-- Email flow: forgot-password reset link email
+- Email flow: forgot-password reset link email + post-reset confirmation email
 
 ## Project Status Snapshot (2026-03-08)
 - Sender email identity verification: complete (`noreply@nickhanson.me`).
@@ -48,7 +49,7 @@ If in Sandbox:
   - Use case: transactional password reset emails.
 
 ## 4) Grant Lambda permission to send email
-Attach this policy to the execution role for `showcaseForgotPassword`.
+Attach this policy to execution roles for both `showcaseForgotPassword` and `showcaseResetPassword`.
 
 ```json
 {
@@ -79,6 +80,15 @@ Set these on `showcaseForgotPassword`:
   - `https://your-site/reset-password`
 - `PASSWORD_RESET_REPLY_TO` (optional)
   - Reply-to mailbox for support.
+
+Set these on `showcaseResetPassword`:
+- `PASSWORD_RESET_FROM_EMAIL`
+  - Sender for password-changed confirmation emails.
+- `PASSWORD_RESET_REPLY_TO` (optional)
+  - Reply-to mailbox for password-changed notifications.
+- `PASSWORD_CHANGE_SUPPORT_EMAIL` (optional)
+  - Support address shown in confirmation email body.
+  - Current value: `nick@nickhanson.com`.
 
 Keep existing recovery env vars unchanged:
 - `USERS_TABLE_NAME`

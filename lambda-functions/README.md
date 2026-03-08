@@ -40,7 +40,7 @@ Optional (also installs dependencies before zipping):
 Notes:
 - Archive snapshot is written to `lambda-functions/archive/<functionName>/<timestamp>/`.
 - Deployable zip is written to `lambda-functions/<functionName>.zip`.
-- Ensure required env vars are configured before publish (for recovery: `USERS_TABLE_NAME`, `RESET_TOKENS_TABLE_NAME`, `RESET_TOKEN_TTL_MINUTES`, `TOKEN_HASH_PEPPER`, `RETURN_RESET_TOKEN_FOR_TESTING`, `PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`).
+- Ensure required env vars are configured before publish (for recovery: `USERS_TABLE_NAME`, `RESET_TOKENS_TABLE_NAME`, `RESET_TOKEN_TTL_MINUTES`, `TOKEN_HASH_PEPPER`, `RETURN_RESET_TOKEN_FOR_TESTING`, `PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`, optional `PASSWORD_CHANGE_SUPPORT_EMAIL`).
 - Ensure auth/session env vars are configured for login/session validation (`USERS_TABLE_NAME`, `JWT_SECRET`, optional `JWT_EXPIRES_IN`).
 
 ## Rollback Workflow
