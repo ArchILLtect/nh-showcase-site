@@ -61,6 +61,7 @@ Marker legend:
 - [x] Invalidate active sessions/tokens after reset.
 	- Implemented via `POST /session/validate` + protected-route server validation using JWT `tokenVersion` checks.
 - [ ] Add per-IP and per-identifier rate limiting.
+	- Backend logic implemented in forgot/reset lambdas; pending AWS table/env/IAM enablement for `RESET_RATE_LIMITS_TABLE_NAME`.
 
 ## Data Layer (DynamoDB)
 - [x] Add user attributes: `passwordChangedAt`, `tokenVersion`.
@@ -110,6 +111,7 @@ Marker legend:
 - [x] Verify old sessions fail immediately after reset.
 	- Validated with separate browser sessions: old session redirected to login after password reset.
 - [ ] Verify rate limits and abuse controls trigger as expected.
+	- Pending after provisioning `RESET_RATE_LIMITS_TABLE_NAME` and smoke-testing throttle scenarios.
 
 ## Rollout
 - [x] [YOU] Deploy backend and data changes first.
