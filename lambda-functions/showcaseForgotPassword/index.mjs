@@ -2,12 +2,16 @@ import AWS from "aws-sdk";
 import crypto from "crypto";
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const ses = new AWS.SES();
 const USERS_TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const RESET_TOKENS_TABLE_NAME = process.env.RESET_TOKENS_TABLE_NAME || "PasswordResetTokens";
 const RESET_TOKEN_TTL_MINUTES = Number(process.env.RESET_TOKEN_TTL_MINUTES || "15");
 const TOKEN_HASH_PEPPER = process.env.TOKEN_HASH_PEPPER || "";
 const RETURN_RESET_TOKEN_FOR_TESTING = process.env.RETURN_RESET_TOKEN_FOR_TESTING === "true";
 const GENERIC_FORGOT_PASSWORD_MESSAGE = "If account details are valid, password reset instructions were sent.";
+const PASSWORD_RESET_FROM_EMAIL = process.env.PASSWORD_RESET_FROM_EMAIL || "";
+const PASSWORD_RESET_REPLY_TO = process.env.PASSWORD_RESET_REPLY_TO || "";
+const RESET_URL_BASE = process.env.RESET_URL_BASE || "";
 
 const jsonResponse = (statusCode, payload) => ({
   statusCode,
@@ -36,6 +40,54 @@ const genericForgotPasswordResponse = () =>
   jsonResponse(200, {
     message: GENERIC_FORGOT_PASSWORD_MESSAGE,
   });
+
+const buildResetUrl = (resetToken) => {
+  if (!RESET_URL_BASE) {
+    return "";
+  }
+
+  const separator = RESET_URL_BASE.includes("?") ? "&" : "?";
+  return `${RESET_URL_BASE}${separator}token=${encodeURIComponent(resetToken)}`;
+};
+
+const sendPasswordResetEmail = async ({ toEmail, username, resetToken, expiresMinutes }) => {
+  if (!PASSWORD_RESET_FROM_EMAIL || !RESET_URL_BASE) {
+    console.warn(
+      "Forgot password email send skipped: missing PASSWORD_RESET_FROM_EMAIL or RESET_URL_BASE",
+    );
+    return;
+  }
+
+  const resetUrl = buildResetUrl(resetToken);
+  const params = {
+    Source: PASSWORD_RESET_FROM_EMAIL,
+    Destination: {
+      ToAddresses: [toEmail],
+    },
+    Message: {
+      Subject: {
+        Data: "Password reset request",
+        Charset: "UTF-8",
+      },
+      Body: {
+        Text: {
+          Data: `Hi ${username},\n\nWe received a request to reset your password. Use the link below to set a new password:\n${resetUrl}\n\nThis link expires in ${expiresMinutes} minutes. If you did not request this, you can ignore this email.`,
+          Charset: "UTF-8",
+        },
+        Html: {
+          Data: `<p>Hi ${username},</p><p>We received a request to reset your password. Use the link below to set a new password:</p><p><a href="${resetUrl}">${resetUrl}</a></p><p>This link expires in ${expiresMinutes} minutes. If you did not request this, you can ignore this email.</p>`,
+          Charset: "UTF-8",
+        },
+      },
+    },
+  };
+
+  if (PASSWORD_RESET_REPLY_TO) {
+    params.ReplyToAddresses = [PASSWORD_RESET_REPLY_TO];
+  }
+
+  await ses.sendEmail(params).promise();
+};
 
 export const handler = async (event) => {
   if (event?.requestContext?.http?.method === "OPTIONS") {
@@ -99,6 +151,13 @@ export const handler = async (event) => {
         ConditionExpression: "attribute_not_exists(tokenId)",
       })
       .promise();
+
+    await sendPasswordResetEmail({
+      toEmail: email,
+      username,
+      resetToken,
+      expiresMinutes: RESET_TOKEN_TTL_MINUTES,
+    });
 
     if (RETURN_RESET_TOKEN_FOR_TESTING) {
       return jsonResponse(200, {
