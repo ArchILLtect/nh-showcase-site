@@ -7,14 +7,11 @@ Central index for authentication and account recovery documentation.
   - Existing login/register overview, localStorage keys, and role-based route behavior.
 
 ## Account Recovery (New)
-- [Implementation Plan](./ACCOUNT_RECOVERY_IMPLEMENTATION.md)
   - End-to-end flow, API contracts, data model updates, security controls, rollout, and acceptance criteria.
-- [Legacy Concerns](./ACCOUNT_RECOVERY_LEGACY.md)
   - Migration risks, compatibility concerns, and mitigation strategy.
-- [Execution Checklist](./ACCOUNT_RECOVERY_CHECKLIST.md)
   - Step-by-step checklist for planning, implementation, rollout, and post-launch review.
-- [Account-Scoped Recovery Playbook (Email Reuse Allowed)](./ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md)
   - Concrete implementation guide for `username + email` recovery targeting when emails can be shared.
+- [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
 
 ## Registration Hardening
 - [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
@@ -30,6 +27,7 @@ Central index for authentication and account recovery documentation.
 - [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
   - Documents final policy choice: username is unique and multiple accounts may share an email.
 - [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
+14. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
   - Step-by-step implementation/ops checklist aligned to reused-email registration behavior.
 
 ## Lambda Source Management

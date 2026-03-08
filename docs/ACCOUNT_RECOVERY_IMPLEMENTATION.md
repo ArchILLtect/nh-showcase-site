@@ -6,9 +6,10 @@ Implement secure self-service password reset and account recovery for the existi
 ## Current Status (2026-03-07)
 - Implemented and deployed backend endpoints: `POST /forgot-password`, `POST /reset-password`.
 - Forgot flow: account-scoped validation (`username + email`), secure token issuance, hashed token storage with TTL metadata, generic enumeration-safe response.
+- Forgot email wiring: AWS SES integration added in Lambda (`subject/text/html` reset email) and reset URL composition via `RESET_URL_BASE`.
 - Reset flow: composite token verification, single-use + expiry enforcement, password update, `passwordChangedAt`/`updatedAt` write, `tokenVersion` increment.
 - Implemented for testing and then disabled in normal operation: `RETURN_RESET_TOKEN_FOR_TESTING`.
-- Pending: email delivery wiring, frontend forgot/reset pages, auth middleware enforcement for stale `tokenVersion` sessions.
+- Pending: SES sender/domain verification + production access + email monitoring, frontend forgot/reset pages, auth middleware enforcement for stale `tokenVersion` sessions.
 
 ## Scope
 - Add forgot-password and reset-password user flows.
@@ -58,7 +59,7 @@ Response (always 200):
 Behavior:
 - Normalize username and email.
 - Lookup user by username and verify normalized email matches the same account.
-- If found, create single-use reset token record (and send email when configured).
+- If found, create single-use reset token record and send reset email when SES env vars are configured.
 - Always return generic response.
 
 ### 2) POST `/reset-password`
@@ -134,7 +135,7 @@ Indexes (recommended):
 - Audit logs for all reset lifecycle events.
 - Prevent token replay by strict single-use semantics.
 
-## Email Requirements (Pending)
+## Email Requirements
 Forgot-password email:
 - Subject: `Password reset request`
 - Include clear call-to-action reset link.
@@ -172,7 +173,8 @@ Implementation state:
 - Handlers and token lifecycle utilities are implemented.
 - `tokenVersion` increment on reset is implemented.
 - Full stale-session enforcement by tokenVersion at auth-check time is pending.
-- Email dispatch integration is pending.
+- Forgot email dispatch integration is implemented (AWS SES).
+- Remaining: SES sender/domain verification + production access, and password-changed confirmation email.
 
 ## Rollout Plan
 1. Deploy backend data model and endpoints (dark launch).

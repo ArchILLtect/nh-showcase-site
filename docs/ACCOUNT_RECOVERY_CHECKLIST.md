@@ -73,9 +73,11 @@ Marker legend:
 	- DynamoDB TTL on `expiresAt` is active.
 
 ## Email
-- [ ] Implement forgot-password template with reset link and expiry note.
+- [x] Implement forgot-password template with reset link and expiry note.
+	- Implemented in forgot Lambda using AWS SES payload (`subject/text/html`) and `RESET_URL_BASE?token=<tokenId.tokenSecret>`.
 - [ ] Implement password-changed confirmation email.
-- [ ] [YOU] Verify sender identity and domain auth (SPF/DKIM/DMARC).
+- [ ] [YOU] Verify SES sender/domain identity and production access.
+- [ ] [YOU] Configure email provider env vars in Lambda (`PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`).
 - [ ] [YOU] Add monitoring for bounces/complaints.
 
 ## Frontend (React)

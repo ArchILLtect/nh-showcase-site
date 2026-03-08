@@ -81,10 +81,6 @@ Response:
 4. Monitor reset success/failure and abuse metrics.
 
 ## Required Smoke Tests
-- Valid username+email -> generic `200`, token record issued.
-- Valid username + wrong email -> same generic `200`, no token issued.
-- Unknown username + any email -> same generic `200`.
-- Valid token reset -> `200`; token becomes single-use.
 - Reused/expired/invalid token -> `400 INVALID_OR_EXPIRED_TOKEN`.
 
 ## Exit Criteria
