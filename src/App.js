@@ -43,6 +43,8 @@ import Layout from "./components/Layout";
 import AdminDashboard from "./admin/AdminDashboard";
 import Certificates from "./pages/Certificates";
 import Privacy from "./pages/Privacy";
+import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
     return (
@@ -60,6 +62,8 @@ function App() {
                     <Route path="/privacy" element={<Privacy />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route
                         path="/dashboard"
                         element={
