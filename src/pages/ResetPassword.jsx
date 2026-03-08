@@ -10,6 +10,7 @@ const ResetPassword = () => {
   const [token, setToken] = useState(searchParams.get("token") || "");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -90,7 +91,7 @@ const ResetPassword = () => {
               <input
                 id="newPassword"
                 name="newPassword"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(event) => setNewPassword(event.target.value)}
                 className="w-full px-4 py-2 border rounded dark:bg-gray-700 text-gray-700 dark:text-gray-100"
@@ -104,12 +105,24 @@ const ResetPassword = () => {
               <input
                 id="confirmPassword"
                 name="confirmPassword"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
                 className="w-full px-4 py-2 border rounded dark:bg-gray-700 text-gray-700 dark:text-gray-100"
                 required
               />
+            </div>
+
+            <div className="mb-4">
+              <input
+                type="checkbox"
+                id="show_password_check"
+                checked={showPassword}
+                onChange={() => setShowPassword((prev) => !prev)}
+              />
+              <label htmlFor="show_password_check" className="w-full px-4 py-2 text-gray-700 dark:text-gray-100">
+                {showPassword ? "Hide Password" : "Show Password"}
+              </label>
             </div>
 
             {error && <p className="mb-4 text-sm text-red-600 dark:text-red-400">{error}</p>}
