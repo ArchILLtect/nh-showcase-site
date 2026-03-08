@@ -6,8 +6,11 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const ses = new AWS.SES();
 const USERS_TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const RESET_TOKENS_TABLE_NAME = process.env.RESET_TOKENS_TABLE_NAME || "PasswordResetTokens";
+const RESET_RATE_LIMITS_TABLE_NAME = process.env.RESET_RATE_LIMITS_TABLE_NAME || "";
 const TOKEN_HASH_PEPPER = process.env.TOKEN_HASH_PEPPER || "";
 const MIN_PASSWORD_LENGTH = 8;
+const RESET_PER_IP_MAX_ATTEMPTS = Number(process.env.RESET_PER_IP_MAX_ATTEMPTS || "10");
+const RESET_PER_IP_WINDOW_SECONDS = Number(process.env.RESET_PER_IP_WINDOW_SECONDS || "900");
 const PASSWORD_RESET_FROM_EMAIL = process.env.PASSWORD_RESET_FROM_EMAIL || "";
 const PASSWORD_RESET_REPLY_TO = process.env.PASSWORD_RESET_REPLY_TO || "";
 const PASSWORD_CHANGE_SUPPORT_EMAIL = process.env.PASSWORD_CHANGE_SUPPORT_EMAIL || "";
@@ -73,6 +76,66 @@ const invalidResetTokenResponse = () =>
     message: "Reset token is invalid or expired",
   });
 
+const rateLimitedResetResponse = () =>
+  jsonResponse(429, {
+    code: "RATE_LIMITED",
+    message: "Too many reset attempts. Please try again later.",
+  });
+
+const safeNumber = (value, fallback) =>
+  Number.isFinite(Number(value)) ? Number(value) : fallback;
+
+const checkAndRecordRateLimit = async ({ key, windowSeconds, maxAttempts }) => {
+  if (!RESET_RATE_LIMITS_TABLE_NAME || !key) {
+    return { allowed: true };
+  }
+
+  const normalizedWindowSeconds = safeNumber(windowSeconds, 900);
+  const normalizedMaxAttempts = safeNumber(maxAttempts, 10);
+  const now = Math.floor(Date.now() / 1000);
+
+  try {
+    const currentRecord = await dynamoDB
+      .get({
+        TableName: RESET_RATE_LIMITS_TABLE_NAME,
+        Key: { key },
+      })
+      .promise();
+
+    const item = currentRecord?.Item || null;
+    const previousCount = typeof item?.count === "number" ? item.count : 0;
+    const previousWindowStart = typeof item?.windowStart === "number" ? item.windowStart : 0;
+    const withinWindow = previousWindowStart > 0 && now - previousWindowStart < normalizedWindowSeconds;
+
+    if (withinWindow && previousCount >= normalizedMaxAttempts) {
+      return { allowed: false };
+    }
+
+    const nextWindowStart = withinWindow ? previousWindowStart : now;
+    const nextCount = withinWindow ? previousCount + 1 : 1;
+    const expiresAt = nextWindowStart + normalizedWindowSeconds + 300;
+
+    await dynamoDB
+      .put({
+        TableName: RESET_RATE_LIMITS_TABLE_NAME,
+        Item: {
+          key,
+          count: nextCount,
+          windowStart: nextWindowStart,
+          lastAttemptAt: now,
+          expiresAt,
+          updatedAt: new Date(now * 1000).toISOString(),
+        },
+      })
+      .promise();
+
+    return { allowed: true };
+  } catch (error) {
+    console.error("Reset password rate-limit check failed (fail-open):", error);
+    return { allowed: true };
+  }
+};
+
 const sendPasswordChangedConfirmationEmail = async ({ toEmail, username, changedAtIso }) => {
   if (!toEmail || !PASSWORD_RESET_FROM_EMAIL) {
     console.warn(
@@ -133,6 +196,16 @@ export const handler = async (event) => {
   const token = typeof parsedBody.token === "string" ? parsedBody.token.trim() : "";
   const newPassword = typeof parsedBody.newPassword === "string" ? parsedBody.newPassword : "";
   const confirmPassword = typeof parsedBody.confirmPassword === "string" ? parsedBody.confirmPassword : "";
+  const requestIp = extractIpAddress(event);
+
+  const perIpResult = await checkAndRecordRateLimit({
+    key: `reset:ip:${requestIp}`,
+    windowSeconds: RESET_PER_IP_WINDOW_SECONDS,
+    maxAttempts: RESET_PER_IP_MAX_ATTEMPTS,
+  });
+  if (!perIpResult.allowed) {
+    return rateLimitedResetResponse();
+  }
 
   if (!token || !newPassword || !confirmPassword) {
     return jsonResponse(400, {
@@ -217,7 +290,7 @@ export const handler = async (event) => {
               ExpressionAttributeValues: {
                 ":used": "used",
                 ":usedAt": nowIso,
-                ":consumedIp": extractIpAddress(event),
+                ":consumedIp": requestIp,
                 ":consumedUserAgent":
                   event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
                 ":active": "active",
