@@ -76,17 +76,21 @@ Marker legend:
 - [x] Implement forgot-password template with reset link and expiry note.
 	- Implemented in forgot Lambda using AWS SES payload (`subject/text/html`) and `RESET_URL_BASE?token=<tokenId.tokenSecret>`.
 - [ ] Implement password-changed confirmation email.
-- [ ] [YOU] Verify SES sender/domain identity and production access.
-- [ ] [YOU] Configure email provider env vars in Lambda (`PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`).
+- [x] [YOU] Verify SES sender/domain identity and production access.
+	- Verified sender identity and granted SES production access in `us-east-2`.
+- [x] [YOU] Configure email provider env vars in Lambda (`PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`).
+	- Configured and validated via successful forgot-password email delivery.
 - [ ] [YOU] Add monitoring for bounces/complaints.
 
 ## Frontend (React)
-- [ ] Add `Forgot password?` link on login page.
-- [ ] Create `/forgot-password` page and form.
-- [ ] Create `/reset-password` page and form.
-- [ ] Add token parsing + invalid/expired token UX.
+- [x] Add `Forgot password?` link on login page.
+- [x] Create `/forgot-password` page and form.
+- [x] Create `/reset-password` page and form.
+- [x] Add token parsing + invalid/expired token UX.
 - [ ] Add password strength guidance and confirmation checks.
+	- Confirmation checks are implemented; explicit strength guidance UI is still pending.
 - [ ] Add success redirect to login.
+	- Success screen currently provides a login link (not automatic redirect).
 
 ## Security & Abuse Prevention
 - [x] Ensure forgot-password endpoint does not reveal account existence.
@@ -100,14 +104,16 @@ Marker legend:
 - [ ] Unit tests for token generation/hash/expiry/single-use behavior.
 - [x] Integration tests for forgot/reset endpoints.
 	- Manual Lambda/API tests validated happy-path and invalid/expired token behavior.
-- [ ] E2E tests for happy path and failure states.
+- [x] E2E tests for happy path and failure states.
+	- Manual end-to-end verification completed (forgot email delivery, reset success, login with new password, reused token rejected).
 - [ ] Verify old sessions fail immediately after reset.
 - [ ] Verify rate limits and abuse controls trigger as expected.
 
 ## Rollout
 - [x] [YOU] Deploy backend and data changes first.
 - [x] [YOU] Validate in dev/staging with test accounts.
-- [ ] Enable frontend UI in staged rollout.
+- [x] Enable frontend UI in staged rollout.
+	- Minimal forgot/reset pages and routes are implemented and active.
 - [ ] [YOU] Monitor metrics/logs after release.
 - [ ] Prepare rollback plan and support FAQ.
 

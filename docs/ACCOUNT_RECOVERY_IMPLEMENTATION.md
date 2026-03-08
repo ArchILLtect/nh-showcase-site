@@ -9,7 +9,9 @@ Implement secure self-service password reset and account recovery for the existi
 - Forgot email wiring: AWS SES integration added in Lambda (`subject/text/html` reset email) and reset URL composition via `RESET_URL_BASE`.
 - Reset flow: composite token verification, single-use + expiry enforcement, password update, `passwordChangedAt`/`updatedAt` write, `tokenVersion` increment.
 - Implemented for testing and then disabled in normal operation: `RETURN_RESET_TOKEN_FOR_TESTING`.
-- Pending: SES sender/domain verification + production access + email monitoring, frontend forgot/reset pages, auth middleware enforcement for stale `tokenVersion` sessions.
+- SES sender verification and production access are complete; forgot-password email delivery validated in production mode.
+- Frontend minimal recovery UI is implemented (`/forgot-password`, `/reset-password`, login-page link).
+- Pending: email monitoring (bounces/complaints), password-changed confirmation email, and auth middleware enforcement for stale `tokenVersion` sessions.
 
 ## Scope
 - Add forgot-password and reset-password user flows.
@@ -174,7 +176,8 @@ Implementation state:
 - `tokenVersion` increment on reset is implemented.
 - Full stale-session enforcement by tokenVersion at auth-check time is pending.
 - Forgot email dispatch integration is implemented (AWS SES).
-- Remaining: SES sender/domain verification + production access, and password-changed confirmation email.
+- SES sender/domain verification and production access are complete.
+- Remaining: password-changed confirmation email, email observability hooks, and stale-session enforcement using `tokenVersion`.
 
 ## Rollout Plan
 1. Deploy backend data model and endpoints (dark launch).

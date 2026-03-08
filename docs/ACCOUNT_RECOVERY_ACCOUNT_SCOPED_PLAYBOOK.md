@@ -33,7 +33,7 @@ Response (always 200):
 Behavior:
 - Normalize `username` (`trim`) and `email` (`trim().toLowerCase()`).
 - Lookup user by `username` and compare normalized email.
-- If match: issue reset token (email send wiring is a separate pending step).
+- If match: issue reset token and send reset email.
 - If no match: return same generic response.
 
 ### POST `/reset-password`
