@@ -5,6 +5,7 @@ import AWS from "aws-sdk";
 const originalDocClientGet = AWS.DynamoDB.DocumentClient.prototype.get;
 const originalDocClientPut = AWS.DynamoDB.DocumentClient.prototype.put;
 const originalSesSendEmail = AWS.SES.prototype.sendEmail;
+const originalSqsSendMessage = AWS.SQS.prototype.sendMessage;
 const originalConsoleInfo = console.info;
 const originalConsoleError = console.error;
 
@@ -13,12 +14,14 @@ let mockState = {
     get: [],
     put: [],
     sendEmail: [],
+    sendMessage: [],
     infoLogs: [],
     errorLogs: [],
   },
   onGet: async () => ({}),
   onPut: async () => ({}),
   onSendEmail: async () => ({}),
+  onSendMessage: async () => ({}),
 };
 
 const setMockState = (overrides = {}) => {
@@ -27,12 +30,14 @@ const setMockState = (overrides = {}) => {
       get: [],
       put: [],
       sendEmail: [],
+      sendMessage: [],
       infoLogs: [],
       errorLogs: [],
     },
     onGet: async () => ({}),
     onPut: async () => ({}),
     onSendEmail: async () => ({}),
+    onSendMessage: async () => ({}),
     ...overrides,
   };
 };
@@ -66,6 +71,13 @@ AWS.SES.prototype.sendEmail = function mockSendEmail(params) {
   };
 };
 
+AWS.SQS.prototype.sendMessage = function mockSendMessage(params) {
+  mockState.calls.sendMessage.push(params);
+  return {
+    promise: () => mockState.onSendMessage(params),
+  };
+};
+
 const originalEnv = { ...process.env };
 
 const applyBaseEnv = () => {
@@ -78,6 +90,9 @@ const applyBaseEnv = () => {
   process.env.EMAIL_VERIFICATION_REPLY_TO = "nick@nickhanson.me";
   process.env.ENABLE_INTERNAL_ERROR_TEST = "false";
   delete process.env.EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME;
+  delete process.env.REGISTRATION_VERIFICATION_EMAIL_MODE;
+  delete process.env.REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT;
+  delete process.env.REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL;
 };
 
 const loadHandler = async () => {
@@ -93,6 +108,7 @@ test.after(() => {
   AWS.DynamoDB.DocumentClient.prototype.get = originalDocClientGet;
   AWS.DynamoDB.DocumentClient.prototype.put = originalDocClientPut;
   AWS.SES.prototype.sendEmail = originalSesSendEmail;
+  AWS.SQS.prototype.sendMessage = originalSqsSendMessage;
   console.info = originalConsoleInfo;
   console.error = originalConsoleError;
 });
@@ -106,7 +122,7 @@ test("register success returns 201 and verificationEmailSent=true", async () => 
     body: JSON.stringify({
       username: "integration_user_success",
       email: "integration-success@example.com",
-      password: "StrongPass123",
+      password: "StrongPass123!",
     }),
     headers: {
       "x-forwarded-for": "203.0.113.10",
@@ -170,7 +186,7 @@ test("duplicate username returns 409 USERNAME_EXISTS", async () => {
     body: JSON.stringify({
       username: "existing_user",
       email: "existing@example.com",
-      password: "StrongPass123",
+      password: "StrongPass123!",
     }),
     requestContext: {
       requestId: "req-duplicate",
@@ -192,7 +208,7 @@ test("invalid payload returns 400 VALIDATION_ERROR", async () => {
   const result = await handler({
     body: JSON.stringify({
       email: "missing-username@example.com",
-      password: "StrongPass123",
+      password: "StrongPass123!",
     }),
     requestContext: {
       requestId: "req-invalid",
@@ -232,7 +248,7 @@ test("throttled request returns 429 RATE_LIMITED", async () => {
     body: JSON.stringify({
       username: "throttle_user",
       email: "throttle@example.com",
-      password: "StrongPass123",
+      password: "StrongPass123!",
     }),
     headers: {
       "x-forwarded-for": "203.0.113.40",
@@ -290,7 +306,7 @@ test("post-create verification failure still returns 201 with verificationEmailS
     body: JSON.stringify({
       username: "post_create_fallback_user",
       email: "fallback@example.com",
-      password: "StrongPass123",
+      password: "StrongPass123!",
     }),
     requestContext: {
       requestId: "req-post-create-fallback",
@@ -310,4 +326,145 @@ test("post-create verification failure still returns 201 with verificationEmailS
   const usersPutCall = mockState.calls.put.find((call) => call.TableName === "Users");
   assert.ok(usersPutCall);
   assert.equal(mockState.calls.sendEmail.length, 0);
+});
+
+test("verification dispatch mode off skips token generation and email send", async () => {
+  applyBaseEnv();
+  process.env.REGISTRATION_VERIFICATION_EMAIL_MODE = "off";
+  setMockState();
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "rollout_off_user",
+      email: "rollout-off@example.com",
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-rollout-off",
+      http: { sourceIp: "203.0.113.55" },
+    },
+  });
+
+  assert.equal(result.statusCode, 201);
+  const payload = parseBody(result);
+  assert.equal(payload.verificationPending, true);
+  assert.equal(payload.verificationEmailSent, false);
+
+  const tokenPutCall = mockState.calls.put.find(
+    (call) => call.TableName === "EmailVerificationTokens",
+  );
+  assert.equal(tokenPutCall, undefined);
+  assert.equal(mockState.calls.sendEmail.length, 0);
+});
+
+test("post-create verification failure enqueues notification intent when queue configured", async () => {
+  applyBaseEnv();
+  process.env.REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL =
+    "https://sqs.us-east-2.amazonaws.com/010928199012/registration-notification-failures";
+
+  setMockState({
+    onPut: async (params) => {
+      if (params.TableName === "EmailVerificationTokens") {
+        throw new Error("token write failed");
+      }
+      return {};
+    },
+  });
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "queue_fallback_user",
+      email: "queue-fallback@example.com",
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-queue-fallback",
+      http: { sourceIp: "203.0.113.56" },
+    },
+  });
+
+  assert.equal(result.statusCode, 201);
+  const payload = parseBody(result);
+  assert.equal(payload.verificationPending, true);
+  assert.equal(payload.verificationEmailSent, false);
+
+  assert.equal(mockState.calls.sendMessage.length, 1);
+  assert.equal(
+    mockState.calls.sendMessage[0].QueueUrl,
+    "https://sqs.us-east-2.amazonaws.com/010928199012/registration-notification-failures",
+  );
+});
+
+test("password without symbol returns 400 VALIDATION_ERROR", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "no_symbol_user",
+      email: "no-symbol@example.com",
+      password: "StrongPass123",
+    }),
+    requestContext: {
+      requestId: "req-no-symbol",
+      http: { sourceIp: "203.0.113.60" },
+    },
+  });
+
+  assert.equal(result.statusCode, 400);
+  const payload = parseBody(result);
+  assert.equal(payload.code, "VALIDATION_ERROR");
+  assert.equal(payload.message, "password must include uppercase, lowercase, a number, and a symbol");
+});
+
+test("common weak password returns 400 VALIDATION_ERROR", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "weak_password_user",
+      email: "weak-password@example.com",
+      password: "Password123!",
+    }),
+    requestContext: {
+      requestId: "req-weak-password",
+      http: { sourceIp: "203.0.113.62" },
+    },
+  });
+
+  assert.equal(result.statusCode, 400);
+  const payload = parseBody(result);
+  assert.equal(payload.code, "VALIDATION_ERROR");
+  assert.equal(payload.message, "password is too common; choose a stronger password");
+});
+
+test("email longer than 254 chars returns 400 VALIDATION_ERROR", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const localPart = "a".repeat(249);
+  const longEmail = `${localPart}@x.com`;
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "long_email_user",
+      email: longEmail,
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-long-email",
+      http: { sourceIp: "203.0.113.61" },
+    },
+  });
+
+  assert.equal(result.statusCode, 400);
+  const payload = parseBody(result);
+  assert.equal(payload.code, "VALIDATION_ERROR");
+  assert.equal(payload.message, "email must be at most 254 characters");
 });
