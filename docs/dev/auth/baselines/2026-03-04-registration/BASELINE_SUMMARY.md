@@ -79,9 +79,10 @@ Use this file to summarize current-state findings before registration hardening 
 
 #### P1 (next short phase)
 - [x] Tighten IAM from `AmazonDynamoDBFullAccess` to least-privilege table-scoped actions required by registration.
-- [ ] Add `emailVerified`, `tokenVersion`, `passwordChangedAt`, and `updatedAt` fields for forward compatibility.
+- [x] Add `emailVerified`, `tokenVersion`, `passwordChangedAt`, and `updatedAt` fields for forward compatibility.
+	- Implemented in `lambda-functions/showcaseRegistration/index.mjs` for new registrations; publish/cutover required in AWS to make live.
 - [x] Define email identity policy (`username` unique, email reuse allowed) via [../../REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md](../../REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md).
-- [ ] Enable basic data resilience controls (at minimum PITR and/or scheduled backups).
+- [x] Enable basic data resilience controls (at minimum PITR and/or scheduled backups).
 - [x] Set CloudWatch log retention to cost-aware period (e.g., 7–14 days); minimal alerting for registration failures remains optional/deferred.
 
 ## Sign-off
@@ -94,3 +95,4 @@ Use this file to summarize current-state findings before registration hardening 
 - Cleanup closure update (2026-03-06): optional `UserEmailIndex` table removed, custom registration IAM narrowed to `Users` table only, and post-cleanup smoke tests remained green (`201` reused-email success, `409 USERNAME_EXISTS`, `400 VALIDATION_ERROR`).
 - Next auth execution playbook: implement account-scoped recovery (`username + email`) via [../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md](../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md).
 - Status update (2026-03-08): account recovery rollout is complete; remaining unchecked P1 registration items are optional follow-up work unless registration schema/data-resilience modernization is resumed.
+- Baseline wrap update (2026-03-08): registration baseline is functionally wrapped in-repo; remaining unchecked item is AWS data-resilience enablement (PITR and/or scheduled backups).
