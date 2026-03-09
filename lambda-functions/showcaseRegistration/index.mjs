@@ -4,6 +4,7 @@ import crypto from "crypto";
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const ses = new AWS.SES();
+const sqs = new AWS.SQS();
 const TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const EMAIL_VERIFICATION_TOKENS_TABLE_NAME =
   process.env.EMAIL_VERIFICATION_TOKENS_TABLE_NAME || "EmailVerificationTokens";
@@ -18,10 +19,46 @@ const REGISTER_PER_IP_WINDOW_SECONDS = Number(process.env.REGISTER_PER_IP_WINDOW
 const REGISTER_PER_EMAIL_MAX_ATTEMPTS = Number(process.env.REGISTER_PER_EMAIL_MAX_ATTEMPTS || "5");
 const REGISTER_PER_EMAIL_WINDOW_SECONDS = Number(process.env.REGISTER_PER_EMAIL_WINDOW_SECONDS || "3600");
 const REGISTER_EMAIL_COOLDOWN_SECONDS = Number(process.env.REGISTER_EMAIL_COOLDOWN_SECONDS || "60");
+const REGISTRATION_VERIFICATION_EMAIL_MODE = (
+  process.env.REGISTRATION_VERIFICATION_EMAIL_MODE || "on"
+).toLowerCase();
+const REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT = Number(
+  process.env.REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT || "100",
+);
+const REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL =
+  process.env.REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL || "";
 const USERNAME_REGEX = /^[A-Za-z0-9_-]{3,32}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_EMAIL_LENGTH = 254;
 const MIN_PASSWORD_LENGTH = 8;
+const COMMON_WEAK_PASSWORDS = new Set([
+  "password",
+  "password1",
+  "password123",
+  "qwerty",
+  "qwerty123",
+  "letmein",
+  "welcome",
+  "admin",
+  "administrator",
+  "iloveyou",
+  "abc123",
+  "12345678",
+  "123456789",
+  "1234567890",
+  "passw0rd",
+  "dragon",
+  "monkey",
+  "football",
+  "baseball",
+  "trustno1",
+]);
 const ENABLE_INTERNAL_ERROR_TEST = process.env.ENABLE_INTERNAL_ERROR_TEST === "true";
+
+const normalizePasswordForWeakCheck = (password) =>
+  String(password || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 
 const jsonResponse = (statusCode, payload) => ({
   statusCode,
@@ -47,6 +84,10 @@ const validatePayload = ({ username, email, password }) => {
     return "email format is invalid";
   }
 
+  if (email.length > MAX_EMAIL_LENGTH) {
+    return `email must be at most ${MAX_EMAIL_LENGTH} characters`;
+  }
+
   if (password.length < MIN_PASSWORD_LENGTH) {
     return `password must be at least ${MIN_PASSWORD_LENGTH} characters`;
   }
@@ -54,9 +95,15 @@ const validatePayload = ({ username, email, password }) => {
   const hasUpper = /[A-Z]/.test(password);
   const hasLower = /[a-z]/.test(password);
   const hasNumber = /\d/.test(password);
+  const hasSymbol = /[^A-Za-z0-9]/.test(password);
 
-  if (!hasUpper || !hasLower || !hasNumber) {
-    return "password must include uppercase, lowercase, and a number";
+  if (!hasUpper || !hasLower || !hasNumber || !hasSymbol) {
+    return "password must include uppercase, lowercase, a number, and a symbol";
+  }
+
+  const normalizedPassword = normalizePasswordForWeakCheck(password);
+  if (COMMON_WEAK_PASSWORDS.has(normalizedPassword)) {
+    return "password is too common; choose a stronger password";
   }
 
   return null;
@@ -80,6 +127,73 @@ const logEvent = (payload) => {
 
 const safeNumber = (value, fallback) =>
   Number.isFinite(Number(value)) ? Number(value) : fallback;
+
+const clampPercent = (value) => {
+  const numericValue = safeNumber(value, 100);
+  if (numericValue < 0) {
+    return 0;
+  }
+
+  if (numericValue > 100) {
+    return 100;
+  }
+
+  return numericValue;
+};
+
+const deterministicBucket = (value) => {
+  const hashHex = crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, 8);
+  return Number.parseInt(hashHex, 16) % 100;
+};
+
+const getVerificationDispatchDecision = ({ username, email }) => {
+  if (REGISTRATION_VERIFICATION_EMAIL_MODE === "off") {
+    return { enabled: false, reason: "mode_off" };
+  }
+
+  if (REGISTRATION_VERIFICATION_EMAIL_MODE === "canary") {
+    const canaryPercent = clampPercent(REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT);
+    const bucket = deterministicBucket(`${username.toLowerCase()}#${email}`);
+    return {
+      enabled: bucket < canaryPercent,
+      reason: bucket < canaryPercent ? "canary_enabled" : "canary_disabled",
+      bucket,
+      canaryPercent,
+    };
+  }
+
+  return { enabled: true, reason: "mode_on" };
+};
+
+const queueNotificationFailureIntent = async ({ username, email, requestId, errorCode }) => {
+  if (!REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL) {
+    return false;
+  }
+
+  const payload = {
+    type: "register_verification_email_failed",
+    username,
+    email,
+    requestId,
+    errorCode: errorCode || "unknown",
+    createdAt: new Date().toISOString(),
+  };
+
+  await sqs
+    .sendMessage({
+      QueueUrl: REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL,
+      MessageBody: JSON.stringify(payload),
+      MessageAttributes: {
+        eventType: {
+          DataType: "String",
+          StringValue: "REGISTER_VERIFICATION_EMAIL_FAILED",
+        },
+      },
+    })
+    .promise();
+
+  return true;
+};
 
 const checkAndRecordRateLimit = async ({ key, windowSeconds, maxAttempts, cooldownSeconds = 0 }) => {
   if (!EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME || !key) {
@@ -314,44 +428,56 @@ export const handler = async (event) => {
     userCreated = true;
 
     let verificationEmailSent = false;
+    const verificationDispatch = getVerificationDispatchDecision({ username, email });
     try {
-      const tokenSecret = crypto.randomBytes(32).toString("base64url");
-      const tokenId = crypto.randomUUID();
-      const tokenHash = hashTokenSecret(tokenSecret);
-      const verifyToken = `${tokenId}.${tokenSecret}`;
-      const createdAtDate = new Date();
-      const expiresAt = Math.floor(createdAtDate.getTime() / 1000) + EMAIL_VERIFY_TOKEN_TTL_MINUTES * 60;
+      if (verificationDispatch.enabled) {
+        const tokenSecret = crypto.randomBytes(32).toString("base64url");
+        const tokenId = crypto.randomUUID();
+        const tokenHash = hashTokenSecret(tokenSecret);
+        const verifyToken = `${tokenId}.${tokenSecret}`;
+        const createdAtDate = new Date();
+        const expiresAt = Math.floor(createdAtDate.getTime() / 1000) + EMAIL_VERIFY_TOKEN_TTL_MINUTES * 60;
 
-      await dynamoDB
-        .put({
-          TableName: EMAIL_VERIFICATION_TOKENS_TABLE_NAME,
-          Item: {
-            tokenId,
-            username,
-            emailNormalized: email,
-            tokenHash,
-            status: "active",
-            createdAt: createdAtDate.toISOString(),
-            expiresAt,
-            requestIp:
-              event?.headers?.["x-forwarded-for"]?.split(",")?.[0]?.trim() ||
-              event?.requestContext?.http?.sourceIp ||
-              "unknown",
-            requestUserAgent:
-              event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
-          },
-          ConditionExpression: "attribute_not_exists(tokenId)",
-        })
-        .promise();
+        await dynamoDB
+          .put({
+            TableName: EMAIL_VERIFICATION_TOKENS_TABLE_NAME,
+            Item: {
+              tokenId,
+              username,
+              emailNormalized: email,
+              tokenHash,
+              status: "active",
+              createdAt: createdAtDate.toISOString(),
+              expiresAt,
+              requestIp:
+                event?.headers?.["x-forwarded-for"]?.split(",")?.[0]?.trim() ||
+                event?.requestContext?.http?.sourceIp ||
+                "unknown",
+              requestUserAgent:
+                event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
+            },
+            ConditionExpression: "attribute_not_exists(tokenId)",
+          })
+          .promise();
 
-      await sendVerificationEmail({
-        toEmail: email,
-        username,
-        verifyToken,
-        expiresMinutes: EMAIL_VERIFY_TOKEN_TTL_MINUTES,
-      });
+        await sendVerificationEmail({
+          toEmail: email,
+          username,
+          verifyToken,
+          expiresMinutes: EMAIL_VERIFY_TOKEN_TTL_MINUTES,
+        });
 
-      verificationEmailSent = true;
+        verificationEmailSent = true;
+      } else {
+        logEvent({
+          event: "REGISTER_VERIFICATION_SKIPPED",
+          requestId,
+          accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+          reason: verificationDispatch.reason,
+          canaryPercent: verificationDispatch.canaryPercent,
+          canaryBucket: verificationDispatch.bucket,
+        });
+      }
     } catch (verificationError) {
       logEvent({
         event: "REGISTER_VERIFICATION_POST_CREATE_FAILED",
@@ -359,6 +485,31 @@ export const handler = async (event) => {
         accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
         errorCode: verificationError?.code || "unknown",
       });
+
+      try {
+        const queued = await queueNotificationFailureIntent({
+          username,
+          email,
+          requestId,
+          errorCode: verificationError?.code,
+        });
+        if (queued) {
+          logEvent({
+            event: "REGISTER_NOTIFICATION_FAILURE_ENQUEUED",
+            requestId,
+            accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+          });
+        }
+      } catch (queueError) {
+        logEvent({
+          event: "REGISTER_NOTIFICATION_FAILURE_ENQUEUE_FAILED",
+          requestId,
+          accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+          errorCode: queueError?.code || "unknown",
+        });
+        console.error("Failed to enqueue registration notification failure:", queueError);
+      }
+
       console.error("Post-registration verification setup failed:", verificationError);
     }
 
@@ -368,6 +519,8 @@ export const handler = async (event) => {
       ipHash: hashForLog(requestIp),
       accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
       verificationEmailSent,
+      verificationDispatchMode: REGISTRATION_VERIFICATION_EMAIL_MODE,
+      verificationDispatchReason: verificationDispatch.reason,
     });
 
     return jsonResponse(201, {
