@@ -8,7 +8,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 
 ## Scope for This Phase
 - Add email verification for new accounts.
-- Gate login/access for unverified accounts.
+- Allow login for unverified accounts and encourage verification in-app.
 - Complete remaining registration hardening items that were deferred.
 
 ## Phase A: Data + Contract Preparation
@@ -19,13 +19,14 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
   - `POST /register` (returns verification-pending state)
   - `POST /verify-email` (token consume)
   - optional `POST /resend-verification`
-- [x] Document login behavior for unverified users (recommended: block login with safe `EMAIL_NOT_VERIFIED` response).
+- [x] Document login behavior for unverified users (current policy: allow login, show dismissible in-app verification guidance, and gate future sensitive actions only).
   - See Phase A spec: `REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md`.
 
 ## Phase B: Backend Implementation
-- [ ] Update registration lambda to create unverified users by default (`emailVerified=false`).
-- [ ] Generate single-use verification token and persist hash + expiry metadata.
-- [ ] Send verification email via SES with verification link.
+- Status note: initial backend scaffolds exist in `lambda-functions/showcaseVerifyEmail/` and `lambda-functions/showcaseResendVerification/`; API route wiring + deploy validation still pending.
+- [x] Update registration lambda to create unverified users by default (`emailVerified=false`).
+- [x] Generate single-use verification token and persist hash + expiry metadata.
+- [x] Send verification email via SES with verification link.
 - [ ] Implement verify-email endpoint to consume token and set `emailVerified=true`.
 - [ ] Add resend-verification path with cooldown/rate limiting.
 - [ ] Ensure all responses are enumeration-safe and non-sensitive.
@@ -33,8 +34,10 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 ## Phase C: Frontend UX
 - [ ] Show post-registration "check your email" confirmation state.
 - [ ] Add verification landing page/route to process verification link.
-- [ ] Add resend verification UI with cooldown messaging.
-- [ ] Handle login attempt for unverified users with clear next-step guidance.
+- [x] Add resend verification UI with cooldown messaging.
+  - Implemented as a dismissible global banner for logged-in users with `emailVerified=false`.
+- [x] Handle login attempt for unverified users with clear next-step guidance.
+  - Login remains allowed; guidance is shown in the same dismissible banner.
 
 ## Phase D: Security + Abuse Controls
 - [ ] Add per-IP and per-identifier throttling for register + resend verification.
@@ -49,7 +52,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 
 ## Validation Checklist
 - [ ] Register new user -> account created unverified + verification email sent.
-- [ ] Login before verification -> blocked with expected response.
+- [ ] Login before verification -> allowed; verification guidance banner is shown.
 - [ ] Verify with valid token -> success, token becomes unusable.
 - [ ] Reuse same verification token -> rejected.
 - [ ] Expired token -> rejected; resend flow issues new token.
@@ -57,7 +60,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - [ ] Post-verification login succeeds.
 
 ## Done Criteria
-- [ ] Unverified accounts cannot authenticate as fully active users.
+- [ ] Unverified accounts are guided to verify (without hard-blocking baseline login during current phase).
 - [ ] Verification flow is reliable (send, consume, resend) and abuse-resistant.
 - [ ] Deferred resilience items (PITR/backups + baseline alerting) are addressed or explicitly deferred with rationale.
 - [ ] Runbook/evidence entry added after production-like validation.

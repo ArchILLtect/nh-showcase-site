@@ -7,6 +7,8 @@ Purpose: provide one fast, root-level reference for the current authentication a
 ## What Is Live
 - Custom auth stack is active (no third-party auth provider).
 - Registration and login are working with DynamoDB-backed users.
+- Registration now creates accounts as unverified and sends verification email tokens.
+- Unverified users can still log in during current phase and see an in-app verification reminder with resend action.
 - Password recovery is fully implemented and validated end-to-end.
 - Session invalidation after password reset is enforced.
 

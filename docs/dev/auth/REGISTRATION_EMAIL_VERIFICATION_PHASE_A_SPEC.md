@@ -13,7 +13,8 @@ Purpose: lock the data model, API contracts, and AWS configuration requirements 
 ## Compatibility Policy
 - Existing/legacy users without `emailVerified` are treated as verified (`true`) during rollout.
 - New registrations are created with `emailVerified=false`.
-- Login block applies only when `emailVerified === false`.
+- Login remains allowed when `emailVerified === false` during current phase.
+- Unverified users are guided with a dismissible in-app banner and resend action.
 
 ## Data Model
 
@@ -126,16 +127,12 @@ Behavior:
 
 ## Login Behavior for Unverified Users
 - On login, after credential match:
-  - If `user.emailVerified === false`: return `403 EMAIL_NOT_VERIFIED`.
+  - If `user.emailVerified === false`: allow login and include `emailVerified=false` in token/user payload.
+  - Frontend shows dismissible verification guidance banner with resend action.
   - If `emailVerified` is missing (legacy account), treat as verified during rollout.
 
-Suggested response:
-```json
-{
-  "code": "EMAIL_NOT_VERIFIED",
-  "message": "Please verify your email before logging in."
-}
-```
+Future tightening option:
+- Later, if product needs stronger controls, gate only sensitive actions first before considering hard login blocking.
 
 ## Lambda Environment Variables
 
@@ -191,7 +188,7 @@ Suggested response:
 
 ## Rollout Notes
 - Start with legacy-compatible login behavior (missing `emailVerified` treated as verified).
-- Enforce verification only for newly created accounts first.
+- Keep baseline login accessible for newly created unverified accounts during this phase.
 - After migration/backfill decision, optionally tighten behavior for old accounts.
 
 ## Phase A Exit Criteria
