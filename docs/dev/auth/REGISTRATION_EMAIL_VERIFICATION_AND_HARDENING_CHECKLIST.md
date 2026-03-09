@@ -76,6 +76,8 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - [x] Rate limiting triggers on repeated resend/register attempts.
   - Confirmed in Lambda validation: repeated same registration identity returns 429 RATE_LIMITED.
 - [x] Register with common weak password -> rejected with `400 VALIDATION_ERROR`.
+- [x] Queue-backed post-create notification failure fallback works as designed.
+  - Confirmed via controlled failure and restore tests (201 fail-open with `verificationEmailSent=false`, `REGISTER_NOTIFICATION_FAILURE_ENQUEUED`, then restored success with `verificationEmailSent=true`); see `REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md` validation snapshot.
 - [x] Post-verification login succeeds.
 
 ## Done Criteria

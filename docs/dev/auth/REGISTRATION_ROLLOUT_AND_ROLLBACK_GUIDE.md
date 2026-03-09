@@ -157,3 +157,73 @@ Path B (queue enabled later):
 1. Lambda -> `showcaseRegistration` -> Configuration -> Environment variables.
 2. Set `REGISTRATION_VERIFICATION_EMAIL_MODE=off` and `REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT=0`.
 3. Save and re-test one registration.
+
+## Enable `REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL` Now (Hands-On)
+Goal: enable low-cost failure-intent queueing so post-create verification failures are captured for retry/inspection.
+
+### Step 1: Create SQS queue (2 minutes)
+1. AWS Console -> SQS -> Create queue.
+2. Type: Standard.
+3. Name: `registration-notification-failures`.
+4. Keep defaults (SSE enabled).
+5. Create queue and copy Queue URL + ARN.
+
+### Step 2: Wire Lambda env var (1 minute)
+1. AWS Console -> Lambda -> `showcaseRegistration` -> Configuration -> Environment variables -> Edit.
+2. Set `REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL` to the copied Queue URL.
+3. Save.
+
+### Step 3: Add IAM permission (1 minute)
+1. IAM -> Roles -> `showcaseRegistration-role-7avd1hce` (or current execution role).
+2. Edit policy and ensure this statement exists with your queue ARN:
+
+```json
+{
+  "Sid": "AllowRegistrationNotificationFailureQueueSend",
+  "Effect": "Allow",
+  "Action": ["sqs:SendMessage"],
+  "Resource": "arn:aws:sqs:us-east-2:010928199012:registration-notification-failures"
+}
+```
+
+3. Save policy.
+
+### Step 4: Validate end-to-end (3-5 minutes)
+Use a temporary, controlled failure to exercise queueing (recommended in low-traffic window):
+1. Lambda -> `showcaseRegistration` -> Environment variables.
+2. Temporarily change `EMAIL_VERIFICATION_TOKENS_TABLE_NAME` to a non-existent table name (for one test only).
+3. Run one registration test event.
+4. Expected results:
+   - API response still `201` with `verificationEmailSent=false`.
+   - CloudWatch logs include:
+     - `REGISTER_VERIFICATION_POST_CREATE_FAILED`
+     - `REGISTER_NOTIFICATION_FAILURE_ENQUEUED`
+   - SQS queue depth increments by 1 message.
+5. Immediately restore the correct `EMAIL_VERIFICATION_TOKENS_TABLE_NAME` value.
+
+### Step 5: Return to normal operation
+- Keep queue URL configured if you want ongoing fallback capture.
+- Or remove `REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL` and IAM statement to return to logs-only mode.
+
+Companion next step:
+- For a minimal consumer implementation, follow `REGISTRATION_NOTIFICATION_FAILURES_CONSUMER_MVP.md`.
+
+Safety note:
+- Do not leave `EMAIL_VERIFICATION_TOKENS_TABLE_NAME` intentionally broken after validation.
+
+## Validation Evidence Snapshot (2026-03-09)
+- Controlled failure test (temporary bad `EMAIL_VERIFICATION_TOKENS_TABLE_NAME`):
+  - Lambda response: `201` with `verificationEmailSent=false`.
+  - Invocation request id: `30a52dcf-8f15-40e3-9c2d-92f4ba5e8085`.
+  - Observed events:
+    - `REGISTER_VERIFICATION_POST_CREATE_FAILED`
+    - `REGISTER_NOTIFICATION_FAILURE_ENQUEUED`
+    - `REGISTER_SUCCEEDED` with `verificationEmailSent=false`
+- Restore test (real table name restored):
+  - Lambda response: `201` with `verificationEmailSent=true`.
+  - Invocation request id: `d8d17550-4429-49df-b4ca-eda02cd47e49`.
+  - Observed event: `REGISTER_SUCCEEDED` with `verificationEmailSent=true` and `verificationDispatchMode=canary`.
+  - Verification email delivery confirmed.
+
+Result:
+- Normal registration verification path and queue-backed fallback path were both validated successfully in the same deployment window.
