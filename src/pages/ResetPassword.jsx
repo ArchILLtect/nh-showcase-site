@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { trackVisit } from "../utils/visitTracker";
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
 const ResetPassword = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState(searchParams.get("token") || "");
   const [newPassword, setNewPassword] = useState("");
@@ -15,10 +16,27 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const hasMinLength = newPassword.length >= 8;
+  const hasUppercase = /[A-Z]/.test(newPassword);
+  const hasLowercase = /[a-z]/.test(newPassword);
+  const hasNumber = /\d/.test(newPassword);
+
   useEffect(() => {
     document.title = "Reset Password | Nick Hanson";
     trackVisit();
   }, []);
+
+  useEffect(() => {
+    if (!success) {
+      return undefined;
+    }
+
+    const timeoutId = setTimeout(() => {
+      navigate("/login");
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [navigate, success]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,6 +82,9 @@ const ResetPassword = () => {
         {success ? (
           <div className="text-center">
             <p className="text-green-600 dark:text-green-400 mb-4">Password reset successful.</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Redirecting to login in 3 seconds...
+            </p>
             <Link to="/login" className="text-blue-500 hover:underline dark:text-blue-400">
               Go to Login
             </Link>
@@ -97,6 +118,20 @@ const ResetPassword = () => {
                 className="w-full px-4 py-2 border rounded dark:bg-gray-700 text-gray-700 dark:text-gray-100"
                 required
               />
+              <ul className="mt-2 text-xs space-y-1 text-gray-600 dark:text-gray-300">
+                <li className={hasMinLength ? "text-green-600 dark:text-green-400" : ""}>
+                  At least 8 characters
+                </li>
+                <li className={hasUppercase ? "text-green-600 dark:text-green-400" : ""}>
+                  At least 1 uppercase letter
+                </li>
+                <li className={hasLowercase ? "text-green-600 dark:text-green-400" : ""}>
+                  At least 1 lowercase letter
+                </li>
+                <li className={hasNumber ? "text-green-600 dark:text-green-400" : ""}>
+                  At least 1 number
+                </li>
+              </ul>
             </div>
             <div className="mb-4">
               <label htmlFor="confirmPassword" className="block mb-2 text-gray-700 dark:text-gray-300">
