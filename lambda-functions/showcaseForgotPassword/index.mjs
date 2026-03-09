@@ -42,6 +42,9 @@ const extractIpAddress = (event) => {
 const hashResetTokenSecret = (tokenSecret) =>
   crypto.createHash("sha256").update(`${tokenSecret}${TOKEN_HASH_PEPPER}`).digest("hex");
 
+const hashForLog = (value) =>
+  crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, 12);
+
 const genericForgotPasswordResponse = () =>
   jsonResponse(200, {
     message: GENERIC_FORGOT_PASSWORD_MESSAGE,
@@ -177,6 +180,7 @@ export const handler = async (event) => {
   const username = typeof parsedBody.username === "string" ? parsedBody.username.trim() : "";
   const email = typeof parsedBody.email === "string" ? parsedBody.email.trim().toLowerCase() : "";
   const requestIp = extractIpAddress(event);
+  const requestId = event?.requestContext?.requestId || "unknown";
 
   if (!username || !email) {
     return genericForgotPasswordResponse();
@@ -188,6 +192,15 @@ export const handler = async (event) => {
     maxAttempts: FORGOT_PER_IP_MAX_ATTEMPTS,
   });
   if (!perIpResult.allowed) {
+    console.info(
+      JSON.stringify({
+        event: "FORGOT_PASSWORD_RATE_LIMITED",
+        scope: "ip",
+        reason: perIpResult.reason || "unknown",
+        requestId,
+        ipHash: hashForLog(requestIp),
+      }),
+    );
     return genericForgotPasswordResponse();
   }
 
@@ -199,6 +212,15 @@ export const handler = async (event) => {
     cooldownSeconds: FORGOT_ACCOUNT_COOLDOWN_SECONDS,
   });
   if (!perAccountResult.allowed) {
+    console.info(
+      JSON.stringify({
+        event: "FORGOT_PASSWORD_RATE_LIMITED",
+        scope: "account",
+        reason: perAccountResult.reason || "unknown",
+        requestId,
+        accountHash: hashForLog(normalizedAccountKey),
+      }),
+    );
     return genericForgotPasswordResponse();
   }
 
@@ -214,6 +236,14 @@ export const handler = async (event) => {
     const storedEmail = typeof user?.email === "string" ? user.email.trim().toLowerCase() : "";
 
     if (!user || storedEmail !== email) {
+      console.info(
+        JSON.stringify({
+          event: "FORGOT_PASSWORD_REQUEST_REJECTED",
+          reason: "account_mismatch",
+          requestId,
+          accountHash: hashForLog(normalizedAccountKey),
+        }),
+      );
       return genericForgotPasswordResponse();
     }
 
@@ -249,6 +279,14 @@ export const handler = async (event) => {
       resetToken,
       expiresMinutes: RESET_TOKEN_TTL_MINUTES,
     });
+
+    console.info(
+      JSON.stringify({
+        event: "FORGOT_PASSWORD_EMAIL_SENT",
+        requestId,
+        accountHash: hashForLog(normalizedAccountKey),
+      }),
+    );
 
     if (RETURN_RESET_TOKEN_FOR_TESTING) {
       return jsonResponse(200, {
