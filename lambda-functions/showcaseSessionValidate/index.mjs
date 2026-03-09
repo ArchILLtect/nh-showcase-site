@@ -107,6 +107,8 @@ export const handler = async (event) => {
         username,
         role: typeof user.role === "string" ? user.role : "user",
         tokenVersion: currentTokenVersion,
+        emailVerified:
+          typeof user.emailVerified === "boolean" ? user.emailVerified : true,
         passwordChangedAt: user.passwordChangedAt || null,
       },
     });
