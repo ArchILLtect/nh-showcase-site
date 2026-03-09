@@ -13,6 +13,8 @@ Use this guide to configure Amazon SES for forgot-password email delivery in thi
 - SES production access: granted (`us-east-2`).
 - Lambda SES IAM send policy: applied and validated.
 - Forgot-password delivery test: successful end-to-end.
+- Password-changed confirmation email: successful end-to-end.
+- SES bounce/complaint alerting: deferred (cost-aware), tracked in TODO backlog.
 
 ## 1) Confirm AWS/SES starting point
 1. Sign in to AWS Console.

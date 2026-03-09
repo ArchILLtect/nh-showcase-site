@@ -10,9 +10,13 @@ Implement secure self-service password reset and account recovery for the existi
 - Reset flow: composite token verification, single-use + expiry enforcement, password update, `passwordChangedAt`/`updatedAt` write, `tokenVersion` increment.
 - Implemented for testing and then disabled in normal operation: `RETURN_RESET_TOKEN_FOR_TESTING`.
 - SES sender verification and production access are complete; forgot-password email delivery validated in production mode.
+- Password-changed confirmation email is implemented and validated.
 - Frontend minimal recovery UI is implemented (`/forgot-password`, `/reset-password`, login-page link).
 - Session invalidation enforcement is implemented and validated via `POST /session/validate` and protected-route checks.
-- Pending: email monitoring (bounces/complaints) and rate-limiting/abuse controls.
+- Rate-limiting and abuse controls are implemented and validated (account cooldown + per-account and per-IP limits) with DynamoDB-backed counters.
+- Structured recovery logs are implemented and validated in CloudWatch (`FORGOT_PASSWORD_EMAIL_SENT`, `FORGOT_PASSWORD_RATE_LIMITED`, `FORGOT_PASSWORD_REQUEST_REJECTED`).
+- CloudWatch log retention configured to 2 weeks for related log groups.
+- Remaining (deferred/cost-aware): SES bounce/complaint alerting via CloudWatch Alarms + SNS.
 
 ## Scope
 - Add forgot-password and reset-password user flows.
@@ -41,7 +45,7 @@ Out of scope (for initial release):
 6. Frontend submits token + new password.
 7. Backend verifies token, applies password policy, updates password hash, and marks token used.
 8. User sees success message and is redirected to login.
-9. Optional confirmation email is sent once email wiring is enabled.
+9. Password-changed confirmation email is sent after successful reset.
 
 ## API Design
 
@@ -156,7 +160,7 @@ Password reset confirmation email:
 - Add `Forgot password?` link to new route `/forgot-password`.
 
 ### New page: `/forgot-password`
-- Single input for username/email.
+- Two required inputs: username and email.
 - Always show generic success banner after submit.
 - Include resend cooldown text.
 
@@ -178,7 +182,9 @@ Implementation state:
 - Full stale-session enforcement by tokenVersion at auth-check time is implemented (`POST /session/validate` + frontend protected-route validation).
 - Forgot email dispatch integration is implemented (AWS SES).
 - SES sender/domain verification and production access are complete.
-- Remaining: email observability hooks and abuse controls (rate limits/cooldowns).
+- Abuse controls are implemented (per-IP, per-account, and cooldown limits).
+- Recovery flow observability logs are implemented in Lambda and validated in CloudWatch.
+- Remaining: SES deliverability alarms/notifications (deferred for cost control).
 
 ## Rollout Plan
 1. Deploy backend data model and endpoints (dark launch).
@@ -198,7 +204,9 @@ Implementation state:
 
 ## Validated Outcomes (Current)
 - Forgot endpoint returns generic `200` and writes hashed reset token records to `PasswordResetTokens`.
+- Forgot endpoint sends one reset email, then correctly rate-limits repeated requests using account cooldown and IP limits.
 - Reset endpoint accepts valid composite token (`tokenId.tokenSecret`) and returns `200`.
 - Reset endpoint rejects reused/invalid/expired tokens with `400 INVALID_OR_EXPIRED_TOKEN`.
 - `passwordChangedAt` is written and password login with new credential succeeds.
+- Password-changed confirmation email is delivered after successful reset.
 - Session validation endpoint rejects stale sessions after reset and protected routes redirect to login for invalidated sessions.

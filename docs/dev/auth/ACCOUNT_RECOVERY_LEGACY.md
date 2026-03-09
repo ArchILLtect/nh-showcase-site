@@ -3,6 +3,13 @@
 ## Purpose
 Identify compatibility and migration risks when introducing password reset/account recovery into an existing authentication system.
 
+## Current Resolution Snapshot (2026-03-08)
+- Implemented: account-scoped recovery (`username + email`), reset token hashing + TTL + single-use, and generic enumeration-safe forgot responses.
+- Implemented: session invalidation after reset via `tokenVersion` and server-side `POST /session/validate` enforcement.
+- Implemented: password-changed confirmation email and structured CloudWatch recovery logs.
+- Implemented: DynamoDB-backed abuse controls (per-IP/per-account limits + cooldown).
+- Remaining optional hardening: SES bounce/complaint alerting automation (deferred for cost control).
+
 ## Legacy Risk Categories
 
 ### 1) Identity Quality Risks

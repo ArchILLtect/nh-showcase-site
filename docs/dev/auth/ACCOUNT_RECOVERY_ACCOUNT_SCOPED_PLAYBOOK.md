@@ -2,6 +2,13 @@
 
 Purpose: implement forgot/reset flows safely when multiple accounts may share the same email.
 
+## Status Snapshot (2026-03-08)
+- Account-scoped recovery is implemented (`username + email`) and deployed.
+- Session invalidation is implemented via `tokenVersion` + `POST /session/validate`.
+- Forgot/reset rate limiting is implemented and validated (account cooldown + per-account + per-IP).
+- Password-changed confirmation email is implemented and validated.
+- Remaining optional ops hardening: SES bounce/complaint alerting.
+
 ## Policy Context
 - Registration is username-unique.
 - Multiple accounts can use the same email.
@@ -66,6 +73,7 @@ Response:
 - Rate limit by IP and by username.
 - Add cooldown per `(username,email)` pair.
 - Keep generic responses to reduce account-enumeration risk.
+- Capture structured log events for allow/deny decisions to support troubleshooting.
 
 ## Session Invalidation
 - On successful reset:
@@ -81,7 +89,10 @@ Response:
 4. Monitor reset success/failure and abuse metrics.
 
 ## Required Smoke Tests
+- First valid forgot request sends email, then immediate repeats are blocked by cooldown.
+- High-frequency forgot requests from same client trigger IP-based limiter.
 - Reused/expired/invalid token -> `400 INVALID_OR_EXPIRED_TOKEN`.
+- Successful reset invalidates previously active sessions.
 
 ## Exit Criteria
 - Recovery remains enumeration-safe.
