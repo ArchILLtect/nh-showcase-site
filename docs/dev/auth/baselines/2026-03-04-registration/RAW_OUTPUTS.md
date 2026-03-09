@@ -4,37 +4,82 @@ Paste command outputs here (or reference exported JSON files in this folder).
 
 ## AWS Identity
 ```text
-<aws sts get-caller-identity output>
+Profile/account in use at capture time:
+- AWS account/profile: NickHansonSr - 010928199012
+- Region: us-east-2
+- Capture date: 2026-03-04
 ```
 
 ## DynamoDB
 ```text
-<describe-table / backups / ttl key excerpts>
+Table: Users
+- Key schema: username (String) partition key; no sort key
+- GSIs/LSIs: none configured
+- Billing mode: on-demand
+- PITR: Off
+- TTL: Off
+- Streams: Off
+- Encryption: AWS owned key
+- Deletion protection: Off
+- Backups shown: none on-demand at capture time
 ```
 
 ## API Gateway
 ```text
-<get-routes / get-integrations / get-stages excerpts>
+API: ShowcaseRegisterAPI (u7fyurbrjc)
+- Routes: POST /login, POST /register, POST /tracking
+- Stage: $default (auto-deploy enabled)
+- Invoke URL: https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com
+- /register integration: Lambda showcaseRegistration, payload format 2.0, timeout 30000 ms
+- CORS: POST allowed; headers include content-type, authorization
+- Stage throttling overrides: not configured
+- Account throttling: burst 5000, rate 10000
 ```
 
 ## Lambda
 ```text
-<get-function / get-function-configuration / get-policy excerpts>
+Function: showcaseRegistration
+- Runtime: Node.js 22.x
+- Handler: index.handler
+- Architecture: x86_64
+- Memory: 128 MB
+- Timeout: 3 s
+- Ephemeral storage: 512 MB
+- Layers: none
+- Env vars: none configured at baseline capture
+- Runtime update mode: Auto
 ```
 
 ## IAM
 ```text
-<role + policies excerpts>
+Execution role: showcaseRegistration-role-7avd1hce
+
+Baseline posture at capture:
+- Managed policy attached: AmazonDynamoDBFullAccess (broad)
+- Logging policy: AWSLambdaBasicExecutionRole
+- Lambda resource policy allows API Gateway invoke
+
+Recorded later in same baseline runbook:
+- P1 IAM cutover completed
+- Attached custom least-privilege PutItem policy for Users table
+- Detached AmazonDynamoDBFullAccess
 ```
 
 ## CloudWatch Logs
 ```text
-<log group + metric filters excerpts>
+Log group: /aws/lambda/showcaseRegistration
+- Retention at baseline capture: Never expire
+- Metric filters: 0
+- Subscription filters: 0
+- Invocation/runtime report lines present
+
+Recorded later in project hardening:
+- Auth/recovery log retention standardized to 2 weeks
 ```
 
 ## Functional Test Notes
 ```text
-<manual test request/response snapshots>
+See "2026-03-04 Registration smoke results (user-run)" section below for captured outcomes and response examples.
 ```
 
 ### 2026-03-04 Registration smoke results (user-run)
