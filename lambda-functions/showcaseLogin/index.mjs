@@ -77,6 +77,8 @@ export const handler = async (event) => {
 
     const tokenVersion = Number.isInteger(user.tokenVersion) ? user.tokenVersion : 0;
     const role = typeof user.role === "string" ? user.role : "user";
+    const emailVerified =
+      typeof user.emailVerified === "boolean" ? user.emailVerified : true;
 
     const token = jwt.sign(
       {
@@ -84,6 +86,7 @@ export const handler = async (event) => {
         username,
         role,
         tokenVersion,
+        emailVerified,
       },
       JWT_SECRET,
       { expiresIn: JWT_EXPIRES_IN },
@@ -97,6 +100,7 @@ export const handler = async (event) => {
         email: user.email || "",
         knownIps: Array.isArray(user.knownIps) ? user.knownIps : [],
         tokenVersion,
+        emailVerified,
         passwordChangedAt: user.passwordChangedAt || null,
       },
     });
