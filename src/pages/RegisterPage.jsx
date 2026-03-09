@@ -84,6 +84,35 @@ import axios from "axios";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
+const MAX_EMAIL_LENGTH = 254;
+const MIN_PASSWORD_LENGTH = 8;
+const COMMON_WEAK_PASSWORDS = new Set([
+  "password",
+  "password1",
+  "password123",
+  "qwerty",
+  "qwerty123",
+  "letmein",
+  "welcome",
+  "admin",
+  "administrator",
+  "iloveyou",
+  "abc123",
+  "12345678",
+  "123456789",
+  "1234567890",
+  "passw0rd",
+  "dragon",
+  "monkey",
+  "football",
+  "baseball",
+  "trustno1",
+]);
+
+const normalizePasswordForWeakCheck = (password) =>
+  String(password || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
@@ -108,6 +137,33 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = Date.now();
+
+    const normalizedEmail = formData.email.trim().toLowerCase();
+    const hasUpper = /[A-Z]/.test(formData.password);
+    const hasLower = /[a-z]/.test(formData.password);
+    const hasNumber = /\d/.test(formData.password);
+    const hasSymbol = /[^A-Za-z0-9]/.test(formData.password);
+
+    if (!normalizedEmail || normalizedEmail.length > MAX_EMAIL_LENGTH) {
+      alert(`Email must be at most ${MAX_EMAIL_LENGTH} characters.`);
+      return;
+    }
+
+    if (formData.password.length < MIN_PASSWORD_LENGTH) {
+      alert(`Password must be at least ${MIN_PASSWORD_LENGTH} characters.`);
+      return;
+    }
+
+    if (!hasUpper || !hasLower || !hasNumber || !hasSymbol) {
+      alert("Password must include uppercase, lowercase, a number, and a symbol.");
+      return;
+    }
+
+    const normalizedPassword = normalizePasswordForWeakCheck(formData.password);
+    if (COMMON_WEAK_PASSWORDS.has(normalizedPassword)) {
+      alert("Password is too common. Please choose a stronger password.");
+      return;
+    }
     
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
@@ -116,6 +172,7 @@ const RegisterPage = () => {
 
     const dataToSend = {
       ...formData,
+      email: normalizedEmail,
       role: "user"
     };
 
@@ -179,6 +236,7 @@ const RegisterPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                maxLength={MAX_EMAIL_LENGTH}
                 className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-gray-900 caret-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:caret-gray-100"
                 required
               />
