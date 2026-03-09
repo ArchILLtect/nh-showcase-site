@@ -23,6 +23,7 @@
 
 ## Auth / Account Recovery
 - [ ] Add email confirmation during account creation (send verification email + require confirmation before account activation/login).
+- [ ] Deferred (cost-aware): Add SES deliverability monitoring + alerting (CloudWatch alarms for Bounce/Complaint + SNS notifications) and a short incident runbook.
 
 ## Deferred: Auth/API Modernization (SSAF alignment)
 
