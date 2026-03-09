@@ -45,6 +45,7 @@ import Certificates from "./pages/Certificates";
 import Privacy from "./pages/Privacy";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
     return (
@@ -64,6 +65,7 @@ function App() {
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route
                         path="/dashboard"
                         element={
