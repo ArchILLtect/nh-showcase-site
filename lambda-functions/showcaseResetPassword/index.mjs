@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
+import { hashResetTokenSecret, isTokenUsable, parseCompositeResetToken } from "./tokenUtils.mjs";
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const ses = new AWS.SES();
@@ -33,25 +33,6 @@ const extractIpAddress = (event) => {
   }
 
   return event?.requestContext?.http?.sourceIp || "unknown";
-};
-
-const hashResetTokenSecret = (tokenSecret) =>
-  crypto.createHash("sha256").update(`${tokenSecret}${TOKEN_HASH_PEPPER}`).digest("hex");
-
-const parseCompositeResetToken = (token) => {
-  const tokenParts = token.split(".");
-  if (tokenParts.length !== 2) {
-    return null;
-  }
-
-  const tokenId = tokenParts[0]?.trim();
-  const tokenSecret = tokenParts[1]?.trim();
-
-  if (!tokenId || !tokenSecret) {
-    return null;
-  }
-
-  return { tokenId, tokenSecret };
 };
 
 const validatePasswordPolicy = (newPassword) => {
@@ -235,7 +216,7 @@ export const handler = async (event) => {
   }
 
   const { tokenId, tokenSecret } = tokenParts;
-  const tokenHash = hashResetTokenSecret(tokenSecret);
+  const tokenHash = hashResetTokenSecret(tokenSecret, TOKEN_HASH_PEPPER);
   const nowEpochSeconds = Math.floor(Date.now() / 1000);
 
   try {
@@ -262,12 +243,15 @@ export const handler = async (event) => {
       return invalidResetTokenResponse();
     }
 
-    const tokenIsExpired =
-      typeof tokenRecord.expiresAt !== "number" || tokenRecord.expiresAt <= nowEpochSeconds;
-    const tokenIsActive = tokenRecord.status === "active";
-    const tokenMatches = tokenRecord.tokenHash === tokenHash;
-
-    if (!tokenIsActive || tokenIsExpired || !tokenMatches) {
+    if (
+      !isTokenUsable({
+        status: tokenRecord.status,
+        expiresAt: tokenRecord.expiresAt,
+        storedTokenHash: tokenRecord.tokenHash,
+        candidateTokenHash: tokenHash,
+        nowEpochSeconds,
+      })
+    ) {
       return invalidResetTokenResponse();
     }
 
