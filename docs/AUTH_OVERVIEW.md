@@ -72,6 +72,7 @@ Detailed rollback/support runbook:
 ## Where Detailed Docs Live
 - Auth docs index: [dev/auth/AUTH_DOCS_INDEX.md](dev/auth/AUTH_DOCS_INDEX.md)
 - Next up (registration email verification + hardening): [dev/auth/REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md](dev/auth/REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md)
+- Phase A implementation spec (contracts + env/IAM): [dev/auth/REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md](dev/auth/REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
 - Account recovery checklist: [dev/auth/ACCOUNT_RECOVERY_CHECKLIST.md](dev/auth/ACCOUNT_RECOVERY_CHECKLIST.md)
 - Lambda migration checklist: [dev/LAMBDA_MIGRATION_CHECKLIST.md](dev/LAMBDA_MIGRATION_CHECKLIST.md)
 - Lambda source/deploy workflow: [../lambda-functions/README.md](../lambda-functions/README.md)

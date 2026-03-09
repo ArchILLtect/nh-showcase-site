@@ -12,13 +12,15 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - Complete remaining registration hardening items that were deferred.
 
 ## Phase A: Data + Contract Preparation
-- [ ] Add/confirm user attributes on creation: `emailVerified`, `tokenVersion`, `passwordChangedAt`, `updatedAt`.
-- [ ] Define verification token storage model (recommended: dedicated table with TTL + single-use semantics).
-- [ ] Define API contracts and stable error codes for:
+- [x] Add/confirm user attributes on creation: `emailVerified`, `tokenVersion`, `passwordChangedAt`, `updatedAt`.
+  - Implemented in registration lambda source for new registrations.
+- [x] Define verification token storage model (recommended: dedicated table with TTL + single-use semantics).
+- [x] Define API contracts and stable error codes for:
   - `POST /register` (returns verification-pending state)
   - `POST /verify-email` (token consume)
   - optional `POST /resend-verification`
-- [ ] Document login behavior for unverified users (recommended: block login with safe `EMAIL_NOT_VERIFIED` response).
+- [x] Document login behavior for unverified users (recommended: block login with safe `EMAIL_NOT_VERIFIED` response).
+  - See Phase A spec: `REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md`.
 
 ## Phase B: Backend Implementation
 - [ ] Update registration lambda to create unverified users by default (`emailVerified=false`).

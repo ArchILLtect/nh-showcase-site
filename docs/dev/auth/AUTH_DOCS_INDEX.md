@@ -31,6 +31,8 @@ Central index for authentication and account recovery documentation.
   - Practical checklist to secure the current registration Lambda/API path before larger SSAF modernization.
 - [Registration Email Verification + Hardening Checklist](./REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md)
   - Next-phase execution checklist focused on email verification rollout and remaining deferred registration hardening items.
+- [Registration Email Verification Phase A Spec](./REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
+  - Locked data model, API contracts, token strategy, and Lambda env/IAM requirements for implementation.
 - [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
   - Step-by-step AWS config capture checklist (DynamoDB/API Gateway/Lambda/IAM/logs) before hardening changes.
 - [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
@@ -63,11 +65,12 @@ Central index for authentication and account recovery documentation.
 6. [Account-Scoped Recovery Playbook (Email Reuse Allowed)](./ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md)
 7. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
 8. [Registration Email Verification + Hardening Checklist](./REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md)
-9. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
-10. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
-11. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
-12. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
-13. [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
-14. [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
-15. [Lambda In-Repo Migration Checklist](../LAMBDA_MIGRATION_CHECKLIST.md)
-16. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
+9. [Registration Email Verification Phase A Spec](./REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
+10. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
+11. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+12. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
+13. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
+14. [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
+15. [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
+16. [Lambda In-Repo Migration Checklist](../LAMBDA_MIGRATION_CHECKLIST.md)
+17. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
