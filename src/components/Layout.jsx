@@ -24,6 +24,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import CookieNotice from "./CookieNotice";
+import EmailVerificationBanner from "./EmailVerificationBanner";
 import PropTypes from 'prop-types';
 
 Layout.propTypes = {
@@ -50,6 +51,7 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-gray-300 dark:bg-gray-900 text-white">
       <NavBar />
+      <EmailVerificationBanner />
         <main className="p-4">{children}</main>
       <CookieNotice />
       <Footer />
