@@ -139,11 +139,15 @@ Future tightening option:
 ### `showcaseRegistration`
 - `USERS_TABLE_NAME`
 - `EMAIL_VERIFICATION_TOKENS_TABLE_NAME`
+- `EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME` (optional, recommended for throttling)
 - `EMAIL_VERIFY_TOKEN_TTL_MINUTES`
 - `EMAIL_VERIFY_TOKEN_HASH_PEPPER`
 - `EMAIL_VERIFY_URL_BASE`
 - `EMAIL_VERIFICATION_FROM_EMAIL` (or fallback to existing sender env)
 - `EMAIL_VERIFICATION_REPLY_TO` (optional)
+- Optional registration limiter tuning:
+  - `REGISTER_PER_IP_MAX_ATTEMPTS`, `REGISTER_PER_IP_WINDOW_SECONDS`
+  - `REGISTER_PER_EMAIL_MAX_ATTEMPTS`, `REGISTER_PER_EMAIL_WINDOW_SECONDS`, `REGISTER_EMAIL_COOLDOWN_SECONDS`
 
 ### `showcaseVerifyEmail` (new)
 - `USERS_TABLE_NAME`
@@ -166,6 +170,7 @@ Future tightening option:
 - DynamoDB:
   - `dynamodb:PutItem` on `Users`
   - `dynamodb:PutItem` on `EmailVerificationTokens`
+  - If registration limiter enabled: `dynamodb:GetItem` + `dynamodb:PutItem` on `EmailVerificationRateLimits`
 - SES:
   - `ses:SendEmail`
   - `ses:SendRawEmail`

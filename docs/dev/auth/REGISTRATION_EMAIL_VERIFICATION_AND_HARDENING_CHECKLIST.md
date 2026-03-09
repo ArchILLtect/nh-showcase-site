@@ -40,8 +40,8 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
   - Login remains allowed; guidance is shown in the same dismissible banner.
 
 ## Phase D: Security + Abuse Controls
-- [ ] Add per-IP and per-identifier throttling for register + resend verification.
-  - Resend verification throttling is implemented and validated; registration throttling remains open.
+- [x] Add per-IP and per-identifier throttling for register + resend verification.
+  - Resend verification throttling validated; registration throttling validated with 429 RATE_LIMITED response and REGISTER_RATE_LIMITED structured log event.
 - [ ] Keep tokens hashed at rest and single-use with short TTL.
 - [ ] Add structured logs for verification lifecycle events (`sent`, `consumed`, `expired`, `rate_limited`).
 - [ ] Ensure no raw token values appear in logs.
@@ -55,9 +55,12 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - [x] Register new user -> account created unverified + verification email sent.
 - [x] Login before verification -> allowed; verification guidance banner is shown.
 - [x] Verify with valid token -> success, token becomes unusable.
-- [ ] Reuse same verification token -> rejected.
-- [ ] Expired token -> rejected; resend flow issues new token.
+- [x] Reuse same verification token -> rejected.
+  - Confirmed in Lambda validation: first consume returned 200, second consume of same token returned 400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN.
+- [x] Expired token -> rejected; resend flow issues new token.
+  - Confirmed in Lambda validation: short-TTL token returned 400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN after expiry, resend produced a fresh token, and fresh-token verify returned 200 with `Users.emailVerified=true`.
 - [x] Rate limiting triggers on repeated resend/register attempts.
+  - Confirmed in Lambda validation: repeated same registration identity returns 429 RATE_LIMITED.
 - [x] Post-verification login succeeds.
 
 ## Done Criteria
