@@ -25,6 +25,12 @@ const ENABLE_INTERNAL_ERROR_TEST = process.env.ENABLE_INTERNAL_ERROR_TEST === "t
 
 const jsonResponse = (statusCode, payload) => ({
   statusCode,
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  },
   body: JSON.stringify(payload),
 });
 
@@ -67,6 +73,10 @@ const extractIpAddress = (event) => {
 
 const hashForLog = (value) =>
   crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, 12);
+
+const logEvent = (payload) => {
+  console.info(JSON.stringify(payload));
+};
 
 const safeNumber = (value, fallback) =>
   Number.isFinite(Number(value)) ? Number(value) : fallback;
@@ -187,11 +197,24 @@ const sendVerificationEmail = async ({ toEmail, username, verifyToken, expiresMi
 };
 
 export const handler = async (event) => {
+  if (event?.requestContext?.http?.method === "OPTIONS") {
+    return jsonResponse(200, { message: "OK" });
+  }
+
+  const requestIp = extractIpAddress(event);
+  const requestId = event?.requestContext?.requestId || "unknown";
+
   let parsedBody;
 
   try {
     parsedBody = JSON.parse(event.body || "{}");
   } catch (error) {
+    logEvent({
+      event: "REGISTER_VALIDATION_FAILED",
+      reason: "invalid_json",
+      requestId,
+      ipHash: hashForLog(requestIp),
+    });
     return jsonResponse(400, {
       code: "VALIDATION_ERROR",
       message: "Invalid JSON request body",
@@ -204,14 +227,18 @@ export const handler = async (event) => {
 
   const validationError = validatePayload({ username, email, password });
   if (validationError) {
+    logEvent({
+      event: "REGISTER_VALIDATION_FAILED",
+      reason: "payload_validation",
+      requestId,
+      ipHash: hashForLog(requestIp),
+      accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+    });
     return jsonResponse(400, {
       code: "VALIDATION_ERROR",
       message: validationError,
     });
   }
-
-  const requestIp = extractIpAddress(event);
-  const requestId = event?.requestContext?.requestId || "unknown";
 
   const perIpResult = await checkAndRecordRateLimit({
     key: `register:ip:${requestIp}`,
@@ -326,8 +353,22 @@ export const handler = async (event) => {
 
       verificationEmailSent = true;
     } catch (verificationError) {
+      logEvent({
+        event: "REGISTER_VERIFICATION_POST_CREATE_FAILED",
+        requestId,
+        accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+        errorCode: verificationError?.code || "unknown",
+      });
       console.error("Post-registration verification setup failed:", verificationError);
     }
+
+    logEvent({
+      event: "REGISTER_SUCCEEDED",
+      requestId,
+      ipHash: hashForLog(requestIp),
+      accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+      verificationEmailSent,
+    });
 
     return jsonResponse(201, {
       message: verificationEmailSent
@@ -338,6 +379,12 @@ export const handler = async (event) => {
     });
   } catch (error) {
     if (error?.code === "ConditionalCheckFailedException") {
+      logEvent({
+        event: "REGISTER_DUPLICATE_USERNAME",
+        requestId,
+        ipHash: hashForLog(requestIp),
+        usernameHash: hashForLog(username.toLowerCase()),
+      });
       return jsonResponse(409, {
         code: "USERNAME_EXISTS",
         message: "Username already exists",
@@ -345,6 +392,12 @@ export const handler = async (event) => {
     }
 
     if (userCreated) {
+      logEvent({
+        event: "REGISTER_SUCCEEDED_WITH_POST_CREATE_FAILURE",
+        requestId,
+        ipHash: hashForLog(requestIp),
+        accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+      });
       console.error("Registration completed with post-create failure:", error);
       return jsonResponse(201, {
         message: "User registered successfully. Verification email could not be sent right now.",
@@ -353,6 +406,13 @@ export const handler = async (event) => {
       });
     }
 
+    logEvent({
+      event: "REGISTER_FAILED",
+      requestId,
+      ipHash: hashForLog(requestIp),
+      accountHash: hashForLog(`${username.toLowerCase()}#${email}`),
+      errorCode: error?.code || "unknown",
+    });
     console.error("Registration error:", error);
     return jsonResponse(500, {
       code: "INTERNAL_ERROR",
