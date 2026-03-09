@@ -13,6 +13,7 @@ Central index for authentication and account recovery documentation.
 - Soft enforcement is active: unverified users can log in and are guided via dismissible banner + resend action.
 - `/verify-email` frontend route is live and consumes verification tokens.
 - Post-rollout baseline refresh evidence captured in `baselines/2026-03-04-registration/` with 2026-03-09 validation updates.
+- Deferred resilience acceptance note is recorded in `REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md` under "Deferred Resilience Acceptance (2026-03-09)".
 - Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
 
 ## Core Auth
