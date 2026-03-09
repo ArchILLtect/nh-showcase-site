@@ -95,4 +95,4 @@ Use this file to summarize current-state findings before registration hardening 
 - Cleanup closure update (2026-03-06): optional `UserEmailIndex` table removed, custom registration IAM narrowed to `Users` table only, and post-cleanup smoke tests remained green (`201` reused-email success, `409 USERNAME_EXISTS`, `400 VALIDATION_ERROR`).
 - Next auth execution playbook: implement account-scoped recovery (`username + email`) via [../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md](../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md).
 - Status update (2026-03-08): account recovery rollout is complete; remaining unchecked P1 registration items are optional follow-up work unless registration schema/data-resilience modernization is resumed.
-- Baseline wrap update (2026-03-08): registration baseline is functionally wrapped in-repo; remaining unchecked item is AWS data-resilience enablement (PITR and/or scheduled backups).
+- Baseline wrap update (2026-03-08): registration baseline checklist is complete, including PITR/data resilience enabled on `Users`, `PasswordResetTokens`, and `PasswordResetRateLimits`.
