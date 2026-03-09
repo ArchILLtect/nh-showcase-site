@@ -1,7 +1,8 @@
 Project File Structure:
 
 Related docs:
-- Auth docs index: [AUTH_DOCS_INDEX.md](AUTH_DOCS_INDEX.md)
+- Auth quick overview: [AUTH_OVERVIEW.md](AUTH_OVERVIEW.md)
+- Auth docs index: [dev/auth/AUTH_DOCS_INDEX.md](dev/auth/AUTH_DOCS_INDEX.md)
 
 my-showcase-site/
 ├── backend/ # Backend-related files
