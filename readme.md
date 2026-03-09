@@ -17,6 +17,13 @@ This project uses a custom-built authentication system, not a third-party provid
 - Lambda in-repo migration checklist: [docs/LAMBDA_MIGRATION_CHECKLIST.md](docs/LAMBDA_MIGRATION_CHECKLIST.md)
 - Lambda functions workflow: [lambda-functions/README.md](lambda-functions/README.md)
 
+🔄 Account Recovery Status (2026-03-08)
+- Forgot/reset flow is implemented and validated end-to-end.
+- Session invalidation after reset is enforced via tokenVersion + `POST /session/validate`.
+- SES reset + password-changed emails are operational.
+- Abuse controls (per-account cooldown + per-account/per-IP limits) are active and validated.
+- SES bounce/complaint alerting is deferred as an optional cost-aware follow-up.
+
 ✅ Summary
 Auth credentials are stored in DynamoDB
 
