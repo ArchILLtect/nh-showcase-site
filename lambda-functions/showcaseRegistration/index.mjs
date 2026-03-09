@@ -7,11 +7,17 @@ const ses = new AWS.SES();
 const TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const EMAIL_VERIFICATION_TOKENS_TABLE_NAME =
   process.env.EMAIL_VERIFICATION_TOKENS_TABLE_NAME || "EmailVerificationTokens";
+const EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME = process.env.EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME || "";
 const EMAIL_VERIFY_TOKEN_TTL_MINUTES = Number(process.env.EMAIL_VERIFY_TOKEN_TTL_MINUTES || "30");
 const EMAIL_VERIFY_TOKEN_HASH_PEPPER = process.env.EMAIL_VERIFY_TOKEN_HASH_PEPPER || "";
 const EMAIL_VERIFY_URL_BASE = process.env.EMAIL_VERIFY_URL_BASE || "";
 const EMAIL_VERIFICATION_FROM_EMAIL = process.env.EMAIL_VERIFICATION_FROM_EMAIL || "";
 const EMAIL_VERIFICATION_REPLY_TO = process.env.EMAIL_VERIFICATION_REPLY_TO || "";
+const REGISTER_PER_IP_MAX_ATTEMPTS = Number(process.env.REGISTER_PER_IP_MAX_ATTEMPTS || "10");
+const REGISTER_PER_IP_WINDOW_SECONDS = Number(process.env.REGISTER_PER_IP_WINDOW_SECONDS || "900");
+const REGISTER_PER_EMAIL_MAX_ATTEMPTS = Number(process.env.REGISTER_PER_EMAIL_MAX_ATTEMPTS || "5");
+const REGISTER_PER_EMAIL_WINDOW_SECONDS = Number(process.env.REGISTER_PER_EMAIL_WINDOW_SECONDS || "3600");
+const REGISTER_EMAIL_COOLDOWN_SECONDS = Number(process.env.REGISTER_EMAIL_COOLDOWN_SECONDS || "60");
 const USERNAME_REGEX = /^[A-Za-z0-9_-]{3,32}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 8;
@@ -48,6 +54,82 @@ const validatePayload = ({ username, email, password }) => {
   }
 
   return null;
+};
+
+const extractIpAddress = (event) => {
+  const forwardedFor = event?.headers?.["x-forwarded-for"] || event?.headers?.["X-Forwarded-For"];
+  if (typeof forwardedFor === "string" && forwardedFor.length > 0) {
+    return forwardedFor.split(",")[0].trim();
+  }
+
+  return event?.requestContext?.http?.sourceIp || "unknown";
+};
+
+const hashForLog = (value) =>
+  crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, 12);
+
+const safeNumber = (value, fallback) =>
+  Number.isFinite(Number(value)) ? Number(value) : fallback;
+
+const checkAndRecordRateLimit = async ({ key, windowSeconds, maxAttempts, cooldownSeconds = 0 }) => {
+  if (!EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME || !key) {
+    return { allowed: true };
+  }
+
+  const normalizedWindowSeconds = safeNumber(windowSeconds, 900);
+  const normalizedMaxAttempts = safeNumber(maxAttempts, 5);
+  const normalizedCooldownSeconds = safeNumber(cooldownSeconds, 0);
+  const now = Math.floor(Date.now() / 1000);
+
+  try {
+    const currentRecord = await dynamoDB
+      .get({
+        TableName: EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME,
+        Key: { key },
+      })
+      .promise();
+
+    const item = currentRecord?.Item || null;
+    const previousCount = typeof item?.count === "number" ? item.count : 0;
+    const previousWindowStart = typeof item?.windowStart === "number" ? item.windowStart : 0;
+    const previousLastAttemptAt = typeof item?.lastAttemptAt === "number" ? item.lastAttemptAt : 0;
+    const withinWindow = previousWindowStart > 0 && now - previousWindowStart < normalizedWindowSeconds;
+
+    if (
+      normalizedCooldownSeconds > 0 &&
+      previousLastAttemptAt > 0 &&
+      now - previousLastAttemptAt < normalizedCooldownSeconds
+    ) {
+      return { allowed: false, reason: "cooldown" };
+    }
+
+    if (withinWindow && previousCount >= normalizedMaxAttempts) {
+      return { allowed: false, reason: "rate_limit" };
+    }
+
+    const nextWindowStart = withinWindow ? previousWindowStart : now;
+    const nextCount = withinWindow ? previousCount + 1 : 1;
+    const expiresAt = nextWindowStart + normalizedWindowSeconds + 300;
+
+    await dynamoDB
+      .put({
+        TableName: EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME,
+        Item: {
+          key,
+          count: nextCount,
+          windowStart: nextWindowStart,
+          lastAttemptAt: now,
+          expiresAt,
+          updatedAt: new Date(now * 1000).toISOString(),
+        },
+      })
+      .promise();
+
+    return { allowed: true };
+  } catch (error) {
+    console.error("Registration rate-limit check failed (fail-open):", error);
+    return { allowed: true };
+  }
 };
 
 const hashTokenSecret = (tokenSecret) =>
@@ -125,6 +207,53 @@ export const handler = async (event) => {
     return jsonResponse(400, {
       code: "VALIDATION_ERROR",
       message: validationError,
+    });
+  }
+
+  const requestIp = extractIpAddress(event);
+  const requestId = event?.requestContext?.requestId || "unknown";
+
+  const perIpResult = await checkAndRecordRateLimit({
+    key: `register:ip:${requestIp}`,
+    windowSeconds: REGISTER_PER_IP_WINDOW_SECONDS,
+    maxAttempts: REGISTER_PER_IP_MAX_ATTEMPTS,
+  });
+  if (!perIpResult.allowed) {
+    console.info(
+      JSON.stringify({
+        event: "REGISTER_RATE_LIMITED",
+        scope: "ip",
+        reason: perIpResult.reason || "unknown",
+        requestId,
+        ipHash: hashForLog(requestIp),
+      }),
+    );
+    return jsonResponse(429, {
+      code: "RATE_LIMITED",
+      message: "Too many registration attempts. Please try again shortly.",
+    });
+  }
+
+  const normalizedEmailKey = `register:email:${email}`;
+  const perEmailResult = await checkAndRecordRateLimit({
+    key: normalizedEmailKey,
+    windowSeconds: REGISTER_PER_EMAIL_WINDOW_SECONDS,
+    maxAttempts: REGISTER_PER_EMAIL_MAX_ATTEMPTS,
+    cooldownSeconds: REGISTER_EMAIL_COOLDOWN_SECONDS,
+  });
+  if (!perEmailResult.allowed) {
+    console.info(
+      JSON.stringify({
+        event: "REGISTER_RATE_LIMITED",
+        scope: "email",
+        reason: perEmailResult.reason || "unknown",
+        requestId,
+        emailHash: hashForLog(normalizedEmailKey),
+      }),
+    );
+    return jsonResponse(429, {
+      code: "RATE_LIMITED",
+      message: "Too many registration attempts. Please try again shortly.",
     });
   }
 
