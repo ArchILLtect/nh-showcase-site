@@ -23,7 +23,8 @@ Status note (2026-03-09): this checklist has largely been completed by Phase A v
 - [x] Add account creation metadata: `emailVerified`, `tokenVersion`, `passwordChangedAt`, `updatedAt`.
 - [x] Add rate limiting and abuse controls (per IP + per identifier).
 - [x] Add robust CORS + JSON response headers for all outcomes.
-- [ ] Add integration tests for success, duplicate, invalid input, and throttled paths.
+- [x] Add integration tests for success, duplicate, invalid input, and throttled paths.
+  - Implemented in `lambda-functions/showcaseRegistration/tests/handler.integration.test.mjs` using Node built-in test runner.
 
 ## P2 (Soon After)
 - [x] Add email verification flow and gate account activation/login on verification.
