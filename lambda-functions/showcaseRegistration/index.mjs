@@ -128,6 +128,8 @@ export const handler = async (event) => {
     });
   }
 
+  let userCreated = false;
+
   try {
     if (ENABLE_INTERNAL_ERROR_TEST && parsedBody.__simulateInternalError === true) {
       throw new Error("Simulated internal error for testing");
@@ -153,52 +155,72 @@ export const handler = async (event) => {
     };
 
     await dynamoDB.put(putParams).promise();
+    userCreated = true;
 
-    const tokenSecret = crypto.randomBytes(32).toString("base64url");
-    const tokenId = crypto.randomUUID();
-    const tokenHash = hashTokenSecret(tokenSecret);
-    const verifyToken = `${tokenId}.${tokenSecret}`;
-    const createdAtDate = new Date();
-    const expiresAt = Math.floor(createdAtDate.getTime() / 1000) + EMAIL_VERIFY_TOKEN_TTL_MINUTES * 60;
+    let verificationEmailSent = false;
+    try {
+      const tokenSecret = crypto.randomBytes(32).toString("base64url");
+      const tokenId = crypto.randomUUID();
+      const tokenHash = hashTokenSecret(tokenSecret);
+      const verifyToken = `${tokenId}.${tokenSecret}`;
+      const createdAtDate = new Date();
+      const expiresAt = Math.floor(createdAtDate.getTime() / 1000) + EMAIL_VERIFY_TOKEN_TTL_MINUTES * 60;
 
-    await dynamoDB
-      .put({
-        TableName: EMAIL_VERIFICATION_TOKENS_TABLE_NAME,
-        Item: {
-          tokenId,
-          username,
-          emailNormalized: email,
-          tokenHash,
-          status: "active",
-          createdAt: createdAtDate.toISOString(),
-          expiresAt,
-          requestIp:
-            event?.headers?.["x-forwarded-for"]?.split(",")?.[0]?.trim() ||
-            event?.requestContext?.http?.sourceIp ||
-            "unknown",
-          requestUserAgent:
-            event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
-        },
-        ConditionExpression: "attribute_not_exists(tokenId)",
-      })
-      .promise();
+      await dynamoDB
+        .put({
+          TableName: EMAIL_VERIFICATION_TOKENS_TABLE_NAME,
+          Item: {
+            tokenId,
+            username,
+            emailNormalized: email,
+            tokenHash,
+            status: "active",
+            createdAt: createdAtDate.toISOString(),
+            expiresAt,
+            requestIp:
+              event?.headers?.["x-forwarded-for"]?.split(",")?.[0]?.trim() ||
+              event?.requestContext?.http?.sourceIp ||
+              "unknown",
+            requestUserAgent:
+              event?.headers?.["user-agent"] || event?.headers?.["User-Agent"] || "unknown",
+          },
+          ConditionExpression: "attribute_not_exists(tokenId)",
+        })
+        .promise();
 
-    await sendVerificationEmail({
-      toEmail: email,
-      username,
-      verifyToken,
-      expiresMinutes: EMAIL_VERIFY_TOKEN_TTL_MINUTES,
-    });
+      await sendVerificationEmail({
+        toEmail: email,
+        username,
+        verifyToken,
+        expiresMinutes: EMAIL_VERIFY_TOKEN_TTL_MINUTES,
+      });
+
+      verificationEmailSent = true;
+    } catch (verificationError) {
+      console.error("Post-registration verification setup failed:", verificationError);
+    }
 
     return jsonResponse(201, {
-      message: "User registered successfully. Please verify your email.",
+      message: verificationEmailSent
+        ? "User registered successfully. Please verify your email."
+        : "User registered successfully. Verification email could not be sent right now.",
       verificationPending: true,
+      verificationEmailSent,
     });
   } catch (error) {
     if (error?.code === "ConditionalCheckFailedException") {
       return jsonResponse(409, {
         code: "USERNAME_EXISTS",
         message: "Username already exists",
+      });
+    }
+
+    if (userCreated) {
+      console.error("Registration completed with post-create failure:", error);
+      return jsonResponse(201, {
+        message: "User registered successfully. Verification email could not be sent right now.",
+        verificationPending: true,
+        verificationEmailSent: false,
       });
     }
 
