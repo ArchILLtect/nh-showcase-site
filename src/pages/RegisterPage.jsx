@@ -123,7 +123,7 @@ const RegisterPage = () => {
       setLoading(true); // show spinner
       const response = await axios.post(`${API_BASE_URL}/register`, dataToSend);
       console.log("Registration successful:", response.data);
-      alert("User registered successfully!");
+      alert(response?.data?.message || "User registered successfully!");
       navigate("/login"); // Redirect to login page after successful registration
     } catch (error) {
       console.error("Registration failed:", error.response?.data?.message || error.message);
