@@ -3,7 +3,7 @@
 ## Goal
 Implement secure self-service password reset and account recovery for the existing custom auth stack (React frontend + AWS API Gateway/Lambda + DynamoDB), with backward compatibility and minimal disruption to current login/register flows.
 
-## Current Status (2026-03-08)
+## Current Status (2026-03-09)
 - Implemented and deployed backend endpoints: `POST /forgot-password`, `POST /reset-password`.
 - Forgot flow: account-scoped validation (`username + email`), secure token issuance, hashed token storage with TTL metadata, generic enumeration-safe response.
 - Forgot email wiring: AWS SES integration added in Lambda (`subject/text/html` reset email) and reset URL composition via `RESET_URL_BASE`.

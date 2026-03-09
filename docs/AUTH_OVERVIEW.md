@@ -1,6 +1,6 @@
 # Auth Overview (Current State)
 
-Last updated: 2026-03-08
+Last updated: 2026-03-09
 
 Purpose: provide one fast, root-level reference for the current authentication and account recovery system.
 
@@ -9,6 +9,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - Registration and login are working with DynamoDB-backed users.
 - Registration now creates accounts as unverified and sends verification email tokens.
 - Unverified users can still log in during current phase and see an in-app verification reminder with resend action.
+- Verification landing route (`/verify-email`) is live and consumes verification tokens.
 - Password recovery is fully implemented and validated end-to-end.
 - Session invalidation after password reset is enforced.
 
@@ -20,6 +21,8 @@ Purpose: provide one fast, root-level reference for the current authentication a
 
 ## Key Endpoints
 - `POST /register`
+- `POST /verify-email`
+- `POST /resend-verification`
 - `POST /login`
 - `POST /forgot-password`
 - `POST /reset-password`
@@ -35,11 +38,15 @@ Purpose: provide one fast, root-level reference for the current authentication a
 
 ## DynamoDB/Auth Data
 - Users table: includes `password`, `role`, `tokenVersion`, `passwordChangedAt`, `updatedAt`.
+- `EmailVerificationTokens`: verification token lifecycle records with TTL (`expiresAt`).
+- `EmailVerificationRateLimits`: resend limiter counters with TTL (`expiresAt`).
 - `PasswordResetTokens`: token lifecycle records with TTL (`expiresAt`).
 - `PasswordResetRateLimits`: limiter counters with TTL (`expiresAt`).
 
 ## Required Lambda Environment Variables (Auth/Recovery)
 - Shared/auth: `USERS_TABLE_NAME`, `JWT_SECRET`, optional `JWT_EXPIRES_IN`
+- Verification: `EMAIL_VERIFICATION_TOKENS_TABLE_NAME`, `EMAIL_VERIFY_TOKEN_TTL_MINUTES`, `EMAIL_VERIFY_TOKEN_HASH_PEPPER`, `EMAIL_VERIFY_URL_BASE`, `EMAIL_VERIFICATION_FROM_EMAIL`, optional `EMAIL_VERIFICATION_REPLY_TO`
+- Verification limits (optional): `EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME` + resend limiter tuning vars
 - Forgot/reset tokens: `RESET_TOKENS_TABLE_NAME`, `RESET_TOKEN_TTL_MINUTES`, `TOKEN_HASH_PEPPER`
 - Email: `PASSWORD_RESET_FROM_EMAIL`, `RESET_URL_BASE`, optional `PASSWORD_RESET_REPLY_TO`, optional `PASSWORD_CHANGE_SUPPORT_EMAIL`
 - Limiting: `RESET_RATE_LIMITS_TABLE_NAME` plus forgot/reset limiter tuning vars
@@ -47,6 +54,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 ## Operations Snapshot
 - SES sender identity verified and production access granted in `us-east-2`.
 - CloudWatch retention set to 2 weeks for related log groups.
+- Registration verification flow validated: register -> resend -> verify token consume -> verified state reflected in UI.
 - Recovery flow validated: email send, reset success, reused-token rejection, stale-session invalidation, limiter triggers.
 - Deferred (cost-aware): SES bounce/complaint alarm automation.
 

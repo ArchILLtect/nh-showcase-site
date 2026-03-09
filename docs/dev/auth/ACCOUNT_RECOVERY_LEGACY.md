@@ -3,7 +3,7 @@
 ## Purpose
 Identify compatibility and migration risks when introducing password reset/account recovery into an existing authentication system.
 
-## Current Resolution Snapshot (2026-03-08)
+## Current Resolution Snapshot (2026-03-09)
 - Implemented: account-scoped recovery (`username + email`), reset token hashing + TTL + single-use, and generic enumeration-safe forgot responses.
 - Implemented: session invalidation after reset via `tokenVersion` and server-side `POST /session/validate` enforcement.
 - Implemented: password-changed confirmation email and structured CloudWatch recovery logs.

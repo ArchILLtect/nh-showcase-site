@@ -8,7 +8,7 @@ Use this guide to configure Amazon SES for forgot-password email delivery in thi
 - Region: `us-east-2` (match your existing Lambda/API stack)
 - Email flow: forgot-password reset link email + post-reset confirmation email
 
-## Project Status Snapshot (2026-03-08)
+## Project Status Snapshot (2026-03-09)
 - Sender email identity verification: complete (`noreply@nickhanson.me`).
 - SES production access: granted (`us-east-2`).
 - Lambda SES IAM send policy: applied and validated.

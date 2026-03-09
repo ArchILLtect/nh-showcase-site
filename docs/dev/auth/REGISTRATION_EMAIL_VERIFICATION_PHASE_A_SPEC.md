@@ -1,6 +1,6 @@
 # Registration Email Verification — Phase A Spec
 
-Last updated: 2026-03-08
+Last updated: 2026-03-09
 
 Purpose: lock the data model, API contracts, and AWS configuration requirements before implementing verification endpoints.
 
@@ -175,7 +175,7 @@ Future tightening option:
   - `dynamodb:GetItem` on `EmailVerificationTokens`
   - `dynamodb:UpdateItem` on `EmailVerificationTokens`
   - `dynamodb:UpdateItem` on `Users`
-  - Prefer `dynamodb:TransactWriteItems` if token consume + user update are performed atomically
+  - Current implementation uses conditional `UpdateItem` calls (no `dynamodb:TransactWriteItems` required)
 
 ### `showcaseResendVerification` (optional)
 - DynamoDB:

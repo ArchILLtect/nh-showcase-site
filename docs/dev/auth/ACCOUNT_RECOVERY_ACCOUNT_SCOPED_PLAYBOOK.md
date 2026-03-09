@@ -2,7 +2,7 @@
 
 Purpose: implement forgot/reset flows safely when multiple accounts may share the same email.
 
-## Status Snapshot (2026-03-08)
+## Status Snapshot (2026-03-09)
 - Account-scoped recovery is implemented (`username + email`) and deployed.
 - Session invalidation is implemented via `tokenVersion` + `POST /session/validate`.
 - Forgot/reset rate limiting is implemented and validated (account cooldown + per-account + per-IP).

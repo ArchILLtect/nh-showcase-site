@@ -2,11 +2,17 @@
 
 Central index for authentication and account recovery documentation.
 
-## Account Recovery Status (2026-03-08)
+## Account Recovery Status (2026-03-09)
 - Core recovery flow is implemented and validated end-to-end (forgot, reset, single-use token, stale-session invalidation).
 - SES sending is operational in production mode for reset and password-changed emails.
 - Abuse controls are enabled (per-IP/per-account limits + cooldown) with structured CloudWatch logs.
 - SES bounce/complaint alerting is intentionally deferred as a cost-aware optional follow-up.
+
+## Registration Verification Status (2026-03-09)
+- Phase A is complete and validated end-to-end (`register -> resend -> verify -> UI reflects verified state`).
+- Soft enforcement is active: unverified users can log in and are guided via dismissible banner + resend action.
+- `/verify-email` frontend route is live and consumes verification tokens.
+- Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
 
 ## Core Auth
 - [Auth Quick Overview](../../AUTH_OVERVIEW.md)

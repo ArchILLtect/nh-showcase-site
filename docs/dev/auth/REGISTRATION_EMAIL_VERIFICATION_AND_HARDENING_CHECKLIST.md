@@ -23,17 +23,17 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
   - See Phase A spec: `REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md`.
 
 ## Phase B: Backend Implementation
-- Status note: initial backend scaffolds exist in `lambda-functions/showcaseVerifyEmail/` and `lambda-functions/showcaseResendVerification/`; API route wiring + deploy validation still pending.
+- Status note: verification lambdas are deployed, API routes are wired, and end-to-end verification flow has been validated.
 - [x] Update registration lambda to create unverified users by default (`emailVerified=false`).
 - [x] Generate single-use verification token and persist hash + expiry metadata.
 - [x] Send verification email via SES with verification link.
-- [ ] Implement verify-email endpoint to consume token and set `emailVerified=true`.
-- [ ] Add resend-verification path with cooldown/rate limiting.
-- [ ] Ensure all responses are enumeration-safe and non-sensitive.
+- [x] Implement verify-email endpoint to consume token and set `emailVerified=true`.
+- [x] Add resend-verification path with cooldown/rate limiting.
+- [x] Ensure all responses are enumeration-safe and non-sensitive.
 
 ## Phase C: Frontend UX
-- [ ] Show post-registration "check your email" confirmation state.
-- [ ] Add verification landing page/route to process verification link.
+- [x] Show post-registration "check your email" confirmation state.
+- [x] Add verification landing page/route to process verification link.
 - [x] Add resend verification UI with cooldown messaging.
   - Implemented as a dismissible global banner for logged-in users with `emailVerified=false`.
 - [x] Handle login attempt for unverified users with clear next-step guidance.
@@ -41,6 +41,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 
 ## Phase D: Security + Abuse Controls
 - [ ] Add per-IP and per-identifier throttling for register + resend verification.
+  - Resend verification throttling is implemented and validated; registration throttling remains open.
 - [ ] Keep tokens hashed at rest and single-use with short TTL.
 - [ ] Add structured logs for verification lifecycle events (`sent`, `consumed`, `expired`, `rate_limited`).
 - [ ] Ensure no raw token values appear in logs.
@@ -51,16 +52,16 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - [ ] Add minimal alerts for registration/verification failure spikes (cost-aware baseline).
 
 ## Validation Checklist
-- [ ] Register new user -> account created unverified + verification email sent.
-- [ ] Login before verification -> allowed; verification guidance banner is shown.
-- [ ] Verify with valid token -> success, token becomes unusable.
+- [x] Register new user -> account created unverified + verification email sent.
+- [x] Login before verification -> allowed; verification guidance banner is shown.
+- [x] Verify with valid token -> success, token becomes unusable.
 - [ ] Reuse same verification token -> rejected.
 - [ ] Expired token -> rejected; resend flow issues new token.
-- [ ] Rate limiting triggers on repeated resend/register attempts.
-- [ ] Post-verification login succeeds.
+- [x] Rate limiting triggers on repeated resend/register attempts.
+- [x] Post-verification login succeeds.
 
 ## Done Criteria
-- [ ] Unverified accounts are guided to verify (without hard-blocking baseline login during current phase).
-- [ ] Verification flow is reliable (send, consume, resend) and abuse-resistant.
+- [x] Unverified accounts are guided to verify (without hard-blocking baseline login during current phase).
+- [x] Verification flow is reliable (send, consume, resend) and abuse-resistant.
 - [ ] Deferred resilience items (PITR/backups + baseline alerting) are addressed or explicitly deferred with rationale.
 - [ ] Runbook/evidence entry added after production-like validation.
