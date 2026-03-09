@@ -12,6 +12,7 @@ Central index for authentication and account recovery documentation.
 - Phase A is complete and validated end-to-end (`register -> resend -> verify -> UI reflects verified state`).
 - Soft enforcement is active: unverified users can log in and are guided via dismissible banner + resend action.
 - `/verify-email` frontend route is live and consumes verification tokens.
+- Post-rollout baseline refresh evidence captured in `baselines/2026-03-04-registration/` with 2026-03-09 validation updates.
 - Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
 
 ## Core Auth

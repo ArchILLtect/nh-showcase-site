@@ -51,6 +51,17 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - [ ] Set/verify cost-aware CloudWatch retention for registration/verification log groups.
 - [ ] Add minimal alerts for registration/verification failure spikes (cost-aware baseline).
 
+### Deferred Resilience Acceptance (2026-03-09)
+- Deferral decision: accepted for current phase close, with explicit follow-up in the next hardening cycle.
+- Rationale:
+  - Verification and abuse-control correctness are now validated end-to-end in production-like runs.
+  - Remaining resilience work is operational hardening (not functional correctness blockers) and can be scheduled as a focused ops pass.
+- Deferred items to carry forward:
+  - PITR/backup verification for verification-specific tables.
+  - CloudWatch retention verification for registration/verification log groups.
+  - Minimal failure-spike alerting baseline.
+- Acceptance guardrail: no further auth-surface expansion before these three items are reviewed and either implemented or re-deferred with updated rationale.
+
 ## Validation Checklist
 - [x] Register new user -> account created unverified + verification email sent.
 - [x] Login before verification -> allowed; verification guidance banner is shown.
@@ -66,5 +77,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 ## Done Criteria
 - [x] Unverified accounts are guided to verify (without hard-blocking baseline login during current phase).
 - [x] Verification flow is reliable (send, consume, resend) and abuse-resistant.
-- [ ] Deferred resilience items (PITR/backups + baseline alerting) are addressed or explicitly deferred with rationale.
-- [ ] Runbook/evidence entry added after production-like validation.
+- [x] Deferred resilience items (PITR/backups + baseline alerting) are addressed or explicitly deferred with rationale.
+  - Deferred under "Deferred Resilience Acceptance (2026-03-09)" in this checklist.
+- [x] Runbook/evidence entry added after production-like validation.
+  - Evidence captured in baseline refresh artifacts under `docs/dev/auth/baselines/2026-03-04-registration/` (2026-03-09 updates).

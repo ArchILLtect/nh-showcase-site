@@ -1,4 +1,4 @@
-# Raw Capture Outputs (2026-03-04)
+# Raw Capture Outputs (2026-03-04, refreshed 2026-03-09)
 
 Paste command outputs here (or reference exported JSON files in this folder).
 
@@ -81,6 +81,12 @@ Recorded later in project hardening:
 ```text
 See "2026-03-04 Registration smoke results (user-run)" section below for captured outcomes and response examples.
 ```
+
+### 2026-03-09 post-rollout verification and throttling validation
+
+- Registration success, throttling, and verification lifecycle were revalidated end-to-end.
+- Registration throttling now returns `429 RATE_LIMITED` and emits `REGISTER_RATE_LIMITED` structured logs.
+- Verification token lifecycle now includes validated single-use and expiry enforcement.
 
 ### 2026-03-04 Registration smoke results (user-run)
 

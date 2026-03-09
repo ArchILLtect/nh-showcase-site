@@ -96,3 +96,5 @@ Use this file to summarize current-state findings before registration hardening 
 - Next auth execution playbook: implement account-scoped recovery (`username + email`) via [../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md](../../ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md).
 - Status update (2026-03-08): account recovery rollout is complete; remaining unchecked P1 registration items are optional follow-up work unless registration schema/data-resilience modernization is resumed.
 - Baseline wrap update (2026-03-08): registration baseline checklist is complete, including PITR/data resilience enabled on `Users`, `PasswordResetTokens`, and `PasswordResetRateLimits`.
+- Post-rollout baseline refresh (2026-03-09): registration verification Phase A is now live end-to-end, including `/verify-email` token consume, `/resend-verification`, and in-app unverified banner guidance.
+- Validation refresh (2026-03-09): registration throttling behavior is validated (`429 RATE_LIMITED` with `REGISTER_RATE_LIMITED` logs), token reuse is rejected (`400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN`), and expired-token + resend + fresh-token verification flow is confirmed.
