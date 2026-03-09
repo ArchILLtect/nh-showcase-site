@@ -12,6 +12,7 @@ Central index for authentication and account recovery documentation.
 - Phase A is complete and validated end-to-end (`register -> resend -> verify -> UI reflects verified state`).
 - Soft enforcement is active: unverified users can log in and are guided via dismissible banner + resend action.
 - `/verify-email` frontend route is live and consumes verification tokens.
+- Registration validation constraints are enforced and documented: email max length `254`; password min `8` with upper/lower/number/symbol; common weak passwords rejected.
 - Post-rollout baseline refresh evidence captured in `baselines/2026-03-04-registration/` with 2026-03-09 validation updates.
 - Deferred resilience acceptance note is recorded in `REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md` under "Deferred Resilience Acceptance (2026-03-09)".
 - Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
@@ -41,6 +42,8 @@ Central index for authentication and account recovery documentation.
   - Next-phase execution checklist focused on email verification rollout and remaining deferred registration hardening items.
 - [Registration Email Verification Phase A Spec](./REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
   - Locked data model, API contracts, token strategy, and Lambda env/IAM requirements for implementation.
+- [Registration Rollout Toggles + Rollback Guide](./REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md)
+  - Low-cost staged rollout controls (`on|off|canary`) and fast rollback steps for registration verification dispatch.
 - [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
   - Step-by-step AWS config capture checklist (DynamoDB/API Gateway/Lambda/IAM/logs) before hardening changes.
 - [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
@@ -74,11 +77,12 @@ Central index for authentication and account recovery documentation.
 7. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
 8. [Registration Email Verification + Hardening Checklist](./REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md)
 9. [Registration Email Verification Phase A Spec](./REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
-10. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
-11. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
-12. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
-13. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
-14. [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
-15. [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
-16. [Lambda In-Repo Migration Checklist](../LAMBDA_MIGRATION_CHECKLIST.md)
-17. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
+10. [Registration Rollout Toggles + Rollback Guide](./REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md)
+11. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
+12. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+13. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
+14. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
+15. [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
+16. [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
+17. [Lambda In-Repo Migration Checklist](../LAMBDA_MIGRATION_CHECKLIST.md)
+18. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)

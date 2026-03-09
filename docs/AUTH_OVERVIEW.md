@@ -29,6 +29,8 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - `POST /session/validate`
 
 ## Core Security Controls
+- Registration input validation is enforced server-side: username regex (3-32), email normalization + max 254, and password min 8 with upper/lower/number/symbol.
+- Common weak passwords are rejected during registration (normalized case/symbol-insensitive check).
 - Forgot-password responses are enumeration-safe (generic success response).
 - Reset tokens are single-use, short-lived, and hash-at-rest.
 - Password reset increments `tokenVersion` to invalidate stale sessions.

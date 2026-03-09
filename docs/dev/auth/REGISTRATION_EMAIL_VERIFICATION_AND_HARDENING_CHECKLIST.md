@@ -21,6 +21,9 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
   - optional `POST /resend-verification`
 - [x] Document login behavior for unverified users (current policy: allow login, show dismissible in-app verification guidance, and gate future sensitive actions only).
   - See Phase A spec: `REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md`.
+- [x] Lock registration validation constraints in spec + implementation:
+  - email max length `254` (trim + lowercase normalization)
+  - password requires upper/lower/number/symbol and rejects common weak passwords
 
 ## Phase B: Backend Implementation
 - Status note: verification lambdas are deployed, API routes are wired, and end-to-end verification flow has been validated.
@@ -72,6 +75,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
   - Confirmed in Lambda validation: short-TTL token returned 400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN after expiry, resend produced a fresh token, and fresh-token verify returned 200 with `Users.emailVerified=true`.
 - [x] Rate limiting triggers on repeated resend/register attempts.
   - Confirmed in Lambda validation: repeated same registration identity returns 429 RATE_LIMITED.
+- [x] Register with common weak password -> rejected with `400 VALIDATION_ERROR`.
 - [x] Post-verification login succeeds.
 
 ## Done Criteria

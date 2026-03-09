@@ -57,7 +57,7 @@ Request (unchanged core fields):
 {
   "username": "new_user",
   "email": "user@example.com",
-  "password": "StrongPass123"
+  "password": "StrongPass123!"
 }
 ```
 
@@ -73,6 +73,14 @@ Error responses:
 - `400 VALIDATION_ERROR`
 - `409 USERNAME_EXISTS`
 - `500 INTERNAL_ERROR`
+
+Validation contract (current implementation):
+- Username: `^[A-Za-z0-9_-]{3,32}$`
+- Email: trim + lowercase normalization, RFC-safe format check, max length `254`
+- Password:
+  - minimum length `8`
+  - requires at least 1 uppercase, 1 lowercase, 1 number, 1 symbol
+  - rejects common weak passwords (normalized comparison; case/symbol variants blocked)
 
 Behavior:
 - Create user with `emailVerified=false`.
@@ -148,6 +156,10 @@ Future tightening option:
 - Optional registration limiter tuning:
   - `REGISTER_PER_IP_MAX_ATTEMPTS`, `REGISTER_PER_IP_WINDOW_SECONDS`
   - `REGISTER_PER_EMAIL_MAX_ATTEMPTS`, `REGISTER_PER_EMAIL_WINDOW_SECONDS`, `REGISTER_EMAIL_COOLDOWN_SECONDS`
+- Low-cost rollout/fallback controls:
+  - `REGISTRATION_VERIFICATION_EMAIL_MODE` (`on|off|canary`)
+  - `REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT` (0-100; used in `canary` mode)
+  - `REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL` (optional SQS queue for failed notification intent capture)
 
 ### `showcaseVerifyEmail` (new)
 - `USERS_TABLE_NAME`
@@ -174,6 +186,8 @@ Future tightening option:
 - SES:
   - `ses:SendEmail`
   - `ses:SendRawEmail`
+- Optional (if notification-failure queue enabled):
+  - `sqs:SendMessage` on queue referenced by `REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL`
 
 ### `showcaseVerifyEmail`
 - DynamoDB:

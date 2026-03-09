@@ -31,8 +31,10 @@ Status note (2026-03-09): this checklist has largely been completed by Phase A v
   - Implemented verification flow; current policy intentionally keeps login soft-enforced (no hard block yet).
 - [ ] Add monitoring/alerts for registration error spikes and unusual signup patterns.
   - Deferred (cost-aware) with explicit acceptance note in verification/hardening checklist.
-- [ ] Add dead-letter/error handling strategy for async notification failures.
-- [ ] Add staged rollout toggles and rollback guidance.
+- [x] Add dead-letter/error handling strategy for async notification failures.
+  - Implemented low-cost optional SQS intent enqueue via `REGISTRATION_NOTIFICATION_FAILURES_QUEUE_URL` (fail-open when unset).
+- [x] Add staged rollout toggles and rollback guidance.
+  - Implemented env-driven rollout controls (`REGISTRATION_VERIFICATION_EMAIL_MODE=on|off|canary`, `REGISTRATION_VERIFICATION_EMAIL_CANARY_PERCENT`) and documented rollback in `REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md`.
 
 ## Validation Rules (Suggested Starter)
 - Username:
@@ -41,11 +43,11 @@ Status note (2026-03-09): this checklist has largely been completed by Phase A v
   - [x] Reject leading/trailing spaces
 - Email:
   - [x] RFC-safe format check + lowercase canonicalization
-  - [ ] Max length guard
+  - [x] Max length guard (254)
 - Password:
   - [x] Minimum length (currently 8; consider 12 in next policy tightening)
-  - [ ] At least 1 uppercase, 1 lowercase, 1 number, 1 symbol
-  - [ ] Reject common weak passwords
+  - [x] At least 1 uppercase, 1 lowercase, 1 number, 1 symbol
+  - [x] Reject common weak passwords
 
 ## Error Contract (Suggested)
 - [x] `400` invalid input with stable machine code (e.g., `VALIDATION_ERROR`).
