@@ -105,43 +105,37 @@ export const handler = async (event) => {
     }
 
     await dynamoDB
-      .transactWrite({
-        TransactItems: [
-          {
-            Update: {
-              TableName: EMAIL_VERIFICATION_TOKENS_TABLE_NAME,
-              Key: { tokenId },
-              UpdateExpression:
-                "SET #status = :used, usedAt = :usedAt, consumedIp = :consumedIp, consumedUserAgent = :consumedUserAgent",
-              ConditionExpression:
-                "#status = :active AND tokenHash = :tokenHash AND expiresAt > :nowEpochSeconds",
-              ExpressionAttributeNames: {
-                "#status": "status",
-              },
-              ExpressionAttributeValues: {
-                ":used": "used",
-                ":usedAt": nowIso,
-                ":consumedIp": requestIp,
-                ":consumedUserAgent": requestUserAgent,
-                ":active": "active",
-                ":tokenHash": tokenHash,
-                ":nowEpochSeconds": nowEpochSeconds,
-              },
-            },
-          },
-          {
-            Update: {
-              TableName: USERS_TABLE_NAME,
-              Key: { username },
-              UpdateExpression: "SET emailVerified = :true, updatedAt = :updatedAt",
-              ConditionExpression: "attribute_exists(username)",
-              ExpressionAttributeValues: {
-                ":true": true,
-                ":updatedAt": nowIso,
-              },
-            },
-          },
-        ],
+      .update({
+        TableName: EMAIL_VERIFICATION_TOKENS_TABLE_NAME,
+        Key: { tokenId },
+        UpdateExpression:
+          "SET #status = :used, usedAt = :usedAt, consumedIp = :consumedIp, consumedUserAgent = :consumedUserAgent",
+        ConditionExpression: "#status = :active AND tokenHash = :tokenHash AND expiresAt > :nowEpochSeconds",
+        ExpressionAttributeNames: {
+          "#status": "status",
+        },
+        ExpressionAttributeValues: {
+          ":used": "used",
+          ":usedAt": nowIso,
+          ":consumedIp": requestIp,
+          ":consumedUserAgent": requestUserAgent,
+          ":active": "active",
+          ":tokenHash": tokenHash,
+          ":nowEpochSeconds": nowEpochSeconds,
+        },
+      })
+      .promise();
+
+    await dynamoDB
+      .update({
+        TableName: USERS_TABLE_NAME,
+        Key: { username },
+        UpdateExpression: "SET emailVerified = :true, updatedAt = :updatedAt",
+        ConditionExpression: "attribute_exists(username)",
+        ExpressionAttributeValues: {
+          ":true": true,
+          ":updatedAt": nowIso,
+        },
       })
       .promise();
 
@@ -149,7 +143,7 @@ export const handler = async (event) => {
       message: "Email verified successfully",
     });
   } catch (error) {
-    if (error?.code === "TransactionCanceledException" || error?.code === "ConditionalCheckFailedException") {
+    if (error?.code === "ConditionalCheckFailedException") {
       return invalidTokenResponse();
     }
 
