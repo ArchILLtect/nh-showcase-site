@@ -22,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "export:auth-baseline": "powershell -ExecutionPolicy Bypass -File ./scripts/export-auth-config-baseline.ps1 -IncludeIam -ContinueOnError"
   },
   "eslintConfig": {
     "extends": [
