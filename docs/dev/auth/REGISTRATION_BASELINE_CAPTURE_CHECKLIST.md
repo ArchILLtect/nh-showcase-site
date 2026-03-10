@@ -9,8 +9,9 @@ Purpose: capture a reliable “before” snapshot of the current registration st
 
 ## Outputs to Produce
 - [x] A timestamped baseline notes file with key findings.
-- [ ] JSON exports for DynamoDB/API/Lambda config.
-	- Note: JSON export commands are documented; refresh and store sanitized exports if you want an additional machine-readable bundle in-repo.
+- [x] JSON exports for DynamoDB/API/Lambda config.
+	- Captured on 2026-03-10 to `docs/dev/auth/baselines/2026-03-10-registration-config-exports/` (sanitized Lambda env values; `export.manifest.json` shows `failures: []`).
+	- Re-run command: `npm run export:auth-baseline`
 - [x] Example request/response payloads for registration success and failure.
 - [x] Screenshots of key AWS console pages (optional but useful).
 

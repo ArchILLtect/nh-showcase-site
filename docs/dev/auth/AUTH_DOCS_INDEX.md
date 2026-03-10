@@ -16,6 +16,7 @@ Central index for authentication and account recovery documentation.
 - Queue-backed notification-failure fallback was validated via controlled failure test and restore test; evidence captured in `REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md`.
 - Verify-email lifecycle logging was validated, including explicit expired-token rejection (`EMAIL_VERIFICATION_TOKEN_REJECTED` with `reason=expired`) after ~35-minute wait.
 - Post-rollout baseline refresh evidence captured in `baselines/2026-03-04-registration/` with 2026-03-09 validation updates.
+- Machine-readable AWS config baseline exports captured in `baselines/2026-03-10-registration-config-exports/`.
 - Deferred resilience acceptance note is recorded in `REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md` under "Deferred Resilience Acceptance (2026-03-09)".
 - Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
 

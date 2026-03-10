@@ -39,6 +39,18 @@ Optional (also installs dependencies before zipping):
 ./scripts/package-lambda.ps1 -FunctionName showcaseForgotPassword -InstallDependencies
 ```
 
+## Config Baseline Export (JSON)
+Use this command from repo root to capture a sanitized machine-readable baseline bundle for DynamoDB, API Gateway, Lambda, and IAM config:
+
+```powershell
+npm run export:auth-baseline
+```
+
+Notes:
+- Writes to `docs/dev/auth/baselines/<yyyy-mm-dd>-registration-config-exports/`.
+- Lambda environment variable values are exported as `__REDACTED__`.
+- Includes `export.manifest.json` with captured file list and any failures.
+
 Notes:
 - Archive snapshot is written to `lambda-functions/archive/<functionName>/<timestamp>/`.
 - Deployable zip is written to `lambda-functions/<functionName>.zip`.
