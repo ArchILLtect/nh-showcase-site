@@ -1,53 +1,76 @@
 [
     {
-        "title": "SameBoat Platform",
-        "image": "../images/sameboat-logo.png",
-        "description": "A secure, full-stack mental-health support platform featuring anonymous user authentication, story sharing, trigger-warning safety systems, and an evolving trust metric. Built as a semester-long honors project with production-grade tooling, CI/CD, and cloud deployment.",
-        "techStack": [
-            "React 19",
-            "TypeScript",
-            "Vite",
-            "Chakra UI",
-            "Zustand",
-            "Spring Boot 3 (Java 21)",
-            "PostgreSQL (Neon)",
-            "Flyway",
-            "JPA / Hibernate",
-            "Netlify",
-            "Render",
-            "Docker",
-            "GitHub Actions CI"
-        ],
-        "siteLink": "https://sameboatplatform.com/",
-        "github": "https://github.com/sameboat-platform/",
-        "status": "MVP In Progress – Stories and Trust Metric Next"
+      "title": "CodeForge",
+      "image": "../images/codeforge-logo.png",
+      "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",
+      "techStack": [
+          "Java",
+          "JSP",
+          "Tomcat",
+          "MySQL",
+          "Elastic Beanstalk",
+          "AWS CloudFront",
+          "Cognito",
+          "Maven"
+      ],
+      "liveDemo": "https://codeforge.nickhanson.me/",
+      "github": "https://github.com/ArchILLtect/code-forge",
+      "status": "MVP In Progress - Evaluation Engine Next"
     },
     {
-        "title": "TaskMaster App",
-        "image": "../images/TaskMaster-App-Logo.webp",
-        "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
-        "techStack": ["React", "Node.js", "MySQL", "Netlify"],
-        "liveDemo": "https://taskmaster.nickhanson.me/",
-        "github": "https://github.com/ArchILLtect/taskmaster",
+      "title": "TaskMaster App",
+      "image": "../images/TaskMaster-App-Logo.webp",
+      "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
+      "techStack": ["React", "Node.js", "MySQL", "Netlify"],
+      "liveDemo": "https://taskmaster.nickhanson.me/",
+      "github": "https://github.com/ArchILLtect/taskmaster",
+      "status": "MVP - Work in Progress"
+    },
+    {
+      "title": "Budgeteer",
+      "image": "../images/budgeteer-logo.png",
+      "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on my showcase site.",
+      "techStack": [
+          "React 19",
+          "JavaScript / TypeScript Hybrid Components",
+          "Vite",
+          "Chakra UI",
+          "Zustand (Persist Middleware)",
+          "Day.js",
+          "PapaParse (CSV Import)",
+          "React Router 6",
+          "Custom JWT Auth",
+          "Netlify",
+          "AWS Lambda / API Gateway (Auth Endpoint)",
+          "LocalStorage Persistence",
+          "Node Utilities for Data Normalization"
+        ],
+        "liveDemo": "https://budgeteer.nickhanson.me",
+        "github": "https://github.com/ArchILLtect/budgeteer",
         "status": "MVP - Work in Progress"
     },
     {
-        "title": "CodeForge",
-        "image": "../images/codeforge-logo.png",
-        "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",
-        "techStack": [
-            "Java",
-            "JSP",
-            "Tomcat",
-            "MySQL",
-            "Elastic Beanstalk",
-            "AWS CloudFront",
-            "Cognito",
-            "Maven"
-        ],
-        "liveDemo": "https://codeforge.nickhanson.me/",
-        "github": "https://github.com/ArchILLtect/code-forge",
-        "status": "MVP In Progress - Evaluation Engine Next"
+      "title": "SameBoat Platform",
+      "image": "../images/sameboat-logo.png",
+      "description": "A secure, full-stack mental-health support platform featuring anonymous user authentication, story sharing, trigger-warning safety systems, and an evolving trust metric. Built as a semester-long honors project with production-grade tooling, CI/CD, and cloud deployment.",
+      "techStack": [
+          "React 19",
+          "TypeScript",
+          "Vite",
+          "Chakra UI",
+          "Zustand",
+          "Spring Boot 3 (Java 21)",
+          "PostgreSQL (Neon)",
+          "Flyway",
+          "JPA / Hibernate",
+          "Netlify",
+          "Render",
+          "Docker",
+          "GitHub Actions CI"
+      ],
+      "siteLink": "https://sameboatplatform.com/",
+      "github": "https://github.com/sameboat-platform/",
+      "status": "MVP In Progress – Stories and Trust Metric Next"
     },
     {
         "title": "Cosmic DB",
@@ -74,29 +97,6 @@
         "techStack": ["React", "DynamoDB", "S3 Bucket"],
         "liveDemo": "https://bullpenreport.nickhanson.me",
         "github": "https://github.com/ArchILLtect/the-bullpen-report",
-        "status": "MVP - Work in Progress"
-    },
-    {
-        "title": "Budgetizer",
-        "image": "../images/budgetizer-logo.png",
-        "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on my showcase site.",
-        "techStack": [
-            "React 19",
-            "JavaScript / TypeScript Hybrid Components",
-            "Vite",
-            "Chakra UI",
-            "Zustand (Persist Middleware)",
-            "Day.js",
-            "PapaParse (CSV Import)",
-            "React Router 6",
-            "Custom JWT Auth",
-            "Netlify",
-            "AWS Lambda / API Gateway (Auth Endpoint)",
-            "LocalStorage Persistence",
-            "Node Utilities for Data Normalization"
-        ],
-        "liveDemo": "https://budgeteer.nickhanson.me",
-        "github": "https://github.com/ArchILLtect/budgeteer",
         "status": "MVP - Work in Progress"
     },
     {
