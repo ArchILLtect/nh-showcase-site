@@ -468,3 +468,154 @@ test("email longer than 254 chars returns 400 VALIDATION_ERROR", async () => {
   assert.equal(payload.code, "VALIDATION_ERROR");
   assert.equal(payload.message, "email must be at most 254 characters");
 });
+
+test("username boundary lengths enforce 3-32 constraint", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const handler = await loadHandler();
+
+  const tooShortResult = await handler({
+    body: JSON.stringify({
+      username: "ab",
+      email: "username-short@example.com",
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-username-too-short",
+      http: { sourceIp: "203.0.113.70" },
+    },
+  });
+
+  assert.equal(tooShortResult.statusCode, 400);
+  assert.equal(parseBody(tooShortResult).code, "VALIDATION_ERROR");
+  assert.equal(
+    parseBody(tooShortResult).message,
+    "username must be 3-32 chars and only include letters, numbers, underscores, or dashes",
+  );
+
+  const minBoundaryResult = await handler({
+    body: JSON.stringify({
+      username: "abc",
+      email: "username-min-pass@example.com",
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-username-min-pass",
+      http: { sourceIp: "203.0.113.71" },
+    },
+  });
+
+  assert.equal(minBoundaryResult.statusCode, 201);
+  assert.equal(parseBody(minBoundaryResult).verificationPending, true);
+
+  const maxBoundaryUsername = "u".repeat(32);
+  const maxBoundaryResult = await handler({
+    body: JSON.stringify({
+      username: maxBoundaryUsername,
+      email: "username-max-pass@example.com",
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-username-max-pass",
+      http: { sourceIp: "203.0.113.72" },
+    },
+  });
+
+  assert.equal(maxBoundaryResult.statusCode, 201);
+  assert.equal(parseBody(maxBoundaryResult).verificationPending, true);
+
+  const tooLongResult = await handler({
+    body: JSON.stringify({
+      username: "u".repeat(33),
+      email: "username-too-long@example.com",
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-username-too-long",
+      http: { sourceIp: "203.0.113.73" },
+    },
+  });
+
+  assert.equal(tooLongResult.statusCode, 400);
+  assert.equal(parseBody(tooLongResult).code, "VALIDATION_ERROR");
+  assert.equal(
+    parseBody(tooLongResult).message,
+    "username must be 3-32 chars and only include letters, numbers, underscores, or dashes",
+  );
+});
+
+test("email with exact 254 chars is accepted", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const localPart = "a".repeat(248);
+  const exactMaxEmail = `${localPart}@x.com`;
+  assert.equal(exactMaxEmail.length, 254);
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "email_254_pass_user",
+      email: exactMaxEmail,
+      password: "StrongPass123!",
+    }),
+    requestContext: {
+      requestId: "req-email-254-pass",
+      http: { sourceIp: "203.0.113.74" },
+    },
+  });
+
+  assert.equal(result.statusCode, 201);
+  const payload = parseBody(result);
+  assert.equal(payload.verificationPending, true);
+  assert.equal(payload.verificationEmailSent, true);
+});
+
+test("huge password with valid complexity is accepted", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const hugeStrongPassword = `A!1a${"xY9!".repeat(300)}`;
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "huge_strong_password_user",
+      email: "huge-strong@example.com",
+      password: hugeStrongPassword,
+    }),
+    requestContext: {
+      requestId: "req-huge-strong-password",
+      http: { sourceIp: "203.0.113.75" },
+    },
+  });
+
+  assert.equal(result.statusCode, 201);
+  assert.equal(parseBody(result).verificationPending, true);
+});
+
+test("huge common-pattern password is rejected by weak/common rule", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const hugeWeakPassword = `${"---".repeat(500)}Password123!!!${"___".repeat(500)}`;
+
+  const handler = await loadHandler();
+  const result = await handler({
+    body: JSON.stringify({
+      username: "huge_weak_password_user",
+      email: "huge-weak@example.com",
+      password: hugeWeakPassword,
+    }),
+    requestContext: {
+      requestId: "req-huge-weak-password",
+      http: { sourceIp: "203.0.113.76" },
+    },
+  });
+
+  assert.equal(result.statusCode, 400);
+  const payload = parseBody(result);
+  assert.equal(payload.code, "VALIDATION_ERROR");
+  assert.equal(payload.message, "password is too common; choose a stronger password");
+});
