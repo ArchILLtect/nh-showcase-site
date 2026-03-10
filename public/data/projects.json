@@ -28,7 +28,7 @@
     },
     {
       "title": "Budgeteer",
-      "image": "../images/budgeteer-logo.png",
+      "image": "../images/budgeteer-logo2.png",
       "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on my showcase site.",
       "techStack": [
           "React 19",
