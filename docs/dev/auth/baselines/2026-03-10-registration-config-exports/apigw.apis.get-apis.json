@@ -1,0 +1,61 @@
+﻿{
+    "Items":  [
+                  {
+                      "ApiEndpoint":  "https://msirwhqowf.execute-api.us-east-2.amazonaws.com",
+                      "ApiId":  "msirwhqowf",
+                      "ApiKeySelectionExpression":  "$request.header.x-api-key",
+                      "CorsConfiguration":  {
+                                                "AllowCredentials":  false,
+                                                "AllowHeaders":  [
+                                                                     "content-type",
+                                                                     "authorization"
+                                                                 ],
+                                                "AllowMethods":  [
+                                                                     "GET",
+                                                                     "POST",
+                                                                     "PUT",
+                                                                     "DELETE"
+                                                                 ],
+                                                "AllowOrigins":  [
+                                                                     "*"
+                                                                 ],
+                                                "MaxAge":  0
+                                            },
+                      "CreatedDate":  "2024-12-25T23:52:51+00:00",
+                      "DisableExecuteApiEndpoint":  false,
+                      "Name":  "TaskmasterAPI",
+                      "ProtocolType":  "HTTP",
+                      "RouteSelectionExpression":  "$request.method $request.path",
+                      "Tags":  {
+
+                               }
+                  },
+                  {
+                      "ApiEndpoint":  "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com",
+                      "ApiId":  "u7fyurbrjc",
+                      "ApiKeySelectionExpression":  "$request.header.x-api-key",
+                      "CorsConfiguration":  {
+                                                "AllowCredentials":  false,
+                                                "AllowHeaders":  [
+                                                                     "content-type",
+                                                                     "authorization"
+                                                                 ],
+                                                "AllowMethods":  [
+                                                                     "POST"
+                                                                 ],
+                                                "AllowOrigins":  [
+                                                                     "*"
+                                                                 ],
+                                                "MaxAge":  0
+                                            },
+                      "CreatedDate":  "2024-12-23T07:24:49+00:00",
+                      "DisableExecuteApiEndpoint":  false,
+                      "Name":  "ShowcaseRegisterAPI",
+                      "ProtocolType":  "HTTP",
+                      "RouteSelectionExpression":  "$request.method $request.path",
+                      "Tags":  {
+
+                               }
+                  }
+              ]
+}

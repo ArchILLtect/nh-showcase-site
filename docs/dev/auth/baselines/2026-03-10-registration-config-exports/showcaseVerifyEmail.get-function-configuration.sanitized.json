@@ -1,0 +1,45 @@
+﻿{
+    "FunctionName":  "showcaseVerifyEmail",
+    "FunctionArn":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseVerifyEmail",
+    "Runtime":  "nodejs24.x",
+    "Role":  "arn:aws:iam::010928199012:role/service-role/showcaseVerifyEmail-role-119xg1dn",
+    "Handler":  "index.handler",
+    "CodeSize":  14235151,
+    "Description":  "",
+    "Timeout":  3,
+    "MemorySize":  128,
+    "LastModified":  "2026-03-10T15:38:45.000+0000",
+    "CodeSha256":  "7Ylpaab6vSkOTv6Z4ewkPiGAxAzb1V4llYG+7kuByFo=",
+    "Version":  "$LATEST",
+    "Environment":  {
+                        "Variables":  {
+                                          "USERS_TABLE_NAME":  "__REDACTED__",
+                                          "EMAIL_VERIFY_TOKEN_HASH_PEPPER":  "__REDACTED__",
+                                          "EMAIL_VERIFICATION_TOKENS_TABLE_NAME":  "__REDACTED__"
+                                      }
+                    },
+    "TracingConfig":  {
+                          "Mode":  "PassThrough"
+                      },
+    "RevisionId":  "e560b30c-b134-40f1-8a77-1f536748ea2e",
+    "State":  "Active",
+    "LastUpdateStatus":  "Successful",
+    "PackageType":  "Zip",
+    "Architectures":  [
+                          "x86_64"
+                      ],
+    "EphemeralStorage":  {
+                             "Size":  512
+                         },
+    "SnapStart":  {
+                      "ApplyOn":  "None",
+                      "OptimizationStatus":  "Off"
+                  },
+    "RuntimeVersionConfig":  {
+                                 "RuntimeVersionArn":  "arn:aws:lambda:us-east-2::runtime:b0bb5dea1b12bb0e2c3b50ed434af2fd2d16d383f7324c7b455111008b6112ba"
+                             },
+    "LoggingConfig":  {
+                          "LogFormat":  "Text",
+                          "LogGroup":  "/aws/lambda/showcaseVerifyEmail"
+                      }
+}

@@ -1,0 +1,42 @@
+﻿{
+    "Items":  [
+                  {
+                      "AutoDeploy":  true,
+                      "CreatedDate":  "2024-12-23T07:24:50+00:00",
+                      "DefaultRouteSettings":  {
+                                                   "DetailedMetricsEnabled":  false
+                                               },
+                      "DeploymentId":  "vgkfm0",
+                      "LastDeploymentStatusMessage":  "Successfully deployed stage with deployment ID \u0027vgkfm0\u0027",
+                      "LastUpdatedDate":  "2026-03-09T18:26:15+00:00",
+                      "RouteSettings":  {
+
+                                        },
+                      "StageName":  "$default",
+                      "StageVariables":  {
+
+                                         },
+                      "Tags":  {
+
+                               }
+                  },
+                  {
+                      "CreatedDate":  "2026-03-08T23:47:33+00:00",
+                      "DefaultRouteSettings":  {
+                                                   "DetailedMetricsEnabled":  false
+                                               },
+                      "DeploymentId":  "vt9v1b",
+                      "LastUpdatedDate":  "2026-03-08T23:50:06+00:00",
+                      "RouteSettings":  {
+
+                                        },
+                      "StageName":  "prod",
+                      "StageVariables":  {
+
+                                         },
+                      "Tags":  {
+
+                               }
+                  }
+              ]
+}

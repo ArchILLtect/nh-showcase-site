@@ -1,0 +1,61 @@
+﻿{
+    "Configuration":  {
+                          "FunctionName":  "showcaseResendVerification",
+                          "FunctionArn":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseResendVerification",
+                          "Runtime":  "nodejs24.x",
+                          "Role":  "arn:aws:iam::010928199012:role/service-role/showcaseResendVerification-role-ljk47q7n",
+                          "Handler":  "index.handler",
+                          "CodeSize":  14236183,
+                          "Description":  "",
+                          "Timeout":  10,
+                          "MemorySize":  128,
+                          "LastModified":  "2026-03-09T15:29:32.000+0000",
+                          "CodeSha256":  "2X0ZgrIPtkOAHEGzSRaGOahGmwhIbfpdgZkBSkNIlW0=",
+                          "Version":  "$LATEST",
+                          "Environment":  {
+                                              "Variables":  {
+                                                                "EMAIL_VERIFY_TOKEN_HASH_PEPPER":  "__REDACTED__",
+                                                                "EMAIL_VERIFICATION_TOKENS_TABLE_NAME":  "__REDACTED__",
+                                                                "EMAIL_VERIFY_TOKEN_TTL_MINUTES":  "__REDACTED__",
+                                                                "RESEND_PER_ACCOUNT_WINDOW_SECONDS":  "__REDACTED__",
+                                                                "RESEND_PER_ACCOUNT_MAX_ATTEMPTS":  "__REDACTED__",
+                                                                "EMAIL_VERIFY_URL_BASE":  "__REDACTED__",
+                                                                "EMAIL_VERIFICATION_REPLY_TO":  "__REDACTED__",
+                                                                "EMAIL_VERIFY_RATE_LIMITS_TABLE_NAME":  "__REDACTED__",
+                                                                "USERS_TABLE_NAME":  "__REDACTED__",
+                                                                "RESEND_ACCOUNT_COOLDOWN_SECONDS":  "__REDACTED__",
+                                                                "RESEND_PER_IP_MAX_ATTEMPTS":  "__REDACTED__",
+                                                                "RESEND_PER_IP_WINDOW_SECONDS":  "__REDACTED__",
+                                                                "EMAIL_VERIFICATION_FROM_EMAIL":  "__REDACTED__"
+                                                            }
+                                          },
+                          "TracingConfig":  {
+                                                "Mode":  "PassThrough"
+                                            },
+                          "RevisionId":  "5323858d-95ca-48e2-8cc5-57fcd4467140",
+                          "State":  "Active",
+                          "LastUpdateStatus":  "Successful",
+                          "PackageType":  "Zip",
+                          "Architectures":  [
+                                                "x86_64"
+                                            ],
+                          "EphemeralStorage":  {
+                                                   "Size":  512
+                                               },
+                          "SnapStart":  {
+                                            "ApplyOn":  "None",
+                                            "OptimizationStatus":  "Off"
+                                        },
+                          "RuntimeVersionConfig":  {
+                                                       "RuntimeVersionArn":  "arn:aws:lambda:us-east-2::runtime:b0bb5dea1b12bb0e2c3b50ed434af2fd2d16d383f7324c7b455111008b6112ba"
+                                                   },
+                          "LoggingConfig":  {
+                                                "LogFormat":  "Text",
+                                                "LogGroup":  "/aws/lambda/showcaseResendVerification"
+                                            }
+                      },
+    "Code":  {
+                 "RepositoryType":  "S3",
+                 "Location":  "__REDACTED__"
+             }
+}

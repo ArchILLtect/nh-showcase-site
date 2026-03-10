@@ -1,0 +1,41 @@
+﻿{
+    "Table":  {
+                  "AttributeDefinitions":  [
+                                               {
+                                                   "AttributeName":  "tokenId",
+                                                   "AttributeType":  "S"
+                                               }
+                                           ],
+                  "TableName":  "EmailVerificationTokens",
+                  "KeySchema":  [
+                                    {
+                                        "AttributeName":  "tokenId",
+                                        "KeyType":  "HASH"
+                                    }
+                                ],
+                  "TableStatus":  "ACTIVE",
+                  "CreationDateTime":  "2026-03-08T23:17:21.165000-05:00",
+                  "ProvisionedThroughput":  {
+                                                "NumberOfDecreasesToday":  0,
+                                                "ReadCapacityUnits":  0,
+                                                "WriteCapacityUnits":  0
+                                            },
+                  "TableSizeBytes":  0,
+                  "ItemCount":  0,
+                  "TableArn":  "arn:aws:dynamodb:us-east-2:010928199012:table/EmailVerificationTokens",
+                  "TableId":  "cc4c785b-ee80-4475-8835-6caf6af9276c",
+                  "BillingModeSummary":  {
+                                             "BillingMode":  "PAY_PER_REQUEST",
+                                             "LastUpdateToPayPerRequestDateTime":  "2026-03-08T23:17:21.165000-05:00"
+                                         },
+                  "TableClassSummary":  {
+                                            "TableClass":  "STANDARD"
+                                        },
+                  "DeletionProtectionEnabled":  false,
+                  "WarmThroughput":  {
+                                         "ReadUnitsPerSecond":  12000,
+                                         "WriteUnitsPerSecond":  4000,
+                                         "Status":  "ACTIVE"
+                                     }
+              }
+}

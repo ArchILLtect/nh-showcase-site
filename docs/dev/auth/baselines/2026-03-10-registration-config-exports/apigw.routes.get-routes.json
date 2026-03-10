@@ -1,0 +1,66 @@
+﻿{
+    "Items":  [
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "1ttr5l4",
+                      "RouteKey":  "POST /tracking",
+                      "Target":  "integrations/a8024mo"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "61grj6k",
+                      "RouteKey":  "POST /session/validate",
+                      "Target":  "integrations/yio9c1r"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "9r6trva",
+                      "RouteKey":  "POST /reset-password",
+                      "Target":  "integrations/55c4lbd"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "n4l1q9o",
+                      "RouteKey":  "POST /login",
+                      "Target":  "integrations/uosp7e7"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "nk8feeh",
+                      "RouteKey":  "POST /verify-email",
+                      "Target":  "integrations/qr2zyol"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "ou90uu8",
+                      "RouteKey":  "POST /resend-verification",
+                      "Target":  "integrations/j3ya740"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationScopes":  [
+
+                                              ],
+                      "AuthorizationType":  "NONE",
+                      "RequestParameters":  {
+
+                                            },
+                      "RouteId":  "q01cbi6",
+                      "RouteKey":  "POST /register",
+                      "Target":  "integrations/091nuwk"
+                  },
+                  {
+                      "ApiKeyRequired":  false,
+                      "AuthorizationType":  "NONE",
+                      "RouteId":  "vxqyddg",
+                      "RouteKey":  "POST /forgot-password",
+                      "Target":  "integrations/akxjwn2"
+                  }
+              ]
+}
