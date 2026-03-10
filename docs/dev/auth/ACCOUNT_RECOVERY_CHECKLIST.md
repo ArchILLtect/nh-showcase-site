@@ -142,6 +142,8 @@ Marker legend:
 - [ ] Tune rate limits and UX based on observed behavior.
 - [ ] Resolve legacy account edge cases discovered in production.
 - [ ] Document final operating procedures for support/admin use.
+- [x] Document final operating procedures for support/admin use.
+	- Added support/admin runbook: `ACCOUNT_RECOVERY_OPERATING_PROCEDURES.md`.
 - [ ] (Optional) Enable SES bounce/complaint alarms + notification channel when cost budget allows.
 
 ## Quick Validation Runbook (5 Minutes)

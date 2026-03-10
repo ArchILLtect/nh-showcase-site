@@ -227,3 +227,17 @@ Safety note:
 
 Result:
 - Normal registration verification path and queue-backed fallback path were both validated successfully in the same deployment window.
+
+## Validation Evidence Snapshot (2026-03-10)
+- Resend verification validation:
+  - Lambda response: `200` generic resend message.
+  - Invocation request id: `e3c4c157-7b0f-4a27-9535-9c7d57d65509`.
+  - Observed event: `EMAIL_VERIFICATION_RESENT`.
+- Expired token lifecycle validation:
+  - Waited ~35 minutes after receiving new verification email (30-minute TTL policy).
+  - Verify response: `400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN`.
+  - Invocation request id: `3904d6db-0862-473a-9433-81b4080f4b30`.
+  - Observed event: `EMAIL_VERIFICATION_TOKEN_REJECTED` with `reason=expired`.
+
+Result:
+- Verification lifecycle logging and expiry enforcement are validated (`resent`, `consumed`, `rejected:expired`).

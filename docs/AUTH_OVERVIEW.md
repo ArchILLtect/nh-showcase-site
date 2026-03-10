@@ -1,6 +1,6 @@
 # Auth Overview (Current State)
 
-Last updated: 2026-03-09
+Last updated: 2026-03-10
 
 Purpose: provide one fast, root-level reference for the current authentication and account recovery system.
 
@@ -58,6 +58,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - CloudWatch retention set to 2 weeks for related log groups.
 - Registration verification flow validated: register -> resend -> verify token consume -> verified state reflected in UI.
 - Queue-backed registration notification failure fallback validated with controlled failure and restore tests (enqueue on failure, normal send restored).
+- Verify lifecycle logging validated in production-like tests, including explicit expired-token rejection after ~35 minutes (`reason=expired`).
 - Recovery flow validated: email send, reset success, reused-token rejection, stale-session invalidation, limiter triggers.
 - Deferred (cost-aware): SES bounce/complaint alarm automation.
 

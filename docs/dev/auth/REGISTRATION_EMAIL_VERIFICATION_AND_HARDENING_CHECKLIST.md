@@ -45,14 +45,23 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 ## Phase D: Security + Abuse Controls
 - [x] Add per-IP and per-identifier throttling for register + resend verification.
   - Resend verification throttling validated; registration throttling validated with 429 RATE_LIMITED response and REGISTER_RATE_LIMITED structured log event.
-- [ ] Keep tokens hashed at rest and single-use with short TTL.
-- [ ] Add structured logs for verification lifecycle events (`sent`, `consumed`, `expired`, `rate_limited`).
-- [ ] Ensure no raw token values appear in logs.
+- [x] Keep tokens hashed at rest and single-use with short TTL.
+  - Token secret hash-at-rest + single-use consume semantics are enforced in registration/resend/verify lambdas; TTL uses `expiresAt` with short-lived token windows.
+- [x] Add structured logs for verification lifecycle events (`sent`, `consumed`, `expired`, `rate_limited`).
+  - `sent`: `EMAIL_VERIFICATION_RESENT` and registration `REGISTER_SUCCEEDED` with `verificationEmailSent=true`.
+  - `consumed`: `EMAIL_VERIFICATION_TOKEN_CONSUMED`.
+  - `expired`: `EMAIL_VERIFICATION_TOKEN_REJECTED` with `reason=expired`.
+  - `rate_limited`: `EMAIL_VERIFICATION_RESEND_RATE_LIMITED` and `REGISTER_RATE_LIMITED`.
+- [x] Ensure no raw token values appear in logs.
+  - Verification lifecycle logging records hashed identifiers only; no raw token secrets are emitted.
 
 ## Phase E: Ops Resilience
 - [ ] Enable PITR (or scheduled backups) for auth-critical tables.
+  - Deferred (cost-aware): backup/PITR storage costs accepted for later ops pass; see Deferred Resilience Acceptance.
 - [ ] Set/verify cost-aware CloudWatch retention for registration/verification log groups.
+  - Deferred (cost-aware): retention tuning/verification tracked as ops follow-up.
 - [ ] Add minimal alerts for registration/verification failure spikes (cost-aware baseline).
+  - Deferred (cost-aware): alarm creation and ongoing metric evaluation deferred by explicit acceptance decision.
 
 ### Deferred Resilience Acceptance (2026-03-09)
 - Deferral decision: accepted for current phase close, with explicit follow-up in the next hardening cycle.
@@ -73,6 +82,7 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
   - Confirmed in Lambda validation: first consume returned 200, second consume of same token returned 400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN.
 - [x] Expired token -> rejected; resend flow issues new token.
   - Confirmed in Lambda validation: short-TTL token returned 400 INVALID_OR_EXPIRED_VERIFICATION_TOKEN after expiry, resend produced a fresh token, and fresh-token verify returned 200 with `Users.emailVerified=true`.
+  - 2026-03-10 validation: resend returned 200 (`EMAIL_VERIFICATION_RESENT`), then verify attempt after ~35 minutes returned 400 with `EMAIL_VERIFICATION_TOKEN_REJECTED` and `reason=expired`.
 - [x] Rate limiting triggers on repeated resend/register attempts.
   - Confirmed in Lambda validation: repeated same registration identity returns 429 RATE_LIMITED.
 - [x] Register with common weak password -> rejected with `400 VALIDATION_ERROR`.

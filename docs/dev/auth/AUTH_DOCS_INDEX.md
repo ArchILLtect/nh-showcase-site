@@ -8,12 +8,13 @@ Central index for authentication and account recovery documentation.
 - Abuse controls are enabled (per-IP/per-account limits + cooldown) with structured CloudWatch logs.
 - SES bounce/complaint alerting is intentionally deferred as a cost-aware optional follow-up.
 
-## Registration Verification Status (2026-03-09)
+## Registration Verification Status (2026-03-10)
 - Phase A is complete and validated end-to-end (`register -> resend -> verify -> UI reflects verified state`).
 - Soft enforcement is active: unverified users can log in and are guided via dismissible banner + resend action.
 - `/verify-email` frontend route is live and consumes verification tokens.
 - Registration validation constraints are enforced and documented: email max length `254`; password min `8` with upper/lower/number/symbol; common weak passwords rejected.
 - Queue-backed notification-failure fallback was validated via controlled failure test and restore test; evidence captured in `REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md`.
+- Verify-email lifecycle logging was validated, including explicit expired-token rejection (`EMAIL_VERIFICATION_TOKEN_REJECTED` with `reason=expired`) after ~35-minute wait.
 - Post-rollout baseline refresh evidence captured in `baselines/2026-03-04-registration/` with 2026-03-09 validation updates.
 - Deferred resilience acceptance note is recorded in `REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md` under "Deferred Resilience Acceptance (2026-03-09)".
 - Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
@@ -31,6 +32,8 @@ Central index for authentication and account recovery documentation.
   - Migration risks, compatibility concerns, and mitigation strategy.
 - [Account Recovery Checklist](./ACCOUNT_RECOVERY_CHECKLIST.md)
   - Step-by-step checklist for planning, implementation, rollout, and post-launch review.
+- [Account Recovery Operating Procedures](./ACCOUNT_RECOVERY_OPERATING_PROCEDURES.md)
+  - Final support/admin triage and incident runbook for forgot/reset operations.
 - [Account Recovery Account-Scoped Playbook](./ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md)
   - Concrete implementation guide for `username + email` recovery targeting when emails can be shared.
 - [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
@@ -76,17 +79,18 @@ Central index for authentication and account recovery documentation.
 3. [Implementation Plan](./ACCOUNT_RECOVERY_IMPLEMENTATION.md)
 4. [Legacy Concerns](./ACCOUNT_RECOVERY_LEGACY.md)
 5. [Execution Checklist](./ACCOUNT_RECOVERY_CHECKLIST.md)
-6. [Account-Scoped Recovery Playbook (Email Reuse Allowed)](./ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md)
-7. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
-8. [Registration Email Verification + Hardening Checklist](./REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md)
-9. [Registration Email Verification Phase A Spec](./REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
-10. [Registration Rollout Toggles + Rollback Guide](./REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md)
-11. [Registration Notification Failures Consumer (MVP)](./REGISTRATION_NOTIFICATION_FAILURES_CONSUMER_MVP.md)
-12. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
-13. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
-14. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
-15. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
-16. [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
-17. [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
-18. [Lambda In-Repo Migration Checklist](../LAMBDA_MIGRATION_CHECKLIST.md)
-19. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
+6. [Account Recovery Operating Procedures](./ACCOUNT_RECOVERY_OPERATING_PROCEDURES.md)
+7. [Account-Scoped Recovery Playbook (Email Reuse Allowed)](./ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md)
+8. [Minimum Safe Registration Hardening Checklist](./REGISTRATION_HARDENING_CHECKLIST.md)
+9. [Registration Email Verification + Hardening Checklist](./REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md)
+10. [Registration Email Verification Phase A Spec](./REGISTRATION_EMAIL_VERIFICATION_PHASE_A_SPEC.md)
+11. [Registration Rollout Toggles + Rollback Guide](./REGISTRATION_ROLLOUT_AND_ROLLBACK_GUIDE.md)
+12. [Registration Notification Failures Consumer (MVP)](./REGISTRATION_NOTIFICATION_FAILURES_CONSUMER_MVP.md)
+13. [Registration Baseline Capture Checklist](./REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
+14. [Registration P0 Implementation Playbook](./REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
+15. [Registration P1 IAM Least-Privilege Playbook](./REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
+16. [Registration P1 IAM Console Click Path](./REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
+17. [Registration P1 Email Identity Policy (Reuse Allowed)](./REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
+18. [Registration P1 Email Policy Alignment Playbook](./REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
+19. [Lambda In-Repo Migration Checklist](../LAMBDA_MIGRATION_CHECKLIST.md)
+20. [Account Recovery SES Setup Guide](./ACCOUNT_RECOVERY_SES_SETUP.md)
