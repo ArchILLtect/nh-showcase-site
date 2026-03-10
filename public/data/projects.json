@@ -79,7 +79,7 @@
     {
         "title": "Budgetizer",
         "image": "../images/budgetizer-logo.png",
-        "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on your showcase site.",
+        "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on my showcase site.",
         "techStack": [
             "React 19",
             "JavaScript / TypeScript Hybrid Components",
@@ -95,7 +95,8 @@
             "LocalStorage Persistence",
             "Node Utilities for Data Normalization"
         ],
-        "github": "https://github.com/nickhanson-dev/budgetizer",
+        "liveDemo": "https://budgeteer.nickhanson.me",
+        "github": "https://github.com/ArchILLtect/budgeteer",
         "status": "Active Development – Accounts Sync, Savings Goals, and Monthly Reconciliation Live"
     },
     {
