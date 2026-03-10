@@ -21,6 +21,7 @@
 import React, {useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { trackVisit } from "../utils/visitTracker";
+import FeaturedProjectCard from '../components/FeaturedProjectCard';
 
 const HomePage = () => {
 
@@ -184,35 +185,7 @@ const HomePage = () => {
 
       {/* Projects Section */}
       <section className="py-12 bg-gray-100 dark:bg-gray-800 justify-items-center">
-        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">
-          Featured Projects
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5">
-          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark
-              hover:scale-105">
-            <img src="/images/D&D-App-logo.jpg" alt="Project Thumbnail" className="rounded w-full
-                h-auto mb-4 text-gray-100 dark:text-gray-800" />
-            <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">DnD App</h3>
-            <p className="text-gray-300 dark:text-gray-700">
-              An app for Dungeons & Dragons Info.
-            </p>
-          </div>
-          <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark
-              hover:scale-105">
-            <img src="/images/TaskMaster-App-logo.webp" alt="Project Thumbnail" className="rounded
-                w-full h-auto mb-4 text-gray-100 dark:text-gray-800" />
-            <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">Todo App</h3>
-            <p className="text-gray-300 dark:text-gray-700">
-                My version of an app for to-do items.
-            </p>
-          </div>
-        </div>
-        <Link to="/projects" className="flex justify-center mt-6">
-          <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded
-              hover:bg-blue-600 transition duration-500">
-            View All Projects
-          </button>
-        </Link>
+        <FeaturedProjectCard />
       </section>
 
       {/* Bio Section */}
@@ -226,7 +199,7 @@ const HomePage = () => {
             alt="Profile"
             className="rounded-full w-24 h-24 shadow"
           />
-          <p className="text-gray-700 dark:text-gray-300 max-w-lgsm:text-left max-w-xl">
+          <p className="text-gray-700 dark:text-gray-300 max-w-lg sm:text-left max-w-xl">
             Hi, I’m Nick Hanson Sr., a passionate web developer. I love building
             intuitive, accessible, and visually appealing applications. When I’m
             not coding, I enjoy exploring new technologies and sharing my
