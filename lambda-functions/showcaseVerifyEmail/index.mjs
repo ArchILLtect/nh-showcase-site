@@ -7,6 +7,13 @@ const EMAIL_VERIFICATION_TOKENS_TABLE_NAME =
   process.env.EMAIL_VERIFICATION_TOKENS_TABLE_NAME || "EmailVerificationTokens";
 const EMAIL_VERIFY_TOKEN_HASH_PEPPER = process.env.EMAIL_VERIFY_TOKEN_HASH_PEPPER || "";
 
+const hashForLog = (value) =>
+  crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, 12);
+
+const logEvent = (payload) => {
+  console.info(JSON.stringify(payload));
+};
+
 const jsonResponse = (statusCode, payload) => ({
   statusCode,
   headers: {
@@ -47,6 +54,8 @@ export const handler = async (event) => {
     return jsonResponse(200, { message: "OK" });
   }
 
+  const requestId = event?.requestContext?.requestId || "unknown";
+
   let parsedBody;
   try {
     parsedBody = JSON.parse(event?.body || "{}");
@@ -59,6 +68,11 @@ export const handler = async (event) => {
 
   const token = typeof parsedBody.token === "string" ? parsedBody.token.trim() : "";
   if (!token) {
+    logEvent({
+      event: "EMAIL_VERIFICATION_TOKEN_REJECTED",
+      reason: "missing_token",
+      requestId,
+    });
     return jsonResponse(400, {
       code: "VALIDATION_ERROR",
       message: "token is required",
@@ -67,6 +81,11 @@ export const handler = async (event) => {
 
   const tokenParts = parseCompositeToken(token);
   if (!tokenParts) {
+    logEvent({
+      event: "EMAIL_VERIFICATION_TOKEN_REJECTED",
+      reason: "invalid_format",
+      requestId,
+    });
     return invalidTokenResponse();
   }
 
@@ -91,6 +110,12 @@ export const handler = async (event) => {
 
     const tokenRecord = tokenRecordResult?.Item;
     if (!tokenRecord) {
+      logEvent({
+        event: "EMAIL_VERIFICATION_TOKEN_REJECTED",
+        reason: "token_not_found",
+        requestId,
+        tokenIdHash: hashForLog(tokenId),
+      });
       return invalidTokenResponse();
     }
 
@@ -101,6 +126,19 @@ export const handler = async (event) => {
     const tokenMatches = tokenRecord.tokenHash === tokenHash;
 
     if (!username || !tokenIsActive || tokenIsExpired || !tokenMatches) {
+      logEvent({
+        event: "EMAIL_VERIFICATION_TOKEN_REJECTED",
+        reason: tokenIsExpired
+          ? "expired"
+          : !tokenMatches
+            ? "hash_mismatch"
+            : !tokenIsActive
+              ? "not_active"
+              : "invalid_record",
+        requestId,
+        tokenIdHash: hashForLog(tokenId),
+        accountHash: hashForLog(`${username.toLowerCase()}#${tokenRecord.emailNormalized || ""}`),
+      });
       return invalidTokenResponse();
     }
 
@@ -139,11 +177,24 @@ export const handler = async (event) => {
       })
       .promise();
 
+    logEvent({
+      event: "EMAIL_VERIFICATION_TOKEN_CONSUMED",
+      requestId,
+      tokenIdHash: hashForLog(tokenId),
+      accountHash: hashForLog(`${username.toLowerCase()}#${tokenRecord.emailNormalized || ""}`),
+    });
+
     return jsonResponse(200, {
       message: "Email verified successfully",
     });
   } catch (error) {
     if (error?.code === "ConditionalCheckFailedException") {
+      logEvent({
+        event: "EMAIL_VERIFICATION_TOKEN_REJECTED",
+        reason: "already_consumed_or_expired",
+        requestId,
+        tokenIdHash: hashForLog(tokenId),
+      });
       return invalidTokenResponse();
     }
 
