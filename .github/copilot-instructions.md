@@ -48,6 +48,25 @@ React (CRA) + Tailwind frontend with Netlify Functions for server-side tasks and
 -   Do not commit `node_modules` for Lambda folders. Keep only source + `package.json` + lockfile in git; zip artifacts and archive folders are ignored via `.gitignore`.
 -   When deploying Lambda updates, record the current deployed Lambda version/ARN first so rollback target is always known.
 
+### AWS config baseline export automation
+
+-   Use `npm run export:auth-baseline` from repo root to capture a machine-readable snapshot of current AWS auth config.
+-   Export output is written to `docs/dev/auth/baselines/<yyyy-mm-dd>-registration-config-exports/`.
+-   Captures include DynamoDB table config, API Gateway routes/integrations/stages, Lambda config/policies, and IAM role policy snapshots (for the auth registration/verification Lambdas).
+-   Lambda environment variable values and Lambda code download URLs are sanitized in exported files.
+
+When to run:
+
+-   Before a risky auth/Lambda rollout (pre-change baseline).
+-   After deployment and smoke tests (post-change confirmation).
+-   Before finalizing hardening checklist/docs evidence for a milestone.
+-   During incident triage when comparing current state to last known-good baseline.
+
+Suggested operating cadence:
+
+-   Standard changes: run once per milestone.
+-   High-risk auth changes: run both pre-deploy and post-deploy.
+
 ## Gotchas
 
 -   Keep SPA redirect: `/* /index.html 200` in `public/_redirects`.
