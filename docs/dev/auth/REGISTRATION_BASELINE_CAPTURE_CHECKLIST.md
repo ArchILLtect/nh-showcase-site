@@ -113,7 +113,9 @@ Suggested manual test set:
 - [x] Existing username/email registration.
 - [x] Invalid email format.
 - [x] Empty password.
-- [ ] Extremely long username/email/password.
+- [x] Extremely long username/email/password.
+	- Evidence (2026-03-10): Chrome app/manual boundary run validated username limits (`2` fail, `3` pass, `32` pass, `33` fail), email boundary (`254` pass; UI blocks `255` input), and password extremes (huge strong pass; huge weak/common fail).
+	- Backend contract confirmation: integration suite `lambda-functions/showcaseRegistration/tests/handler.integration.test.mjs` passes for boundary matrix including backend email length rejection (`255` -> `400 VALIDATION_ERROR`) with `node --test tests/handler.integration.test.mjs` (`15` passed, `0` failed).
 
 ## 8) Data Quality Snapshot (Users Table)
 From DynamoDB console or scan sample:
