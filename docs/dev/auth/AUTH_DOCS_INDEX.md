@@ -2,7 +2,7 @@
 
 Central index for authentication and account recovery documentation.
 
-## Account Recovery Status (2026-03-09)
+## Account Recovery Status (2026-03-10)
 - Core recovery flow is implemented and validated end-to-end (forgot, reset, single-use token, stale-session invalidation).
 - SES sending is operational in production mode for reset and password-changed emails.
 - Abuse controls are enabled (per-IP/per-account limits + cooldown) with structured CloudWatch logs.
@@ -18,7 +18,12 @@ Central index for authentication and account recovery documentation.
 - Post-rollout baseline refresh evidence captured in `baselines/2026-03-04-registration/` with 2026-03-09 validation updates.
 - Machine-readable AWS config baseline exports captured in `baselines/2026-03-10-registration-config-exports/`.
 - Deferred resilience acceptance note is recorded in `REGISTRATION_EMAIL_VERIFICATION_AND_HARDENING_CHECKLIST.md` under "Deferred Resilience Acceptance (2026-03-09)".
-- Next focus: remaining hardening checklist items (registration-side throttling parity, PITR/backups, cost-aware alerting).
+- Remaining open work is limited to explicitly deferred cost-aware resilience items and ongoing post-launch review cadence.
+
+## Phase Complete (2026-03-10)
+- Account recovery implementation, registration hardening baseline, and registration email verification Phase A are complete and validated.
+- Remaining unchecked items in auth docs are intentionally either cost-aware deferrals or ongoing post-launch operational cadence tasks.
+- Next implementation trigger: begin the deferred resilience ops pass (alerts/retention/backup verification) when budget/timing allows.
 
 ## Core Auth
 - [Auth Quick Overview](../../AUTH_OVERVIEW.md)

@@ -137,11 +137,15 @@ Marker legend:
 		- "I was logged out after reset." -> Expected security behavior from session invalidation; sign in again with new password.
 		- "I did not request this." -> Immediately reset password again and contact support using `PASSWORD_CHANGE_SUPPORT_EMAIL` guidance.
 
+## Phase Completion Snapshot (2026-03-10)
+- Status: account recovery implementation is complete and validated (forgot/reset, single-use token lifecycle, session invalidation, limits, and support runbook).
+- Validation evidence: captured in this checklist and linked auth docs/runbooks.
+- Remaining open items: ongoing post-launch review cadence plus optional cost-aware alerting enhancements.
+
 ## Post-Launch
 - [ ] Review reset success/failure rates weekly.
 - [ ] Tune rate limits and UX based on observed behavior.
 - [ ] Resolve legacy account edge cases discovered in production.
-- [ ] Document final operating procedures for support/admin use.
 - [x] Document final operating procedures for support/admin use.
 	- Added support/admin runbook: `ACCOUNT_RECOVERY_OPERATING_PROCEDURES.md`.
 - [ ] (Optional) Enable SES bounce/complaint alarms + notification channel when cost budget allows.

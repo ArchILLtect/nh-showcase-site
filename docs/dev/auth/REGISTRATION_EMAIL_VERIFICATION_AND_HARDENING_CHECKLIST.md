@@ -11,6 +11,11 @@ Purpose: execute the next registration phase after baseline/P0 work, focused on 
 - Allow login for unverified accounts and encourage verification in-app.
 - Complete remaining registration hardening items that were deferred.
 
+## Phase Completion Snapshot (2026-03-10)
+- Status: implementation complete for this phase (register/resend/verify flow, soft-enforcement UX, validation parity, rollout controls, fallback queueing, lifecycle logging).
+- Validation: backend integration tests and production-like/manual validation evidence are captured in this checklist and linked runbooks/baselines.
+- Open items: only explicitly deferred cost-aware resilience tasks in Phase E.
+
 ## Phase A: Data + Contract Preparation
 - [x] Add/confirm user attributes on creation: `emailVerified`, `tokenVersion`, `passwordChangedAt`, `updatedAt`.
   - Implemented in registration lambda source for new registrations.

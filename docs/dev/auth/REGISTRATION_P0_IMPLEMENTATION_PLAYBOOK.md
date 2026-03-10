@@ -16,9 +16,12 @@ Out of scope:
 - Full IAM least-privilege refactor
 
 ## Future Items (Post-P0)
-- [ ] Finalize and document email identity policy decisions for verification/recovery.
-- [ ] Implement account-scoped verification/recovery flow (`username` + `email`) if email reuse remains allowed.
-- [ ] Replace broad IAM access with least-privilege, table-scoped policy set.
+- [x] Finalize and document email identity policy decisions for verification/recovery.
+  - Completed via `REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md` (username unique; email reuse allowed).
+- [x] Implement account-scoped verification/recovery flow (`username` + `email`) if email reuse remains allowed.
+  - Completed for recovery and documented in `ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md` and implementation/checklist artifacts.
+- [x] Replace broad IAM access with least-privilege, table-scoped policy set.
+  - Completed and documented in `REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md`.
 
 ## Preconditions
 - [x] Baseline completed in `docs/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`

@@ -55,12 +55,12 @@ Purpose: provide one fast, root-level reference for the current authentication a
 
 ## Operations Snapshot
 - SES sender identity verified and production access granted in `us-east-2`.
-- CloudWatch retention set to 2 weeks for related log groups.
+- CloudWatch retention is set to 2 weeks for recovery-related log groups.
 - Registration verification flow validated: register -> resend -> verify token consume -> verified state reflected in UI.
 - Queue-backed registration notification failure fallback validated with controlled failure and restore tests (enqueue on failure, normal send restored).
 - Verify lifecycle logging validated in production-like tests, including explicit expired-token rejection after ~35 minutes (`reason=expired`).
 - Recovery flow validated: email send, reset success, reused-token rejection, stale-session invalidation, limiter triggers.
-- Deferred (cost-aware): SES bounce/complaint alarm automation.
+- Deferred (cost-aware): registration resilience ops pass (PITR/backup verification, retention verification, minimal failure alerts) and SES bounce/complaint alarm automation.
 
 ## Rollback & Support (Quick Reference)
 Fast rollback path:
