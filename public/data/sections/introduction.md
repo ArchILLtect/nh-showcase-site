@@ -1,0 +1,1 @@
+I have **always** been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development, creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.
