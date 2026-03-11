@@ -2,7 +2,7 @@
  * File: ProjectCardItem.jsx
  * Author: Nick Hanson
  * Created On: March 10, 2026
- * Last Updated: March 10, 2026
+ * Last Updated: March 11, 2026
  * Description: This is the component used for displaying individual projects in a project card
  *
  * Props:

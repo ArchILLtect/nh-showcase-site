@@ -1,3 +1,16 @@
+/**
+ * File: EmailVerificationBanner.jsx
+ * Author: Nick Hanson
+ * Created On: March 10, 2026
+ * Last Updated: March 11, 2026
+ * Description: A banner component that prompts users with unverified emails to verify their email address, with an option to resend the verification email. The banner can be dismissed, and the dismissal state is persisted in localStorage on a per-user basis.
+ *
+ * Notes:
+ * - Persists dismissal state in localStorage under key: "emailVerifyBannerDismissed:<username>" with values "true" | "false".
+ * - Renders only when the user has an unverified email.
+ * - Uses Tailwind + dark variants; positioned above fixed Footer.
+ */
+
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getLoggedInUser, isLoggedIn } from "../utils/auth";

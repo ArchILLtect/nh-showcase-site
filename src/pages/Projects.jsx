@@ -2,7 +2,7 @@
  * File: Projects.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: July 25, 2025
+ * Last Updated: March 11, 2026
  * Description: The projects page for the showcase site.
  * This is where the user can view projects.
  *

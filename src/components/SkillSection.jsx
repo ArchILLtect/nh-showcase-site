@@ -1,8 +1,8 @@
 /**
  * File: SkillSection.jsx
  * Author: Nick Hanson
- * Created On: December 21, 2024
- * Last Updated: July 25, 2025
+ * Created On: March 10, 2026
+ * Last Updated: March 11, 2026
  * Description: The skill section for the showcase site. **REPLACE**
  *
  * Props:

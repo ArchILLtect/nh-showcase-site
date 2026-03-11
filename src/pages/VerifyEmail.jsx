@@ -1,3 +1,29 @@
+/**
+ * File: VerifyEmail.jsx
+ * Author: Nick Hanson
+ * Created On: March 05, 2026
+ * Last Updated: March 11, 2026
+ * Description: The verify email page for the showcase site.
+ * This is where the user can verify their email address.
+ *
+ * Props:
+ * - None
+ *
+ * Notes:
+ * - Uses Tailwind CSS classes for styling.
+ * - Responsive design included for mobile and desktop views.
+ *
+ * Dependencies:
+ * - React
+ * - useState: A React hook for managing state.
+ * - useEffect: A React hook for side effects.
+ * - useMemo: A React hook for memoizing values.
+ * - useSearchParams: A React Router hook for accessing URL search parameters.
+ * - AppModal: A component to display a modal with a live demo of the app.
+ * - trackVisit: A utility function to track visits to the verify email page.
+ * - LoadingSpinner: A component for display a spinner during loading times.
+ */
+
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";

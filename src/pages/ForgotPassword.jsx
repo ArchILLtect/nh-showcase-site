@@ -1,3 +1,26 @@
+/**
+ * File: ForgotPassword.jsx
+ * Author: Nick Hanson
+ * Created On: March 05, 2026
+ * Last Updated: March 11, 2026
+ * Description: The forgot password page for the showcase site.
+ * This is where the user can request a password reset.
+ *
+ * Props:
+ * - None
+ *
+ * Notes:
+ * - Uses Tailwind CSS classes for styling.
+ * - Responsive design included for mobile and desktop views.
+ *
+ * Dependencies:
+ * - React
+ * - useState: A React hook for managing state.
+ * - useEffect: A React hook for side effects.
+ * - trackVisit: A utility function to track visits to the forgot password page.
+ * - LoadingSpinner: A component for display a spinner during loading times.
+ */
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";

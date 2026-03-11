@@ -2,7 +2,7 @@
  * File: Blog.jsx
  * Author: Nick Hanson
  * Created On: December 21, 2024
- * Last Updated: July 25, 2025
+ * Last Updated: March 11, 2026
  * Description: The blog page for the showcase site.
  *
  * Props:
@@ -50,7 +50,6 @@ export default function Blogs() {
         setLoading(true); // start loading
         const response = await fetch(BLOG_API_ENDPOINT);
         const data = await response.json();
-        console.log("Fetched metadata:", data); // 👈 sanity check
 
         // Safe fallback to array
         const blogArray = Array.isArray(data)
