@@ -1,0 +1,98 @@
+[
+    {
+        "icon": "icons/HTML-CSS-JS-Icon.png",
+        "title": "HTML/CSS/JavaScript",
+        "alt": "HTML/CSS/JS Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/React-logo.png",
+        "title": "React",
+        "alt": "React Icon",
+        "flex": true
+    },
+    {
+        "icon": "icons/Tailwind-icon.png",
+        "title": "Tailwind CSS",
+        "alt": "Tailwind Logo",
+        "flex": false
+    },
+    {
+        "icon": "icons/Angular-icon.png",
+        "title": "Angular",
+        "alt": "Angular Icon",
+        "flex": false
+    },
+        {
+        "icon": "icons/PHP-Logo.png",
+        "title": "PHP",
+        "alt": "PHP Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/Node.js-logo.png",
+        "title": "NodeJS",
+        "alt": "NodeJS Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/java-icon.webp",
+        "title": "Java",
+        "alt": "Java Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/Python-Logo.png",
+        "title": "Python",
+        "alt": "Python Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/AWS-Logo.webp",
+        "title": "AWS",
+        "alt": "AWS Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/VSCode-Logo.jpg",
+        "title": "VS Code",
+        "alt": "VS Code Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/MySQL-Logo.webp",
+        "title": "MySQL",
+        "alt": "MySQL Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/DynamoDB-Logo.png",
+        "title": "DynamoDB",
+        "alt": "DynamoDB Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/MongoDb-Logo.png",
+        "title": "MongoDB",
+        "alt": "MongoDB Icon",
+        "flex": true
+    },
+    {
+        "icon": "icons/ChakraUI-Logo.png",
+        "title": "Chakra UI",
+        "alt": "Chakra UI Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/ExpressJS-Logo.png",
+        "title": "ExpressJS",
+        "alt": "ExpressJS Icon",
+        "flex": false
+    },
+    {
+        "icon": "icons/Vue-Logo.png",
+        "title": "VueJS",
+        "alt": "VueJS Icon",
+        "flex": false
+    }
+]

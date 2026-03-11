@@ -1,0 +1,50 @@
+[
+    {
+        "icon": "icons/Figma-Logo.png",
+        "title": "Figma",
+        "alt": "Figma Icon",
+        "width": "w-32"
+    },
+    {
+        "icon": "icons/AGILE.png",
+        "title": "AGILE Development Practices",
+        "alt": "AGILE Development Practices Icon",
+        "width": "w-44"
+    },
+    {
+        "icon": "icons/Dev-Ops-Logo.png",
+        "title": "Development Operations",
+        "alt": "Development Operations Icon",
+        "width": "w-56"
+    },
+    {
+        "icon": "icons/CI-CD-Logo.png",
+        "title": "CI/CD Pipeline - Continuous Integration & Deployment",
+        "alt": "CI/CD Pipeline Icon",
+        "width": "w-36"
+    },
+    {
+        "icon": "icons/Git&GitHub-Logo.png",
+        "title": "Git & GitHub",
+        "alt": "Git & GitHub Icon",
+        "width": "w-40"
+    },
+    {
+        "icon": "icons/Netlify-Logo.png",
+        "title": "Netlify Hosting Services",
+        "alt": "Netlify Icon",
+        "width": "w-62"
+    },
+    {
+        "icon": "icons/AmazonWebServices-Logo.png",
+        "title": "AWS (Lambda, API Gateway, S3, DynamoDB)",
+        "alt": "AWS Icon",
+        "width": "w-56"
+    },
+    {
+        "icon": "icons/LocalStorage-Logo.png",
+        "title": "LocalStorage Persistence",
+        "alt": "LocalStorage Icon",
+        "width": "w-62"
+    }
+]
