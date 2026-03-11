@@ -1,12 +1,9 @@
 
 ## TOP Priorities
-- [ ] Create a page for future projects that I intend to work on and add it to the navbar.
-  - [ ] Add a new entry for creating (an) npm package(s) for React components and utilities--specifically any helpers I have that are and/or could be reusable across projects (e.g., auth utilities, API clients, custom hooks).
-  - [ ] Add a new entry for creating (a) YouTube channel(s) to share knowledge, tutorials, and project walkthroughs related to my work and learning journey.
-
-- [ ] Catch up on my blogs and add them to the site.
-  - [ ] Add a new entry for writing and publishing blog posts about my projects, learning experiences, and insights in software development, web technologies, and related topics and add them to the blog section of the site.
-
+- [ ] Github API implementation.
+- [ ] Make a DB for JSON files and implement it across the site to make it easier to add new items and maintain existing ones.
+- [ ] Add missing certs from Coursera and codefinity, etc.
+- [ ] Add Dean's List letters to achievements page.
 
 - [ ] Add server-side validation and duplicate prevention to registration Lambda to fix critical bugs and security issues in current flow (P0).
 - [ ] Define safe, SSAF-aligned modernization plan for auth/API architecture to enable future improvements without risking current stability (P1).
@@ -18,7 +15,8 @@
 - [ ] Add new auth-related AWS resources (Lambdas, DynamoDB indexes, IAM policies) with careful naming and ownership documentation to prevent future confusion and ensure clear responsibility.
 - [ ] Add automated tests for auth flows (registration, login, recovery) covering success paths, validation errors, duplicate attempts, and edge cases to prevent regressions and ensure contract stability.
 
-
+- [ ] Catch up on my blogs and add them to the site.
+  - [ ] Add a new entry for writing and publishing blog posts about my projects, learning experiences, and insights in software development, web technologies, and related topics and add them to the blog section of the site.
 
 
 ## Auth / Account Recovery
@@ -71,8 +69,14 @@
 - [x] Move current PDP links into an actual card item in "Videos" section
 - [x] Add new CodeForge Presentation to showcase site
 - [x] Convert to Windows 11
-- [ ] Switch to new version of TaskMaster
-- [ ] Github API implementation.
-- [ ] Make a DB for projects
-- [ ] Add missing certs from Coursera and codefinity, etc.
-- [ ] Add Dean's List letters to achievements page.
+- [x] Switch to new version of TaskMaster
+
+
+## Completed Items
+- [x] Create a page for future projects that I intend to work on and add it to the navbar.
+  - [x] Add a new entry for creating my FamHub app to connect with family members, share updates, and coordinate events with features like user authentication, real-time and video chat, and a shared calendar.
+  - [x] Add a new entry for creating (an) npm package(s) for React components and utilities--specifically any helpers I have that are and/or could be reusable across projects (e.g., auth utilities, API clients, custom hooks).
+  - [x] Add a new entry for creating an app to manage my projects, tasks, and learning goals with features like user authentication, database-backed storage, and a clean UI to track progress and organize my work.
+  - [x] Add a new entry for creating a RiffTrax collection app to catalog and share my favorite movie riffing commentaries, including features like user ratings, reviews, and a searchable database of riffs. Later adding a discussion forum for fans to connect and share their thoughts on riffs and movies.
+  - [x] Add a new entry for creating a Media Tracker app to manage movie, TV, and book collections with features like tracking what I've watched/read, rating and reviewing items, and generating recommendations based on my preferences. This app will also have a Chrome extension that is injected into every movie/TV/book page for Chrome search results to allow quick adding of items to my collection and rating them on the spot. It will also utilize the TMDB API to fetch metadata and cover art for movies and TV shows, and the Google Books API for books.
+  - [x] Add a new entry for creating a YouTube channel to share my learning journey, project details/updates, tutorials, and insights in software development and related topics with the broader community.
