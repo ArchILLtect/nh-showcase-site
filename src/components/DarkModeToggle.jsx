@@ -20,10 +20,13 @@
 import React, { useEffect } from 'react';
 
 const DarkModeToggle = () => {
-  // Load the saved dark mode state from localStorage on component mount
+  // Load the saved dark mode state from localStorage on component mount.
+  // Default is dark — only disable if the user has explicitly chosen light.
   useEffect(() => {
     const darkMode = localStorage.getItem('darkMode');
-    if (darkMode === 'enabled') {
+    if (darkMode === 'disabled') {
+      document.documentElement.classList.remove('dark');
+    } else {
       document.documentElement.classList.add('dark');
     }
   }, []); // Runs once when the component mounts
