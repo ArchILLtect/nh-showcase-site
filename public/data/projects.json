@@ -19,7 +19,7 @@
     },
     {
       "title": "TaskMaster App",
-      "image": "../images/TaskMaster-App-Logo.webp",
+      "image": "../images/TaskMaster-App-Banner.png",
       "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
       "techStack": ["React", "Node.js", "MySQL", "Netlify"],
       "liveDemo": "https://taskmaster.nickhanson.me/",
@@ -98,14 +98,5 @@
         "liveDemo": "https://bullpenreport.nickhanson.me",
         "github": "https://github.com/ArchILLtect/the-bullpen-report",
         "status": "MVP - Work in Progress"
-    },
-    {
-        "title": "Media Tracker",
-        "image": "../images/RiffTrax-Collection-thumbnail.png",
-        "description": "Track movies, shows, and games with detailed stats and recommendations.",
-        "techStack": ["Next.js", "MongoDB"],
-        "liveDemo": "https://media-tracker.example.com",
-        "github": "https://github.com/ArchILLtect/media-tracker-extension",
-        "status": "None"
     }
 ]
