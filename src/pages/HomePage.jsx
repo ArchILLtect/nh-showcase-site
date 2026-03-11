@@ -21,7 +21,8 @@
 import React, {useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { trackVisit } from "../utils/visitTracker";
-import FeaturedProjectCard from '../components/FeaturedProjectCard';
+import FeaturedProjects from '../components/FeaturedProjects';
+import SkillSection from '../components/SkillSection';
 
 const HomePage = () => {
 
@@ -72,120 +73,12 @@ const HomePage = () => {
       {/* Skills Section */}
       {/* TODO: Add C#, C++ and .NET */}
       <section className="py-12">
-        <h2 id="skills" className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mb-6">
-          My Skills
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6
-            2xl:grid-cols-7 gap-x-2 gap-y-8 justify-items-center">
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/HTML-CSS-JS-Icon.png" className="w-24 h-auto transition transform
-                hover:scale-110" alt="HTML/CSS/JS Icon" title="HTML/CSS/JavaScript" />
-          </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
-              dark:shadow-dark justify-center content-center">
-            <img src="icons/React-logo.png" className="transition transform hover:scale-110"
-                alt="React Logo" title="React" />
-          </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
-              dark:shadow-dark justify-center content-center">
-            <img src="icons/Tailwind-icon.png" className="transition transform hover:scale-110"
-                alt="Tailwind Logo" title="Tailwind CSS" />
-          </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
-              dark:shadow-dark justify-center content-center">
-            <img src="icons/Angular-icon.png" className="transition transform hover:scale-110"
-                alt="Angular Logo" title="Angular" />
-          </div>
-          <div className="w-32 h-32 flex text-center bg-gray-100 p-4 rounded shadow
-              dark:shadow-dark justify-center content-center">
-            <img src="icons/PHP-Logo.png" className="transition transform hover:scale-110"
-                alt="PHP Logo" title="PHP" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/Node.js-logo.png" className="w-24 h-12 transition
-                transform hover:scale-110" alt="Node.js Logo" title="Node.js" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/java-icon.webp" className="w-24 h-24 transition
-                transform hover:scale-110" alt="Java Logo" title="Java" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/Python-Logo.png" className="w-24 h-24 transition
-                transform hover:scale-110" alt="Python Logo" title="Python" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/AWS-Web-Services-Logo.webp" className="w-24 h-24 transition
-                transform hover:scale-110" alt="AWS Logo" title="Amazon Web Services" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/VSCode-Logo.jpg" className="w-24 h-24 transition
-                transform hover:scale-110" alt="VS Code Logo" title="VS Code" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/MySQL-Logo.webp" className="w-24 h-24 transition
-                transform hover:scale-110" alt="MySQL Logo" title="MySQL Database" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/DynamoDB-Logo.png" className="w-24 h-24 transition
-                transform hover:scale-110" alt="DynamoDB Logo" title="Dynamo Database" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/MongoDb-Logo.png" className="w-24 h-24 transition
-                transform hover:scale-110" alt="MongoDB Logo" title="Mongo Database" />
-          </div>
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/ChakraUI-Logo.png" className="w-24 h-24 transition
-                transform hover:scale-110" alt="Chakra UI Logo" title="Chakra UI" />
-          </div>
-          {/* Add more skills as needed */}
-        </div>
-        <h2 className="text-2xl font-bold text-center text-gray-300 dark:text-gray-200 mt-10 mb-6">
-          My Process
-        </h2>
-        <div className="flex justify-around flex-wrap gap-6">
-          <div className="w-32 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/Figma-Logo.png" className="h-24 transition
-                transform hover:scale-110" alt="Figma Logo" title="Figma" />
-          </div>
-          <div className="w-44 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/AGILE.png" className="h-24 transition
-                transform hover:scale-110" alt="AWS Logo" title="AGILE Development Practices" />
-          </div>
-          <div className="w-56 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/Dev-Ops-Logo.png" className="h-24 transition
-                transform hover:scale-110" alt="AWS Logo" title="Development Operations" />
-          </div>
-          <div className="w-36 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/CI-CD-Logo.png" className="h-24 transition
-                transform hover:scale-110" alt="AWS Logo"
-                title="CI/CD Pipeline - Continuous Integration & Deployment" />
-          </div>
-          <div className="w-40 h-32 text-center bg-gray-100 p-4 rounded shadow dark:shadow-dark
-              justify-center content-center">
-            <img src="icons/Git&GitHub-Logo.png" className="h-24 transition
-                transform hover:scale-110" alt="AWS Logo" title="Git & Github" />
-          </div>
-          {/* Add more workflow/processes as needed */}
-        </div>
+        <SkillSection />
       </section>
 
       {/* Projects Section */}
       <section className="py-12 bg-gray-100 dark:bg-gray-800 justify-items-center">
-        <FeaturedProjectCard />
+        <FeaturedProjects />
       </section>
 
       {/* Bio Section */}
@@ -199,8 +92,8 @@ const HomePage = () => {
             alt="Profile"
             className="rounded-full w-24 h-24 shadow"
           />
-          <p className="text-gray-700 dark:text-gray-300 max-w-lg sm:text-left max-w-xl">
-            Hi, I’m Nick Hanson Sr., a passionate web developer. I love building
+          <p className="text-gray-700 dark:text-gray-300 max-w-lg sm:text-left max-w-xl font-semibold">
+            Hi, I’m <b>Nick Hanson Sr.</b>, a passionate web developer. I <u>love</u> building
             intuitive, accessible, and visually appealing applications. When I’m
             not coding, I enjoy exploring new technologies and sharing my
             knowledge with others.
