@@ -1,0 +1,82 @@
+[
+    {
+      "title": "FamHub",
+      "image": "../images/FamHub-Banner.png",
+      "description": "A full-stack web platform for connecting with family members, sharing updates, and coordinating events.",
+      "techStack": [
+        "React 19",
+        "TypeScript",
+        "Vite",
+        "Chakra UI",
+        "Zustand",
+        "Node.js",
+        "Express",
+        "MongoDB (Atlas)",
+        "Mongoose",
+        "JWT Authentication",
+        "Socket.IO (Real-Time Chat)",
+        "WebRTC (Video Chat)",
+        "FullCalendar (Shared Calendar)"
+      ],
+      "github": "https://github.com/ArchILLtect/famhub",
+      "status": "Project Planned - Not Started"
+    },
+    {
+        "title": "Media Tracker",
+        "image": "../images/MediaTracker-Platform-Banner.png",
+        "description": "Track movies, shows, and games with detailed stats and recommendations.",
+        "techStack": [
+          "Next.js",
+          "MongoDB",
+          "TMDB API (Movies/TV)",
+          "Google Books API (Books)",
+          "Chrome Extension"
+        ],
+        "github": "https://github.com/ArchILLtect/media-tracker-extension",
+        "status": "Project Started - MVP In Progress"
+    },
+    {
+        "title": "RiffTrax Collection",
+        "image": "../images/RiffTrax-Collection-thumbnail.png",
+        "description": "A catalog of my favorite RiffTrax commentaries with user ratings and reviews.",
+        "techStack": ["Next.js", "MongoDB"],
+        "github": "https://github.com/ArchILLtect/rifftrax-collection",
+        "status": "None"
+    },
+    {
+        "title": "Project Management App",
+        "image": "../images/project-management-app-thumbnail.png",
+        "description": "An app to manage projects, tasks, and learning goals with user authentication and database-backed storage.",
+        "techStack": ["React", "Node.js", "MySQL", "Netlify"],
+        "liveDemo": "https://project-management-app.example.com",
+        "github": "https://github.com/ArchILLtect/project-management-app",
+        "status": "None"
+    },
+    {
+        "title": "NPM Package Collection",
+        "image": "../images/npm-package-collection-thumbnail.png",
+        "description": "A collection of reusable React components and utilities for authentication, API clients, and custom hooks.",
+        "techStack": ["React", "TypeScript", "Vite", "NPM"],
+        "liveDemo": "https://www.npmjs.com/org/archilltect",
+        "github": "https://github.com/ArchILLtect/npm-package-collection",
+        "status": "None"
+    },
+    {
+        "title": "YouTube Channel",
+        "image": "../images/youtube-channel-thumbnail.png",
+        "description": "A YouTube channel to share knowledge, tutorials, and project walkthroughs related to my work and learning journey.",
+        "techStack": ["YouTube"],
+        "liveDemo": "https://www.youtube.com/channel/UC1234567890abcdef",
+        "github": null,
+        "status": "None"
+     },
+     {
+        "title": "The Bullpen Report",
+        "image": "../images/bullpen-report-thumbnail.png",
+        "description": "A sports news and analysis platform focused on baseball, featuring articles, stats, and community discussions.",
+        "techStack": ["React", "Node.js", "MySQL", "Netlify"],
+        "liveDemo": "https://bullpenreport.nickhanson.me",
+        "github": "https://github.com/ArchILLtect/the-bullpen-report",
+        "status": "None"
+    }
+]
