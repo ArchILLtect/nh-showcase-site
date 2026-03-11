@@ -31,7 +31,6 @@ const ProjectCard = ({ project }) => {
 export default ProjectCard;
 
 ProjectCard.propTypes = {
-  index: PropTypes.number.isRequired,
   project: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
