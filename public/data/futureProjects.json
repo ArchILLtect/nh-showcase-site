@@ -1,82 +1,91 @@
 [
-    {
-      "title": "FamHub",
-      "image": "../images/FamHub-Banner.png",
-      "description": "A full-stack web platform for connecting with family members, sharing updates, and coordinating events.",
-      "techStack": [
-        "React 19",
-        "TypeScript",
-        "Vite",
-        "Chakra UI",
-        "Zustand",
-        "Node.js",
-        "Express",
-        "MongoDB (Atlas)",
-        "Mongoose",
-        "JWT Authentication",
-        "Socket.IO (Real-Time Chat)",
-        "WebRTC (Video Chat)",
-        "FullCalendar (Shared Calendar)"
-      ],
-      "github": "https://github.com/ArchILLtect/famhub",
-      "status": "Project Planned - Not Started"
-    },
-    {
-        "title": "Media Tracker",
-        "image": "../images/MediaTracker-Platform-Banner.png",
-        "description": "Track movies, shows, and games with detailed stats and recommendations.",
-        "techStack": [
-          "Next.js",
-          "MongoDB",
-          "TMDB API (Movies/TV)",
-          "Google Books API (Books)",
-          "Chrome Extension"
-        ],
-        "github": "https://github.com/ArchILLtect/media-tracker-extension",
-        "status": "Project Started - MVP In Progress"
-    },
-    {
-        "title": "RiffTrax Collection",
-        "image": "../images/RiffTrax-Collection-thumbnail.png",
-        "description": "A catalog of my favorite RiffTrax commentaries with user ratings and reviews.",
-        "techStack": ["Next.js", "MongoDB"],
-        "github": "https://github.com/ArchILLtect/rifftrax-collection",
-        "status": "None"
-    },
-    {
-        "title": "Project Management App",
-        "image": "../images/project-management-app-thumbnail.png",
-        "description": "An app to manage projects, tasks, and learning goals with user authentication and database-backed storage.",
-        "techStack": ["React", "Node.js", "MySQL", "Netlify"],
-        "liveDemo": "https://project-management-app.example.com",
-        "github": "https://github.com/ArchILLtect/project-management-app",
-        "status": "None"
-    },
-    {
-        "title": "NPM Package Collection",
-        "image": "../images/npm-package-collection-thumbnail.png",
-        "description": "A collection of reusable React components and utilities for authentication, API clients, and custom hooks.",
-        "techStack": ["React", "TypeScript", "Vite", "NPM"],
-        "liveDemo": "https://www.npmjs.com/org/archilltect",
-        "github": "https://github.com/ArchILLtect/npm-package-collection",
-        "status": "None"
-    },
-    {
-        "title": "YouTube Channel",
-        "image": "../images/youtube-channel-thumbnail.png",
-        "description": "A YouTube channel to share knowledge, tutorials, and project walkthroughs related to my work and learning journey.",
-        "techStack": ["YouTube"],
-        "liveDemo": "https://www.youtube.com/channel/UC1234567890abcdef",
-        "github": null,
-        "status": "None"
-     },
-     {
-        "title": "The Bullpen Report",
-        "image": "../images/bullpen-report-thumbnail.png",
-        "description": "A sports news and analysis platform focused on baseball, featuring articles, stats, and community discussions.",
-        "techStack": ["React", "Node.js", "MySQL", "Netlify"],
-        "liveDemo": "https://bullpenreport.nickhanson.me",
-        "github": "https://github.com/ArchILLtect/the-bullpen-report",
-        "status": "None"
-    }
+  {
+    "title": "FamHub",
+    "image": "../images/FamHub-Banner.png",
+    "description": "A full-stack web platform for connecting with family members, sharing updates, and coordinating events.",
+    "techStack": [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Chakra UI",
+      "Zustand",
+      "Node.js",
+      "Express",
+      "MongoDB (Atlas)",
+      "Mongoose",
+      "JWT Authentication",
+      "Socket.IO (Real-Time Chat)",
+      "WebRTC (Video Chat)",
+      "FullCalendar (Shared Calendar)"
+    ],
+    "github": "https://github.com/ArchILLtect/famhub",
+    "status": "Project Planned - Not Started"
+  },
+  {
+    "title": "Media Tracker: Platform",
+    "image": "../images/MediaTracker-Platform-Banner.png",
+    "description": "A modern media management platform for organizing movies, shows, and games in one personal hub. Track progress, rate experiences, build and manage curated watchlists, discover new content through a unified and intuitive interface, and explore personalized discovery tools across multiple entertainment types.",
+    "techStack": [
+      "Vite 7.x",
+      "Preact 10.x",
+      "TypeScript 5.x",
+      "Chakra UI (3.x, planned)",
+      "Zustand (5.x)",
+      "Fastify (planned)",
+      "Turborepo (planned)",
+      "Zod (planned)",
+      "PostgreSQL (planned)",
+      "TMDB API (Movies/TV)",
+      "Google Books API (Books)"
+    ],
+    "github": "https://github.com/ArchILLtect/mediatracker",
+    "status": "Project Started - MVP In Progress"
+  },
+  {
+    "title": "Media Tracker: Companion",
+    "image": "../images/MediaTracker-Companion-Banner.png",
+    "description": "A lightweight browser extension that overlays media tracking controls directly onto media search results, allowing users to save, rate, and manage titles in real time without leaving their browsing flow. Quickly mark titles as watched, rate them, or add to watchlists — with optional sync to the MediaTracker platform.",
+    "techStack": [
+      "Chrome Extension (MV3)",
+      "Vite 7.x",
+      "Preact 10.x",
+      "TypeScript 5.x",
+      "Zustand (5.x)",
+      "TMDB API (integration)"
+    ],
+    "github": "https://github.com/ArchILLtect/media-tracker-extension",
+    "status": "Project Started - MVP In Progress"
+  },
+  {
+    "title": "RiffTrax Collection",
+    "image": "../images/RiffTrax-Collection-Banner.png",
+    "description": "A catalog of my favorite movie riffing commentaries, including features like user ratings, reviews, and a searchable database of riffs. Later adding a discussion forum for fans to connect and share their thoughts on riffs and movies.",
+    "techStack": ["Next.js", "MongoDB"],
+    "github": "https://github.com/ArchILLtect/rifftrax-collection",
+    "status": "Project Planned - Not Started"
+  },
+  {
+    "title": "Project Management App",
+    "image": "../images/Project_Management_App-Banner.png",
+    "description": "An app to manage my projects, tasks, and learning goals with features like user authentication, database-backed storage, and a clean UI to track progress and organize my work.",
+    "techStack": ["React", "Node.js", "MySQL", "Netlify"],
+    "github": "https://github.com/ArchILLtect/project-management-app",
+    "status": "Project Planned - Not Started"
+  },
+  {
+    "title": "NPM Package Collection",
+    "image": "../images/NPM_Package_Collection-Banner.png",
+    "description": "A collection of reusable React components and utilities. Specifically any helpers I have that are--or could be--reusable across projects (e.g., auth utilities, API clients, custom hooks).",
+    "techStack": ["React", "TypeScript", "Vite", "NPM"],
+    "github": "https://github.com/ArchILLtect/npm-package-collection",
+    "status": "Project Planned - Not Started"
+  },
+  {
+    "title": "YouTube Channel",
+    "image": "../images/YouTube_Channel-Banner.png",
+    "description": "A YouTube channel to share my learning journey, project details/updates, tutorials, and insights in software development and related topics with the broader community.",
+    "techStack": ["YouTube"],
+    "github": null,
+    "status": "Project Planned - Not Started"
+  }
 ]
