@@ -19,7 +19,64 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { trackVisit } from "../utils/visitTracker";
+
+const getSectionDetails = (section) => {
+  if (typeof section?.details === 'string' || section?.details == null) {
+    return { type: 'text', content: String(section?.details || ''), file: '' };
+  }
+
+  return {
+    type: String(section?.details?.type || 'text').toLowerCase(),
+    content: String(section?.details?.content || ''),
+    file: String(section?.details?.file || ''),
+  };
+};
+
+const slugify = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const getMarkdownPath = (section, details) => {
+  if (details.file) {
+    return details.file.startsWith('/') ? details.file : `/data/sections/${details.file}`;
+  }
+
+  return `/data/sections/${slugify(section?.title)}.md`;
+};
+
+const sanitizeHtml = (unsafeHtml) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(String(unsafeHtml || ''), 'text/html');
+
+  const blockedTags = ['script', 'style', 'iframe', 'object', 'embed', 'link', 'meta'];
+  blockedTags.forEach((tag) => {
+    doc.querySelectorAll(tag).forEach((node) => node.remove());
+  });
+
+  doc.querySelectorAll('*').forEach((element) => {
+    Array.from(element.attributes).forEach((attr) => {
+      const name = attr.name.toLowerCase();
+      const value = attr.value.toLowerCase();
+
+      if (name.startsWith('on')) {
+        element.removeAttribute(attr.name);
+        return;
+      }
+
+      if ((name === 'href' || name === 'src') && value.startsWith('javascript:')) {
+        element.removeAttribute(attr.name);
+      }
+    });
+  });
+
+  return doc.body.innerHTML;
+};
 
 const AboutMe = () => {
 
@@ -27,39 +84,75 @@ const AboutMe = () => {
     trackVisit();
   }, []);
 
-  const sections = [
-    {
-      title: "Introduction",
-      summary: "Hi, I’m Nick Hanson. I spent most of my career working in construction and production fields, and I’m now transitioning into web development to turn my passion for coding into a new path.",
-      details: (<>I have <strong>always</strong> been fascinated by technology and problem-solving. After a fulfilling career managing teams and operations, I decided to pursue web development — creating applications and designing user-friendly solutions. I enjoy learning and constantly challenging myself with new projects.</>),
-    },
-    {
-      title: "Education",
-      summary: "Currently pursuing (in my last semester) an Associate’s Degree in Web Software Development at Madison College, with plans to transfer to UW-Whitewater for a BS in Computer Science.",
-      details: "My coursework has focused on programming, web development, and software engineering fundamentals. I’ve consistently earned high grades — including over 100% in advanced programming courses — and am gaining practical experience through academic projects and reverse engineering assignments.",
-    },
-    {
-      title: "Career Pivot",
-      summary: "As a project manager, I developed skills in leadership, problem-solving, and technical communication, which I now apply to web development.",
-      details: "In my project management career, I led diverse teams, managed tight deadlines, and facilitated communication between stakeholders. These skills have been invaluable in web development projects, where I prioritize clarity, efficiency, and teamwork.",
-    },
-    {
-      title: "Ongoing Learning",
-      summary: "Beyond formal education, I’m committed to continuous learning through online courses, certifications, and tech communities.",
-      details: "I’ve completed self-paced courses on platforms like Coursera and Codecademy in topics such as Python, backend development, responsive design, and cloud infrastructure. I’m currently preparing for AWS certification and plan to pursue advanced Java programming credentials. Staying current with evolving tech stacks is a key part of how I want to continue growing as a developer.",
-    },
-    {
-      title: "What People Are Saying",
-      summary: "I’ve received positive feedback from peers and instructors, highlighting my dedication, problem-solving skills, and ability to learn quickly.",
-      details: "“You are such a great writer! This is perfect!!! I don't think anything needs to be changed.”— Paula Waite, Honors Program Instructor"
-    }
-  ];
-
   const [expanded, setExpanded] = useState(null);
+  const [sections, setSections] = useState([]);
+  const [sectionsLoading, setSectionsLoading] = useState(true);
+  const [markdownByIndex, setMarkdownByIndex] = useState({});
+  const [markdownLoadingByIndex, setMarkdownLoadingByIndex] = useState({});
+  const [markdownErrorByIndex, setMarkdownErrorByIndex] = useState({});
+
+  useEffect(() => {
+    const loadSections = async () => {
+      const start = Date.now();
+      try {
+        setSectionsLoading(true); // show spinner
+        const response = await fetch('data/sections.json');
+        const data = await response.json();
+        setSections(data);
+      } catch (error) {
+        console.error("Error fetching sections:", error);
+      } finally {
+        const elapsed = Date.now() - start;
+        const delay = Math.max(0, 500 - elapsed);
+        setTimeout(() => setSectionsLoading(false), delay); // ⏳ delay cleanup
+      }
+    };
+
+    loadSections();
+  }, []);
 
   const toggleSection = (index) => {
     setExpanded(expanded === index ? null : index);
   };
+
+  useEffect(() => {
+    if (expanded === null) return;
+
+    const section = sections[expanded];
+    if (!section) return;
+
+    const details = getSectionDetails(section);
+    if (details.type !== 'md') return;
+    if (typeof markdownByIndex[expanded] === 'string') return;
+    if (markdownLoadingByIndex[expanded]) return;
+
+    const markdownPath = getMarkdownPath(section, details);
+
+    const loadMarkdown = async () => {
+      try {
+        setMarkdownLoadingByIndex((prev) => ({ ...prev, [expanded]: true }));
+        setMarkdownErrorByIndex((prev) => ({ ...prev, [expanded]: '' }));
+
+        const response = await fetch(markdownPath);
+        if (!response.ok) {
+          throw new Error(`Could not load markdown file: ${markdownPath}`);
+        }
+
+        const markdown = await response.text();
+        setMarkdownByIndex((prev) => ({ ...prev, [expanded]: markdown }));
+      } catch (error) {
+        console.error('Error loading markdown section:', error);
+        setMarkdownErrorByIndex((prev) => ({
+          ...prev,
+          [expanded]: 'Markdown content could not be loaded.',
+        }));
+      } finally {
+        setMarkdownLoadingByIndex((prev) => ({ ...prev, [expanded]: false }));
+      }
+    };
+
+    loadMarkdown();
+  }, [expanded, sections, markdownByIndex, markdownLoadingByIndex]);
 
   return (
     <div className="bg-gray-200 dark:bg-gray-600 xl:max-w-6xl lg:max-w-4xl mx-auto p-4">
@@ -70,27 +163,48 @@ const AboutMe = () => {
           Certificates
         </button>
       </Link>
-      {sections.map((section, index) => (
-        <div key={index} className="text-gray-800 bg-gray-300 dark:bg-gray-300 mb-4 border-b
-            border-gray-500 dark:border-gray-800">
-          <button
-            className="w-full text-left py-2 px-4 font-semibold text-lg flex justify-between items-center"
-            onClick={() => toggleSection(index)}
-          >
-            {section.title}
-            <span className="text-gray-500 dark:text-gray-800">
-              {expanded === index ? "▲" : "▼"}
-            </span>
-          </button>
-          <p className="px-4 py-2 text-gray-700 hover:text-lg">{section.summary}</p>
-          {expanded === index && (
-            <div className="px-4 pb-4 text-gray-600 hover:text-lg">
-              <hr className="border-gray-400 my-2" />
-              {section.details}
-            </div>
-          )}
-        </div>
-      ))}
+      {sectionsLoading ? (
+        <LoadingSpinner />
+      ) : (
+        sections.map((section, index) => {
+          const { type, content } = getSectionDetails(section);
+          return (
+          <div key={index} className="text-gray-800 bg-gray-300 dark:bg-gray-300 mb-4 border-b
+              border-gray-500 dark:border-gray-800">
+            <button
+              className="w-full text-left py-2 px-4 font-semibold text-lg flex justify-between items-center"
+              onClick={() => toggleSection(index)}
+            >
+              {section.title}
+              <span className="text-gray-500 dark:text-gray-800">
+                {expanded === index ? "▲" : "▼"}
+              </span>
+            </button>
+            <p className="px-4 py-2 text-gray-700 hover:text-lg">{section.summary}</p>
+            {expanded === index && (
+              <div className="px-4 pb-4 text-gray-600 hover:text-lg">
+                <hr className="border-gray-400 my-2" />
+                {type === "md" ? (
+                  markdownLoadingByIndex[index] ? (
+                    <LoadingSpinner />
+                  ) : markdownErrorByIndex[index] ? (
+                    <p className="text-red-700">{markdownErrorByIndex[index]}</p>
+                  ) : (
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {markdownByIndex[index] || ''}
+                    </ReactMarkdown>
+                  )
+                ) : type === "html" ? (
+                  <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }} />
+                ) : (
+                  <p>{content}</p>
+                )}
+              </div>
+            )}
+          </div>
+          );
+        })
+      )}
       <div className="mt-24 pb-24 flex flex-col text-center content-center flex-wrap hover:scale-110">
         <h2 className="text-gray-600 dark:text-gray-100 text-3xl font-bold">Powered By:</h2>
         <img src="/images/NH-Circuit-Logo.webp" width="30%" alt="Nick Hanson Circuit Logo" />
