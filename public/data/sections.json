@@ -1,0 +1,41 @@
+[
+    {
+      "title": "Introduction",
+      "summary": "Hi, I’m Nick Hanson. I spent most of my career working in construction and production fields, and I’m now transitioning into web development to turn my passion for coding into a new path.",
+      "details": {
+        "type": "md"
+      }
+    },
+    {
+      "title": "Education",
+      "summary": "Currently pursuing (in my last semester) an Associate’s Degree in Web Software Development at Madison College, with plans to transfer to UW-Whitewater for a BS in Computer Science.",
+      "details": {
+        "type": "text",
+        "content": "My coursework has focused on programming, web development, and software engineering fundamentals. I’ve consistently earned high grades — including over 100% in advanced programming courses — and am gaining practical experience through academic projects and reverse engineering assignments."
+      }
+    },
+    {
+      "title": "Career Pivot",
+      "summary": "As a project manager, I developed skills in leadership, problem-solving, and technical communication, which I now apply to web development.",
+      "details": {
+        "type": "text",
+        "content": "My background in construction and production has given me a unique perspective on project management and teamwork. I’m adept at coordinating complex projects, communicating effectively with diverse teams, and solving problems creatively — all of which are valuable skills in software development."
+      }
+    },
+    {
+      "title": "Ongoing Learning",
+      "summary": "Beyond formal education, I’m committed to continuous learning through online courses, certifications, and tech communities.",
+      "details": {
+        "type": "text",
+        "content": "I’ve completed self-paced courses on platforms like Coursera and Codecademy in topics such as Python, backend development, responsive design, and cloud infrastructure. I’m currently preparing for AWS certification and plan to pursue advanced Java programming credentials. Staying current with evolving tech stacks is a key part of how I want to continue growing as a developer."
+      }
+    },
+    {
+      "title": "What People Are Saying",
+      "summary": "I’ve received positive feedback from peers and instructors, highlighting my dedication, problem-solving skills, and ability to learn quickly.",
+      "details": {
+        "type": "text",
+        "content": "“You are such a great writer! This is perfect!!! I don't think anything needs to be changed.”— Paula Waite, Honors Program Instructor"
+      }
+    }
+  ]
