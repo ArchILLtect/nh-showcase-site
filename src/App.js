@@ -46,6 +46,7 @@ import Privacy from "./pages/Privacy";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import FutureProjects from "./pages/FutureProjects";
 
 function App() {
     return (
@@ -55,6 +56,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/projects" element={<Projects />} />
+                    <Route path="/future-projects" element={<FutureProjects />} />
                     <Route path="/about" element={<AboutMe />} />
                     <Route path="/experience" element={<Experience />} />
                     <Route path="/certificates" element={<Certificates />} />
