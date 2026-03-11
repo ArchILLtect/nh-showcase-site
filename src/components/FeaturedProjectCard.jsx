@@ -3,7 +3,7 @@
  * Author: Nick Hanson
  * Created On: March 10, 2026
  * Last Updated: March 10, 2026
- * Description: This is the component used for displaying the featured projects on the homepage
+ * Description: This is the component used for displaying individual featured projects cards on the homepage
  *
  * Props:
  * - None
@@ -16,72 +16,32 @@
  * - React
  */
 
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import FeaturedProjectItem from './FeaturedProjectItem';
-import LoadingSpinner from './LoadingSpinner';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const FeaturedProjectCard = () => {
-  const [featuredProjects, setFeaturedProjects] = useState([]);
-  const [projectsLoading, setProjectsLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProjects = async () => {
-      const start = Date.now();
-      try {
-        setProjectsLoading(true); // show spinner
-        const response = await fetch('data/projects.json');
-        const data = await response.json();
-        prepFeaturedProjects(data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        const elapsed = Date.now() - start;
-        const delay = Math.max(0, 500 - elapsed);
-        setTimeout(() => setProjectsLoading(false), delay); // ⏳ delay cleanup
-      }
-    };
-
-    loadProjects();
-  }, []);
-
-  // This function is used to set the featured projects on the homepage. It takes in a project object and sets the state of the featured projects to 2 random projects from the projects.json file. It also ensures that the same project is not featured twice.
-  const prepFeaturedProjects = (projects) => {
-    if (projects.length === 0) return; // ⏳ wait for projects to load
-
-    // Prefer explicitly featured projects when present; otherwise fallback to active projects.
-    const explicitlyFeatured = projects.filter((project) => project.featured === true);
-    const fallbackPool = projects.filter((project) => project.status?.trim() !== "None");
-    const pool = explicitlyFeatured.length > 0 ? explicitlyFeatured : fallbackPool;
-
-    const shuffled = [...pool].sort(() => 0.5 - Math.random());
-    setFeaturedProjects(shuffled.slice(0, 2));
-  };
+const FeaturedProjectCard = ({ project }) => {
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">
-        Featured Projects
-      </h2>
-
-      {projectsLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5">
-          {featuredProjects.map((project) => (
-            <FeaturedProjectItem key={project.title} project={project} />
-          ))}
-        </div>
-      )}
-
-      <Link to="/projects" className="flex justify-center mt-6">
-        <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded
-            hover:bg-blue-600 transition duration-500">
-          View All Projects
-        </button>
-      </Link>
+    <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
+      <img
+        src={project.image}
+        alt={`${project.title} thumbnail`}
+        className="rounded w-full mb-4 text-gray-100 dark:text-gray-800 h-96 object-contain"
+      />
+      <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">{project.title}</h3>
+      <p className="text-gray-300 dark:text-gray-700">
+        {project.description}
+      </p>
     </div>
   );
-};
+}
 
 export default FeaturedProjectCard;
+
+FeaturedProjectCard.propTypes = {
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+};
