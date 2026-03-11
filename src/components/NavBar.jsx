@@ -18,7 +18,7 @@
 
 import { React, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import AboutMenu from "./AboutMenu.jsx";
+import SubMenu from "./SubMenu";
 import { isLoggedIn, getLoggedInUser } from "../utils/auth.js";
 import { roleHierarchy } from "../constants/roles.js";
 
@@ -60,19 +60,8 @@ const NavBar = () => {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              isActive
-                ? "bg-gray-300 text-gray-800 font-medium px-5 py-2 no-underline hover:text-lg"
-                : "hover:bg-gray-300 text-white hover:font-medium hover:text-gray-800 px-5 py-2 no-underline hover:text-lg"
-            }
-          >
-            Projects
-          </NavLink>
-        </li>
-        <AboutMenu />
+        <SubMenu topic="Projects" />
+        <SubMenu topic="About" />
         <li>
           <NavLink
             to="/blog"
