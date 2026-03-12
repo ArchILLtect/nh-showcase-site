@@ -83,10 +83,12 @@ import { trackVisit } from "../utils/visitTracker";
 import { login } from "../utils/auth";
 import { roleHierarchy } from "../constants/roles";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
 const LoginPage = () => {
+  usePageTitle('Login');
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);

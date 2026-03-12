@@ -23,8 +23,11 @@
 import React, { useState, useEffect } from 'react';
 import { trackVisit } from "../utils/visitTracker";
 import LoadingSpinner from '../components/LoadingSpinner';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const Contact = () => {
+  usePageTitle('Contact');
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);

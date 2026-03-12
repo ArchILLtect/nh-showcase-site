@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { trackVisit } from "../utils/visitTracker";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
@@ -21,8 +22,9 @@ const ResetPassword = () => {
   const hasLowercase = /[a-z]/.test(newPassword);
   const hasNumber = /\d/.test(newPassword);
 
+  usePageTitle('Reset Password');
+
   useEffect(() => {
-    document.title = "Reset Password | Nick Hanson";
     trackVisit();
   }, []);
 

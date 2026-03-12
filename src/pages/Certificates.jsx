@@ -21,8 +21,11 @@ import { trackVisit } from "../utils/visitTracker";
 import LoadingSpinner from '../components/LoadingSpinner';
 import DetailsModal from '../components/DetailsModal';
 import Video from '../components/Video';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const Certificates = () => {
+  usePageTitle('Certificates');
+
   const [certs, setCerts] = useState([]);
   const [badges, setBadges] = useState([]);
   const [videos, setVideos] = useState([]);

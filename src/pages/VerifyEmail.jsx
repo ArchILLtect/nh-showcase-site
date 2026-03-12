@@ -28,6 +28,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { trackVisit } from "../utils/visitTracker";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 
@@ -38,8 +39,9 @@ const VerifyEmail = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
+  usePageTitle('Verify Email');
+
   useEffect(() => {
-    document.title = "Verify Email | Nick Hanson";
     trackVisit();
   }, []);
 

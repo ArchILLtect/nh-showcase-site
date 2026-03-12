@@ -82,6 +82,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 const MAX_EMAIL_LENGTH = 254;
@@ -115,6 +116,8 @@ const normalizePasswordForWeakCheck = (password) =>
     .replace(/[^a-z0-9]/g, "");
 
 const RegisterPage = () => {
+  usePageTitle('Register');
+
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({

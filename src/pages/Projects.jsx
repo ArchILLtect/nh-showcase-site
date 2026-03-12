@@ -27,8 +27,11 @@ import { trackVisit } from "../utils/visitTracker";
 import LoadingSpinner from '../components/LoadingSpinner';
 import Video from '../components/Video';
 import ProjectCard from '../components/ProjectCard';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const Projects = () => {
+  usePageTitle('Projects');
+
   const [projects, setProjects] = useState([]);
   const [videos, setVideos] = useState([]);
   const [projectsLoading, setProjectsLoading] = useState(true);

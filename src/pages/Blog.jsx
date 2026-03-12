@@ -26,12 +26,15 @@ import React, { useState, useEffect } from "react";
 import { trackVisit } from "../utils/visitTracker";
 import BlogPost from "../components/BlogPost";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 // TODO: Decide what to do when there are > 9 categories.
 
 const BLOG_API_ENDPOINT = "https://0khffs67k4.execute-api.us-east-2.amazonaws.com/dev/";
 
 export default function Blogs() {
+  usePageTitle('Blog');
+
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);

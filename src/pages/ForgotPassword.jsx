@@ -24,6 +24,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { usePageTitle } from '../hooks/usePageTitle';
 import { trackVisit } from "../utils/visitTracker";
 
 const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
@@ -35,8 +36,9 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  usePageTitle('Forgot Password');
+
   useEffect(() => {
-    document.title = "Forgot Password | Nick Hanson";
     trackVisit();
   }, []);
 

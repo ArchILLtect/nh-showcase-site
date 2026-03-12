@@ -6,12 +6,11 @@
  * Description: Privacy & Cookies page describing localStorage and analytics usage.
  */
 
-import React, { useEffect } from "react";
+import React from "react";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 export default function Privacy() {
-  useEffect(() => {
-    document.title = "Privacy & Cookies - Nick Hanson Showcase";
-  }, []);
+  usePageTitle('Privacy & Cookies');
 
   const clearConsent = () => {
     try {

@@ -28,9 +28,11 @@ import Toolbar from "../components/ToolBar.jsx";
 import BlogManager from "./BlogManager.jsx";
 import VisitLogsDashboard from "../components/VisitLogsDashboard.jsx";
 import AllVisitLogsDashboard from "./AllVisitLogsDashboard.jsx";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 
 const AdminDashboard = () => {
+  usePageTitle('Admin Dashboard');
 
   const [showAddBlog, setShowAddBlog] = useState(false);
   const [showUserTracking, setShowUserTracking] = useState(false);

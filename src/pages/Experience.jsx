@@ -18,8 +18,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { trackVisit } from "../utils/visitTracker";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const AboutMe = () => {
+  usePageTitle('Experience');
 
   useEffect(() => {
     trackVisit();

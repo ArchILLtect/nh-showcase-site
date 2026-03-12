@@ -23,6 +23,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { trackVisit } from "../utils/visitTracker";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const getSectionDetails = (section) => {
   if (typeof section?.details === 'string' || section?.details == null) {
@@ -79,6 +80,7 @@ const sanitizeHtml = (unsafeHtml) => {
 };
 
 const AboutMe = () => {
+  usePageTitle('About Me');
 
   useEffect(() => {
     trackVisit();

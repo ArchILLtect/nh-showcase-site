@@ -23,15 +23,11 @@ import { Link } from "react-router-dom";
 import { trackVisit } from "../utils/visitTracker";
 import FeaturedProjects from '../components/FeaturedProjects';
 import SkillSection from '../components/SkillSection';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const HomePage = () => {
 
-  useEffect(() => {
-    document.title = "Home - Nick Hanson Showcase";
-    document.body.classList.add('bg-gray-200');
-     // Add the dark mode class to the body when the component mounts
-    document.body.classList.add('dark:bg-gray-900');
-  }, []);
+  usePageTitle('Home');
 
   useEffect(() => {
     const hash = window.location.hash;

@@ -23,8 +23,10 @@ import { getLoggedInUser } from '../utils/auth';
 import { Navigate } from "react-router-dom";
 import { roleHierarchy } from "../constants/roles.js";
 import VisitLogsDashboard from "../components/VisitLogsDashboard.jsx";
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const Dashboard = () => {
+    usePageTitle('Dashboard');
     const user = getLoggedInUser();
     const userLevel = user?.role ? roleHierarchy[user.role] ?? 0 : 0;
     const ipInfo = user?.knownIps || [];
