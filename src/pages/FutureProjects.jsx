@@ -21,7 +21,7 @@
  * - LoadingSpinner: A component for display a spinner during loading times.
  */
 
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { trackVisit } from "../utils/visitTracker";
 import { usePageTitle } from '../hooks/usePageTitle';
 import LoadingSpinner from '../components/LoadingSpinner';
