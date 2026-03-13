@@ -9,7 +9,7 @@ module.exports = {
                 darklg: "0 10px 15px -3px rgba(255, 255, 255, 0.3), 0 4px 6px -4px rgba(255, 255, 255, 0.3)",
             },
             backgroundImage: {
-                "hero-pattern": "url('../public/images/Hero-Banner-AI.webp')",
+                "hero-pattern": "url('../public/images/Hero-Banner.png')",
             },
             keyframes: {
                 fadeIn: {
