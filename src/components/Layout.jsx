@@ -52,7 +52,7 @@ export default function Layout({ children }) {
     <div className="min-h-screen bg-gray-300 dark:bg-gray-900 text-white">
       <NavBar />
       <EmailVerificationBanner />
-        <main className="p-4">{children}</main>
+        <main className="p-4 pb-28">{children}</main>
       <CookieNotice />
       <Footer />
 
