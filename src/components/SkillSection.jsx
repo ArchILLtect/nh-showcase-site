@@ -68,7 +68,7 @@ const SkillSection = () => {
   }, []);
 
   return (
-    <section className="py-12">
+    <section className="pb-8">
       <h2 id="skills" className="text-2xl font-bold text-center text-gray-700 dark:text-gray-200 mb-6">
         My Skills
       </h2>
@@ -95,7 +95,7 @@ const SkillSection = () => {
           <LoadingSpinner />
         </div>
       ) : (
-        <div className="flex justify-around flex-wrap gap-6">
+        <div className="flex justify-around flex-wrap gap-6 px-4 sm:px-6 2xl:px-16">
           {processes.map((process) => (
             <div key={process.title}>
               <SkillCard skill={process} type="process" width={process.width} />
