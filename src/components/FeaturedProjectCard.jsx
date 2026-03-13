@@ -22,7 +22,7 @@ import PropTypes from 'prop-types';
 const FeaturedProjectCard = ({ project }) => {
 
   return (
-    <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
+    <div className="bg-gray-800 h- dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
       <img
         src={project.image}
         alt={`${project.title} thumbnail`}
