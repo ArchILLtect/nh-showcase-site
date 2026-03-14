@@ -207,9 +207,9 @@ const AboutMe = () => {
           );
         })
       )}
-      <div className="mt-24 pb-24 flex flex-col text-center content-center flex-wrap hover:scale-110">
+      <div className="mt-24 pb-24 flex flex-col flex-wrap hover:scale-110 items-center justify-center gap-4 transition-transform duration-300">
         <h2 className="text-gray-600 dark:text-gray-100 text-3xl font-bold">Powered By:</h2>
-        <img src="/images/NH-Circuit-Logo.webp" width="30%" alt="Nick Hanson Circuit Logo" />
+        <img src="/images/NH-Circuit-Logo.webp" width="30%" alt="Nick Hanson Circuit Logo margin-auto" />
       </div>
     </div>
   );
