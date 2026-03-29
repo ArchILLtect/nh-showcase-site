@@ -1,6 +1,6 @@
 
 ## TOP Priorities
-- [ ] Github API implementation.
+- [ ] Github API implementation. STARTED.
 - [ ] Make a DB for JSON files and implement it across the site to make it easier to add new items and maintain existing ones.
 - [ ] Add missing certs from Coursera and codefinity, etc.
 - [ ] Add Dean's List letters to achievements page.
