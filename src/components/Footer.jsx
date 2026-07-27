@@ -39,6 +39,10 @@ const Footer = () => {
           <Link to="/privacy" className="underline hover:text-gray-300">
             Privacy
           </Link>
+          {" Â· "}
+          <Link to="/pay" className="underline hover:text-gray-300">
+            Pay
+          </Link>
         </p>
         {/* Login/Logout Button */}
         <div>

@@ -21,6 +21,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { trackVisit } from "../utils/visitTracker";
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageTitle } from '../hooks/usePageTitle';
@@ -102,6 +103,13 @@ const Contact = () => {
               className="text-blue-500 hover:underline">
             ArchILLtect
           </a>
+        </p>
+        <p className="text-gray-600 dark:text-gray-200 mt-3">
+          Existing clients can also{" "}
+          <Link to="/pay" className="text-blue-500 hover:underline">
+            make a payment here
+          </Link>
+          .
         </p>
       </div>
 

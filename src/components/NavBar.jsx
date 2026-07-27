@@ -301,6 +301,11 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/pay" onClick={handleMobileLinkSelect} className={mobilePrimaryLinkClass}>
+                Pay
+              </NavLink>
+            </li>
+            <li>
               <NavLink
                 to={mobileAction.to}
                 onClick={handleMobileLinkSelect}
@@ -361,6 +366,11 @@ const NavBar = () => {
             }
           >
             Contact
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/pay" className={mainLinkClass}>
+            Pay
           </NavLink>
         </li>
         <li>

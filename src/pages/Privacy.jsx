@@ -35,6 +35,15 @@ export default function Privacy() {
         <li>Optional analytics: anonymized IP and user-agent via a serverless endpoint to count visits.</li>
         <li>UI preferences (e.g., dark mode) may be stored to persist your settings.</li>
       </ul>
+      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mt-6 mb-2">Payments</h2>
+      <p className="text-gray-700 dark:text-gray-200 mb-2">
+        Client payments may be processed through Stripe-hosted payment pages. Stripe collects and
+        processes payment details such as card or bank account information. This website does not
+        collect or store card or bank account details.
+      </p>
+      <p className="text-gray-700 dark:text-gray-200">
+        Payment records, receipts, and payment method availability are managed through Stripe.
+      </p>
       <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mt-6 mb-2">Your choices</h2>
       <p className="text-gray-700 dark:text-gray-200 mb-2">
         You can accept or decline non-essential storage via the banner. Essential items needed for

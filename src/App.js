@@ -36,6 +36,7 @@ import AboutMe from "./pages/AboutMe";
 import Experience from "./pages/Experience";
 import BlogPage from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Pay from "./pages/Pay";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/certificates" element={<Certificates />} />
                     <Route path="/blog" element={<BlogPage />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/pay" element={<Pay />} />
                     <Route path="/privacy" element={<Privacy />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
