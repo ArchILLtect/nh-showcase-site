@@ -35,11 +35,11 @@ const Footer = () => {
     <footer className="bg-gray-800 text-gray-100 flex flex-col sm:flex-row text-center py-2
         fixed w-full bottom-0 justify-around items-center z-50">
         <p>
-          &copy; {currentYear} Nick Hanson Sr. All rights reserved.{" · "}
+          &copy; {currentYear} Nick Hanson Sr. All rights reserved.{" \u00b7 "}
           <Link to="/privacy" className="underline hover:text-gray-300">
             Privacy
           </Link>
-          {" Â· "}
+          {" \u00b7 "}
           <Link to="/pay" className="underline hover:text-gray-300">
             Pay
           </Link>
