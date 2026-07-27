@@ -108,6 +108,12 @@ export default function Pay() {
           service balances you have already discussed with Nick Hanson Web Consulting.
         </p>
 
+        <p className="max-w-xl rounded bg-white/70 px-4 py-3 text-sm text-gray-700 shadow dark:bg-gray-800/80 dark:text-gray-300">
+          Prefer Zelle? Zelle may be available by request for established clients.
+          Please contact me first so I can confirm payment details and apply it to
+          the correct project or invoice.
+        </p>
+
         <Link to="/contact" className="text-sm text-blue-600 dark:text-blue-300 underline">
           Questions? Contact me first
         </Link>
