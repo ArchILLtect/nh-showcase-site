@@ -17,10 +17,13 @@ This phase is designed for immediate use cases such as:
 Use a Stripe Payment Link configured as:
 
 - Pricing model: customer chooses what to pay.
-- Suggested amount: the current expected payment amount, if useful.
-- Minimum amount: a reasonable lower bound for partial payments.
-- Maximum amount: either the current invoice amount or a broader business-safe cap.
+- Suggested amount: none/off for now.
+- Minimum amount: `$50`.
+- Maximum amount: `$5,000`.
 - Payment methods: ACH/bank account and card, controlled through Stripe settings.
+- Customer name: required.
+- Business name: optional.
+- Optional custom fields: `Invoice Number`, `Project Name`, and `Payment Note`.
 
 Use a generic title such as:
 
@@ -32,6 +35,12 @@ Use a description such as:
 
 ```text
 Make a full or partial payment toward an active project, invoice, or deposit.
+```
+
+Current Phase 1 Payment Link:
+
+```text
+https://buy.stripe.com/28E00jeCS7ZXdI12jO5wI00
 ```
 
 ## User Flow
@@ -69,7 +78,7 @@ Use this page to make a full or partial payment toward an active project, invoic
 3. Add the payment call to action.
 - Button label: `Make a Payment`.
 - Button destination: Stripe Payment Link URL.
-- Open in the same tab or a new tab; either is acceptable, but be consistent with the rest of the site.
+- Open in a new tab with `target="_blank"` and `rel="noopener noreferrer"`.
 
 4. Add basic reconciliation guidance.
 - If Stripe custom fields are available for the Payment Link, collect `Invoice number, project name, or business name`.
