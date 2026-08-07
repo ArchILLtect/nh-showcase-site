@@ -302,7 +302,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink to="/pay" onClick={handleMobileLinkSelect} className={mobilePrimaryLinkClass}>
-                Pay
+                Client Payment
               </NavLink>
             </li>
             <li>
