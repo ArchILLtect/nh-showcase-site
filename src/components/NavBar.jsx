@@ -370,7 +370,7 @@ const NavBar = () => {
         </li>
         <li>
           <NavLink to="/pay" className={mainLinkClass}>
-            Pay
+            Client Payment
           </NavLink>
         </li>
         <li>
