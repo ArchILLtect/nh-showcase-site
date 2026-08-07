@@ -8,12 +8,15 @@
     "codefinity",
     "codeforge",
     "cooldown",
+    "cooldowns",
     "CSPRNG",
     "cutover",
     "DMARC",
     "fyurbrjc",
     "lockfiles",
+    "nickhanson",
     "PITR",
+    "putitem",
     "redrive",
     "Repoint",
     "sameboat",
@@ -21,11 +24,13 @@
     "showcaseregistration",
     "showcaseresetpassword",
     "simplemde",
+    "spoofable",
     "SSAF",
     "TMDB",
     "Trax",
     "Turborepo",
     "Viewports",
-    "worldbuilding"
+    "worldbuilding",
+    "Zelle"
   ]
 }
