@@ -1,5 +1,9 @@
 
 ## TOP Priorities
+
+- [ ] Mobile layout issue: Clicking the X button on the mobile menu doesn't close the menu. (P0), it attempts to but fails and the menu reopens immediately. This is a critical bug that needs to be fixed as soon as possible.
+
+
 - [ ] Github API implementation. STARTED.
 - [ ] Make a DB for JSON files and implement it across the site to make it easier to add new items and maintain existing ones.
 - [ ] Add missing certs from Coursera and codefinity, etc.
