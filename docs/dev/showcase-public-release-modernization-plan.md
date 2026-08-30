@@ -208,9 +208,9 @@ Remove the obsolete provider-specific contact backend after Netlify Forms is pro
 
 ## Status
 
-**Application cleanup complete; manual credential retirement pending.** The legacy contact Function, `@sendgrid/mail`, root `dotenv`, and obsolete Netlify Functions configuration were removed. Active guidance now describes the Netlify Forms flow, the lockfile is updated, `npm audit` reports zero vulnerabilities, and the Vite build passes.
+**Complete.** The legacy contact Function, `@sendgrid/mail`, root `dotenv`, and obsolete Netlify Functions configuration were removed. Active guidance now describes the Netlify Forms flow, the lockfile is updated, `npm audit` reports zero vulnerabilities, CI and the Vite build pass, and the deployed form was re-verified after merge.
 
-The ignored local credential has not been opened, altered, or deleted, and the provider-side SendGrid key has not yet been revoked. Those manual actions remain required before the Step 3 exit gate can pass.
+The obsolete local SendGrid credential entry was removed manually. Provider-side key revocation was unavailable/not applicable because the SendGrid trial had expired and the service was inactive; no provider-side key deletion is claimed. The Step 3 exit gate has passed.
 
 ---
 
