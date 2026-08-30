@@ -2,51 +2,16 @@
 
 ## Step 0 — Repository Governance Baseline
 
-- [x] Basic CI added.
-- [x] CI install/build run is green.
-- [x] `main` ruleset active.
-- [x] Pull request required before merge.
-- [x] Required `Build` status check enabled.
-- [x] Force pushes blocked.
-- [x] Branch deletion restricted.
-- [x] Clean working tree before modernization branch.
+- [x] Governance / CI baseline complete.
 
 ---
 
 ## Step 1 — CRA → Vite Foundation Migration
 
-- [x] Create dedicated branch: `chore/migrate-cra-to-vite`.
-- [x] Inventory CRA-specific files/config/dependencies.
-- [x] Confirm current runtime baseline.
-- [x] Add Vite + React plugin/config.
-- [x] Replace CRA HTML shell with Vite root `index.html`.
-- [x] Update React entry point as required.
-- [x] Replace `react-scripts` package scripts.
-- [x] Resolve `%PUBLIC_URL%` usage.
-- [x] Resolve CRA env references if present (none used by the frontend).
-- [x] Verify public/static asset paths.
-- [x] Verify Tailwind/PostCSS.
-- [x] Verify local proxy/dev assumptions.
-- [x] Update Netlify publish directory to `dist` where required.
-- [x] Preserve SPA redirects.
-- [x] Preserve Netlify Functions configuration and deployment.
-- [x] Update CI for Vite and the current no-tests state.
-- [x] Run local validation.
-- [x] Deploy preview.
-- [x] Regression-test major public routes.
-- [x] Test direct-route refreshes.
-- [x] Test login/register/private/admin routes as appropriate.
-- [x] Test blog/static data.
-- [x] Test dark mode.
-- [x] Test tracking.
-- [x] Test AWS calls.
-- [x] Test responsive behavior.
-- [x] Confirm production build.
-- [x] Open PR.
-- [x] Required CI passes.
-- [ ] Merge Vite migration.
-
-Contact-page rendering was verified without submitting the legacy SendGrid-backed form. Live form submission is intentionally deferred to Step 2, where Netlify Forms will be implemented and proven before SendGrid retirement.
+- [x] CRA → Vite migration complete.
+- [x] CI/build/deploy validation complete.
+- [x] Migration PR merged.
+- [x] Vite live in production.
 
 ### Step 1 Gate
 - [x] **Vite foundation is stable and existing app behavior is preserved.**
@@ -55,30 +20,10 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 
 ## Step 2 — Netlify Forms Migration
 
-- [x] Create Netlify Forms branch from modernized `main`.
-- [x] Confirm contact form behavior/fields.
-- [x] Keep SendGrid path as rollback insurance until deployed proof passed.
-- [x] Confirm Netlify Forms availability.
-- [x] Confirm static detectable form location in Vite output.
-- [x] Add static Netlify-detectable form markup.
-- [x] Add stable form name.
-- [x] Add hidden `form-name`.
-- [x] Add matching fields.
-- [x] Add Netlify-native spam protection.
-- [x] Convert active submit path to URL-encoded Netlify Forms POST.
-- [x] Preserve controlled-input UX.
-- [x] Preserve loading UX.
-- [x] Preserve success UX.
-- [x] Preserve useful error handling.
-- [x] Run local build.
-- [x] Deploy preview.
-- [x] Confirm Netlify detects form.
-- [x] Send real test.
-- [x] Confirm submission storage.
-- [x] Confirm fields.
-- [x] Confirm notification.
-- [x] Confirm spam protection.
-- [x] Confirm old SendGrid path is not used.
+- [x] Netlify Forms implementation complete.
+- [x] Deploy proof complete.
+- [x] Native notification complete.
+- [x] Legacy Function confirmed unused.
 
 ### Step 2 Gate
 - [x] **Netlify Forms is proven before SendGrid removal.**
@@ -87,21 +32,16 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 
 ## Step 3 — Remove SendGrid + Retire Credential
 
-- [x] Delete legacy contact function if unused.
+- [x] Delete legacy contact Function.
 - [x] Remove `@sendgrid/mail`.
-- [x] Check remaining `dotenv` usage.
-- [x] Remove `dotenv` only if unused.
-- [x] Remove tracked `SENDGRID_API_KEY` references from active code and configuration.
-- [x] Remove stale active SendGrid docs/instructions.
-- [x] Search for `sendgrid` and classify intentional historical records.
-- [x] Search for `SENDGRID_API_KEY`.
-- [x] Search for old contact-function path.
+- [x] Remove unused root `dotenv`.
+- [x] Remove stale active SendGrid guidance.
 - [x] Update lockfile.
-- [x] Run CI/Vite build.
-- [x] Re-test deployed form.
-- [x] Remove obsolete local credential without exposing it.
-- [x] Retain the local env file only if otherwise necessary; the obsolete SendGrid entry is removed.
-- [x] Confirm provider-side revocation is unavailable/not applicable because the SendGrid trial expired and the service is inactive.
+- [x] Root audit/build/CI green.
+- [x] Re-test deployed Netlify Form.
+- [x] Remove obsolete local SendGrid credential without exposing it.
+- [x] Delete provider-side SendGrid API key.
+- [x] Confirm no active SendGrid runtime path remains.
 
 ### Step 3 Gate
 - [x] **SendGrid is completely retired.**
@@ -110,34 +50,86 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 
 ## Step 4 — Targeted Post-Vite Modernization Review
 
-- [ ] Review stale CRA files/dependencies.
-- [ ] Review CI action-version warnings.
-- [ ] Review obsolete package scripts/config.
-- [ ] Review test strategy after Vite.
-- [ ] Review high-severity dependency issues.
-- [ ] Review docs made stale by Vite.
-- [ ] Review build/deploy notes for CRA assumptions.
-- [ ] Decide whether a small real smoke-test suite is worthwhile.
-- [ ] Do not add architectural layers solely for neatness.
-- [ ] Do not prep for Plinth.
+### Review
+- [x] Complete stale CRA/dependency review.
+- [x] Review CI action versions.
+- [x] Review test strategy.
+- [x] Review root and backend dependency/security state.
+- [x] Review docs/public presentation.
+- [x] Review build warnings.
+- [x] Classify FIX NOW / DEFER / NO ACTION.
+- [x] Preserve no-Plinth-prep scope.
+
+### Batch A — Repository / Backend Hygiene
+- [ ] Ignore nested `node_modules`.
+- [ ] Remove tracked `backend/node_modules`.
+- [ ] Remove unused backend `bcrypt`.
+- [ ] Remove unused backend `mongoose`.
+- [ ] Remove unused backend `pg`.
+- [ ] Patch Express within major version 4.
+- [ ] Regenerate backend lockfile.
+- [ ] Backend `npm ci`.
+- [ ] Backend `npm audit` = 0.
+- [ ] Confirm no tracked `node_modules`.
+
+### Batch B — Foundation / Tooling Cleanup
+- [ ] Remove `reportWebVitals()` call.
+- [ ] Delete `src/reportWebVitals.js`.
+- [ ] Remove `web-vitals`.
+- [ ] Reconfirm/remove unused `eslint-config-prettier`.
+- [ ] Update `actions/checkout` to current stable supported major.
+- [ ] Update `actions/setup-node` to current stable supported major.
+- [ ] Preserve Node 24 / npm cache / `npm ci` / build gate.
+- [ ] Refresh Browserslist data.
+- [ ] Remove unused Tailwind `hero-pattern`.
+- [ ] Root `npm ci`.
+- [ ] Root `npm audit` = 0.
+- [ ] `npm run build`.
+
+### Batch C — Active Guidance / Public Presentation
+- [ ] Update `.github/copilot-instructions.md` to current Vite-era behavior.
+- [ ] Repair public README.
+- [ ] Correct GitHub-card implementation plan.
+- [ ] Remove unsafe/stale browser-token recommendation.
+- [ ] Preserve useful historical documentation.
+
+### Explicitly Deferred
+- [x] Frontend Vitest / Testing Library suite.
+- [x] ESLint parser/rule repair and CI lint gate.
+- [x] Route-level code splitting.
+- [x] Long-term backend-stub decision.
+- [x] No architectural layering for neatness.
+- [x] No Plinth preparation.
+- [x] No broad dependency modernization.
+
+### Step 4 Final Validation
+- [ ] Root `npm ci`.
+- [ ] Root `npm audit` = 0.
+- [ ] Root `npm run build`.
+- [ ] Backend `npm ci`.
+- [ ] Backend `npm audit` = 0.
+- [ ] No tracked `node_modules`.
+- [ ] Netlify Forms blueprint still present.
+- [ ] `dist/_redirects` still present.
+- [ ] `git diff --check`.
+- [ ] Required CI green.
+- [ ] Netlify deploy preview green if applicable.
+- [ ] Update Step 4 docs with completion state.
 
 ### Step 4 Gate
-- [ ] **No obvious foundation-era leftovers materially hurt stability or professional presentation.**
+- [ ] **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
 
 ---
 
 ## Step 5 — Security / Public-Readiness Audit
 
-- [ ] `git fetch --prune`
-- [ ] `git status -sb`
-- [ ] Confirm expected branch/HEAD.
+- [ ] Git baseline.
 - [ ] Scan tracked files for secrets.
-- [ ] Confirm no tracked env file.
-- [ ] Confirm no tracked private-key material.
+- [ ] Confirm no tracked env/private-key material.
 - [ ] Re-check Git history for credentials.
 - [ ] Review relevant remote branches/tags.
 - [ ] Confirm protected local secret files ignored/untracked without reading them.
-- [ ] Run dependency/config sanity checks.
+- [ ] Run dependency/config sanity checks across all npm projects.
 - [ ] Confirm no security/audit artifact contains secret material.
 
 ### Step 5 Gate
@@ -147,17 +139,12 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 
 ## Step 6 — Manual Public-Repository Review
 
-- [ ] Review intentional personal/contact information.
-- [ ] Review AWS/API/Lambda/infrastructure metadata.
-- [ ] Review docs and operational notes.
-- [ ] Review AI-agent instructions.
-- [ ] Review images/icons/fonts/screenshots.
-- [ ] Confirm redistribution/licensing appropriateness.
-- [ ] Review README/setup instructions.
-- [ ] Review dead links.
-- [ ] Remove stale generated/temp artifacts.
-- [ ] Keep useful engineering depth.
-- [ ] Avoid presentation-only over-cleaning.
+- [ ] Personal/contact information.
+- [ ] Infrastructure metadata.
+- [ ] Docs/agent instructions.
+- [ ] Assets/licensing.
+- [ ] README/setup/dead links.
+- [ ] Generated/temp artifacts.
 
 ### Step 6 Gate
 - [ ] **Everything remaining is intentionally acceptable for public visibility.**
@@ -166,26 +153,14 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 
 ## Step 7 — Final Publication Verification
 
-- [ ] `git fetch --prune`
-- [ ] `git status -sb`
-- [ ] Confirm expected branch/current HEAD.
-- [ ] Confirm required CI green.
-- [ ] Confirm production Vite build.
-- [ ] Confirm deployed site.
-- [ ] Re-test contact form.
-- [ ] Re-test notification.
-- [ ] Re-check spam protection.
-- [ ] Check major public routes.
-- [ ] Check auth/private routes.
-- [ ] Check AWS-backed features.
-- [ ] Final tracked-file secret scan.
-- [ ] Final history sanity check.
-- [ ] Confirm SendGrid key retired.
-- [ ] Confirm personal-info decision.
-- [ ] Confirm infrastructure decision.
-- [ ] Confirm licensing/assets decision.
-- [ ] Confirm docs decision.
-- [ ] Explicitly judge repository ready.
+- [ ] Git baseline/current HEAD.
+- [ ] Required CI green.
+- [ ] Production Vite build/deploy.
+- [ ] Contact form + notification + spam protection.
+- [ ] Major/auth/private/AWS-backed functionality.
+- [ ] Final tracked-file/history secret sanity.
+- [ ] Confirm SendGrid key remains retired.
+- [ ] Confirm public-review decisions.
 
 ### Step 7 Gate
 - [ ] **Repository is safe and appropriate to make public.**
