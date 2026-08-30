@@ -6,6 +6,12 @@ Replace the SendGrid-backed contact flow with Netlify Forms directly **after CRA
 
 This order avoids implementing Netlify form detection against CRA's `public/index.html` immediately before replacing the CRA HTML/build structure.
 
+## Status
+
+**Netlify Forms proven; application cleanup complete.** The deployed `contact` form is detected, stores submissions with the expected fields, applies honeypot protection, sends native notifications, and receives the React form's URL-encoded `POST /`. The legacy Function was not invoked during verification and has now been deleted; `@sendgrid/mail`, root `dotenv`, and the obsolete Netlify Functions configuration were removed.
+
+Manual deletion of the local credential and provider-side SendGrid key revocation remain pending and are intentionally outside the repository cleanup.
+
 ## Preconditions
 
 - CRA → Vite migration is complete.
@@ -35,7 +41,7 @@ This order avoids implementing Netlify form detection against CRA's `public/inde
 - broad dependency upgrades;
 - auth/AWS changes.
 
-## Current flow
+## Historical flow before migration
 
 ```text
 Contact.jsx

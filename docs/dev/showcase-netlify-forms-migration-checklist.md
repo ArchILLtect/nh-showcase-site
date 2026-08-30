@@ -2,71 +2,71 @@
 
 ## Preconditions
 
-- [ ] CRA → Vite migration is merged.
-- [ ] Vite production/deploy preview is stable.
-- [ ] Branch created from current `main`.
-- [ ] Working tree clean/expected.
+- [x] CRA → Vite migration is merged.
+- [x] Vite production/deploy preview is stable.
+- [x] Branch created from current `main`.
+- [x] Working tree clean/expected.
 
 ## Detection
 
-- [ ] Confirm Netlify Forms availability.
-- [ ] Confirm static detectable form location in Vite output.
-- [ ] Add form name `contact`.
-- [ ] Add matching `name`, `email`, `message` fields.
-- [ ] Add Netlify-native spam/honeypot configuration.
-- [ ] Build.
-- [ ] Confirm static form markup survives into deployable output.
+- [x] Confirm Netlify Forms availability.
+- [x] Confirm static detectable form location in Vite output.
+- [x] Add form name `contact`.
+- [x] Add matching `name`, `email`, `message` fields.
+- [x] Add Netlify-native spam/honeypot configuration.
+- [x] Build.
+- [x] Confirm static form markup survives into deployable output.
 
 ## React Form
 
-- [ ] Add `name="contact"`.
-- [ ] Add hidden `form-name`.
-- [ ] Add matching honeypot field if needed.
-- [ ] Replace JSON function POST with URL-encoded Netlify Forms POST.
-- [ ] Preserve controlled inputs.
-- [ ] Preserve loading UX.
-- [ ] Preserve success UX.
-- [ ] Preserve useful error handling.
-- [ ] Run local validation.
+- [x] Add `name="contact"`.
+- [x] Add hidden `form-name`.
+- [x] Add matching honeypot field if needed.
+- [x] Replace JSON function POST with URL-encoded Netlify Forms POST.
+- [x] Preserve controlled inputs.
+- [x] Preserve loading UX.
+- [x] Preserve success UX.
+- [x] Preserve useful error handling.
+- [x] Run local validation.
 
 ## Deployed Proof
 
-- [ ] Deploy preview.
-- [ ] Confirm Netlify detects form.
-- [ ] Send real submission.
-- [ ] Confirm storage.
-- [ ] Confirm all fields.
-- [ ] Confirm success UX.
-- [ ] Configure/confirm native notification.
-- [ ] Confirm notification arrives.
-- [ ] Confirm spam protection.
-- [ ] Confirm old SendGrid path is not used.
+- [x] Deploy preview.
+- [x] Confirm Netlify detects form.
+- [x] Send real submission.
+- [x] Confirm storage.
+- [x] Confirm all fields.
+- [x] Confirm success UX.
+- [x] Configure/confirm native notification.
+- [x] Confirm notification arrives.
+- [x] Confirm spam protection.
+- [x] Confirm old SendGrid path is not used.
 
 ### Hard Gate
 
-- [ ] **Do not remove SendGrid before deployed proof passes.**
+- [x] **Do not remove SendGrid before deployed proof passes.**
 
 ## SendGrid Removal
 
-- [ ] Delete legacy function if unused.
-- [ ] Remove `@sendgrid/mail`.
-- [ ] Check `dotenv`.
-- [ ] Remove `dotenv` only if unused.
-- [ ] Remove tracked SendGrid/API-key/old-path references.
-- [ ] Update lockfile.
+- [x] Delete legacy function if unused.
+- [x] Remove `@sendgrid/mail`.
+- [x] Check `dotenv`.
+- [x] Remove `dotenv` only if unused.
+- [x] Remove tracked SendGrid/API-key/old-path references from active code and configuration.
+- [x] Update lockfile.
 - [ ] Run CI/Vite build.
 - [ ] Re-test deployed form.
 
 ## Credential Retirement
 
-- [ ] Confirm app no longer needs SendGrid.
+- [x] Confirm app no longer needs SendGrid.
 - [ ] Remove obsolete local credential without viewing/copying it.
 - [ ] Delete env file only if otherwise unnecessary.
 - [ ] Revoke/delete provider-side SendGrid key.
 
 ## Final
 
-- [ ] Search tracked repo for stale SendGrid references.
+- [x] Search tracked repo for stale SendGrid references and classify intentional historical records.
 - [ ] Confirm no secret-bearing staged/tracked file.
 - [ ] Open PR.
 - [ ] Required CI passes.

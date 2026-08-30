@@ -1,6 +1,6 @@
 # AI coding agent guide for nh-showcase-site
 
-React (CRA) + Tailwind frontend with Netlify Functions for server-side tasks and an optional Express stub. These are the entry points and conventions to ship fast here.
+React + Tailwind frontend with Netlify Forms for contact submissions and an optional Express stub. These are the entry points and conventions to ship fast here.
 
 ## Architecture & data flow
 
@@ -8,7 +8,7 @@ React (CRA) + Tailwind frontend with Netlify Functions for server-side tasks and
 -   Auth/roles: `PrivateRoute.jsx` gates routes using `roleHierarchy` (`constants/roles.js`) and auth helpers in `utils/auth.js` (localStorage: `authToken`, `userData`).
 -   Data sources:
     -   Static JSON under `public/data/*.json` (e.g., `projects.json` via `fetch('data/projects.json')`).
-    -   Netlify Function `netlify/functions/contact.js` (SendGrid email) called at `/.netlify/functions/contact`.
+    -   Netlify Forms handles `pages/Contact.jsx` submissions through a URL-encoded `POST /`; the static detection blueprint is in root `index.html`.
     -   AWS API Gateway Lambdas: blog create in `components/BlogEditor.jsx` (BLOG_API_ENDPOINT), visit logs in `utils/visitTracker.js` (VISIT_API_ENDPOINT), login in `pages/LoginPage.jsx` (API_BASE_URL).
 -   Backend: `backend/server.js` is a local Express stub. CRA `proxy` points to `http://localhost:5000`.
 
@@ -17,7 +17,7 @@ React (CRA) + Tailwind frontend with Netlify Functions for server-side tasks and
 -   Run dev: `npm start` (CRA on 3000; Tailwind scans `./src/**/*.{js,jsx,ts,tsx}`; dark mode is `class`).
 -   Build: `npm run build` → `build/` (checked-in snapshot exists).
 -   Test: CRA/Jest scaffold only (`npm test`). Add tests near changed code when you introduce logic.
--   Netlify: SPA routing via `public/_redirects`; functions folder set by `netlify.toml` (`netlify/functions`).
+-   Netlify: SPA routing via `public/_redirects`; Vite build/publish settings are in `netlify.toml`; contact submissions use Netlify Forms.
 
 ## Conventions & patterns
 
@@ -139,4 +139,4 @@ Suggested operating cadence:
 -   Auth/roles: `components/PrivateRoute.jsx`, `utils/auth.js`, `constants/roles.js`
 -   Data/flows: `components/BlogEditor.jsx`, `pages/Projects.jsx`, `pages/Contact.jsx`
 -   Telemetry: `utils/visitTracker.js`
--   Serverless: `netlify/functions/contact.js`, `netlify.toml`, `public/_redirects`
+-   Netlify deployment/forms: `index.html`, `pages/Contact.jsx`, `netlify.toml`, `public/_redirects`

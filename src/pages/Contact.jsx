@@ -45,20 +45,22 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const start = Date.now();
+    const form = e.currentTarget;
+    const body = new URLSearchParams(new FormData(form)).toString();
+
     try {
       setLoading(true); // start loading
-      const response = await fetch('/.netlify/functions/contact', {
+      const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
       });
-  
-      const result = await response.json();
+
       if (response.ok) {
-        console.log('Email sent successfully:', result);
+        console.log('Form submitted successfully.');
         setSubmitted(true);
       } else {
-        console.error('Error sending email:', result.message);
+        console.error('Error submitting form:', response.status);
         alert('Failed to send message. Please try again later.');
       }
     } catch (error) {
@@ -127,7 +129,38 @@ const Contact = () => {
               Thank you for reaching out! I&apos;ll get back to you soon.
             </p>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <p
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  overflow: 'hidden',
+                  clip: 'rect(0 0 0 0)',
+                  height: '1px',
+                  width: '1px',
+                  margin: '-1px',
+                  padding: 0,
+                  border: 0,
+                }}
+              >
+                <label>
+                  Don&apos;t fill this out if you&apos;re human:
+                  <input
+                    name="bot-field"
+                    type="text"
+                    tabIndex="-1"
+                    autoComplete="off"
+                  />
+                </label>
+              </p>
               <input
                 type="text"
                 name="name"
