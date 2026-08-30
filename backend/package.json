@@ -11,9 +11,6 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "express": "^4.21.2",
-    "mongoose": "^8.9.2",
-    "pg": "^8.13.1"
+    "express": "^4.22.2"
   }
 }
