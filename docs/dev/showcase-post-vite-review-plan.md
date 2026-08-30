@@ -18,9 +18,9 @@ Only fix an item in this phase if it is:
 
 ## Current Status
 
-**Review complete; implementation in progress.**
+**Review and approved Batch A/B/C implementation complete locally; final external validation pending.**
 
-The Vite/Netlify production foundation is sound. The highest-priority issue is a separate optional backend npm project whose `node_modules` directory is tracked and whose dependency tree contained 9 vulnerabilities at review time.
+The Vite/Netlify production foundation is sound. Tracked backend dependencies were removed, both npm projects now audit cleanly, approved foundation residue was removed, and active public-facing guidance now reflects the Vite-era application. The Step 4 exit gate remains pending until the committed documentation batch passes required CI and its Netlify deploy preview, if applicable.
 
 ---
 
@@ -192,6 +192,8 @@ The following are already correct or intentionally preserved:
 
 ## Batch A — Repository/backend hygiene
 
+**Complete.**
+
 1. Add nested `node_modules` ignore coverage.
 2. Remove tracked `backend/node_modules`.
 3. Remove unused backend dependencies.
@@ -207,6 +209,8 @@ The following are already correct or intentionally preserved:
 - backend stub remains otherwise unchanged.
 
 ## Batch B — Foundation/tooling cleanup
+
+**Complete.**
 
 1. Remove CRA `reportWebVitals` residue.
 2. Remove `web-vitals`.
@@ -224,6 +228,8 @@ The following are already correct or intentionally preserved:
 - Vite/Netlify configuration remains healthy.
 
 ## Batch C — Active guidance / public-facing docs
+
+**Complete locally; awaiting final external validation.**
 
 1. Update `.github/copilot-instructions.md`.
 2. Repair `readme.md`.
@@ -266,6 +272,8 @@ The following are already correct or intentionally preserved:
 ## Exit Gate
 
 > **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
+
+Pending required CI and Netlify deploy-preview confirmation for the completed change set.
 
 ## Explicitly Out of Scope
 

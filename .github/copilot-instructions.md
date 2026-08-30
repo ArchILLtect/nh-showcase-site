@@ -4,19 +4,20 @@ React + Tailwind frontend with Netlify Forms for contact submissions and an opti
 
 ## Architecture & data flow
 
--   Router: `src/App.js` defines routes; `Layout` wraps pages to render `NavBar`/`Footer`.
+-   Router: `src/App.jsx` defines routes; `Layout` wraps pages to render `NavBar`/`Footer`.
 -   Auth/roles: `PrivateRoute.jsx` gates routes using `roleHierarchy` (`constants/roles.js`) and auth helpers in `utils/auth.js` (localStorage: `authToken`, `userData`).
 -   Data sources:
     -   Static JSON under `public/data/*.json` (e.g., `projects.json` via `fetch('data/projects.json')`).
     -   Netlify Forms handles `pages/Contact.jsx` submissions through a URL-encoded `POST /`; the static detection blueprint is in root `index.html`.
     -   AWS API Gateway Lambdas: blog create in `components/BlogEditor.jsx` (BLOG_API_ENDPOINT), visit logs in `utils/visitTracker.js` (VISIT_API_ENDPOINT), login in `pages/LoginPage.jsx` (API_BASE_URL).
--   Backend: `backend/server.js` is a local Express stub. CRA `proxy` points to `http://localhost:5000`.
+-   Backend: `backend/server.js` is an optional local Express stub. The Vite frontend has no development proxy configured.
 
 ## Dev, build, deploy
 
--   Run dev: `npm start` (CRA on 3000; Tailwind scans `./src/**/*.{js,jsx,ts,tsx}`; dark mode is `class`).
--   Build: `npm run build` → `build/` (checked-in snapshot exists).
--   Test: CRA/Jest scaffold only (`npm test`). Add tests near changed code when you introduce logic.
+-   Install: `npm install` (CI uses `npm ci`).
+-   Run dev: `npm run dev` (or the equivalent `npm start` alias) starts Vite; Tailwind scans root `index.html` and `./src/**/*.{js,jsx,ts,tsx}`; dark mode is `class`.
+-   Build/preview: `npm run build` emits `dist/`; use `npm run preview` to serve the production build locally.
+-   Test: there is currently no automated frontend test suite or `npm test` script. The CI gate runs a clean install and production build.
 -   Netlify: SPA routing via `public/_redirects`; Vite build/publish settings are in `netlify.toml`; contact submissions use Netlify Forms.
 
 ## Conventions & patterns
@@ -94,7 +95,7 @@ must not depend on those endpoint URLs remaining unknown.
 
 ## Extend safely
 
--   New page: add under `src/pages/`, import and route in `App.js` inside the existing `Layout`.
+-   New page: add under `src/pages/`, import and route in `App.jsx` inside the existing `Layout`.
 -   Protected view: wrap element in `<PrivateRoute requiredRole="admin">`.
 -   New function: `netlify/functions/<name>.js` exporting `handler(event)`; call from UI at `/.netlify/functions/<name>`.
 -   Data-driven content: put JSON in `public/data/` and fetch via relative path.
@@ -135,7 +136,7 @@ Suggested operating cadence:
 
 ## Key files
 
--   Routing/UI shell: `src/App.js`, `components/Layout.jsx`, `components/NavBar.jsx`
+-   Routing/UI shell: `src/App.jsx`, `components/Layout.jsx`, `components/NavBar.jsx`
 -   Auth/roles: `components/PrivateRoute.jsx`, `utils/auth.js`, `constants/roles.js`
 -   Data/flows: `components/BlogEditor.jsx`, `pages/Projects.jsx`, `pages/Contact.jsx`
 -   Telemetry: `utils/visitTracker.js`

@@ -61,37 +61,37 @@
 - [x] Preserve no-Plinth-prep scope.
 
 ### Batch A — Repository / Backend Hygiene
-- [ ] Ignore nested `node_modules`.
-- [ ] Remove tracked `backend/node_modules`.
-- [ ] Remove unused backend `bcrypt`.
-- [ ] Remove unused backend `mongoose`.
-- [ ] Remove unused backend `pg`.
-- [ ] Patch Express within major version 4.
-- [ ] Regenerate backend lockfile.
-- [ ] Backend `npm ci`.
-- [ ] Backend `npm audit` = 0.
-- [ ] Confirm no tracked `node_modules`.
+- [x] Ignore nested `node_modules`.
+- [x] Remove tracked `backend/node_modules`.
+- [x] Remove unused backend `bcrypt`.
+- [x] Remove unused backend `mongoose`.
+- [x] Remove unused backend `pg`.
+- [x] Patch Express within major version 4.
+- [x] Regenerate backend lockfile.
+- [x] Backend `npm ci`.
+- [x] Backend `npm audit` = 0.
+- [x] Confirm no tracked `node_modules`.
 
 ### Batch B — Foundation / Tooling Cleanup
-- [ ] Remove `reportWebVitals()` call.
-- [ ] Delete `src/reportWebVitals.js`.
-- [ ] Remove `web-vitals`.
-- [ ] Reconfirm/remove unused `eslint-config-prettier`.
-- [ ] Update `actions/checkout` to current stable supported major.
-- [ ] Update `actions/setup-node` to current stable supported major.
-- [ ] Preserve Node 24 / npm cache / `npm ci` / build gate.
-- [ ] Refresh Browserslist data.
-- [ ] Remove unused Tailwind `hero-pattern`.
-- [ ] Root `npm ci`.
-- [ ] Root `npm audit` = 0.
-- [ ] `npm run build`.
+- [x] Remove `reportWebVitals()` call.
+- [x] Delete `src/reportWebVitals.js`.
+- [x] Remove `web-vitals`.
+- [x] Reconfirm/remove unused `eslint-config-prettier`.
+- [x] Update `actions/checkout` to current stable supported major.
+- [x] Update `actions/setup-node` to current stable supported major.
+- [x] Preserve Node 24 / npm cache / `npm ci` / build gate.
+- [x] Refresh Browserslist data.
+- [x] Remove unused Tailwind `hero-pattern`.
+- [x] Root `npm ci`.
+- [x] Root `npm audit` = 0.
+- [x] `npm run build`.
 
 ### Batch C — Active Guidance / Public Presentation
-- [ ] Update `.github/copilot-instructions.md` to current Vite-era behavior.
-- [ ] Repair public README.
-- [ ] Correct GitHub-card implementation plan.
-- [ ] Remove unsafe/stale browser-token recommendation.
-- [ ] Preserve useful historical documentation.
+- [x] Update `.github/copilot-instructions.md` to current Vite-era behavior.
+- [x] Repair public README.
+- [x] Correct GitHub-card implementation plan.
+- [x] Remove unsafe/stale browser-token recommendation.
+- [x] Preserve useful historical documentation.
 
 ### Explicitly Deferred
 - [x] Frontend Vitest / Testing Library suite.
@@ -103,18 +103,18 @@
 - [x] No broad dependency modernization.
 
 ### Step 4 Final Validation
-- [ ] Root `npm ci`.
-- [ ] Root `npm audit` = 0.
-- [ ] Root `npm run build`.
-- [ ] Backend `npm ci`.
-- [ ] Backend `npm audit` = 0.
-- [ ] No tracked `node_modules`.
-- [ ] Netlify Forms blueprint still present.
-- [ ] `dist/_redirects` still present.
-- [ ] `git diff --check`.
+- [x] Root `npm ci`.
+- [x] Root `npm audit` = 0.
+- [x] Root `npm run build`.
+- [x] Backend `npm ci`.
+- [x] Backend `npm audit` = 0.
+- [x] No tracked `node_modules`.
+- [x] Netlify Forms blueprint still present.
+- [x] `dist/_redirects` still present.
+- [x] `git diff --check`.
 - [ ] Required CI green.
 - [ ] Netlify deploy preview green if applicable.
-- [ ] Update Step 4 docs with completion state.
+- [x] Update Step 4 docs with locally complete status and pending external gates.
 
 ### Step 4 Gate
 - [ ] **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**

@@ -19,7 +19,7 @@ The site should remain representative of a normal, organically evolved external 
 1. CRA → Vite foundation migration             ✅ COMPLETE
 2. Netlify Forms migration                     ✅ COMPLETE
 3. Remove SendGrid + retire credential         ✅ COMPLETE
-4. Targeted post-Vite modernization review     🔄 IN PROGRESS
+4. Targeted post-Vite modernization review     🔄 LOCAL WORK COMPLETE; EXTERNAL VALIDATION PENDING
 5. Re-run security / public-readiness audit
 6. Manual public-repository review
 7. Final publication verification
@@ -87,9 +87,9 @@ Catch obvious foundation-era leftovers without turning this phase into a broad r
 
 ## Status
 
-**Review complete; approved FIX NOW implementation in progress.**
+**Review and approved Batch A/B/C implementation complete locally; external validation pending.**
 
-The Vite/Netlify production foundation is sound.
+The Vite/Netlify production foundation is sound. Repository/backend hygiene, focused foundation/tooling cleanup, and active public-facing guidance updates are complete. Root and backend clean installs/audits passed, both audits report zero vulnerabilities, the Vite production build passed, and the Netlify Forms blueprint and SPA redirect remain present.
 
 ### Approved repository/backend hygiene
 
@@ -134,7 +134,7 @@ Use the dedicated post-Vite review plan/checklist for execution details.
 
 > **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
 
-Pending implementation/validation.
+Pending the required remote CI result and Netlify deploy-preview confirmation, if applicable, for the final documentation batch. Do not advance to Step 5 or mark this gate passed until those external checks are confirmed.
 
 ---
 

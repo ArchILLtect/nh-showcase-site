@@ -7,7 +7,7 @@
 - [x] Confirm Vite/Netlify production foundation is sound.
 - [x] Confirm root `npm audit` is green at review baseline.
 - [x] Identify separate backend npm dependency tree.
-- [ ] Complete approved FIX NOW implementation.
+- [x] Complete approved FIX NOW implementation.
 - [ ] Pass Step 4 exit gate.
 
 ---
@@ -16,28 +16,28 @@
 
 ## Tracked dependencies
 
-- [ ] Change ignore coverage so nested `node_modules` directories are ignored.
-- [ ] Remove tracked `backend/node_modules/**`.
-- [ ] Confirm `backend/package.json`, `backend/package-lock.json`, and `backend/server.js` remain.
-- [ ] Confirm no `node_modules` directory remains tracked anywhere in the repo.
+- [x] Change ignore coverage so nested `node_modules` directories are ignored.
+- [x] Remove tracked `backend/node_modules/**`.
+- [x] Confirm `backend/package.json`, `backend/package-lock.json`, and `backend/server.js` remain.
+- [x] Confirm no `node_modules` directory remains tracked anywhere in the repo.
 
 ## Backend dependency cleanup
 
-- [ ] Reconfirm `backend/server.js` imports only Express.
-- [ ] Remove unused `bcrypt`.
-- [ ] Remove unused `mongoose`.
-- [ ] Remove unused `pg`.
-- [ ] Update Express within major version 4 to a patched compatible release.
-- [ ] Regenerate `backend/package-lock.json`.
-- [ ] Run `npm ci` from `backend/`.
-- [ ] Run `npm audit` from `backend/`.
-- [ ] Confirm backend audit reports 0 vulnerabilities.
+- [x] Reconfirm `backend/server.js` imports only Express.
+- [x] Remove unused `bcrypt`.
+- [x] Remove unused `mongoose`.
+- [x] Remove unused `pg`.
+- [x] Update Express within major version 4 to a patched compatible release.
+- [x] Regenerate `backend/package-lock.json`.
+- [x] Run `npm ci` from `backend/`.
+- [x] Run `npm audit` from `backend/`.
+- [x] Confirm backend audit reports 0 vulnerabilities.
 
 ### Batch A Checkpoint
 
-- [ ] Nested dependency directories are ignored and not tracked.
-- [ ] Optional backend stub still installs/runs as intended.
-- [ ] Backend dependency tree is clean.
+- [x] Nested dependency directories are ignored and not tracked.
+- [x] Optional backend stub still installs/runs as intended.
+- [x] Backend dependency tree is clean.
 
 ---
 
@@ -45,50 +45,50 @@
 
 ## CRA residue
 
-- [ ] Remove unused `reportWebVitals()` call from `src/main.jsx`.
-- [ ] Delete `src/reportWebVitals.js`.
-- [ ] Remove root `web-vitals` dependency.
-- [ ] Regenerate/update root lockfile.
+- [x] Remove unused `reportWebVitals()` call from `src/main.jsx`.
+- [x] Delete `src/reportWebVitals.js`.
+- [x] Remove root `web-vitals` dependency.
+- [x] Regenerate/update root lockfile.
 
 ## Unused tooling dependency
 
-- [ ] Reconfirm `eslint-config-prettier` is unreferenced.
-- [ ] Remove `eslint-config-prettier`.
-- [ ] Do not perform broader ESLint changes.
+- [x] Reconfirm `eslint-config-prettier` is unreferenced.
+- [x] Remove `eslint-config-prettier`.
+- [x] Do not perform broader ESLint changes.
 
 ## GitHub Actions
 
-- [ ] Check current stable supported major for `actions/checkout`.
-- [ ] Check current stable supported major for `actions/setup-node`.
-- [ ] Update only those action references.
-- [ ] Preserve Node 24.
-- [ ] Preserve npm cache.
-- [ ] Preserve `npm ci`.
-- [ ] Preserve production build gate.
+- [x] Check current stable supported major for `actions/checkout`.
+- [x] Check current stable supported major for `actions/setup-node`.
+- [x] Update only those action references.
+- [x] Preserve Node 24.
+- [x] Preserve npm cache.
+- [x] Preserve `npm ci`.
+- [x] Preserve production build gate.
 - [ ] Confirm required status check remains healthy.
 
 ## Browserslist
 
-- [ ] Run targeted Browserslist / `caniuse-lite` database refresh.
-- [ ] Review resulting package/lockfile changes.
-- [ ] Keep only targeted updater changes.
-- [ ] Confirm stale Browserslist warning is resolved or document why it remains.
+- [x] Run targeted Browserslist / `caniuse-lite` database refresh.
+- [x] Review resulting package/lockfile changes.
+- [x] Keep only targeted updater changes.
+- [x] Confirm stale Browserslist warning is resolved or document why it remains.
 
 ## Tailwind
 
-- [ ] Remove unused `hero-pattern` entry only.
-- [ ] Confirm no source usage existed.
-- [ ] Confirm no visual/asset change results.
+- [x] Remove unused `hero-pattern` entry only.
+- [x] Confirm no source usage existed.
+- [x] Confirm no visual/asset change results.
 
 ### Batch B Checkpoint
 
-- [ ] Run root `npm ci`.
-- [ ] Run root `npm audit`.
-- [ ] Confirm root audit reports 0 vulnerabilities.
-- [ ] Run `npm run build`.
-- [ ] Confirm Vite production output remains healthy.
-- [ ] Confirm Netlify Forms blueprint remains in `dist/index.html`.
-- [ ] Confirm `dist/_redirects` remains present.
+- [x] Run root `npm ci`.
+- [x] Run root `npm audit`.
+- [x] Confirm root audit reports 0 vulnerabilities.
+- [x] Run `npm run build`.
+- [x] Confirm Vite production output remains healthy.
+- [x] Confirm Netlify Forms blueprint remains in `dist/index.html`.
+- [x] Confirm `dist/_redirects` remains present.
 
 ---
 
@@ -96,40 +96,40 @@
 
 ## Copilot instructions
 
-- [ ] Update stale `src/App.js` references.
-- [ ] Remove stale CRA dev-server/proxy claims.
-- [ ] Document current Vite scripts.
-- [ ] Document `dist/` output.
-- [ ] Document honest current no-frontend-tests state.
-- [ ] Avoid unrelated instruction rewrites.
+- [x] Update stale `src/App.js` references.
+- [x] Remove stale CRA dev-server/proxy claims.
+- [x] Document current Vite scripts.
+- [x] Document `dist/` output.
+- [x] Document honest current no-frontend-tests state.
+- [x] Avoid unrelated instruction rewrites.
 
 ## README
 
-- [ ] Add project purpose.
-- [ ] Add current stack.
-- [ ] Document Node 24 prerequisite.
-- [ ] Document `npm install`.
-- [ ] Document `npm run dev`.
-- [ ] Document `npm run build`.
-- [ ] Document `npm run preview`.
-- [ ] Document `dist/` deployment output.
-- [ ] Document Netlify Forms contact flow.
-- [ ] State honestly that no automated frontend test suite currently exists.
-- [ ] Preserve or link existing authentication-flow documentation.
+- [x] Add project purpose.
+- [x] Add current stack.
+- [x] Document Node 24 prerequisite.
+- [x] Document `npm install`.
+- [x] Document `npm run dev`.
+- [x] Document `npm run build`.
+- [x] Document `npm run preview`.
+- [x] Document `dist/` deployment output.
+- [x] Document Netlify Forms contact flow.
+- [x] State honestly that no automated frontend test suite currently exists.
+- [x] Preserve or link existing authentication-flow documentation.
 
 ## GitHub-card plan
 
-- [ ] Update stale `src/App.js` reference.
-- [ ] Replace obsolete CRA validation commands.
-- [ ] Remove/rework `REACT_APP_GITHUB_TOKEN` recommendation.
-- [ ] Do not recommend a browser-exposed GitHub secret.
-- [ ] Use `VITE_*` terminology only for intentionally public/client-visible configuration.
+- [x] Update stale `src/App.js` reference.
+- [x] Replace obsolete CRA validation commands.
+- [x] Remove/rework `REACT_APP_GITHUB_TOKEN` recommendation.
+- [x] Do not recommend a browser-exposed GitHub secret.
+- [x] Use `VITE_*` terminology only for intentionally public/client-visible configuration.
 
 ### Batch C Checkpoint
 
-- [ ] Active docs/guidance accurately describe the Vite-era application.
-- [ ] Historical migration records remain intentionally historical.
-- [ ] No current documentation casually recommends client-side secret exposure.
+- [x] Active docs/guidance accurately describe the Vite-era application.
+- [x] Historical migration records remain intentionally historical.
+- [x] No current documentation casually recommends client-side secret exposure.
 
 ---
 
@@ -166,28 +166,28 @@
 
 ## Root
 
-- [ ] `npm ci`
-- [ ] `npm audit`
-- [ ] Root audit = 0 vulnerabilities.
-- [ ] `npm run build`
+- [x] `npm ci`
+- [x] `npm audit`
+- [x] Root audit = 0 vulnerabilities.
+- [x] `npm run build`
 
 ## Backend
 
-- [ ] `npm ci` from `backend/`
-- [ ] `npm audit` from `backend/`
-- [ ] Backend audit = 0 vulnerabilities.
+- [x] `npm ci` from `backend/`
+- [x] `npm audit` from `backend/`
+- [x] Backend audit = 0 vulnerabilities.
 
 ## Repository / deployment
 
-- [ ] No tracked `node_modules`.
-- [ ] No stale active CRA guidance.
-- [ ] GitHub Actions changes validated.
-- [ ] Netlify Forms blueprint still present.
-- [ ] `dist/_redirects` still present.
-- [ ] `git diff --check`.
+- [x] No tracked `node_modules`.
+- [x] No stale active CRA guidance.
+- [x] GitHub Actions changes validated locally; required remote status check remains pending for the final documentation commit.
+- [x] Netlify Forms blueprint still present.
+- [x] `dist/_redirects` still present.
+- [x] `git diff --check`.
 - [ ] Required CI green.
 - [ ] Netlify deploy preview green if applicable.
-- [ ] Update master modernization docs with Step 4 completion.
+- [x] Update master modernization docs with the locally complete Step 4 state and pending external gates.
 
 ### Exit Gate
 

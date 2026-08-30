@@ -1,154 +1,149 @@
-🔐 Custom Authentication Flow
-This project uses a custom-built authentication system, not a third-party provider like Auth0 or Firebase.
+# Nick Hanson Showcase Site
 
-📚 Related Auth Docs
-- Auth quick overview (root): [docs/AUTH_OVERVIEW.md](docs/AUTH_OVERVIEW.md)
-- Full auth docs index: [docs/dev/auth/AUTH_DOCS_INDEX.md](docs/dev/auth/AUTH_DOCS_INDEX.md)
-- Account recovery implementation: [docs/dev/auth/ACCOUNT_RECOVERY_IMPLEMENTATION.md](docs/dev/auth/ACCOUNT_RECOVERY_IMPLEMENTATION.md)
-- Legacy concerns: [docs/dev/auth/ACCOUNT_RECOVERY_LEGACY.md](docs/dev/auth/ACCOUNT_RECOVERY_LEGACY.md)
-- Implementation checklist: [docs/dev/auth/ACCOUNT_RECOVERY_CHECKLIST.md](docs/dev/auth/ACCOUNT_RECOVERY_CHECKLIST.md)
-- Account-scoped recovery playbook (email reuse allowed): [docs/dev/auth/ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md](docs/dev/auth/ACCOUNT_RECOVERY_ACCOUNT_SCOPED_PLAYBOOK.md)
-- Registration hardening checklist: [docs/dev/auth/REGISTRATION_HARDENING_CHECKLIST.md](docs/dev/auth/REGISTRATION_HARDENING_CHECKLIST.md)
-- Registration baseline capture checklist: [docs/dev/auth/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md](docs/dev/auth/REGISTRATION_BASELINE_CAPTURE_CHECKLIST.md)
-- Registration P0 implementation playbook: [docs/dev/auth/REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md](docs/dev/auth/REGISTRATION_P0_IMPLEMENTATION_PLAYBOOK.md)
-- Registration P1 IAM least-privilege playbook: [docs/dev/auth/REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md](docs/dev/auth/REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md)
-- Registration P1 IAM console click path: [docs/dev/auth/REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md](docs/dev/auth/REGISTRATION_P1_IAM_CONSOLE_CLICKPATH.md)
-- Registration P1 email identity policy (reuse allowed): [docs/dev/auth/REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md](docs/dev/auth/REGISTRATION_P1_EMAIL_UNIQUENESS_STRATEGY.md)
-- Registration P1 email policy alignment playbook: [docs/dev/auth/REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md](docs/dev/auth/REGISTRATION_P1_EMAIL_UNIQUENESS_IMPLEMENTATION_PLAYBOOK.md)
-- Lambda in-repo migration checklist: [docs/dev/LAMBDA_MIGRATION_CHECKLIST.md](docs/dev/LAMBDA_MIGRATION_CHECKLIST.md)
-- Lambda functions workflow: [lambda-functions/README.md](lambda-functions/README.md)
+This repository contains the React application for my personal developer showcase. It presents projects, experience, certificates, blog content, contact functionality, and authenticated user/admin views. The application is deployed through Netlify and uses AWS-backed APIs for selected authentication, blog, and visit-tracking features.
 
-🔄 Account Recovery Status (2026-03-08)
-- Forgot/reset flow is implemented and validated end-to-end.
-- Session invalidation after reset is enforced via tokenVersion + `POST /session/validate`.
-- SES reset + password-changed emails are operational.
-- Abuse controls (per-account cooldown + per-account/per-IP limits) are active and validated.
-- SES bounce/complaint alerting is deferred as an optional cost-aware follow-up.
+## Technology
 
-✅ Summary
-Auth credentials are stored in DynamoDB
+- React 18 and React Router
+- Vite 7
+- Tailwind CSS 3, Sass, and PostCSS
+- Netlify deployment, SPA routing, and Netlify Forms
+- AWS API Gateway, Lambda, DynamoDB, and SES for the custom authentication and related backend workflows
+- Optional local Express stub under `backend/`
 
-Passwords are hashed with bcrypt via a Lambda backend
+## Requirements
 
-Users are authenticated through custom REST API endpoints
+- Node.js 24
+- npm
 
-Tokens are stored in localStorage
+## Local development
 
-Role-based protection is enforced via a custom <PrivateRoute /> component
+Install the root dependencies:
 
-🔁 Full Auth Flow
-🔹 Registration (/register)
-User submits username, email, password, and confirmPassword
+```text
+npm install
+```
 
-Frontend sends a POST to:
-POST https://<api-gateway-endpoint>/register
+Start the Vite development server:
 
-Lambda function:
+```text
+npm run dev
+```
 
-Hashes the password with bcrypt
+Create a production build:
 
-Stores user in DynamoDB with default role: "user"
+```text
+npm run build
+```
 
-On success: user is redirected to login
+The production output is written to `dist/`. Preview that build locally with:
 
-🔹 Login (/login)
-User submits username + password
+```text
+npm run preview
+```
 
-Frontend sends a POST to:
-POST https://<api-gateway-endpoint>/login
+## Deployment and contact form
 
-Lambda function:
+Netlify runs the production build and publishes `dist/`. Client-side routes use the SPA fallback in `public/_redirects`.
 
-Looks up user by username
+The contact page uses Netlify Forms directly. Root `index.html` contains the static form blueprint required for build-time detection, while `src/pages/Contact.jsx` submits matching fields as a URL-encoded `POST /`. A Netlify honeypot field provides native spam protection without changing the visible form experience.
 
-Compares password using bcrypt
+## Validation and tests
 
-Returns:
+CI performs a clean dependency install and runs the Vite production build on Node 24. There is currently no automated frontend test suite or `npm test` script; test-strategy work is intentionally deferred.
 
-{
-"token": "<jwt or mock token>",
-"user": {
-"username": "nick",
-"email": "nick@example.com",
-"role": "admin"
-}
-}
-Frontend stores:
+## Authentication overview
 
-authToken → in localStorage
+The site uses a custom AWS-backed authentication flow rather than Auth0, Firebase, or another hosted identity provider:
 
-userData → in localStorage
+1. Registration and login requests are sent to API Gateway endpoints backed by Lambda functions.
+2. Password hashing and credential validation occur in the backend workflow; credentials are not stored in the frontend.
+3. User records and role information are stored in DynamoDB.
+4. The frontend stores the returned authentication token and user data in local storage.
+5. `PrivateRoute` enforces the current `user` and `admin` route hierarchy and session validation behavior.
+6. Forgot-password, reset, verification, and session-invalidation workflows are implemented through the related AWS services.
 
-User is redirected to:
-
-/admin/dashboard if role is "admin"
-
-/dashboard if role is "user"
-
-🔐 Role-Based Route Protection
-The custom <PrivateRoute /> component checks:
-
-If the user is logged in (via token in localStorage)
-
-If their role is sufficient ("admin" or "user")
-
-If not:
-
-User is redirected to /login
-
-Or shown a "You don’t have access" alert
-
-💾 LocalStorage Keys Used
-Key Description
-authToken Used to verify login session
-userData Stores user info including role
-currentUser (optional) used in some contexts
-
-These are cleared automatically on logout.
-
-🚀 Tech Involved
-Backend: AWS Lambda, API Gateway, DynamoDB, bcrypt
-
-Frontend: React, Axios, React Router
-
-Security: Basic token storage (can be extended with real JWT validation)
-
-🧭 User Journey (Visitor → User → Admin)
+### User journey
 
 ```mermaid
 flowchart TD
-	A[Visitor lands on /home or /] --> B{Browse public pages}
-	B --> B1[/projects/]
-	B --> B2[/about, /experience, /certificates/]
-	B --> B3[/blog/]
-	B --> B4[/contact/]
-	B --> B5[/privacy/]
+    A[Visitor lands on /home or /] --> B{Browse public pages}
+    B --> B1[/projects/]
+    B1 --> B1A[/future-projects/]
+    B --> B2[/about, /experience, /certificates/]
+    B --> B3[/blog/]
+    B --> B4[/contact/]
+    B --> B5[/privacy/]
+    B --> B6[Client payment at /pay]
+    B6 --> B6A[Stripe-hosted Checkout]
 
-	A --> C[/login/]
-	A --> D[/register/]
+    A --> C[/login/]
+    A --> D[/register/]
 
-	D --> E[POST /register to API Gateway Lambda]
-	E --> C
+    D --> E[POST /register to API Gateway Lambda]
+    E --> C
+    D --> V[Email verification link]
+    V --> V1[/verify-email/]
 
-	C --> F[POST /login to API Gateway Lambda]
-	F --> G[Save authToken + userData in localStorage]
-	G --> H{roleHierarchy check}
+    C --> F[POST /login to API Gateway Lambda]
+    F --> G[Save authToken and userData in localStorage]
+    G --> H{roleHierarchy check}
 
-	H -->|user| I[/dashboard/]
-	H -->|admin| J[/admin/dashboard/]
+    C --> R1[/forgot-password/]
+    R1 --> R2[Request reset email]
+    R2 --> R3[/reset-password/]
+    R3 --> C
 
-	I --> I1[View personal visit logs]
-	J --> J1[User Tracking]
-	J --> J2[All Tracking]
-	J --> J3[Add Blog]
+    H -->|user| I[/dashboard/]
+    H -->|admin| J[/admin/dashboard/]
 
-	A --> K[Cookie notice]
-	K -->|accept| L[Enable visit telemetry]
-	K -->|decline| M[Skip telemetry]
+    I --> I1[View personal visit logs]
+    J --> J1[User tracking]
+    J --> J2[All tracking]
+    J --> J3[Add blog]
+
+    A --> K[Cookie notice]
+    K -->|accept| L[Enable visit telemetry]
+    K -->|decline| M[Skip telemetry]
 ```
 
-Role-based route behavior (at a glance):
+Role behavior at a glance:
 
-- Visitor (guest): can access all public pages, login, and registration.
-- User: gets redirected to /dashboard after login and can view personal visit analytics.
-- Admin: gets redirected to /admin/dashboard after login and can access tracking tools and blog publishing.
+- Visitors can access all public content, the client-payment page, registration, login, and account-recovery routes.
+- `/pay` sends clients to Stripe-hosted Checkout; this site does not collect or store card or bank-account details.
+- Authenticated users are directed to `/dashboard` and can view their personal visit analytics.
+- Administrators are directed to `/admin/dashboard` and can access tracking and blog-publishing tools.
+- Failed authentication or insufficient roles redirect to login or deny the protected action.
+
+### Browser authentication state
+
+| Local-storage key | Purpose |
+| --- | --- |
+| `authToken` | Holds the token used to validate the current session. |
+| `userData` | Holds the current user profile, role, and session-version data. |
+| `currentUser` | Legacy compatibility key removed during logout when present. |
+
+These values are cleared during logout. Protected routes also validate the session with the backend; local storage alone is not treated as authorization.
+
+### Account recovery and session safety
+
+- Forgot-password and reset flows have been validated end to end.
+- Reset tokens are single-use and expire.
+- A successful reset increments `tokenVersion`, and `POST /session/validate` rejects stale sessions.
+- SES sends reset and password-changed notifications.
+- Per-account cooldowns and per-account/per-IP limits protect recovery requests from abuse.
+
+Detailed authentication documentation:
+
+- [Authentication overview](docs/AUTH_OVERVIEW.md)
+- [Authentication documentation index](docs/dev/auth/AUTH_DOCS_INDEX.md)
+- [Account recovery implementation](docs/dev/auth/ACCOUNT_RECOVERY_IMPLEMENTATION.md)
+- [Registration hardening checklist](docs/dev/auth/REGISTRATION_HARDENING_CHECKLIST.md)
+- [Lambda source and deployment workflow](lambda-functions/README.md)
+
+## Repository notes
+
+- Public static data and assets live under `public/`.
+- Active Lambda source lives under `lambda-functions/`; generated dependency directories are not tracked.
+- The optional `backend/` project is a minimal local Express stub and is not the production application backend.
+- Local credentials and protected environment files must not be committed.
