@@ -2,34 +2,27 @@
   "name": "nh-showcase-site",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@sendgrid/mail": "^8.1.4",
     "axios": "^1.7.9",
-    "cra-template": "1.2.0",
     "dotenv": "^16.4.7",
+    "easymde": "2.20.0",
+    "prop-types": "15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.1.0",
-    "react-scripts": "5.0.1",
     "react-simplemde-editor": "^5.2.0",
     "remark-gfm": "^4.0.1",
     "sass": "^1.83.0",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "export:auth-baseline": "powershell -ExecutionPolicy Bypass -File ./scripts/export-auth-config-baseline.ps1 -IncludeIam -ContinueOnError"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -45,11 +38,13 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.27.1",
+    "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-react": "^7.37.5",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vite": "^7.0.0"
   }
 }
