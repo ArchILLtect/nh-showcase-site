@@ -18,9 +18,9 @@ Only fix an item in this phase if it is:
 
 ## Current Status
 
-**Review and approved Batch A/B/C implementation complete locally; final external validation pending.**
+**Complete.**
 
-The Vite/Netlify production foundation is sound. Tracked backend dependencies were removed, both npm projects now audit cleanly, approved foundation residue was removed, and active public-facing guidance now reflects the Vite-era application. The Step 4 exit gate remains pending until the committed documentation batch passes required CI and its Netlify deploy preview, if applicable.
+The Vite/Netlify production foundation is sound. Tracked backend dependencies were removed, both npm projects now audit cleanly, approved foundation residue was removed, and active public-facing guidance now reflects the Vite-era application. Required GitHub Actions CI and the Netlify deploy preview passed for PR #4.
 
 ---
 
@@ -273,7 +273,7 @@ The following are already correct or intentionally preserved:
 
 > **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
 
-Pending required CI and Netlify deploy-preview confirmation for the completed change set.
+**Passed.**
 
 ## Explicitly Out of Scope
 

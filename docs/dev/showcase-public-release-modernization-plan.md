@@ -19,8 +19,8 @@ The site should remain representative of a normal, organically evolved external 
 1. CRA → Vite foundation migration             ✅ COMPLETE
 2. Netlify Forms migration                     ✅ COMPLETE
 3. Remove SendGrid + retire credential         ✅ COMPLETE
-4. Targeted post-Vite modernization review     🔄 LOCAL WORK COMPLETE; EXTERNAL VALIDATION PENDING
-5. Re-run security / public-readiness audit
+4. Targeted post-Vite modernization review     ✅ COMPLETE
+5. Re-run security / public-readiness audit    ✅ COMPLETE
 6. Manual public-repository review
 7. Final publication verification
 8. Change repository visibility to public
@@ -87,7 +87,7 @@ Catch obvious foundation-era leftovers without turning this phase into a broad r
 
 ## Status
 
-**Review and approved Batch A/B/C implementation complete locally; external validation pending.**
+**Complete.**
 
 The Vite/Netlify production foundation is sound. Repository/backend hygiene, focused foundation/tooling cleanup, and active public-facing guidance updates are complete. Root and backend clean installs/audits passed, both audits report zero vulnerabilities, the Vite production build passed, and the Netlify Forms blueprint and SPA redirect remain present.
 
@@ -134,11 +134,15 @@ Use the dedicated post-Vite review plan/checklist for execution details.
 
 > **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
 
-Pending the required remote CI result and Netlify deploy-preview confirmation, if applicable, for the final documentation batch. Do not advance to Step 5 or mark this gate passed until those external checks are confirmed.
+**Passed.** Required GitHub Actions CI, the Netlify deploy preview, and redirect processing were confirmed successful for PR #4 with no pending or failing checks.
 
 ---
 
 # Step 5 — Re-run Security / Public-Readiness Audit
+
+## Status
+
+**Complete.**
 
 ## Goal
 
@@ -154,9 +158,29 @@ Verify that the modernized/stabilized tracked repository and reviewed Git histor
 - dependency/config sanity checks across each npm project;
 - confirm no generated security/audit artifact contains secret material.
 
+## Result
+
+- current branch/upstream state was clean and synchronized;
+- no high-confidence credential, private-key, bearer-token, embedded-URL credential, or client-visible Vite secret pattern was found in tracked content;
+- no protected environment/private-key file was found in reachable history;
+- historical SendGrid material was limited to retired code/dependency identifiers and migration records, with no SendGrid credential shape detected;
+- the local protected `.env` remained ignored/untracked and was not inspected;
+- root and backend `npm audit` each reported zero vulnerabilities;
+- current Vite, Netlify, CI, and server-side environment-variable usage showed no publication blocker;
+- the ignored local `audit-report.json` remained untracked.
+
+### Review later
+
+- reconsider wildcard Lambda CORS origins during a focused auth-hardening pass;
+- reconfirm that opt-in reset-token/internal-error testing flags are disabled during final deployment verification.
+
+Neither follow-up is a confirmed public-release security blocker.
+
 ## Exit gate
 
 > **No confirmed security blocker remains.**
+
+**Passed.** Proceed to Step 6 for the separate manual review of intentional public information, infrastructure metadata, documentation, assets/licensing, and generated artifacts.
 
 ---
 

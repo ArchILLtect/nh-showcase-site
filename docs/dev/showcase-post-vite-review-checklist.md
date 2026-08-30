@@ -8,7 +8,7 @@
 - [x] Confirm root `npm audit` is green at review baseline.
 - [x] Identify separate backend npm dependency tree.
 - [x] Complete approved FIX NOW implementation.
-- [ ] Pass Step 4 exit gate.
+- [x] Pass Step 4 exit gate.
 
 ---
 
@@ -65,7 +65,7 @@
 - [x] Preserve npm cache.
 - [x] Preserve `npm ci`.
 - [x] Preserve production build gate.
-- [ ] Confirm required status check remains healthy.
+- [x] Confirm required status check remains healthy.
 
 ## Browserslist
 
@@ -185,10 +185,10 @@
 - [x] Netlify Forms blueprint still present.
 - [x] `dist/_redirects` still present.
 - [x] `git diff --check`.
-- [ ] Required CI green.
-- [ ] Netlify deploy preview green if applicable.
-- [x] Update master modernization docs with the locally complete Step 4 state and pending external gates.
+- [x] Required CI green.
+- [x] Netlify deploy preview green.
+- [x] Update master modernization docs with the completed Step 4 state.
 
 ### Exit Gate
 
-- [ ] **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
+- [x] **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**

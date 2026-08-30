@@ -112,28 +112,30 @@
 - [x] Netlify Forms blueprint still present.
 - [x] `dist/_redirects` still present.
 - [x] `git diff --check`.
-- [ ] Required CI green.
-- [ ] Netlify deploy preview green if applicable.
-- [x] Update Step 4 docs with locally complete status and pending external gates.
+- [x] Required CI green.
+- [x] Netlify deploy preview green.
+- [x] Update Step 4 docs with completed status.
 
 ### Step 4 Gate
-- [ ] **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
+- [x] **No obvious foundation-era leftovers materially hurt stability, correctness, repository hygiene, or professional presentation.**
 
 ---
 
 ## Step 5 — Security / Public-Readiness Audit
 
-- [ ] Git baseline.
-- [ ] Scan tracked files for secrets.
-- [ ] Confirm no tracked env/private-key material.
-- [ ] Re-check Git history for credentials.
-- [ ] Review relevant remote branches/tags.
-- [ ] Confirm protected local secret files ignored/untracked without reading them.
-- [ ] Run dependency/config sanity checks across all npm projects.
-- [ ] Confirm no security/audit artifact contains secret material.
+- [x] Git baseline.
+- [x] Scan tracked files for secrets.
+- [x] Confirm no tracked env/private-key material.
+- [x] Re-check Git history for credentials.
+- [x] Review relevant remote branches/tags.
+- [x] Confirm protected local secret files ignored/untracked without reading them.
+- [x] Run root and backend dependency/config sanity checks; both audits = 0 vulnerabilities.
+- [x] Confirm no security/audit artifact containing findings is tracked.
+- [x] Record wildcard Lambda CORS as a later focused auth-hardening review item.
+- [x] Record production testing-flag confirmation for final deployment verification.
 
 ### Step 5 Gate
-- [ ] **No confirmed security blocker remains.**
+- [x] **No confirmed security blocker remains.**
 
 ---
 
