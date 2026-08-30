@@ -55,48 +55,48 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 
 ## Step 2 — Netlify Forms Migration
 
-- [ ] Create Netlify Forms branch from modernized `main`.
-- [ ] Confirm contact form behavior/fields.
-- [ ] Keep SendGrid path as rollback insurance.
-- [ ] Confirm Netlify Forms availability.
-- [ ] Confirm static detectable form location in Vite output.
-- [ ] Add static Netlify-detectable form markup.
-- [ ] Add stable form name.
-- [ ] Add hidden `form-name`.
-- [ ] Add matching fields.
-- [ ] Add Netlify-native spam protection.
-- [ ] Convert active submit path to URL-encoded Netlify Forms POST.
-- [ ] Preserve controlled-input UX.
-- [ ] Preserve loading UX.
-- [ ] Preserve success UX.
-- [ ] Preserve useful error handling.
-- [ ] Run local build.
-- [ ] Deploy preview.
-- [ ] Confirm Netlify detects form.
-- [ ] Send real test.
-- [ ] Confirm submission storage.
-- [ ] Confirm fields.
-- [ ] Confirm notification.
-- [ ] Confirm spam protection.
-- [ ] Confirm old SendGrid path is not used.
+- [x] Create Netlify Forms branch from modernized `main`.
+- [x] Confirm contact form behavior/fields.
+- [x] Keep SendGrid path as rollback insurance until deployed proof passed.
+- [x] Confirm Netlify Forms availability.
+- [x] Confirm static detectable form location in Vite output.
+- [x] Add static Netlify-detectable form markup.
+- [x] Add stable form name.
+- [x] Add hidden `form-name`.
+- [x] Add matching fields.
+- [x] Add Netlify-native spam protection.
+- [x] Convert active submit path to URL-encoded Netlify Forms POST.
+- [x] Preserve controlled-input UX.
+- [x] Preserve loading UX.
+- [x] Preserve success UX.
+- [x] Preserve useful error handling.
+- [x] Run local build.
+- [x] Deploy preview.
+- [x] Confirm Netlify detects form.
+- [x] Send real test.
+- [x] Confirm submission storage.
+- [x] Confirm fields.
+- [x] Confirm notification.
+- [x] Confirm spam protection.
+- [x] Confirm old SendGrid path is not used.
 
 ### Step 2 Gate
-- [ ] **Netlify Forms is proven before SendGrid removal.**
+- [x] **Netlify Forms is proven before SendGrid removal.**
 
 ---
 
 ## Step 3 — Remove SendGrid + Retire Credential
 
-- [ ] Delete legacy contact function if unused.
-- [ ] Remove `@sendgrid/mail`.
-- [ ] Check remaining `dotenv` usage.
-- [ ] Remove `dotenv` only if unused.
-- [ ] Remove tracked `SENDGRID_API_KEY` references.
-- [ ] Remove stale SendGrid docs/instructions.
-- [ ] Search for `sendgrid`.
-- [ ] Search for `SENDGRID_API_KEY`.
-- [ ] Search for old contact-function path.
-- [ ] Update lockfile.
+- [x] Delete legacy contact function if unused.
+- [x] Remove `@sendgrid/mail`.
+- [x] Check remaining `dotenv` usage.
+- [x] Remove `dotenv` only if unused.
+- [x] Remove tracked `SENDGRID_API_KEY` references from active code and configuration.
+- [x] Remove stale active SendGrid docs/instructions.
+- [x] Search for `sendgrid` and classify intentional historical records.
+- [x] Search for `SENDGRID_API_KEY`.
+- [x] Search for old contact-function path.
+- [x] Update lockfile.
 - [ ] Run CI/Vite build.
 - [ ] Re-test deployed form.
 - [ ] Remove obsolete local credential without exposing it.

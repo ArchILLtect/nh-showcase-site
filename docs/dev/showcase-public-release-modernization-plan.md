@@ -178,6 +178,10 @@ Replace the SendGrid-backed contact submission flow with Netlify Forms directly,
 
 Use the dedicated Netlify Forms plan/checklist for detailed execution.
 
+## Status
+
+**Complete.** Netlify Forms was proven in a deploy preview with successful detection, storage, expected fields, honeypot protection, native notification delivery, and the preserved contact-page UX. Network verification confirmed the React form submits a URL-encoded `POST /`, and the legacy Function was not invoked.
+
 ---
 
 # Step 3 — Remove SendGrid + Retire Credential
@@ -201,6 +205,12 @@ Remove the obsolete provider-specific contact backend after Netlify Forms is pro
 ## Exit gate
 
 > **No active SendGrid code path, dependency, tracked reference, or obsolete live credential remains.**
+
+## Status
+
+**Application cleanup complete; manual credential retirement pending.** The legacy contact Function, `@sendgrid/mail`, root `dotenv`, and obsolete Netlify Functions configuration were removed. Active guidance now describes the Netlify Forms flow, the lockfile is updated, `npm audit` reports zero vulnerabilities, and the Vite build passes.
+
+The ignored local credential has not been opened, altered, or deleted, and the provider-side SendGrid key has not yet been revoked. Those manual actions remain required before the Step 3 exit gate can pass.
 
 ---
 
