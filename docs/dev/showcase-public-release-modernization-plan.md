@@ -144,6 +144,12 @@ Prove existing behavior survives:
 
 > **Vite foundation is stable and existing application behavior is preserved.**
 
+## Status
+
+**Functionally complete.** The CRA baseline was captured on Node 24, the Vite production build and CI pass, and the corrected Netlify configuration produces a successful deploy preview from `dist/`. Targeted validation covered public and direct routes, authentication and protected access, blog content, contact-page rendering, dark-mode persistence, responsive navigation, payments, and recovery/verification rendering.
+
+The legacy contact form was deliberately not submitted during this phase so the SendGrid-backed path was not exercised unnecessarily. Form submission validation remains part of Step 2. The migration PR is open; merging it is the only remaining Step 1 administrative action.
+
 ---
 
 # Step 2 — Netlify Forms Migration

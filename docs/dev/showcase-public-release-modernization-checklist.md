@@ -3,10 +3,10 @@
 ## Step 0 — Repository Governance Baseline
 
 - [x] Basic CI added.
-- [x] CI install/test/build run is green.
+- [x] CI install/build run is green.
 - [x] `main` ruleset active.
 - [x] Pull request required before merge.
-- [x] Required `Test and build` status check enabled.
+- [x] Required `Build` status check enabled.
 - [x] Force pushes blocked.
 - [x] Branch deletion restricted.
 - [x] Clean working tree before modernization branch.
@@ -16,38 +16,40 @@
 ## Step 1 — CRA → Vite Foundation Migration
 
 - [x] Create dedicated branch: `chore/migrate-cra-to-vite`.
-- [ ] Inventory CRA-specific files/config/dependencies.
-- [ ] Confirm current runtime baseline.
-- [ ] Add Vite + React plugin/config.
-- [ ] Replace CRA HTML shell with Vite root `index.html`.
-- [ ] Update React entry point as required.
-- [ ] Replace `react-scripts` package scripts.
-- [ ] Resolve `%PUBLIC_URL%` usage.
-- [ ] Resolve CRA env references if present.
-- [ ] Verify public/static asset paths.
-- [ ] Verify Tailwind/PostCSS.
-- [ ] Verify local proxy/dev assumptions.
-- [ ] Update Netlify publish directory to `dist` where required.
-- [ ] Preserve SPA redirects.
-- [ ] Verify Netlify Functions.
-- [ ] Update CI for Vite/test-runner changes.
-- [ ] Run local validation.
-- [ ] Deploy preview.
-- [ ] Regression-test major public routes.
-- [ ] Test direct-route refreshes.
-- [ ] Test login/register/private/admin routes as appropriate.
-- [ ] Test blog/static data.
-- [ ] Test dark mode.
-- [ ] Test tracking.
-- [ ] Test AWS calls.
-- [ ] Test responsive behavior.
-- [ ] Confirm production build.
-- [ ] Open PR.
-- [ ] Required CI passes.
+- [x] Inventory CRA-specific files/config/dependencies.
+- [x] Confirm current runtime baseline.
+- [x] Add Vite + React plugin/config.
+- [x] Replace CRA HTML shell with Vite root `index.html`.
+- [x] Update React entry point as required.
+- [x] Replace `react-scripts` package scripts.
+- [x] Resolve `%PUBLIC_URL%` usage.
+- [x] Resolve CRA env references if present (none used by the frontend).
+- [x] Verify public/static asset paths.
+- [x] Verify Tailwind/PostCSS.
+- [x] Verify local proxy/dev assumptions.
+- [x] Update Netlify publish directory to `dist` where required.
+- [x] Preserve SPA redirects.
+- [x] Preserve Netlify Functions configuration and deployment.
+- [x] Update CI for Vite and the current no-tests state.
+- [x] Run local validation.
+- [x] Deploy preview.
+- [x] Regression-test major public routes.
+- [x] Test direct-route refreshes.
+- [x] Test login/register/private/admin routes as appropriate.
+- [x] Test blog/static data.
+- [x] Test dark mode.
+- [x] Test tracking.
+- [x] Test AWS calls.
+- [x] Test responsive behavior.
+- [x] Confirm production build.
+- [x] Open PR.
+- [x] Required CI passes.
 - [ ] Merge Vite migration.
 
+Contact-page rendering was verified without submitting the legacy SendGrid-backed form. Live form submission is intentionally deferred to Step 2, where Netlify Forms will be implemented and proven before SendGrid retirement.
+
 ### Step 1 Gate
-- [ ] **Vite foundation is stable and existing app behavior is preserved.**
+- [x] **Vite foundation is stable and existing app behavior is preserved.**
 
 ---
 
