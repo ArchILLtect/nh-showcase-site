@@ -29,8 +29,68 @@ React (CRA) + Tailwind frontend with Netlify Functions for server-side tasks and
 
 ## External services & secrets
 
--   SendGrid: `SENDGRID_API_KEY` for `contact.js` (dotenv for local). Do not commit secrets.
--   AWS Gateways: Endpoints are hardcoded in `BlogEditor.jsx`, `visitTracker.js`, and `LoginPage.jsx`. If you touch them, centralize in a config and prefer `process.env.REACT_APP_*`.
+### Secret access boundary
+
+Known secret-bearing local files are strictly out of bounds unless the user
+explicitly requests access to a specific file for a specific task.
+
+Do not open, read, search within, print, quote, summarize, copy, transform,
+edit, or otherwise inspect the contents of:
+
+- `.env`
+- `.env.local`
+- `.env.*.local`
+- private-key or certificate files containing private material
+- any other file explicitly identified as containing credentials or secrets
+
+It is acceptable to determine that one of these files exists, whether Git
+ignores/tracks it, and whether repository configuration protects it, without
+reading its contents.
+
+`.env.example` or other intentionally public placeholder files may be reviewed
+when they contain placeholders rather than real credentials.
+
+Do not access a protected secret-bearing file merely because the task is a
+security audit, repository-readiness review, migration, debugging session, or
+configuration review. Those tasks do not override this boundary.
+
+### Secret handling if exposure is discovered elsewhere
+
+If a secret is encountered unexpectedly in source code, documentation, Git
+history, generated output, logs, configuration, or any other location that is
+not supposed to contain secrets:
+
+- Treat the value as potentially exposed.
+- Never reproduce the value in chat or agent output.
+- Never copy it into an audit report, Markdown document, code comment, issue,
+  patch, log, temporary file, or other artifact.
+- Never show a partial value or prefix/suffix merely to prove the finding.
+- Report only safe identifying information:
+  - file path;
+  - line/location;
+  - variable or field name;
+  - provider or credential type;
+  - relevant commit hash when applicable.
+- Stop actions that could further propagate the value.
+- Tell the user that the credential may require rotation or revocation.
+- Do not rotate/revoke credentials, delete source content, rewrite Git history,
+  or change external services without explicit approval.
+
+A security audit must report the existence and location of a secret without
+collecting or reproducing the secret as evidence.
+
+### Public configuration is not a secret
+
+Browser-facing endpoints and other values necessarily shipped to client-side
+code should be treated as public configuration, not protected secrets.
+
+AWS API Gateway endpoints used by the frontend are currently hardcoded in
+project source. Their URLs are not credentials. If those endpoints are touched
+during related implementation work, prefer centralizing public configuration
+rather than treating endpoint URLs as secret material.
+
+Authentication, authorization, validation, rate limiting, and backend security
+must not depend on those endpoint URLs remaining unknown.
 
 ## Extend safely
 
