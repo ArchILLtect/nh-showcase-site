@@ -97,14 +97,14 @@ Contact-page rendering was verified without submitting the legacy SendGrid-backe
 - [x] Search for `SENDGRID_API_KEY`.
 - [x] Search for old contact-function path.
 - [x] Update lockfile.
-- [ ] Run CI/Vite build.
-- [ ] Re-test deployed form.
-- [ ] Remove obsolete local credential without exposing it.
-- [ ] Delete env file only if otherwise unnecessary.
-- [ ] Revoke/delete obsolete SendGrid key.
+- [x] Run CI/Vite build.
+- [x] Re-test deployed form.
+- [x] Remove obsolete local credential without exposing it.
+- [x] Retain the local env file only if otherwise necessary; the obsolete SendGrid entry is removed.
+- [x] Confirm provider-side revocation is unavailable/not applicable because the SendGrid trial expired and the service is inactive.
 
 ### Step 3 Gate
-- [ ] **SendGrid is completely retired.**
+- [x] **SendGrid is completely retired.**
 
 ---
 

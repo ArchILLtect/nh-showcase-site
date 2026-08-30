@@ -10,7 +10,7 @@ This order avoids implementing Netlify form detection against CRA's `public/inde
 
 **Netlify Forms proven; application cleanup complete.** The deployed `contact` form is detected, stores submissions with the expected fields, applies honeypot protection, sends native notifications, and receives the React form's URL-encoded `POST /`. The legacy Function was not invoked during verification and has now been deleted; `@sendgrid/mail`, root `dotenv`, and the obsolete Netlify Functions configuration were removed.
 
-Manual deletion of the local credential and provider-side SendGrid key revocation remain pending and are intentionally outside the repository cleanup.
+**Complete.** The obsolete local SendGrid credential entry was removed manually after the repository changes were merged and the deployed Netlify form was re-verified. Provider-side key revocation was unavailable/not applicable because the SendGrid trial had expired and the service was inactive. No provider-side deletion is claimed.
 
 ## Preconditions
 

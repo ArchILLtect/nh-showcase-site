@@ -54,20 +54,20 @@
 - [x] Remove `dotenv` only if unused.
 - [x] Remove tracked SendGrid/API-key/old-path references from active code and configuration.
 - [x] Update lockfile.
-- [ ] Run CI/Vite build.
-- [ ] Re-test deployed form.
+- [x] Run CI/Vite build.
+- [x] Re-test deployed form.
 
 ## Credential Retirement
 
 - [x] Confirm app no longer needs SendGrid.
-- [ ] Remove obsolete local credential without viewing/copying it.
-- [ ] Delete env file only if otherwise unnecessary.
-- [ ] Revoke/delete provider-side SendGrid key.
+- [x] Remove obsolete local credential without viewing/copying it.
+- [x] Retain the local env file only if otherwise necessary; the obsolete SendGrid entry is removed.
+- [x] Confirm provider-side revocation is unavailable/not applicable because the SendGrid trial expired and the service is inactive.
 
 ## Final
 
 - [x] Search tracked repo for stale SendGrid references and classify intentional historical records.
-- [ ] Confirm no secret-bearing staged/tracked file.
-- [ ] Open PR.
-- [ ] Required CI passes.
-- [ ] Merge.
+- [x] Confirm no secret-bearing staged/tracked file.
+- [x] Open PR.
+- [x] Required CI passes.
+- [x] Merge.
