@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -27,3 +28,5 @@ yarn-error.log*
 /lambda-functions/**/*.zip
 /lambda-functions/**/node_modules/
 /lambda-functions/archive/
+
+audit-report.json
