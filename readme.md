@@ -147,3 +147,11 @@ Detailed authentication documentation:
 - Active Lambda source lives under `lambda-functions/`; generated dependency directories are not tracked.
 - The optional `backend/` project is a minimal local Express stub and is not the production application backend.
 - Local credentials and protected environment files must not be committed.
+
+## Licensing
+
+This repository is publicly visible for portfolio and code-review purposes. No
+general license to use, copy, modify, or redistribute its original source code
+or assets is granted unless explicitly stated otherwise. Third-party names,
+trademarks, logos, badges, and other materials remain the property of their
+respective owners.
