@@ -22,8 +22,8 @@ The site should remain representative of a normal, organically evolved external 
 4. Targeted post-Vite modernization review     ✅ COMPLETE
 5. Re-run security / public-readiness audit    ✅ COMPLETE
 6. Manual public-repository review              ✅ COMPLETE
-7. Final publication verification
-8. Change repository visibility to public
+7. Final publication verification              ✅ COMPLETE
+8. Change repository visibility to public      ✅ COMPLETE
 9. Continue TreeMark / later product work
 ```
 
@@ -206,7 +206,7 @@ Review intentional personal/contact information, infrastructure metadata, docume
 - Wildcard Lambda CORS remains deferred to later auth hardening.
 - Production configuration was manually confirmed in AWS: `showcaseForgotPassword` has `RETURN_RESET_TOKEN_FOR_TESTING=false`, and `showcaseRegistration` has `ENABLE_INTERNAL_ERROR_TEST=false`.
 
-Step 6 is complete. Step 7 — Final Publication Verification — is next and has not yet begun.
+Step 6 is complete. Its decisions were reconfirmed during final publication verification and remain accepted.
 
 ## Exit gate
 
@@ -218,15 +218,53 @@ Step 6 is complete. Step 7 — Final Publication Verification — is next and ha
 
 Confirm Git state, required CI, Vite production build/deployment, contact form/notification/spam protection, major routes, auth/private routes, AWS-backed features, final secret/history sanity, and all public-review decisions.
 
+## Status
+
+**Complete.**
+
+Final verification passed against the PR head that was subsequently merged:
+
+- the local, upstream, and PR commits matched and the working tree was clean;
+- required GitHub Actions CI, the Netlify deploy preview, and redirect processing passed with no pending or failing checks;
+- clean root/backend installs and audits passed with zero vulnerabilities;
+- the Vite production build passed and retained the Netlify Forms blueprint and SPA redirect;
+- direct-route checks passed on the deploy preview and production site;
+- tracked-file, history, ignored-file, licensing, configuration, and accepted Step 6 decisions were reconfirmed;
+- no confirmed security or public-readiness blocker remained.
+
 ## Exit gate
 
 > **Repository is deliberately judged safe and appropriate to make public.**
+
+**Passed.**
 
 ---
 
 # Step 8 — Repository Visibility Change
 
-Changing the GitHub repository from private to public is a separate explicit manual action.
+Changing the GitHub repository from private to public was treated as a separate, explicit manual action after Step 7 passed.
+
+## Status
+
+**Complete.**
+
+The Step 7-approved PR was merged, the production deployment succeeded, and the owner re-verified the production site, login, and a live Netlify Forms submission. The repository was then changed to public and reviewed from a logged-out/incognito perspective.
+
+Post-public verification confirmed:
+
+- the repository and source tree are publicly visible and clonable;
+- the expected single `main` branch is visible, with no unexpected tags or releases;
+- ignored/protected/generated artifacts such as `.env`, `node_modules`, `dist`, audit outputs, and private-key files are not exposed;
+- GitHub Actions history is visible as expected, with successful runs and no known sensitive log or artifact exposure;
+- repository settings and secrets remain unavailable to anonymous visitors;
+- the active `main` ruleset still requires pull requests and passing status checks, restricts deletion, and blocks force pushes;
+- production and the Netlify/GitHub integration remain healthy.
+
+## Exit gate
+
+> **The repository is public, operational, and verified from an anonymous-user perspective.**
+
+**Passed.** The public-release modernization sequence is complete; Step 9 is the next independent product-work phase.
 
 ---
 

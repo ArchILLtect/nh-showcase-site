@@ -168,23 +168,34 @@
 
 ## Step 7 — Final Publication Verification
 
-- [ ] Git baseline/current HEAD.
-- [ ] Required CI green.
-- [ ] Production Vite build/deploy.
-- [ ] Contact form + notification + spam protection.
-- [ ] Major/auth/private/AWS-backed functionality.
-- [ ] Final tracked-file/history secret sanity.
-- [ ] Confirm SendGrid key remains retired.
-- [ ] Confirm public-review decisions.
+- [x] Git baseline/current HEAD.
+- [x] Required CI green.
+- [x] Production Vite build/deploy.
+- [x] Contact form + notification + spam protection.
+- [x] Major/auth/private/AWS-backed functionality.
+- [x] Final tracked-file/history secret sanity.
+- [x] Confirm SendGrid key remains retired.
+- [x] Confirm public-review decisions.
 
 ### Step 7 Gate
-- [ ] **Repository is safe and appropriate to make public.**
+- [x] **Repository is safe and appropriate to make public.**
 
 ---
 
 ## Step 8 — Visibility Change
 
-- [ ] Change GitHub repository visibility from private to public manually.
+- [x] Merge the Step 7-approved PR and confirm the production deploy succeeds.
+- [x] Re-verify production routes, login, and a live Netlify Forms submission.
+- [x] Change GitHub repository visibility from private to public manually.
+- [x] Confirm anonymous/incognito repository visibility and cloning.
+- [x] Confirm no protected, ignored, generated, audit, or private-key artifacts are publicly exposed.
+- [x] Review public branches, tags, releases, and Actions history for unexpected exposure.
+- [x] Confirm repository settings/secrets remain unavailable anonymously.
+- [x] Confirm the active `main` ruleset still protects pull-request and status-check workflow.
+- [x] Confirm production and Netlify/GitHub integration remain healthy.
+
+### Step 8 Gate
+- [x] **Repository is public, operational, and verified from an anonymous-user perspective.**
 
 ---
 
