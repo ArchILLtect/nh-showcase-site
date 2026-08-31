@@ -1,5 +1,14 @@
 [
     {
+      "title": "TreeMark",
+      "image": "https://raw.githubusercontent.com/ArchILLtect/treemark/main/docs/images/banner-README.png",
+      "description": "A cross-platform Node.js CLI for generating deterministic Markdown or ASCII directory trees, safely synchronizing marked documentation regions, and checking generated content in CI.",
+      "techStack": ["TypeScript", "Node.js", "npm", "GitHub Actions"],
+      "projectPage": "/projects/treemark",
+      "github": "https://github.com/ArchILLtect/treemark",
+      "status": "v1.0.0 Released"
+    },
+    {
       "title": "CodeForge",
       "image": "../images/codeforge-logo.png",
       "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",

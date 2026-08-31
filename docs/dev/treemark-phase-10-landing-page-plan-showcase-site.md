@@ -39,6 +39,10 @@ The page should present TreeMark as a real released developer tool, not as a sch
 
 # 10A — Showcase-Site Baseline and TreeMark Dogfooding
 
+Status: **Complete**
+
+The published TreeMark CLI was run against `nh-showcase-site`, and its marked-region update workflow generated the repository structure section now present in `readme.md`. The generated output was reviewed as readable, useful, and free of ignored/generated clutter. The deleted hand-maintained `docs/FILE_STRUCTURE.md` remains intentionally unrecreated.
+
 Before building the landing page:
 
 1. confirm the repository is public and production is stable;
@@ -62,6 +66,10 @@ Do not hand-maintain a duplicate structure document unless a later need independ
 
 # 10B — Page Architecture and Content Plan
 
+Status: **Complete**
+
+The existing route, layout, project-card, navigation, styling, metadata, and public-data patterns were reviewed. The dedicated `src/pages/TreeMark.jsx` approach, canonical route, section hierarchy, CTA hierarchy, dependency-free metadata lifecycle, static sitemap, and optional internal project-card destination are locked.
+
 Lock the page structure before implementation.
 
 Recommended content hierarchy:
@@ -80,6 +88,21 @@ Recommended content hierarchy:
 The exact section order may change during implementation, but the page should remain concise enough to scan quickly.
 
 Reuse existing Showcase Site patterns where they fit. Do not create unnecessary page-specific architecture.
+
+## Structural foundation checkpoint
+
+The first implementation batch is complete:
+
+- added the public `/projects/treemark` route and dedicated semantic page skeleton;
+- established all nine locked content areas without introducing a generalized project-page framework;
+- added TreeMark to `public/data/projects.json` with an internal `projectPage` destination;
+- updated project cards to use React Router navigation for optional internal project pages while preserving existing external-link behavior;
+- added dependency-free route metadata support that restores site defaults on navigation;
+- added a static sitemap covering the stable public routes;
+- preserved the 10A-generated README structure;
+- passed the Vite production build and `git diff --check`.
+
+Final copy, optimized/local visual assets, capability presentation, responsive/accessibility verification, route-specific social imagery, preview/production verification, and launch remain open for later batches.
 
 ---
 

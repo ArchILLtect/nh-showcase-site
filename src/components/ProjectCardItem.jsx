@@ -26,6 +26,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AppModal from './AppModal';
 
 const ProjectCardItem = ({ project }) => {
@@ -55,6 +56,16 @@ const ProjectCardItem = ({ project }) => {
             {project.liveDemo && (
               <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
             )}
+            {project.projectPage && (
+              <div className="flex items-center">
+                <Link
+                  to={project.projectPage}
+                  className="dark:text-green-300 text-green-700 text-lg hover:underline font-bold"
+                >
+                  Project Details
+                </Link>
+              </div>
+            )}
             {project.siteLink && (
               <div className="flex items-center">
                 <a
@@ -67,7 +78,7 @@ const ProjectCardItem = ({ project }) => {
                 </a>
               </div>
             )}
-            {!project.siteLink && !project.liveDemo && (
+            {!project.projectPage && !project.siteLink && !project.liveDemo && (
               <div className="flex items-center">
                 <p className="dark:text-red-500 text-red-700">
                   No Live Demo Available Yet
@@ -139,6 +150,7 @@ ProjectCardItem.propTypes = {
     image: PropTypes.string.isRequired,
     liveDemo: PropTypes.string,
     siteLink: PropTypes.string,
+    projectPage: PropTypes.string,
     github: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
