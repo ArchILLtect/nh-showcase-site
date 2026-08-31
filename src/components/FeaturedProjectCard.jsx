@@ -18,11 +18,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const FeaturedProjectCard = ({ project }) => {
-
   return (
-    <div className="bg-gray-800 h- dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark hover:scale-105">
+    <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark">
       <img
         src={project.image}
         alt={`${project.title} thumbnail`}
@@ -32,6 +32,14 @@ const FeaturedProjectCard = ({ project }) => {
       <p className="text-gray-300 dark:text-gray-700">
         {project.description}
       </p>
+      {project.projectPage && (
+        <Link
+          to={project.projectPage}
+          className="mt-4 inline-flex min-h-11 items-center rounded px-1 font-semibold text-blue-300 dark:text-blue-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        >
+          Project Details
+        </Link>
+      )}
     </div>
   );
 }
@@ -43,5 +51,6 @@ FeaturedProjectCard.propTypes = {
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    projectPage: PropTypes.string,
   }).isRequired,
 };

@@ -74,6 +74,17 @@
 - [ ] Consider narrowing wildcard Lambda CORS during later auth hardening.
 - [ ] Regenerate and reintroduce repository structure documentation through TreeMark when useful.
 
+## Deferred: Full Showcase Site SEO audit
+
+- [ ] Audit titles, descriptions, and canonicals across all public routes.
+- [ ] Review sitemap completeness and `robots.txt`.
+- [ ] Evaluate route-specific Open Graph and Twitter previews.
+- [ ] Inspect semantic headings and internal linking.
+- [ ] Verify crawl and index behavior.
+- [ ] Assess structured data where genuinely useful.
+- [ ] Determine whether SPA metadata is sufficient or route prerendering is warranted.
+- [ ] Review image alt text, page performance/Core Web Vitals, and obvious content SEO opportunities.
+
 ## Asset maintenance
 
 - [ ] Replace outdated logo or brand artwork with current official versions when appropriate.

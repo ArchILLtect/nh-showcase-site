@@ -48,6 +48,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import FutureProjects from "./pages/FutureProjects";
+import TreeMark from "./pages/TreeMark";
 
 function App() {
     return (
@@ -57,6 +58,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/projects" element={<Projects />} />
+                    <Route path="/projects/treemark" element={<TreeMark />} />
                     <Route path="/future-projects" element={<FutureProjects />} />
                     <Route path="/about" element={<AboutMe />} />
                     <Route path="/experience" element={<Experience />} />

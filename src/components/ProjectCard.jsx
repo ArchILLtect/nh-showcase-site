@@ -38,6 +38,7 @@ ProjectCard.propTypes = {
     image: PropTypes.string.isRequired,
     liveDemo: PropTypes.string,
     siteLink: PropTypes.string,
+    projectPage: PropTypes.string,
     github: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,

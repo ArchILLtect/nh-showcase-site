@@ -45,17 +45,18 @@ const FeaturedProjects = () => {
     loadProjects();
   }, []);
 
-  // This function is used to set the featured projects on the homepage. It takes in a project object and sets the state of the featured projects to 2 random projects from the projects.json file. It also ensures that the same project is not featured twice.
+  // Keep explicitly featured projects visible, then fill any remaining slots from active projects.
   const prepFeaturedProjects = (projects) => {
     if (projects.length === 0) return; // ⏳ wait for projects to load
 
     // Prefer explicitly featured projects when present; otherwise fallback to active projects.
     const explicitlyFeatured = projects.filter((project) => project.featured === true);
-    const fallbackPool = projects.filter((project) => project.status?.trim() !== "None");
-    const pool = explicitlyFeatured.length > 0 ? explicitlyFeatured : fallbackPool;
+    const fallbackPool = projects.filter(
+      (project) => project.status?.trim() !== "None" && project.featured !== true
+    );
+    const shuffledFallback = [...fallbackPool].sort(() => 0.5 - Math.random());
 
-    const shuffled = [...pool].sort(() => 0.5 - Math.random());
-    setFeaturedProjects(shuffled.slice(0, 2));
+    setFeaturedProjects([...explicitlyFeatured, ...shuffledFallback].slice(0, 2));
   };
 
   return (
@@ -74,11 +75,11 @@ const FeaturedProjects = () => {
         </div>
       )}
 
-      <Link to="/projects" className="flex justify-center mt-6">
-        <button className="px-6 py-3 bg-blue-500 text-white text-sm rounded
-            hover:bg-blue-600 transition duration-500">
-          View All Projects
-        </button>
+      <Link
+        to="/projects"
+        className="mx-auto mt-6 flex min-h-11 w-fit items-center justify-center rounded bg-blue-500 px-6 py-3 text-sm text-white transition duration-500 hover:bg-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+      >
+        View All Projects
       </Link>
     </div>
   );

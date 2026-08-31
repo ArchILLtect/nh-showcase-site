@@ -26,6 +26,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AppModal from './AppModal';
 
 const ProjectCardItem = ({ project }) => {
@@ -35,7 +36,7 @@ const ProjectCardItem = ({ project }) => {
 
     return (
       <div className="bg-gray-200 dark:bg-gray-800 border border-gray-300
-          rounded-lg shadow-md dark:shadow-dark overflow-hidden hover:scale-110">
+          rounded-lg shadow-md dark:shadow-dark overflow-hidden">
         <img
           src={project.image}
           alt={`${project.title} thumbnail`}
@@ -51,15 +52,25 @@ const ProjectCardItem = ({ project }) => {
           <p className="dark:text-gray-300 text-sm text-gray-500 font-semibold mb-4 h-12 overflow-y-auto scrollbar-custom">
             Tech Stack: {project.techStack.join(', ')}
           </p>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap justify-between items-center gap-3">
             {project.liveDemo && (
               <AppModal site={project.liveDemo } /> /* Pass liveDemo as site */
+            )}
+            {project.projectPage && (
+              <div className="flex items-center">
+                <Link
+                  to={project.projectPage}
+                  className="inline-flex min-h-11 items-center rounded px-1 dark:text-green-300 text-green-700 text-lg hover:underline font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                >
+                  Project Details
+                </Link>
+              </div>
             )}
             {project.siteLink && (
               <div className="flex items-center">
                 <a
                   href={project.siteLink}
-                  className="dark:text-green-300 text-green-700 text-2xl hover:underline font-bold"
+                  className="inline-flex min-h-11 items-center rounded px-1 dark:text-green-300 text-green-700 text-2xl hover:underline font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -67,7 +78,7 @@ const ProjectCardItem = ({ project }) => {
                 </a>
               </div>
             )}
-            {!project.siteLink && !project.liveDemo && (
+            {!project.projectPage && !project.siteLink && !project.liveDemo && (
               <div className="flex items-center">
                 <p className="dark:text-red-500 text-red-700">
                   No Live Demo Available Yet
@@ -78,7 +89,7 @@ const ProjectCardItem = ({ project }) => {
               <div className="flex items-center">
                 <a
                   href={project.github}
-                  className="dark:text-blue-300 text-blue-700 hover:underline"
+                  className="inline-flex min-h-11 items-center rounded px-1 dark:text-blue-300 text-blue-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -139,6 +150,7 @@ ProjectCardItem.propTypes = {
     image: PropTypes.string.isRequired,
     liveDemo: PropTypes.string,
     siteLink: PropTypes.string,
+    projectPage: PropTypes.string,
     github: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
