@@ -1,4 +1,4 @@
 ﻿{
-    "Policy":  "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"8282d478-b0d0-566f-be10-b04e3671df67\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:010928199012:function:showcaseVerifyEmail\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:010928199012:u7fyurbrjc/*/*/verify-email\"}}}]}",
-    "RevisionId":  "7a818a4c-2404-44c9-b76b-7dfc1ae80fbc"
+    "Policy":  "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"<STATEMENT_ID>\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseVerifyEmail\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:<AWS_ACCOUNT_ID>:<AUTH_API_ID>/*/*/verify-email\"}}}]}",
+    "RevisionId":  "<REVISION_ID>"
 }

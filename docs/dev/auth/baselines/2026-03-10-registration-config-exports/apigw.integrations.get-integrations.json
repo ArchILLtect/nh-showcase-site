@@ -2,129 +2,129 @@
     "Items":  [
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "091nuwk",
+                      "IntegrationId":  "<INTEGRATION_ID_01>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseRegistration:prod",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseRegistration:prod",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
                       "Description":  "showcaseResetPassword:prod - reset-password stub (validation + NOT_IMPLEMENTED placeholder)",
-                      "IntegrationId":  "0vl4dn7",
+                      "IntegrationId":  "<INTEGRATION_ID_02>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseResetPassword",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseResetPassword",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "1v3kq96",
+                      "IntegrationId":  "<INTEGRATION_ID_03>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseVerifyEmail",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseVerifyEmail",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "4og1jsu",
+                      "IntegrationId":  "<INTEGRATION_ID_04>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseLogin",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseLogin",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "55c4lbd",
+                      "IntegrationId":  "<INTEGRATION_ID_05>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseResetPassword:prod",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseResetPassword:prod",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "a8024mo",
+                      "IntegrationId":  "<INTEGRATION_ID_06>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:ssaf-analytics-getUserVisits",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:ssaf-analytics-getUserVisits",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "akxjwn2",
+                      "IntegrationId":  "<INTEGRATION_ID_07>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseForgotPassword:prod",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseForgotPassword:prod",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
                       "Description":  "showcaseForgotPassword:prod - account-scoped forgot-password stub (generic 200, enumeration-safe)",
-                      "IntegrationId":  "f7np1w7",
+                      "IntegrationId":  "<INTEGRATION_ID_08>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseForgotPassword",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseForgotPassword",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "gakbtfo",
+                      "IntegrationId":  "<INTEGRATION_ID_09>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseRegistration",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseRegistration",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "j3ya740",
+                      "IntegrationId":  "<INTEGRATION_ID_10>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseResendVerification:prod",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseResendVerification:prod",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "pq5kebg",
+                      "IntegrationId":  "<INTEGRATION_ID_11>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseResendVerification",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseResendVerification",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "qr2zyol",
+                      "IntegrationId":  "<INTEGRATION_ID_12>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseVerifyEmail:prod",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseVerifyEmail:prod",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "uosp7e7",
+                      "IntegrationId":  "<INTEGRATION_ID_13>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseLogin:prod",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseLogin:prod",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   },
                   {
                       "ConnectionType":  "INTERNET",
-                      "IntegrationId":  "yio9c1r",
+                      "IntegrationId":  "<INTEGRATION_ID_14>",
                       "IntegrationMethod":  "POST",
                       "IntegrationType":  "AWS_PROXY",
-                      "IntegrationUri":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseSessionValidate",
+                      "IntegrationUri":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseSessionValidate",
                       "PayloadFormatVersion":  "2.0",
                       "TimeoutInMillis":  30000
                   }

@@ -1,8 +1,8 @@
-﻿# Auth Config Export Bundle
+# Auth Config Export Bundle
 
 - Capture folder: 2026-03-10-registration-config-exports
 - Region: us-east-2
-- API ID: u7fyurbrjc
+- API ID: <AUTH_API_ID>
 - DynamoDB tables: Users, EmailVerificationTokens, EmailVerificationRateLimits
 - Lambda functions: showcaseRegistration, showcaseVerifyEmail, showcaseResendVerification
 - IAM captured: True

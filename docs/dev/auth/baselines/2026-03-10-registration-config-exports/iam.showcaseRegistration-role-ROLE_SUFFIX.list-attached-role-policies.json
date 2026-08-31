@@ -1,0 +1,12 @@
+﻿{
+    "AttachedPolicies":  [
+                             {
+                                 "PolicyName":  "showcaseRegistration-DynamoDBPutItem-Users",
+                                 "PolicyArn":  "arn:aws:iam::<AWS_ACCOUNT_ID>:policy/showcaseRegistration-DynamoDBPutItem-Users"
+                             },
+                             {
+                                 "PolicyName":  "AWSLambdaBasicExecutionRole-<POLICY_SUFFIX>",
+                                 "PolicyArn":  "arn:aws:iam::<AWS_ACCOUNT_ID>:policy/service-role/AWSLambdaBasicExecutionRole-<POLICY_SUFFIX>"
+                             }
+                         ]
+}

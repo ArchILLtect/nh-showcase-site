@@ -7,7 +7,7 @@ Prepared test inputs for duplicate and invalid registration cases.
 Use these values as your working set for P0 validation.
 
 - Existing username for duplicate test: `SSAFNewUser`
-- Existing email (reference only): `nickhansonsr@gmail.com`
+- Existing email (reference only): `existing-user@example.com`
 - Throwaway username (new): `p0test_user_20260304`
 - Throwaway email (new): `p0test_user_20260304@example.com`
 - Strong password sample: `P0Test!Secure123`
@@ -100,7 +100,7 @@ Run each payload above and capture:
 - timestamp
 
 Store outputs in:
-- `docs/baselines/2026-03-04-registration/RAW_OUTPUTS.md`
+- `docs/dev/auth/baselines/2026-03-04-registration/RAW_OUTPUTS.md`
 
 ## Lambda Console Test Event Format (Important)
 

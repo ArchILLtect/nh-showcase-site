@@ -4,7 +4,7 @@
 - [ ] Mobile layout issue: Clicking the X button on the mobile menu doesn't close the menu. (P0), it attempts to but fails and the menu reopens immediately. This is a critical bug that needs to be fixed as soon as possible.
 
 
-- [ ] Github API implementation. STARTED.
+- [ ] Implement GitHub repository cards without exposing a client-side token.
 - [ ] Make a DB for JSON files and implement it across the site to make it easier to add new items and maintain existing ones.
 - [ ] Add missing certs from Coursera and codefinity, etc.
 - [ ] Add Dean's List letters to achievements page.
@@ -65,26 +65,18 @@
 
 
 
-## Completed:
+## Deferred engineering decisions
 
-### Create a "project" entry for my PDP from Ent. Java to showcase that video.
+- [ ] Choose and introduce an automated frontend test strategy.
+- [ ] Repair ESLint and decide whether to enforce it in CI.
+- [ ] Evaluate route-level code splitting if bundle size becomes a practical concern.
+- [ ] Decide whether the optional local Express stub should remain in the repository.
+- [ ] Consider narrowing wildcard Lambda CORS during later auth hardening.
+- [ ] Regenerate and reintroduce repository structure documentation through TreeMark when useful.
 
-- [x] Structure
-- [x] Description
-- [x] Move new "Videos" section under projects
-- [x] Create a new Videos component
-- [x] Add PDP to videos.json
-- [x] Move current PDP links into an actual card item in "Videos" section
-- [x] Add new CodeForge Presentation to showcase site
-- [x] Convert to Windows 11
-- [x] Switch to new version of TaskMaster
+## Asset maintenance
 
-
-## Completed Items
-- [x] Create a page for future projects that I intend to work on and add it to the navbar.
-  - [x] Add a new entry for creating my FamHub app to connect with family members, share updates, and coordinate events with features like user authentication, real-time and video chat, and a shared calendar.
-  - [x] Add a new entry for creating (an) npm package(s) for React components and utilities--specifically any helpers I have that are and/or could be reusable across projects (e.g., auth utilities, API clients, custom hooks).
-  - [x] Add a new entry for creating an app to manage my projects, tasks, and learning goals with features like user authentication, database-backed storage, and a clean UI to track progress and organize my work.
-  - [x] Add a new entry for creating a RiffTrax collection app to catalog and share my favorite movie riffing commentaries, including features like user ratings, reviews, and a searchable database of riffs. Later adding a discussion forum for fans to connect and share their thoughts on riffs and movies.
-  - [x] Add a new entry for creating a Media Tracker app to manage movie, TV, and book collections with features like tracking what I've watched/read, rating and reviewing items, and generating recommendations based on my preferences. This app will also have a Chrome extension that is injected into every movie/TV/book page for Chrome search results to allow quick adding of items to my collection and rating them on the spot. It will also utilize the TMDB API to fetch metadata and cover art for movies and TV shows, and the Google Books API for books.
-  - [x] Add a new entry for creating a YouTube channel to share my learning journey, project details/updates, tutorials, and insights in software development and related topics with the broader community.
+- [ ] Replace outdated logo or brand artwork with current official versions when appropriate.
+- [ ] Continue sourcing new or replacement technology/service logos from official brand, press, or asset sources when available.
+- [ ] If an official downloadable asset is unavailable, document the source used and confirm that the displayed mark accurately represents the official logo without implying endorsement.
+- [ ] Preserve presentation normalization only where it does not distort or materially alter the mark.

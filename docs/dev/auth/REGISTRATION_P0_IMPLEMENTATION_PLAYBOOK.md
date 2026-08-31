@@ -24,9 +24,9 @@ Out of scope:
   - Completed and documented in `REGISTRATION_P1_IAM_LEAST_PRIVILEGE_PLAYBOOK.md`.
 
 ## Preconditions
-- [x] Baseline completed in `docs/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`
+- [x] Baseline completed in `docs/dev/auth/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`
 - [x] Rollback target identified (current Lambda version ARN/number documented before deploy)
-- [x] Test account data available for duplicate/invalid test cases (known existing username + throwaway new username/email + invalid input payloads prepared) via `docs/baselines/2026-03-04-registration/REGISTRATION_TEST_DATA.md`
+- [x] Test account data available for duplicate/invalid test cases (known existing username + throwaway new username/email + invalid input payloads prepared) via `docs/dev/auth/baselines/2026-03-04-registration/REGISTRATION_TEST_DATA.md`
 
 ## Implementation Steps
 

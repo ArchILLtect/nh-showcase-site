@@ -76,7 +76,6 @@ Central index for authentication and account recovery documentation.
   - Structure and manual deploy/rollback workflow for current Lambda source folders.
 
 ## Project Structure Reference
-- [File Structure](../../FILE_STRUCTURE.md)
   - High-level layout of frontend/backend folders and key files.
 
 ## Suggested Reading Order

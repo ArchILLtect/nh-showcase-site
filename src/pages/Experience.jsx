@@ -2,7 +2,6 @@
  * File: Experience.jsx
  * Author: Nick Hanson
  * Created On: June 13, 2025
- * Created On: June 13, 2025
  * Description: The experience page for the showcase site.
  *
  * Props:
@@ -34,7 +33,7 @@ const AboutMe = () => {
         "companyState": "WI",
         "jobTitle": "Warehouse Support A",
         "employmentDates": "Sept 2021—July 2023",
-        "jobSummary": "At Stihl I was in charge of the shipping/receiving area of the warehouse where I was responsible for ensuring the timely departure of all large outbound orders and inbound products/supplies. This included everything from wrappingpre-picked pallet orders to creating B.O.L.s (Bill of Lading) for each order and informing each freight company of the need for pickup to loading/unloading of all trucks. During 'booking season' (the busiest time of year) we had days fo shipping more than one million dollars in product.",
+        "jobSummary": "At Stihl, I oversaw the warehouse shipping and receiving area and was responsible for ensuring the timely departure of large outbound orders and arrival of inbound products and supplies. This included wrapping pre-picked pallet orders, creating B.O.L.s (Bills of Lading), notifying freight companies when pickups were needed, and loading and unloading trucks. During 'booking season' (the busiest time of year), we had days when we shipped more than one million dollars in product.",
         "jobHighlights": [
             "Promoted from Picker/Packer to oversee shipping and receiving operations.",
             "Managed logistics for outbound orders exceeding $1 million during peak season.",
@@ -56,7 +55,7 @@ const AboutMe = () => {
         companyState: "WI",
         jobTitle: "Project Manager",
         employmentDates: "Feb 2006—September 2021",
-        jobSummary: "My main job for ~15 years - I have had many positions and responsibilites with the company. Some of the commercial/industrial governament agencies/businesses we have consulted with include Forest Products Labs (FPL) and Memorial Veterans Hospital. Also worked for projects involving many residential homes/neighborhoods - consulting with companies such as WECC. I have obtained a wide knowledge base from working here, from installing energy monitoring equipment, to complete house remodeling with focus on energy efficiency research, to project management, to IT",
+        jobSummary: "This was my primary job for approximately 15 years, during which I held many positions and responsibilities. Some of the commercial, industrial, and government organizations we consulted with included Forest Products Laboratory (FPL) and Memorial Veterans Hospital. I also worked on projects involving many residential homes and neighborhoods, consulting with organizations such as WECC. Through this work, I developed a broad knowledge base spanning energy-monitoring equipment installation, complete home remodeling focused on energy-efficiency research, project management, and IT.",
         jobHighlights: [
             "Identified plans and resources required to meet project goals and objectives.",
             "Accomplished client goals by providing quality technical projects.",
@@ -74,15 +73,15 @@ const AboutMe = () => {
         companyState: "WI",
         jobTitle: "Refiner Team Lead",
         employmentDates: "November 2003—July 2005",
-        jobSummary: "Started working for the company through a temp agency (Celerity Staffing Solutions) in a temporary position. Clasen Quality Coatings (CQC - Now going by 'Clasen Quality Chocolates') brought mt on as a full employee a couple months later, and promoted me from the starting postion of 'Boxer' to a postion in the refining department called 'Tester.' After a month or so I was then promoted to 'Refiner', skipping the usual prerequisite postion of 'Mixer'. The Refiner was the head of the Refining Department and was the top non-supervisor postion in the production side of the business. During this time I broke the record for number of conches completed during a single shift, which at the time--if not still current), was 17 conches.",
+        jobSummary: "I started working for the company through a temporary agency, Celerity Staffing Solutions. A couple of months later, Clasen Quality Coatings (CQC, now known as Clasen Quality Chocolates) hired me as a full-time employee and promoted me from my initial position as a 'Boxer' to a refining-department position called 'Tester.' After about a month, I was promoted to 'Refiner,' skipping the usual prerequisite position of 'Mixer.' The Refiner led the Refining Department and was the highest-ranking non-supervisory position on the production side of the business. During this time, I broke the record for conches completed during a single shift; the record at the time, and possibly still today, was 17 conches.",
         jobHighlights: [
-            "Responsible for efficiently running the Refining Department with focus on quality.",
-            "Coached team members in techniques necessary to complete job tasks and lead them in their duties, including the 'Tester', 'Mixers' and refining assistants.",
+            "Responsible for efficiently running the Refining Department with a focus on quality.",
+            "Coached team members in the techniques necessary to complete their tasks and led them in their duties, including the 'Tester,' 'Mixers,' and refining assistants.",
             "Operated pre-refining and refining machines, measuring fineness and ensuring quality standards.",
             "Accurately calculated and added oil to conches and tanks to adjust viscosity.",
-            "Recorded any relevant information about each refining run. This includes average fineness, amount of oil used, conch/tank viscosities, etc.",
+            "Recorded relevant information about each refining run, including average fineness, the amount of oil used, and conch and tank viscosities.",
             "Evaluated employee skills and knowledge regularly, and trained and mentored individuals with lagging skills.",
-            "Broke the record for number of conches completed during a single standard shift, which at the time – if not still – was 17 conches."
+            "Broke the record for the number of conches completed during a single standard shift, which at the time—and possibly still today—was 17 conches."
         ]
     },
   ];

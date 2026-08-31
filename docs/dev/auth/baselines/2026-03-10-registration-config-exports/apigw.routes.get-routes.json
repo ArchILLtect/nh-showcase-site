@@ -3,44 +3,44 @@
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "1ttr5l4",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /tracking",
-                      "Target":  "integrations/a8024mo"
+                      "Target":  "integrations/<INTEGRATION_ID_06>"
                   },
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "61grj6k",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /session/validate",
-                      "Target":  "integrations/yio9c1r"
+                      "Target":  "integrations/<INTEGRATION_ID_14>"
                   },
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "9r6trva",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /reset-password",
-                      "Target":  "integrations/55c4lbd"
+                      "Target":  "integrations/<INTEGRATION_ID_05>"
                   },
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "n4l1q9o",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /login",
-                      "Target":  "integrations/uosp7e7"
+                      "Target":  "integrations/<INTEGRATION_ID_13>"
                   },
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "nk8feeh",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /verify-email",
-                      "Target":  "integrations/qr2zyol"
+                      "Target":  "integrations/<INTEGRATION_ID_12>"
                   },
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "ou90uu8",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /resend-verification",
-                      "Target":  "integrations/j3ya740"
+                      "Target":  "integrations/<INTEGRATION_ID_10>"
                   },
                   {
                       "ApiKeyRequired":  false,
@@ -51,16 +51,16 @@
                       "RequestParameters":  {
 
                                             },
-                      "RouteId":  "q01cbi6",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /register",
-                      "Target":  "integrations/091nuwk"
+                      "Target":  "integrations/<INTEGRATION_ID_01>"
                   },
                   {
                       "ApiKeyRequired":  false,
                       "AuthorizationType":  "NONE",
-                      "RouteId":  "vxqyddg",
+                      "RouteId":  "<ROUTE_ID>",
                       "RouteKey":  "POST /forgot-password",
-                      "Target":  "integrations/akxjwn2"
+                      "Target":  "integrations/<INTEGRATION_ID_07>"
                   }
               ]
 }

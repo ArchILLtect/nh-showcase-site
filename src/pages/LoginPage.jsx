@@ -28,53 +28,7 @@
  * - LoadingSpinner: A component for displaying a spinner during loading times.
  */
 
-// TODO: Change alert message to use a modal or toast notification for better UX.
-
-// TODO: Implement server-side validation for login credentials to ensure security.
-// TODO: Implement server-side rate limiting to prevent brute force attacks on login.
-// TODO: Implement server-side logging for login attempts to monitor suspicious activity.
-// TODO: Implement server-side password hashing and salting for secure storage.
-// TODO: Implement server-side session management to handle user sessions securely.
-// TODO: Implement server-side CSRF protection for login requests to prevent cross-site request forgery attacks.
-// TODO: Implement server-side XSS protection to prevent cross-site scripting attacks.
-// TODO: Implement server-side CORS policy to restrict access to the API from unauthorized origins.
-// TODO: Implement server-side input sanitization to prevent injection attacks.
-// TODO: Implement server-side error handling to provide meaningful error messages without exposing sensitive information.
-// TODO: Implement server-side logging for errors to monitor and debug issues.
-// TODO: Implement server-side security headers to enhance security (e.g., Content Security Policy, X-Content-Type-Options, etc.).
-// TODO: Implement server-side HTTPS enforcement to ensure secure communication.
-// TODO: Implement server-side password reset functionality to allow users to reset their passwords securely.
-// TODO: Implement server-side email verification for new accounts to ensure valid email addresses.
-// TODO: Implement server-side account lockout after multiple failed login attempts to prevent brute force attacks.
-// TODO: Implement server-side multi-factor authentication (MFA) for enhanced security.
-// TODO: Implement server-side session expiration to automatically log out users after a period of inactivity.
-// TODO: Implement server-side user role management to control access to different parts of the application based on user roles.
-// TODO: Implement server-side logging for user actions to monitor user activity and detect suspicious behavior.
-// TODO: Implement server-side API rate limiting to prevent abuse of the login endpoint.
-// TODO: Implement server-side password strength validation to ensure users create strong passwords.
-// TODO: Implement server-side account deletion functionality to allow users to delete their accounts securely.
-// TODO: Implement server-side account recovery functionality to allow users to recover their accounts in case of forgotten credentials.
-// TODO: Implement server-side user profile management to allow users to update their profile information securely.
-// TODO: Implement server-side user activity tracking to monitor user interactions with the application.
-// TODO: Implement server-side logging for successful logins to monitor user activity and detect suspicious behavior.
-// TODO: Implement server-side logging for failed logins to monitor and detect potential security threats.
-// TODO: Implement server-side security audits to regularly review and improve the security of the login system.
-// TODO: Implement server-side security best practices to ensure the login system is secure and resilient against attacks.
-// TODO: Implement server-side security patches to keep the login system up-to-date with the latest security fixes.
-// TODO: Implement server-side security monitoring to detect and respond to security incidents in real-time.
-// TODO: Implement server-side security training for developers to ensure they are aware of security best practices and how to implement them in the login system.
-// TODO: Implement server-side security policies to enforce security standards and practices across the login system.
-// TODO: Implement server-side security reviews to regularly assess the security of the login system and identify areas for improvement.
-// TODO: Implement server-side security testing to identify vulnerabilities in the login system and ensure it is secure against attacks.
-// TODO: Implement server-side security incident response to handle security incidents effectively and minimize their impact on the login system.
-// TODO: Implement server-side security compliance to ensure the login system meets relevant security standards and regulations (e.g., GDPR, HIPAA, etc.).
-// TODO: Implement server-side security documentation to provide clear guidelines and instructions for developers on how to implement and maintain the security of the login system.
-// TODO: Implement server-side security monitoring tools to automate the detection and response to security incidents in the login system.
-// TODO: Implement server-side security logging tools to centralize and analyze security logs from the login system.
-// TODO: Implement server-side security alerting to notify administrators of potential security threats in the login system.
-// TODO: Implement server-side security dashboards to visualize and monitor the security status of the login system.
-// TODO: Implement server-side security metrics to measure the effectiveness of security measures in the login system.
-// TODO: add basic client-side validation for email/password inputs to improve UX.
+// TODO: Replace browser alerts with an accessible in-page notification.
 
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";

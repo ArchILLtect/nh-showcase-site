@@ -1,16 +1,16 @@
 ﻿{
     "Configuration":  {
                           "FunctionName":  "showcaseRegistration",
-                          "FunctionArn":  "arn:aws:lambda:us-east-2:010928199012:function:showcaseRegistration",
+                          "FunctionArn":  "arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseRegistration",
                           "Runtime":  "nodejs22.x",
-                          "Role":  "arn:aws:iam::010928199012:role/service-role/showcaseRegistration-role-7avd1hce",
+                          "Role":  "arn:aws:iam::<AWS_ACCOUNT_ID>:role/service-role/showcaseRegistration-role-<ROLE_SUFFIX>",
                           "Handler":  "index.handler",
                           "CodeSize":  14273252,
                           "Description":  "",
                           "Timeout":  10,
                           "MemorySize":  128,
                           "LastModified":  "2026-03-09T18:44:14.000+0000",
-                          "CodeSha256":  "bm/qFTaQNQ26JdmmsyTjEbwQZrei5lGkQefZeJ2l4Cg=",
+                          "CodeSha256":  "<CODE_SHA256>",
                           "Version":  "$LATEST",
                           "Environment":  {
                                               "Variables":  {
@@ -36,7 +36,7 @@
                           "TracingConfig":  {
                                                 "Mode":  "PassThrough"
                                             },
-                          "RevisionId":  "5dc78edf-b604-4fd1-a25b-94a2cc4cf47a",
+                          "RevisionId":  "<REVISION_ID>",
                           "State":  "Active",
                           "LastUpdateStatus":  "Successful",
                           "PackageType":  "Zip",
@@ -51,7 +51,7 @@
                                             "OptimizationStatus":  "Off"
                                         },
                           "RuntimeVersionConfig":  {
-                                                       "RuntimeVersionArn":  "arn:aws:lambda:us-east-2::runtime:d16c83c0a8a33f01d0039330bdf4f8f429ff40686e670a93d7fbf2b2d77cb783"
+                                                       "RuntimeVersionArn":  "arn:aws:lambda:us-east-2::runtime:<RUNTIME_VERSION_ID>"
                                                    },
                           "LoggingConfig":  {
                                                 "LogFormat":  "Text",
