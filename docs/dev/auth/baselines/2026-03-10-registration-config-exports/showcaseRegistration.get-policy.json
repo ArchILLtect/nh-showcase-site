@@ -1,4 +1,4 @@
 ﻿{
-    "Policy":  "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"7ed9d6a5-f3d7-5dfe-bfd2-68ca617957af\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:010928199012:function:showcaseRegistration\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:010928199012:u7fyurbrjc/*/*/register\"}}}]}",
-    "RevisionId":  "bf49c24d-f9d7-4802-8f4b-618b420e1e72"
+    "Policy":  "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"<STATEMENT_ID>\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:<AWS_ACCOUNT_ID>:function:showcaseRegistration\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:<AWS_ACCOUNT_ID>:<AUTH_API_ID>/*/*/register\"}}}]}",
+    "RevisionId":  "<REVISION_ID>"
 }

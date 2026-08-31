@@ -22,8 +22,8 @@
                                             },
                   "TableSizeBytes":  0,
                   "ItemCount":  0,
-                  "TableArn":  "arn:aws:dynamodb:us-east-2:010928199012:table/EmailVerificationTokens",
-                  "TableId":  "cc4c785b-ee80-4475-8835-6caf6af9276c",
+                  "TableArn":  "arn:aws:dynamodb:us-east-2:<AWS_ACCOUNT_ID>:table/EmailVerificationTokens",
+                  "TableId":  "<TABLE_ID>",
                   "BillingModeSummary":  {
                                              "BillingMode":  "PAY_PER_REQUEST",
                                              "LastUpdateToPayPerRequestDateTime":  "2026-03-08T23:17:21.165000-05:00"

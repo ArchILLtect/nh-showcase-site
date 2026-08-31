@@ -1,8 +1,8 @@
 ﻿{
     "Items":  [
                   {
-                      "ApiEndpoint":  "https://msirwhqowf.execute-api.us-east-2.amazonaws.com",
-                      "ApiId":  "msirwhqowf",
+                      "ApiEndpoint":  "https://<OTHER_API_ID>.execute-api.us-east-2.amazonaws.com",
+                      "ApiId":  "<OTHER_API_ID>",
                       "ApiKeySelectionExpression":  "$request.header.x-api-key",
                       "CorsConfiguration":  {
                                                 "AllowCredentials":  false,
@@ -31,8 +31,8 @@
                                }
                   },
                   {
-                      "ApiEndpoint":  "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com",
-                      "ApiId":  "u7fyurbrjc",
+                      "ApiEndpoint":  "https://<AUTH_API_ID>.execute-api.us-east-2.amazonaws.com",
+                      "ApiId":  "<AUTH_API_ID>",
                       "ApiKeySelectionExpression":  "$request.header.x-api-key",
                       "CorsConfiguration":  {
                                                 "AllowCredentials":  false,

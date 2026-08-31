@@ -23,8 +23,8 @@
                                             },
                   "TableSizeBytes":  2576,
                   "ItemCount":  11,
-                  "TableArn":  "arn:aws:dynamodb:us-east-2:010928199012:table/Users",
-                  "TableId":  "d6394c67-d2f9-416e-a304-472e3d123123",
+                  "TableArn":  "arn:aws:dynamodb:us-east-2:<AWS_ACCOUNT_ID>:table/Users",
+                  "TableId":  "<TABLE_ID>",
                   "BillingModeSummary":  {
                                              "BillingMode":  "PAY_PER_REQUEST",
                                              "LastUpdateToPayPerRequestDateTime":  "2025-05-22T17:56:10.783000-05:00"

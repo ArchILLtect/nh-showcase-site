@@ -125,7 +125,7 @@ From DynamoDB console or scan sample:
 - [x] Identify legacy anomalies to preserve or migrate.
 
 ## 9) Save Baseline Bundle
-- [x] Store all exported JSON + notes in a dated folder (example: `docs/baselines/2026-03-04-registration/`).
+- [x] Store all exported JSON + notes in a dated folder (example: `docs/dev/auth/baselines/2026-03-04-registration/`).
 - [x] Add a short summary markdown with findings and risks.
 - [x] Record “go/no-go” notes for first hardening change.
 

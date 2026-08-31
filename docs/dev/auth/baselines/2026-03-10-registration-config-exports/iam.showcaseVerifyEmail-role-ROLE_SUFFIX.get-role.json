@@ -1,10 +1,10 @@
 ﻿{
     "Role":  {
                  "Path":  "/service-role/",
-                 "RoleName":  "showcaseRegistration-role-7avd1hce",
-                 "RoleId":  "AROAQFC27CVSKDSXVQEUF",
-                 "Arn":  "arn:aws:iam::010928199012:role/service-role/showcaseRegistration-role-7avd1hce",
-                 "CreateDate":  "2024-12-23T05:40:27+00:00",
+                 "RoleName":  "showcaseVerifyEmail-role-<ROLE_SUFFIX>",
+                 "RoleId":  "<ROLE_ID>",
+                 "Arn":  "arn:aws:iam::<AWS_ACCOUNT_ID>:role/service-role/showcaseVerifyEmail-role-<ROLE_SUFFIX>",
+                 "CreateDate":  "2026-03-09T02:53:31+00:00",
                  "AssumeRolePolicyDocument":  {
                                                   "Version":  "2012-10-17",
                                                   "Statement":  [
@@ -19,7 +19,7 @@
                                               },
                  "MaxSessionDuration":  3600,
                  "RoleLastUsed":  {
-                                      "LastUsedDate":  "2026-03-09T18:45:37+00:00",
+                                      "LastUsedDate":  "2026-03-10T15:41:43+00:00",
                                       "Region":  "us-east-2"
                                   }
              }

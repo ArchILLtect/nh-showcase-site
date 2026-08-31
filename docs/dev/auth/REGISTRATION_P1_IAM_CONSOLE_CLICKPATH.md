@@ -76,5 +76,5 @@ Also verify CloudWatch logs still appear:
 
 ## Evidence to log
 Record outputs in:
-- `docs/baselines/2026-03-04-registration/RAW_OUTPUTS.md`
-- `docs/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`
+- `docs/dev/auth/baselines/2026-03-04-registration/RAW_OUTPUTS.md`
+- `docs/dev/auth/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`

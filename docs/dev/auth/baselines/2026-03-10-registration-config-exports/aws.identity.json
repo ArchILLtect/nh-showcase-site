@@ -1,5 +1,5 @@
 ﻿{
-    "UserId":  "AIDAQFC27CVSH3SSHR5ZG",
-    "Account":  "010928199012",
-    "Arn":  "arn:aws:iam::010928199012:user/personal-dev"
+    "UserId":  "<IAM_USER_ID>",
+    "Account":  "<AWS_ACCOUNT_ID>",
+    "Arn":  "arn:aws:iam::<AWS_ACCOUNT_ID>:user/<IAM_USER_NAME>"
 }

@@ -22,8 +22,8 @@
                                             },
                   "TableSizeBytes":  0,
                   "ItemCount":  0,
-                  "TableArn":  "arn:aws:dynamodb:us-east-2:010928199012:table/EmailVerificationRateLimits",
-                  "TableId":  "597003db-ccdd-4022-acda-3f188cb4eed9",
+                  "TableArn":  "arn:aws:dynamodb:us-east-2:<AWS_ACCOUNT_ID>:table/EmailVerificationRateLimits",
+                  "TableId":  "<TABLE_ID>",
                   "BillingModeSummary":  {
                                              "BillingMode":  "PAY_PER_REQUEST",
                                              "LastUpdateToPayPerRequestDateTime":  "2026-03-08T23:15:02.415000-05:00"

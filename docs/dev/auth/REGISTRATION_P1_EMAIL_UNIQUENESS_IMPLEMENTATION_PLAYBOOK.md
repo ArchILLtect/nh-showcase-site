@@ -77,8 +77,8 @@ For future email verification and password reset:
 
 ## Evidence to record
 Capture outcomes in:
-- `docs/baselines/2026-03-04-registration/RAW_OUTPUTS.md`
-- `docs/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`
+- `docs/dev/auth/baselines/2026-03-04-registration/RAW_OUTPUTS.md`
+- `docs/dev/auth/baselines/2026-03-04-registration/BASELINE_SUMMARY.md`
 
 ## Exit Criteria
 - Registration allows reused emails and remains stable.
