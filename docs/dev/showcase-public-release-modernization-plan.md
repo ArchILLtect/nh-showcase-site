@@ -21,7 +21,7 @@ The site should remain representative of a normal, organically evolved external 
 3. Remove SendGrid + retire credential         ✅ COMPLETE
 4. Targeted post-Vite modernization review     ✅ COMPLETE
 5. Re-run security / public-readiness audit    ✅ COMPLETE
-6. Manual public-repository review
+6. Manual public-repository review              ✅ COMPLETE
 7. Final publication verification
 8. Change repository visibility to public
 9. Continue TreeMark / later product work
@@ -188,9 +188,29 @@ Neither follow-up is a confirmed public-release security blocker.
 
 Review intentional personal/contact information, infrastructure metadata, documentation, assets/licensing, README/setup instructions, dead links, and temporary/generated artifacts.
 
+## Decision and remediation status
+
+- The unrelated personal email in registration test data was replaced with a synthetic placeholder.
+- AWS baseline exports retain their architecture and security relationships while unique account, IAM, API, role, policy, and other opaque deployment identifiers are represented by deterministic placeholders.
+- The repository remains source-visible for portfolio and review purposes but all rights are reserved; no general reuse or redistribution license is granted. Stray backend and Lambda `ISC` metadata was reconciled to `UNLICENSED`.
+- Ordinary employment and résumé history is intentionally retained, including the approved Forest Products Laboratory, Memorial Veterans Hospital, WECC, shipment-performance, and CQC production-statistic references.
+- SameBoat, Cosmic DB, and Bullpen Report are first-party projects and are intentionally retained.
+- First-party, AI-generated, and expressly authorized artwork is intentionally retained. Coursera certificate images are intentionally retained.
+- The D&D and altered RiffTrax uses are consciously retained as owner-accepted, very-low-risk portfolio uses.
+- Technology/service/stack logos were reviewed and accepted for public release: they originated from official brand assets, and local changes were limited to proportional scaling, cropping, and surrounding-area normalization without intentional redesign, recoloring, or distortion of the marks.
+- Credly badge images were reviewed and accepted for public release: they represent credentials earned by the owner and are paired with their public Credly verification links.
+- Deleting the obsolete `docs/FILE_STRUCTURE.md` is accepted. Structure documentation may later be regenerated and reintroduced through TreeMark rather than manually rebuilding the stale document.
+- The historical `nickhansonsr@gmail.com` occurrence was reviewed and accepted.
+- Historical AWS account and API identifiers were reviewed and accepted as non-secret historical metadata.
+- No Git history rewrite is authorized at this time. A history rewrite may be reconsidered only if later auditing discovers actual secrets or private information.
+- Wildcard Lambda CORS remains deferred to later auth hardening.
+- Production configuration was manually confirmed in AWS: `showcaseForgotPassword` has `RETURN_RESET_TOKEN_FOR_TESTING=false`, and `showcaseRegistration` has `ENABLE_INTERNAL_ERROR_TEST=false`.
+
+Step 6 is complete. Step 7 — Final Publication Verification — is next and has not yet begun.
+
 ## Exit gate
 
-> **Everything remaining is intentionally acceptable for public visibility.**
+> **Passed: everything remaining is intentionally acceptable for public visibility.**
 
 ---
 

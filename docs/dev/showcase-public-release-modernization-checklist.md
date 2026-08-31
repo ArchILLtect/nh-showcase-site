@@ -141,15 +141,28 @@
 
 ## Step 6 — Manual Public-Repository Review
 
-- [ ] Personal/contact information.
-- [ ] Infrastructure metadata.
-- [ ] Docs/agent instructions.
-- [ ] Assets/licensing.
-- [ ] README/setup/dead links.
-- [ ] Generated/temp artifacts.
+- [x] Personal/contact information reviewed; unrelated personal test email anonymized.
+- [x] AWS baseline account/IAM/API and opaque deployment identifiers redacted while architecture is retained.
+- [x] Docs/agent instructions reviewed; stale file-structure, backlog, auth-path, and source-comment guidance repaired.
+- [x] Repository licensing intent recorded as all-rights-reserved/no general reuse; backend and Lambda manifests set to `UNLICENSED`.
+- [x] Ordinary employer/résumé references intentionally retained, including FPL, Memorial Veterans Hospital, WECC, shipment-performance details, and CQC production statistics.
+- [x] SameBoat, Cosmic DB, and Bullpen Report confirmed as first-party projects and retained.
+- [x] First-party, AI-generated, expressly authorized artwork, and Coursera certificates approved for retention.
+- [x] D&D and altered RiffTrax uses consciously retained as owner-accepted, very-low-risk uses.
+- [x] Technology/service/stack logos verified as official brand assets with presentation-only normalization; accepted for public release.
+- [x] Credly badges verified as owner-earned credentials paired with public Credly verification links; accepted for public release.
+- [x] Historical `nickhansonsr@gmail.com` occurrence reviewed and accepted.
+- [x] Historical AWS account/API identifiers accepted as non-secret historical metadata.
+- [x] No history rewrite authorized; reconsider only if later auditing discovers actual secrets/private information.
+- [x] Obsolete `docs/FILE_STRUCTURE.md` deletion accepted; regenerate/reintroduce structure documentation later through TreeMark if useful.
+- [x] README/setup/dead links reviewed and current licensing intent added.
+- [x] Generated/temp artifacts reviewed.
+- [x] Confirmed `showcaseForgotPassword` has deployed `RETURN_RESET_TOKEN_FOR_TESTING=false`.
+- [x] Confirmed `showcaseRegistration` has deployed `ENABLE_INTERNAL_ERROR_TEST=false`.
+- [x] Wildcard Lambda CORS recorded as a later auth-hardening item.
 
 ### Step 6 Gate
-- [ ] **Everything remaining is intentionally acceptable for public visibility.**
+- [x] **Everything remaining is intentionally acceptable for public visibility.**
 
 ---
 
