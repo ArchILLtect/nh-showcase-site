@@ -104,6 +104,37 @@ The first implementation batch is complete:
 
 Final copy, optimized/local visual assets, capability presentation, responsive/accessibility verification, route-specific social imagery, preview/production verification, and launch remain open for later batches.
 
+## Visual and product-evidence checkpoint
+
+The focused visual/evidence batch is complete:
+
+- localized the authoritative TreeMark banner as a 1200 × 320 optimized project-card/hero asset;
+- created a dedicated 1200 × 630 TreeMark social-sharing image and wired it to Open Graph and Twitter metadata;
+- added the real TreeMark banner to the hero without changing the locked CTA hierarchy;
+- featured TreeMark through the existing homepage project system and added SPA navigation to its featured card;
+- added representative `--update` and `--check` examples, a real marked-region example, and concise `0 / 1 / 2` CI exit-code guidance;
+- verified that every metadata target used by the dependency-free hook exists in root `index.html`;
+- passed the Vite production build, emitted-asset checks, TreeMark README freshness check, and `git diff --check`.
+
+The generated visual assets preserve the TreeMark name, terminal/tree mark, green/black/white palette, and supported product positioning. Critical commands and output remain available as selectable text rather than only inside images.
+
+Responsive visual review, social-preview rendering, and preview/production deployment remain open. The existing `/home` and `/pay` sitemap entries are intentionally unchanged and will be reconsidered during the separately deferred full-site SEO audit.
+
+## Local polish and QA checkpoint
+
+The focused local polish and QA pass is complete at the source/build level:
+
+- proofread the concise landing-page copy against the authoritative TreeMark v1.0.0 README and release contract;
+- verified the released GitHub Actions matrix covers Node.js 22 and 24 on Ubuntu, Windows, and macOS, then added the corresponding CI trust signal;
+- verified the npm package metadata and the GitHub repository, v1.0.0 release, and issues destinations;
+- strengthened visible keyboard focus and mobile touch targets for TreeMark page and project-card links;
+- removed card hover scaling that could intrude into neighboring grid space;
+- allowed project-card actions to wrap cleanly and removed the nested interactive control from the homepage Projects CTA;
+- reconfirmed semantic heading order, descriptive image text, selectable code examples, text-backed exit-code meanings, responsive utility behavior, emitted TreeMark assets, and the exact social-image metadata URL;
+- passed the Vite production build, TreeMark README freshness check, and `git diff --check`.
+
+Interactive desktop/tablet/mobile review, rendered light/dark contrast confirmation, keyboard tab-through, shared-link preview rendering, and preview/production regression checks remain deployment-stage gates. They are intentionally not recorded as locally complete because browser control was unavailable during this pass.
+
 ---
 
 # 10C — Hero and Product Positioning
