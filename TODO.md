@@ -1,6 +1,8 @@
 
 ## TOP Priorities
 
+- [ ] Add Plinth project to the portfolio section of the site.
+
 - [ ] Mobile layout issue: Clicking the X button on the mobile menu doesn't close the menu. (P0), it attempts to but fails and the menu reopens immediately. This is a critical bug that needs to be fixed as soon as possible.
 
 
