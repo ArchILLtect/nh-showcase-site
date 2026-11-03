@@ -70,7 +70,7 @@
 ## Deferred engineering decisions
 
 - [ ] Choose and introduce an automated frontend test strategy.
-- [ ] Repair ESLint and decide whether to enforce it in CI.
+- [x] Repair ESLint and enforce it in CI (`npm run lint`).
 - [ ] Evaluate route-level code splitting if bundle size becomes a practical concern.
 - [ ] Decide whether the optional local Express stub should remain in the repository.
 - [ ] Consider narrowing wildcard Lambda CORS during later auth hardening.

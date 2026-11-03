@@ -115,7 +115,7 @@ The contact page uses Netlify Forms directly. Root `index.html` contains the sta
 
 ## Validation and tests
 
-CI performs a clean dependency install and runs the Vite production build on Node 24. There is currently no automated frontend test suite or `npm test` script; test-strategy work is intentionally deferred.
+CI performs a clean dependency install, lints the frontend source, and runs the Vite production build on Node 24. There is currently no automated frontend test suite or `npm test` script; test-strategy work is intentionally deferred.
 
 ## Authentication overview
 
@@ -188,7 +188,7 @@ Role behavior at a glance:
 | `userData` | Holds the current user profile, role, and session-version data. |
 | `currentUser` | Legacy compatibility key removed during logout when present. |
 
-These values are cleared during logout. Protected routes also validate the session with the backend; local storage alone is not treated as authorization.
+These values are cleared during logout. Protected routes validate the session with the backend; local storage alone is not treated as authorization, and a validation error ends the browser session.
 
 ### Account recovery and session safety
 

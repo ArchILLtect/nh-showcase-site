@@ -17,6 +17,7 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
+    "lint": "eslint src --ext .js,.jsx",
     "build": "vite build",
     "preview": "vite preview",
     "export:auth-baseline": "powershell -ExecutionPolicy Bypass -File ./scripts/export-auth-config-baseline.ps1 -IncludeIam -ContinueOnError"
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.27.1",
+    "@babel/plugin-syntax-jsx": "^7.29.7",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
