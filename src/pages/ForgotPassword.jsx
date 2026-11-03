@@ -26,8 +26,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { usePageTitle } from '../hooks/usePageTitle';
 import { trackVisit } from "../utils/visitTracker";
-
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
+import { AUTH_API_BASE_URL } from "../config/api";
 
 const ForgotPassword = () => {
   const [username, setUsername] = useState("");
@@ -54,7 +53,7 @@ const ForgotPassword = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post(`${API_BASE_URL}/forgot-password`, {
+      const response = await axios.post(`${AUTH_API_BASE_URL}/forgot-password`, {
         username: username.trim(),
         email: email.trim(),
       });

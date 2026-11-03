@@ -9,7 +9,7 @@ React + Tailwind frontend with Netlify Forms for contact submissions and an opti
 -   Data sources:
     -   Static JSON under `public/data/*.json` (e.g., `projects.json` via `fetch('data/projects.json')`).
     -   Netlify Forms handles `pages/Contact.jsx` submissions through a URL-encoded `POST /`; the static detection blueprint is in root `index.html`.
-    -   AWS API Gateway Lambdas: blog create in `components/BlogEditor.jsx` (BLOG_API_ENDPOINT), visit logs in `utils/visitTracker.js` (VISIT_API_ENDPOINT), login in `pages/LoginPage.jsx` (API_BASE_URL).
+    -   AWS API Gateway Lambdas: auth flows use `config/api.js` (`AUTH_API_BASE_URL`); blog create and visit logs retain their own public endpoint configuration.
 -   Backend: `backend/server.js` is an optional local Express stub. The Vite frontend has no development proxy configured.
 
 ## Dev, build, deploy
@@ -85,10 +85,11 @@ collecting or reproducing the secret as evidence.
 Browser-facing endpoints and other values necessarily shipped to client-side
 code should be treated as public configuration, not protected secrets.
 
-AWS API Gateway endpoints used by the frontend are currently hardcoded in
-project source. Their URLs are not credentials. If those endpoints are touched
-during related implementation work, prefer centralizing public configuration
-rather than treating endpoint URLs as secret material.
+AWS API Gateway endpoints used by the frontend are public configuration, not
+credentials. Auth flows use `VITE_AUTH_API_BASE_URL` with an in-source fallback;
+other public endpoints remain in their feature modules. Prefer centralizing
+public configuration when an endpoint is touched rather than treating its URL as
+secret material.
 
 Authentication, authorization, validation, rate limiting, and backend security
 must not depend on those endpoint URLs remaining unknown.

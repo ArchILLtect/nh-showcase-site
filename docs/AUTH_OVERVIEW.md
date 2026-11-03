@@ -34,7 +34,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - Forgot-password responses are enumeration-safe (generic success response).
 - Reset tokens are single-use, short-lived, and hash-at-rest.
 - Password reset increments `tokenVersion` to invalidate stale sessions.
-- Protected routes call server-side session validation (`/session/validate`).
+- Protected routes call server-side session validation (`/session/validate`) and end the browser session when validation cannot be confirmed.
 - Abuse controls are enabled (per-account cooldown + per-account/per-IP limits).
 - Structured CloudWatch logs are in place for recovery events.
 

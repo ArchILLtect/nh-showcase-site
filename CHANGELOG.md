@@ -4,6 +4,11 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
+### Authentication
+
+- End browser sessions when server-side session validation cannot be confirmed instead of trusting locally stored session state.
+- Centralized public auth API configuration behind `VITE_AUTH_API_BASE_URL` while preserving the current endpoint as the default.
+
 ### Security
 
 - Updated the production dependency lockfile to remediate the audited `follow-redirects` and `source-map-js` findings.

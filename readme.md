@@ -36,6 +36,9 @@ Create a production build:
 npm run build
 ```
 
+To use a different public auth API endpoint in an environment, set
+`VITE_AUTH_API_BASE_URL`. It is browser-visible configuration and must not contain a secret.
+
 The production output is written to `dist/`. Preview that build locally with:
 
 ```text

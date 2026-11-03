@@ -11,9 +11,9 @@
 - [ ] Add missing certs from Coursera and codefinity, etc.
 - [ ] Add Dean's List letters to achievements page.
 
-- [ ] Add server-side validation and duplicate prevention to registration Lambda to fix critical bugs and security issues in current flow (P0).
+- [x] Add server-side validation and duplicate prevention to registration Lambda. Completed; see `docs/dev/auth/REGISTRATION_HARDENING_CHECKLIST.md`.
 - [ ] Define safe, SSAF-aligned modernization plan for auth/API architecture to enable future improvements without risking current stability (P1).
-- [ ] Implement email verification flow and account recovery features to meet basic auth hardening standards (P2).
+- [x] Implement email verification and account recovery flows. Completed; see `docs/AUTH_OVERVIEW.md`.
 - [ ] Add structured logging, monitoring, and alerting to auth flows to improve observability and incident response.
 - [ ] Conduct thorough inventory and documentation of current auth-related assets and contracts to inform modernization design and migration strategy.
 - [ ] Execute safe, staged rollout of auth improvements with rollback plans and monitoring gates to minimize risk during changes.
@@ -26,6 +26,7 @@
 
 
 ## Auth / Account Recovery
+- [x] Make frontend session validation fail closed when server confirmation is unavailable.
 - [ ] Add email confirmation during account creation (send verification email + require confirmation before account activation/login).
 - [ ] Deferred (cost-aware): Add SES deliverability monitoring + alerting (CloudWatch alarms for Bounce/Complaint + SNS notifications) and a short incident runbook.
 
