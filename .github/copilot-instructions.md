@@ -17,7 +17,7 @@ React + Tailwind frontend with Netlify Forms for contact submissions and an opti
 -   Install: `npm install` (CI uses `npm ci`).
 -   Run dev: `npm run dev` (or the equivalent `npm start` alias) starts Vite; Tailwind scans root `index.html` and `./src/**/*.{js,jsx,ts,tsx}`; dark mode is `class`.
 -   Build/preview: `npm run build` emits `dist/`; use `npm run preview` to serve the production build locally.
--   Quality checks: `npm run lint` checks frontend source. There is currently no automated frontend test suite or `npm test` script. The CI gate runs a clean install, lint, and production build.
+-   Quality checks: `npm test` runs frontend regression tests and `npm run lint` checks frontend source. The CI gate runs a clean install, tests, lint, and production build.
 -   Netlify: SPA routing via `public/_redirects`; Vite build/publish settings are in `netlify.toml`; contact submissions use Netlify Forms.
 
 ## Conventions & patterns

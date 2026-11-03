@@ -17,3 +17,4 @@ All notable project changes are recorded here.
 
 - Restored JSX-aware ESLint parsing and added `npm run lint`.
 - Added linting to the GitHub Actions quality gate before the production build.
+- Added a Vitest regression suite and test gate to GitHub Actions.

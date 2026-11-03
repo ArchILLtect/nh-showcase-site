@@ -118,7 +118,7 @@ The contact page uses Netlify Forms directly. Root `index.html` contains the sta
 
 ## Validation and tests
 
-CI performs a clean dependency install, lints the frontend source, and runs the Vite production build on Node 24. There is currently no automated frontend test suite or `npm test` script; test-strategy work is intentionally deferred.
+Run the frontend regression suite with `npm test`. CI performs a clean dependency install, runs the tests, lints the frontend source, and runs the Vite production build on Node 24.
 
 ## Authentication overview
 
