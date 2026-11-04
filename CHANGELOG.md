@@ -8,7 +8,7 @@ All notable project changes are recorded here.
 
 - Added source-controlled analytics Lambda handlers with server-side session validation, user-bound personal visit filters, and admin-only full-site reads.
 - Changed visit ingestion to use API Gateway's source IP and user-agent headers instead of client-submitted identity or a third-party IP lookup.
-- Added authenticated browser requests and removed persistent browser caching of analytics records. Deployed the updated session validator (prod alias version 4) and all three analytics handlers; added the exact preview-9 origin to HTTP API CORS. Analytics Lambdas remain at reserved concurrency `0` pending valid personal/admin smoke tests; REST API mock preflights still allow `*`.
+- Added authenticated browser requests and removed persistent browser caching of analytics records. Deployed the updated session validator (prod alias version 4) and all three analytics handlers; added preview-9 and preview-10 origins to HTTP API CORS. Analytics Lambdas remain at reserved concurrency `0` pending valid personal/admin smoke tests; REST API mock preflights still allow `*`.
 
 ### Authentication
 
@@ -20,7 +20,7 @@ All notable project changes are recorded here.
 
 - Updated the production dependency lockfile to remediate the audited `follow-redirects` and `source-map-js` findings.
 - Replaced wildcard browser CORS responses in all authentication Lambdas with production-domain and Netlify deploy-preview allowlisting; unknown browser origins are rejected.
-- Restricted API Gateway CORS to the production domains and the specifically verified Netlify previews (deploy-preview-6 and deploy-preview-9). Broader route-specific CORS ownership remains tracked in [issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
+- Restricted API Gateway CORS to the production domains and the specifically verified Netlify previews (deploy-preview-6, deploy-preview-9, and deploy-preview-10). Broader route-specific CORS ownership remains tracked in [issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
 
 ### Tooling
 
