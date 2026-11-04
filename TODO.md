@@ -3,6 +3,8 @@
 
 - [ ] Add Plinth project to the portfolio section of the site.
 
+- [ ] **P1 security:** add server-side authorization to analytics read APIs; prevent public access to visit logs and derive user-specific queries from authenticated identity. See the local [API CORS and access-control inventory](docs/dev/API_CORS_INVENTORY.md). Do not publish this finding in a public issue before remediation is coordinated.
+
 - [x] Verify the mobile menu close-toggle fix on-device: confirmed on a phone after opening the hamburger menu and tapping X; the menu closed and stayed closed. See the [mobile navbar QA checklist](docs/MOBILE_NAVBAR_QA_CHECKLIST.md).
 
 

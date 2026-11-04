@@ -14,19 +14,25 @@ This note maps browser-facing API calls in this repository to the AWS API Gatewa
 
 The HTTP API also has a `POST /tracking` route to `ssaf-analytics-getUserVisits`, but searches of the current frontend source found no call to that route. Confirm whether it is still used by another client before changing or removing it.
 
-For REST Lambda-proxy integrations, AWS requires the backend response to supply CORS headers. The APIs also expose wildcard header mappings in their current method/integration configuration, but that alone does not establish the runtime CORS header returned by the Lambda proxy. The analytics Lambda source and actual POST/GET response behavior still need to be brought under review.
+The deployed analytics Lambda packages were retrieved read-only from AWS and inspected without executing them. All three handlers return `Access-Control-Allow-Origin: *` on their normal responses. The two read handlers contain no application-level identity or role checks. API Gateway also reports `authorizationType: NONE` and `apiKeyRequired: false` for the visit logger `POST /`, dashboard `POST /`, and dashboard `GET /admin` methods. Thus, based on the deployed source and route configuration, the read APIs do not enforce server-side authorization. The dashboard's client-side route guard does not protect a directly callable API.
+
+The `getAllVisits` handler scans and returns the full visit-log table. The `getUserVisits` handler accepts caller-provided IP addresses and returns matching records; those IPs are a filter, not proof of identity. These records include visitor IP, user agent, path, and timestamp. This is a privacy/security finding requiring prompt remediation, separate from CORS. No actual POST or GET request was invoked during this review, so no visit data was retrieved through the live endpoints.
+
+The visit-logging handler is also unauthenticated, as expected for public telemetry, but accepts client-provided `ip`, `userAgent`, and `path` without validation/rate limiting in the inspected handler. Its error response does not include CORS headers.
 
 ## Live preflight verification
 
-Read-only `OPTIONS` requests were sent on 2026-11-04 to the visit logger root (`POST`), dashboard root (`POST`), and dashboard `/admin` (`GET`) using both `https://nickhanson.me` and `https://untrusted.example` as the `Origin`. All six returned HTTP 200 with `Access-Control-Allow-Origin: *`. No POST/GET integration was invoked, so actual Lambda-proxy response headers have not been verified.
+Read-only `OPTIONS` requests were sent on 2026-11-04 to the visit logger root (`POST`), dashboard root (`POST`), and dashboard `/admin` (`GET`) using both `https://nickhanson.me` and `https://untrusted.example` as the `Origin`. All six returned HTTP 200 with `Access-Control-Allow-Origin: *`. The actual Lambda response headers were verified by inspecting the deployed packages, not by invoking the endpoints.
 
 ## Safe follow-up
 
 1. Keep the auth HTTP API's native CORS allowlist explicit and shared across its routes unless a real route needs a different origin policy. HTTP API native CORS is API-wide; per-route policies require moving CORS handling to each integration or separating APIs.
-2. Establish source/deployment ownership for the three analytics Lambdas before changing their proxy responses.
-3. Replace wildcard preflight origins on both REST APIs with individually approved origins, and make each Lambda-proxy response use the same explicit origin policy.
-4. Verify preflight and actual requests from production, an approved preview, and an unapproved origin. Treat CORS as browser policy, not as authorization; verify server-side authorization independently for analytics data.
-5. Decide whether the HTTP API's `/tracking` route is still needed and document its owner.
+2. Promptly protect the two analytics read methods with server-side authorization; remove public access to full visit history, and derive per-user query scope from the authenticated identity rather than caller-supplied IPs.
+3. Establish version-controlled source/deployment ownership for the three analytics Lambdas before changing their proxy responses.
+4. Replace wildcard preflight origins on both REST APIs with individually approved origins, and make each Lambda-proxy response use the same explicit origin policy.
+5. Verify preflight and actual requests from production, an approved preview, and an unapproved origin after authorization is fixed. Treat CORS as browser policy, not as authorization.
+6. Add validation/rate limiting to public visit ingestion and ensure error responses include the intended CORS headers.
+7. Decide whether the HTTP API's `/tracking` route is still needed and document its owner.
 
 ## References
 
