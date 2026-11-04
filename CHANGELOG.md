@@ -4,6 +4,14 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
+### Certificates and portfolio content
+
+- Recovered seven unique Codefinity credentials from archived 2023 certificate images: six completed courses and the **Becoming a Web Developer** track.
+- Added original certificate PNG assets and recorded the historical completion dates and certificate IDs in `public/data/certificates.json`.
+- Featured the completed track separately on the Certificates page; certificate verification links now appear only when a real `certUrl` exists.
+- Kept **Advanced CSS Techniques** as the canonical CSS course title. The separately downloaded **CSS Layout, Effects, and Sass** image was an identical certificate, not an eighth credential.
+- Preserved all five existing Coursera credentials. This change is pending PR review, CI and preview verification; it has not yet been deployed to production.
+
 ### Analytics security and reliability
 
 - Added source-controlled analytics Lambda handlers with server-side session validation, user-bound personal visit filters, and admin-only full-site reads.
