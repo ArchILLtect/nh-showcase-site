@@ -110,6 +110,25 @@ npm run preview
 - [vite.config.js](vite.config.js)
 <!-- treemark:end -->
 
+## Certificates and credentials
+
+The public `/certificates` page loads its certificate records from
+[`public/data/certificates.json`](public/data/certificates.json) and images from
+[`public/images/certificates/`](public/images/certificates/). The collection
+includes five Coursera certificates and seven recovered Codefinity credentials
+(six courses and the completed **Becoming a Web Developer** track). The
+Codefinity completion dates and certificate IDs are transcribed from the
+original 2023 certificate images.
+
+Codefinity certificate IDs are archival metadata, **not** public verification
+links. Only entries with an actual `certUrl` show the **Verify Certificate**
+action. The recovered **Advanced CSS Techniques** certificate is shown once:
+the separate **CSS Layout, Effects, and Sass** download displayed the same
+underlying certificate and ID, so it is not counted as an additional credential.
+
+For evidence, naming and maintenance notes, see the
+[Codefinity recovery record](docs/dev/codefinity-certificate-recovery.md).
+
 ## Deployment and contact form
 
 Netlify runs the production build and publishes `dist/`. Client-side routes use the SPA fallback in `public/_redirects`.
