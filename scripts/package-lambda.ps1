@@ -20,7 +20,9 @@ if (-not (Test-Path $functionDir)) {
 $archiveDir = Join-Path $lambdaRoot "archive/$FunctionName/$ArchiveTag"
 New-Item -ItemType Directory -Path $archiveDir -Force | Out-Null
 
-$sourceFiles = @("index.mjs", "package.json", "package-lock.json")
+$sourceFiles = @("package.json", "package-lock.json")
+$sourceFiles += Get-ChildItem -Path $functionDir -Filter "*.mjs" -File |
+    ForEach-Object { $_.Name }
 foreach ($file in $sourceFiles) {
     $sourcePath = Join-Path $functionDir $file
     if (Test-Path $sourcePath) {
@@ -30,8 +32,14 @@ foreach ($file in $sourceFiles) {
 
 if ($InstallDependencies) {
     Push-Location $functionDir
-    npm ci
-    Pop-Location
+    try {
+        npm ci
+        if ($LASTEXITCODE -ne 0) {
+            throw "npm ci failed for $FunctionName with exit code $LASTEXITCODE"
+        }
+    } finally {
+        Pop-Location
+    }
 }
 
 $zipPath = Join-Path $lambdaRoot "$FunctionName.zip"
@@ -40,7 +48,9 @@ if (Test-Path $zipPath) {
 }
 
 Push-Location $functionDir
-$zipItems = @("index.mjs", "package.json", "package-lock.json")
+$zipItems = @("package.json", "package-lock.json")
+$zipItems += Get-ChildItem -Path $functionDir -Filter "*.mjs" -File |
+    ForEach-Object { $_.Name }
 if (Test-Path "node_modules") {
     $zipItems += "node_modules"
 } else {

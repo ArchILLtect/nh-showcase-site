@@ -3,8 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { trackVisit } from "../utils/visitTracker";
 import { usePageTitle } from '../hooks/usePageTitle';
-
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
+import { AUTH_API_BASE_URL } from "../config/api";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -56,7 +55,7 @@ const ResetPassword = () => {
 
     try {
       setLoading(true);
-      await axios.post(`${API_BASE_URL}/reset-password`, {
+      await axios.post(`${AUTH_API_BASE_URL}/reset-password`, {
         token,
         newPassword,
         confirmPassword,

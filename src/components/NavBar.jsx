@@ -162,7 +162,7 @@ const NavBar = () => {
 
   return (
     <nav className="bg-gray-800 relative z-50">
-      <div className="md:hidden px-3 py-1.5 sm:px-4 sm:py-2">
+      <div className="md:hidden relative z-40 px-3 py-1.5 sm:px-4 sm:py-2">
         <div className="flex min-h-12 items-center justify-between">
           <NavLink
             to="/home"

@@ -29,8 +29,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { trackVisit } from "../utils/visitTracker";
 import { usePageTitle } from '../hooks/usePageTitle';
-
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
+import { AUTH_API_BASE_URL } from "../config/api";
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
@@ -58,7 +57,7 @@ const VerifyEmail = () => {
       }
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/verify-email`, { token });
+        const response = await axios.post(`${AUTH_API_BASE_URL}/verify-email`, { token });
 
         if (!isMounted) return;
         setSuccess(true);

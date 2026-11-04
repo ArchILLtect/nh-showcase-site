@@ -3,7 +3,7 @@
 
 - [ ] Add Plinth project to the portfolio section of the site.
 
-- [ ] Mobile layout issue: Clicking the X button on the mobile menu doesn't close the menu. (P0), it attempts to but fails and the menu reopens immediately. This is a critical bug that needs to be fixed as soon as possible.
+- [ ] Verify the mobile menu close-toggle fix on-device: the header is now stacked above the backdrop, and the close-toggle behavior is included in the [mobile navbar QA checklist](docs/MOBILE_NAVBAR_QA_CHECKLIST.md).
 
 
 - [ ] Implement GitHub repository cards without exposing a client-side token.
@@ -11,9 +11,9 @@
 - [ ] Add missing certs from Coursera and codefinity, etc.
 - [ ] Add Dean's List letters to achievements page.
 
-- [ ] Add server-side validation and duplicate prevention to registration Lambda to fix critical bugs and security issues in current flow (P0).
+- [x] Add server-side validation and duplicate prevention to registration Lambda. Completed; see `docs/dev/auth/REGISTRATION_HARDENING_CHECKLIST.md`.
 - [ ] Define safe, SSAF-aligned modernization plan for auth/API architecture to enable future improvements without risking current stability (P1).
-- [ ] Implement email verification flow and account recovery features to meet basic auth hardening standards (P2).
+- [x] Implement email verification and account recovery flows. Completed; see `docs/AUTH_OVERVIEW.md`.
 - [ ] Add structured logging, monitoring, and alerting to auth flows to improve observability and incident response.
 - [ ] Conduct thorough inventory and documentation of current auth-related assets and contracts to inform modernization design and migration strategy.
 - [ ] Execute safe, staged rollout of auth improvements with rollback plans and monitoring gates to minimize risk during changes.
@@ -26,6 +26,7 @@
 
 
 ## Auth / Account Recovery
+- [x] Make frontend session validation fail closed when server confirmation is unavailable.
 - [ ] Add email confirmation during account creation (send verification email + require confirmation before account activation/login).
 - [ ] Deferred (cost-aware): Add SES deliverability monitoring + alerting (CloudWatch alarms for Bounce/Complaint + SNS notifications) and a short incident runbook.
 
@@ -69,11 +70,11 @@
 
 ## Deferred engineering decisions
 
-- [ ] Choose and introduce an automated frontend test strategy.
-- [ ] Repair ESLint and decide whether to enforce it in CI.
+- [x] Choose and introduce an automated frontend test strategy (Vitest); expand coverage incrementally.
+- [x] Repair ESLint and enforce it in CI (`npm run lint`).
 - [ ] Evaluate route-level code splitting if bundle size becomes a practical concern.
 - [ ] Decide whether the optional local Express stub should remain in the repository.
-- [ ] Consider narrowing wildcard Lambda CORS during later auth hardening.
+- [x] Narrow Lambda browser CORS to production domains and the Netlify deploy-preview hostname pattern; deploy Lambda versions, point auth routes at `prod` aliases, and verify API Gateway CORS/preflight behavior. Broader route-specific CORS ownership remains tracked in [GitHub issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
 - [ ] Regenerate and reintroduce repository structure documentation through TreeMark when useful.
 
 ## Deferred: Full Showcase Site SEO audit

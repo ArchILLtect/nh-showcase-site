@@ -17,6 +17,7 @@ Use this after navbar changes to verify behavior quickly (target: ~2 minutes).
 - Mobile header height is compact and does not push hero content excessively.
 - Opening/closing mobile menu has subtle animation (~150–250ms) and feels smooth.
 - Menu icon swaps correctly between hamburger and close states.
+- With the drawer open, tapping the close toggle closes it once and leaves it closed (the backdrop must not intercept the toggle tap).
 
 ## Mobile menu content checks
 

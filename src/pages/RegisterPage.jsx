@@ -83,8 +83,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { usePageTitle } from '../hooks/usePageTitle';
+import { AUTH_API_BASE_URL } from "../config/api";
 
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 const MAX_EMAIL_LENGTH = 254;
 const MIN_PASSWORD_LENGTH = 8;
 const COMMON_WEAK_PASSWORDS = new Set([
@@ -181,7 +181,7 @@ const RegisterPage = () => {
 
     try {
       setLoading(true); // show spinner
-      const response = await axios.post(`${API_BASE_URL}/register`, dataToSend);
+      const response = await axios.post(`${AUTH_API_BASE_URL}/register`, dataToSend);
       console.log("Registration successful:", response.data);
       alert(response?.data?.message || "User registered successfully!");
       navigate("/login"); // Redirect to login page after successful registration

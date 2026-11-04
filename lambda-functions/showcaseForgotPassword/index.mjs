@@ -19,14 +19,30 @@ const PASSWORD_RESET_FROM_EMAIL = process.env.PASSWORD_RESET_FROM_EMAIL || "";
 const PASSWORD_RESET_REPLY_TO = process.env.PASSWORD_RESET_REPLY_TO || "";
 const RESET_URL_BASE = process.env.RESET_URL_BASE || "";
 
-const jsonResponse = (statusCode, payload) => ({
-  statusCode,
-  headers: {
+const ALLOWED_CORS_ORIGINS = new Set([
+  "https://nickhanson.me",
+  "https://www.nickhanson.me",
+]);
+const NETLIFY_DEPLOY_PREVIEW_ORIGIN =
+  /^https:\/\/deploy-preview-\d+--resonant-ganache-9efedd\.netlify\.app$/;
+
+const getCorsHeaders = (event) => {
+  const origin = event?.headers?.origin || event?.headers?.Origin || "";
+  const isAllowedOrigin =
+    !origin || ALLOWED_CORS_ORIGINS.has(origin) || NETLIFY_DEPLOY_PREVIEW_ORIGIN.test(origin);
+
+  return {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    ...(isAllowedOrigin ? { "Access-Control-Allow-Origin": origin || "*" } : {}),
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-  },
+    ...(origin ? { Vary: "Origin" } : {}),
+  };
+};
+
+const createJsonResponse = (event, statusCode, payload) => ({
+  statusCode,
+  headers: getCorsHeaders(event),
   body: JSON.stringify(payload),
 });
 
@@ -45,8 +61,8 @@ const hashResetTokenSecret = (tokenSecret) =>
 const hashForLog = (value) =>
   crypto.createHash("sha256").update(String(value || "")).digest("hex").slice(0, 12);
 
-const genericForgotPasswordResponse = () =>
-  jsonResponse(200, {
+const genericForgotPasswordResponse = (event) =>
+  createJsonResponse(event, 200, {
     message: GENERIC_FORGOT_PASSWORD_MESSAGE,
   });
 
@@ -163,6 +179,8 @@ const sendPasswordResetEmail = async ({ toEmail, username, resetToken, expiresMi
 };
 
 export const handler = async (event) => {
+  const jsonResponse = (statusCode, payload) => createJsonResponse(event, statusCode, payload);
+
   if (event?.requestContext?.http?.method === "OPTIONS") {
     return jsonResponse(200, { message: "OK" });
   }
@@ -183,7 +201,7 @@ export const handler = async (event) => {
   const requestId = event?.requestContext?.requestId || "unknown";
 
   if (!username || !email) {
-    return genericForgotPasswordResponse();
+    return genericForgotPasswordResponse(event);
   }
 
   const perIpResult = await checkAndRecordRateLimit({
@@ -201,7 +219,7 @@ export const handler = async (event) => {
         ipHash: hashForLog(requestIp),
       }),
     );
-    return genericForgotPasswordResponse();
+    return genericForgotPasswordResponse(event);
   }
 
   const normalizedAccountKey = `forgot:account:${username.toLowerCase()}#${email}`;
@@ -221,7 +239,7 @@ export const handler = async (event) => {
         accountHash: hashForLog(normalizedAccountKey),
       }),
     );
-    return genericForgotPasswordResponse();
+    return genericForgotPasswordResponse(event);
   }
 
   try {
@@ -244,7 +262,7 @@ export const handler = async (event) => {
           accountHash: hashForLog(normalizedAccountKey),
         }),
       );
-      return genericForgotPasswordResponse();
+      return genericForgotPasswordResponse(event);
     }
 
     const tokenSecret = crypto.randomBytes(32).toString("base64url");
@@ -296,7 +314,7 @@ export const handler = async (event) => {
       });
     }
 
-    return genericForgotPasswordResponse();
+    return genericForgotPasswordResponse(event);
   } catch (error) {
     console.error("Forgot password error:", error);
     return jsonResponse(500, {

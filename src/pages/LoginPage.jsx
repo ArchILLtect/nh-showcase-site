@@ -38,8 +38,7 @@ import { login } from "../utils/auth";
 import { roleHierarchy } from "../constants/roles";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { usePageTitle } from '../hooks/usePageTitle';
-
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
+import { AUTH_API_BASE_URL } from "../config/api";
 
 const LoginPage = () => {
   usePageTitle('Login');
@@ -64,7 +63,7 @@ const LoginPage = () => {
 
   const attemptLogin = async (ip) => {
 
-    const response = await axios.post(`${API_BASE_URL}/login`, {
+    const response = await axios.post(`${AUTH_API_BASE_URL}/login`, {
       ...formData,
       ip
     });

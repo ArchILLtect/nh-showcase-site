@@ -14,14 +14,30 @@ const logEvent = (payload) => {
   console.info(JSON.stringify(payload));
 };
 
-const jsonResponse = (statusCode, payload) => ({
-  statusCode,
-  headers: {
+const ALLOWED_CORS_ORIGINS = new Set([
+  "https://nickhanson.me",
+  "https://www.nickhanson.me",
+]);
+const NETLIFY_DEPLOY_PREVIEW_ORIGIN =
+  /^https:\/\/deploy-preview-\d+--resonant-ganache-9efedd\.netlify\.app$/;
+
+const getCorsHeaders = (event) => {
+  const origin = event?.headers?.origin || event?.headers?.Origin || "";
+  const isAllowedOrigin =
+    !origin || ALLOWED_CORS_ORIGINS.has(origin) || NETLIFY_DEPLOY_PREVIEW_ORIGIN.test(origin);
+
+  return {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    ...(isAllowedOrigin ? { "Access-Control-Allow-Origin": origin || "*" } : {}),
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-  },
+    ...(origin ? { Vary: "Origin" } : {}),
+  };
+};
+
+const createJsonResponse = (event, statusCode, payload) => ({
+  statusCode,
+  headers: getCorsHeaders(event),
   body: JSON.stringify(payload),
 });
 
@@ -43,13 +59,15 @@ const hashTokenSecret = (tokenSecret) =>
     .update(`${tokenSecret}${EMAIL_VERIFY_TOKEN_HASH_PEPPER}`)
     .digest("hex");
 
-const invalidTokenResponse = () =>
-  jsonResponse(400, {
+const invalidTokenResponse = (event) =>
+  createJsonResponse(event, 400, {
     code: "INVALID_OR_EXPIRED_VERIFICATION_TOKEN",
     message: "Verification token is invalid or expired",
   });
 
 export const handler = async (event) => {
+  const jsonResponse = (statusCode, payload) => createJsonResponse(event, statusCode, payload);
+
   if (event?.requestContext?.http?.method === "OPTIONS") {
     return jsonResponse(200, { message: "OK" });
   }
@@ -86,7 +104,7 @@ export const handler = async (event) => {
       reason: "invalid_format",
       requestId,
     });
-    return invalidTokenResponse();
+    return invalidTokenResponse(event);
   }
 
   const { tokenId, tokenSecret } = tokenParts;
@@ -116,7 +134,7 @@ export const handler = async (event) => {
         requestId,
         tokenIdHash: hashForLog(tokenId),
       });
-      return invalidTokenResponse();
+      return invalidTokenResponse(event);
     }
 
     const username = typeof tokenRecord.username === "string" ? tokenRecord.username : "";
@@ -139,7 +157,7 @@ export const handler = async (event) => {
         tokenIdHash: hashForLog(tokenId),
         accountHash: hashForLog(`${username.toLowerCase()}#${tokenRecord.emailNormalized || ""}`),
       });
-      return invalidTokenResponse();
+      return invalidTokenResponse(event);
     }
 
     await dynamoDB
@@ -195,7 +213,7 @@ export const handler = async (event) => {
         requestId,
         tokenIdHash: hashForLog(tokenId),
       });
-      return invalidTokenResponse();
+      return invalidTokenResponse(event);
     }
 
     console.error("Verify email error:", error);

@@ -20,14 +20,26 @@ This folder contains the current source-of-truth code for deployed Lambda functi
 ## Deploy Workflow (Manual)
 1. `cd` into target function folder.
 2. Run `npm ci`.
-3. Zip only needed files (`index.mjs`, `package.json`, `package-lock.json`, and `node_modules` if required for runtime packaging process).
+3. Include `package.json`, `package-lock.json`, all top-level `.mjs` source modules, and `node_modules` when required by the function.
 4. Update Lambda code in AWS (`showcaseRegistration`, `showcaseLogin`, `showcaseVerifyEmail`, `showcaseResendVerification`, `showcaseForgotPassword`, `showcaseResetPassword`, or `showcaseSessionValidate`).
 5. Publish a new Lambda version.
 6. Verify alias and API Gateway integration still point to the expected function/alias (prefer `prod` alias over fixed version ARN).
 7. Run smoke tests for success and failure cases.
 
+## CORS Policy
+
+The auth handlers return CORS headers only for browser requests from these origins:
+
+- `https://nickhanson.me`
+- `https://www.nickhanson.me`
+- Netlify deploy previews matching `https://deploy-preview-<number>--resonant-ganache-9efedd.netlify.app`
+
+Requests without an `Origin` header retain the existing `*` response for Lambda-console and non-browser checks. An unrecognized browser origin receives no `Access-Control-Allow-Origin` header, so the browser blocks cross-origin access.
+
+Deployment and verification (2026-11-04): all seven auth Lambda functions were updated and their `prod` aliases now target the published versions; auth API routes use those aliases. API Gateway CORS allows the production domains and the exact preview origin `https://deploy-preview-6--resonant-ganache-9efedd.netlify.app`. The approved preview preflight returned 204 with the requested CORS headers; an unapproved origin received no `Access-Control-Allow-Origin`. Basic invalid-input and missing-session smoke cases returned their expected 400/401 responses. Update API Gateway CORS if a different preview origin must be tested. Route-specific CORS ownership remains an open follow-up in [GitHub issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
+
 ## Deploy Workflow (Scripted)
-Use the helper script from repo root to archive current source and build the deployment zip:
+Use the helper script from repo root to archive source and build the deployment zip. It includes all top-level `.mjs` modules (not only `index.mjs`) and aborts if `npm ci` fails:
 
 ```powershell
 ./scripts/package-lambda.ps1 -FunctionName showcaseRegistration

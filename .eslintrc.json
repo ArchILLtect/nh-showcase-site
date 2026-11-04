@@ -15,11 +15,17 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "requireConfigFile": false
+    "requireConfigFile": false,
+    "babelOptions": {
+      "babelrc": false,
+      "configFile": false,
+      "plugins": ["@babel/plugin-syntax-jsx"]
+    }
   },
   "rules": {
     "no-unused-vars": "warn",
-    "no-console": "off"
+    "no-console": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["netlify-honeypot"] }]
   },
   "settings": {
     "react": {

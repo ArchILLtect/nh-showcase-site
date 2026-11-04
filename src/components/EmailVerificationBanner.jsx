@@ -14,8 +14,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getLoggedInUser, isLoggedIn } from "../utils/auth";
+import { AUTH_API_BASE_URL } from "../config/api";
 
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 const DISMISS_PREFIX = "emailVerifyBannerDismissed:";
 const DEFAULT_COOLDOWN_SECONDS = 60;
 
@@ -110,7 +110,7 @@ export default function EmailVerificationBanner() {
       setStatusType("info");
       setStatusMessage("");
 
-      const response = await fetch(`${API_BASE_URL}/resend-verification`, {
+      const response = await fetch(`${AUTH_API_BASE_URL}/resend-verification`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

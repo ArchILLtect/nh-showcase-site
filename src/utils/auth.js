@@ -20,6 +20,8 @@
  * - Assumes the token is a string and user data is a JSON object.
  */
 
+import { AUTH_API_BASE_URL } from "../config/api";
+
 const decodeJwtPayload = (token) => {
     try {
         const [, payloadPart] = token.split(".");
@@ -35,7 +37,6 @@ const decodeJwtPayload = (token) => {
     }
 };
 
-const API_BASE_URL = "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com";
 const SESSION_VALIDATE_CACHE_MS = 60000;
 let lastSessionValidation = {
     at: 0,
@@ -140,7 +141,7 @@ export const validateSessionWithServer = async () => {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/session/validate`, {
+        const response = await fetch(`${AUTH_API_BASE_URL}/session/validate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -158,12 +159,13 @@ export const validateSessionWithServer = async () => {
         }
 
         if (!response.ok) {
-            console.warn("Session validation endpoint unavailable; allowing current session.");
+            console.warn("Session validation endpoint unavailable; ending current session.");
+            logout();
             lastSessionValidation = {
                 at: now,
-                valid: true,
+                valid: false,
             };
-            return true;
+            return false;
         }
 
         const payload = await response.json();
@@ -184,11 +186,12 @@ export const validateSessionWithServer = async () => {
         };
         return true;
     } catch (error) {
-        console.warn("Session validation network error; allowing current session.", error);
+        console.warn("Session validation network error; ending current session.", error);
+        logout();
         lastSessionValidation = {
             at: now,
-            valid: true,
+            valid: false,
         };
-        return true;
+        return false;
     }
 };
