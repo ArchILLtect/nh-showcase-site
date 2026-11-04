@@ -16,6 +16,10 @@ The HTTP API also has a `POST /tracking` route to `ssaf-analytics-getUserVisits`
 
 For REST Lambda-proxy integrations, AWS requires the backend response to supply CORS headers. The APIs also expose wildcard header mappings in their current method/integration configuration, but that alone does not establish the runtime CORS header returned by the Lambda proxy. The analytics Lambda source and actual POST/GET response behavior still need to be brought under review.
 
+## Live preflight verification
+
+Read-only `OPTIONS` requests were sent on 2026-11-04 to the visit logger root (`POST`), dashboard root (`POST`), and dashboard `/admin` (`GET`) using both `https://nickhanson.me` and `https://untrusted.example` as the `Origin`. All six returned HTTP 200 with `Access-Control-Allow-Origin: *`. No POST/GET integration was invoked, so actual Lambda-proxy response headers have not been verified.
+
 ## Safe follow-up
 
 1. Keep the auth HTTP API's native CORS allowlist explicit and shared across its routes unless a real route needs a different origin policy. HTTP API native CORS is API-wide; per-route policies require moving CORS handling to each integration or separating APIs.
