@@ -1,37 +1,93 @@
 [
-    {
-        "title": "Interactivity with JavaScript and jQuery",
-        "issuer": "Coursera/UCDavis",
-        "date": "Sept 2023",
-        "image": "images/certificates/Interactivity_with_JSt&jQuery.png",
-        "certUrl": "https://coursera.org/share/1f5673fdbfac30d7904362588fc6bd74"
-    },
-    {
-        "title": "Data Manipulation in JavaScript",
-        "issuer": "Coursera/UCDavis",
-        "date": "Oct 2023",
-        "image": "images/certificates/Data_Manipulation_in_JS.png",
-        "certUrl": "https://coursera.org/share/fb2d3df796f87e45865954120015286c"
-    },
-    {
-        "title": "Introduction to VueJS Framework",
-        "issuer": "Coursera/Codio",
-        "date": "May 2024",
-        "image": "images/certificates/Introduction_to_VueJS_Framework.png",
-        "certUrl": "https://coursera.org/share/64755d94b9c8f788267aa79761dd6ec7"
-    },
-    {
-        "title": "Animation with JavaScript and jQuery",
-        "issuer": "Coursera/UCDavis",
-        "date": "Sept 2023",
-        "image": "images/certificates/Animation_with_JS_and_jQuery.jpg",
-        "certUrl": "https://coursera.org/share/0272faccb45729db7ed29ccd6655864f"
-    },
-    {
-        "title": "JavaScript for Beginners - Specialization",
-        "issuer": "Coursera/UCDavis",
-        "date": "Sept 2023",
-        "image": "images/certificates/JS_For_Beginners_Spec.jpg",
-        "certUrl": "https://coursera.org/share/e2648f09290bf975baf748342135b335"
-    }
+  {
+    "title": "Interactivity with JavaScript and jQuery",
+    "issuer": "Coursera/UCDavis",
+    "date": "Sept 2023",
+    "image": "images/certificates/Interactivity_with_JSt&jQuery.png",
+    "certUrl": "https://coursera.org/share/1f5673fdbfac30d7904362588fc6bd74"
+  },
+  {
+    "title": "Data Manipulation in JavaScript",
+    "issuer": "Coursera/UCDavis",
+    "date": "Oct 2023",
+    "image": "images/certificates/Data_Manipulation_in_JS.png",
+    "certUrl": "https://coursera.org/share/fb2d3df796f87e45865954120015286c"
+  },
+  {
+    "title": "Introduction to VueJS Framework",
+    "issuer": "Coursera/Codio",
+    "date": "May 2024",
+    "image": "images/certificates/Introduction_to_VueJS_Framework.png",
+    "certUrl": "https://coursera.org/share/64755d94b9c8f788267aa79761dd6ec7"
+  },
+  {
+    "title": "Animation with JavaScript and jQuery",
+    "issuer": "Coursera/UCDavis",
+    "date": "Sept 2023",
+    "image": "images/certificates/Animation_with_JS_and_jQuery.jpg",
+    "certUrl": "https://coursera.org/share/0272faccb45729db7ed29ccd6655864f"
+  },
+  {
+    "title": "JavaScript for Beginners - Specialization",
+    "issuer": "Coursera/UCDavis",
+    "date": "Sept 2023",
+    "image": "images/certificates/JS_For_Beginners_Spec.jpg",
+    "certUrl": "https://coursera.org/share/e2648f09290bf975baf748342135b335"
+  },
+  {
+    "title": "Introduction to JavaScript",
+    "issuer": "Codefinity",
+    "date": "Jul 18, 2023",
+    "image": "/images/certificates/codefinity-introduction-to-javascript.png",
+    "certificateId": "7ee96a12-58da-4e01-b0c8-df92a838890e",
+    "type": "course"
+  },
+  {
+    "title": "Ultimate HTML",
+    "issuer": "Codefinity",
+    "date": "Jul 20, 2023",
+    "image": "/images/certificates/codefinity-ultimate-html.png",
+    "certificateId": "b2d495e8-4bcf-4f07-9537-cb5a75129560",
+    "type": "course"
+  },
+  {
+    "title": "CSS Fundamentals",
+    "issuer": "Codefinity",
+    "date": "Jul 23, 2023",
+    "image": "/images/certificates/codefinity-css-fundamentals.png",
+    "certificateId": "86980661-59fe-4434-8a6a-237055658351",
+    "type": "course"
+  },
+  {
+    "title": "Advanced CSS Techniques",
+    "issuer": "Codefinity",
+    "date": "Jul 24, 2023",
+    "image": "/images/certificates/codefinity-advanced-css-techniques.png",
+    "certificateId": "9e35a96f-1b77-4889-8568-a15d5369ff5c",
+    "type": "course"
+  },
+  {
+    "title": "Mastering React",
+    "issuer": "Codefinity",
+    "date": "Jul 28, 2023",
+    "image": "/images/certificates/codefinity-mastering-react.png",
+    "certificateId": "6ec43fb2-8707-413f-aa05-dedad674eb65",
+    "type": "course"
+  },
+  {
+    "title": "Expert React",
+    "issuer": "Codefinity",
+    "date": "Jul 30, 2023",
+    "image": "/images/certificates/codefinity-expert-react.png",
+    "certificateId": "86de3824-6ba6-4594-b619-e4d5e23fd06d",
+    "type": "course"
+  },
+  {
+    "title": "Becoming a Web Developer",
+    "issuer": "Codefinity",
+    "date": "Jul 30, 2023",
+    "image": "/images/certificates/codefinity-becoming-a-web-developer-track.png",
+    "certificateId": "a47c5025-581d-41cc-b53f-28bd73d375c7",
+    "type": "track"
+  }
 ]
