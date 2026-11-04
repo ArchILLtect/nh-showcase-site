@@ -7,6 +7,7 @@ React + Tailwind frontend with Netlify Forms for contact submissions and an opti
 -   Router: `src/App.jsx` defines routes; `Layout` wraps pages to render `NavBar`/`Footer`.
 -   Auth/roles: `PrivateRoute.jsx` gates routes using `roleHierarchy` (`constants/roles.js`) and auth helpers in `utils/auth.js` (localStorage: `authToken`, `userData`).
 -   Data sources:
+    -   Certificates: `src/pages/Certificates.jsx` loads `public/data/certificates.json`. Original images live in `public/images/certificates/`; keep filenames/paths exact (case-sensitive on Netlify). Codefinity `certificateId` is archival metadata; only a real `certUrl` warrants a Verify link. The Codefinity Web Developer track uses `type: "track"` and must not be duplicated among course cards. See `docs/dev/codefinity-certificate-recovery.md`.
     -   Static JSON under `public/data/*.json` (e.g., `projects.json` via `fetch('data/projects.json')`).
     -   Netlify Forms handles `pages/Contact.jsx` submissions through a URL-encoded `POST /`; the static detection blueprint is in root `index.html`.
     -   AWS API Gateway Lambdas: auth flows use `config/api.js` (`AUTH_API_BASE_URL`); blog create and visit logs retain their own public endpoint configuration.
