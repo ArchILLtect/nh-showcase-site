@@ -128,6 +128,7 @@ export const handler = async (event) => {
         emailVerified:
           typeof user.emailVerified === "boolean" ? user.emailVerified : true,
         passwordChangedAt: user.passwordChangedAt || null,
+        knownIps: Array.isArray(user.knownIps) ? user.knownIps : [],
       },
     });
   } catch (error) {
