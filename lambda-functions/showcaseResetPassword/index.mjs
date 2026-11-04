@@ -15,14 +15,30 @@ const PASSWORD_RESET_FROM_EMAIL = process.env.PASSWORD_RESET_FROM_EMAIL || "";
 const PASSWORD_RESET_REPLY_TO = process.env.PASSWORD_RESET_REPLY_TO || "";
 const PASSWORD_CHANGE_SUPPORT_EMAIL = process.env.PASSWORD_CHANGE_SUPPORT_EMAIL || "";
 
-const jsonResponse = (statusCode, payload) => ({
-  statusCode,
-  headers: {
+const ALLOWED_CORS_ORIGINS = new Set([
+  "https://nickhanson.me",
+  "https://www.nickhanson.me",
+]);
+const NETLIFY_DEPLOY_PREVIEW_ORIGIN =
+  /^https:\/\/deploy-preview-\d+--resonant-ganache-9efedd\.netlify\.app$/;
+
+const getCorsHeaders = (event) => {
+  const origin = event?.headers?.origin || event?.headers?.Origin || "";
+  const isAllowedOrigin =
+    !origin || ALLOWED_CORS_ORIGINS.has(origin) || NETLIFY_DEPLOY_PREVIEW_ORIGIN.test(origin);
+
+  return {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    ...(isAllowedOrigin ? { "Access-Control-Allow-Origin": origin || "*" } : {}),
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-  },
+    ...(origin ? { Vary: "Origin" } : {}),
+  };
+};
+
+const createJsonResponse = (event, statusCode, payload) => ({
+  statusCode,
+  headers: getCorsHeaders(event),
   body: JSON.stringify(payload),
 });
 
@@ -51,14 +67,14 @@ const validatePasswordPolicy = (newPassword) => {
   return null;
 };
 
-const invalidResetTokenResponse = () =>
-  jsonResponse(400, {
+const invalidResetTokenResponse = (event) =>
+  createJsonResponse(event, 400, {
     code: "INVALID_OR_EXPIRED_TOKEN",
     message: "Reset token is invalid or expired",
   });
 
-const rateLimitedResetResponse = () =>
-  jsonResponse(429, {
+const rateLimitedResetResponse = (event) =>
+  createJsonResponse(event, 429, {
     code: "RATE_LIMITED",
     message: "Too many reset attempts. Please try again later.",
   });
@@ -160,6 +176,8 @@ const sendPasswordChangedConfirmationEmail = async ({ toEmail, username, changed
 };
 
 export const handler = async (event) => {
+  const jsonResponse = (statusCode, payload) => createJsonResponse(event, statusCode, payload);
+
   if (event?.requestContext?.http?.method === "OPTIONS") {
     return jsonResponse(200, { message: "OK" });
   }
@@ -185,7 +203,7 @@ export const handler = async (event) => {
     maxAttempts: RESET_PER_IP_MAX_ATTEMPTS,
   });
   if (!perIpResult.allowed) {
-    return rateLimitedResetResponse();
+    return rateLimitedResetResponse(event);
   }
 
   if (!token || !newPassword || !confirmPassword) {
@@ -212,7 +230,7 @@ export const handler = async (event) => {
 
   const tokenParts = parseCompositeResetToken(token);
   if (!tokenParts) {
-    return invalidResetTokenResponse();
+    return invalidResetTokenResponse(event);
   }
 
   const { tokenId, tokenSecret } = tokenParts;
@@ -229,7 +247,7 @@ export const handler = async (event) => {
 
     const tokenRecord = tokenRecordResult?.Item;
     if (!tokenRecord) {
-      return invalidResetTokenResponse();
+      return invalidResetTokenResponse(event);
     }
 
     const username =
@@ -240,7 +258,7 @@ export const handler = async (event) => {
           : "";
 
     if (!username) {
-      return invalidResetTokenResponse();
+      return invalidResetTokenResponse(event);
     }
 
     if (
@@ -252,7 +270,7 @@ export const handler = async (event) => {
         nowEpochSeconds,
       })
     ) {
-      return invalidResetTokenResponse();
+      return invalidResetTokenResponse(event);
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -324,7 +342,7 @@ export const handler = async (event) => {
     });
   } catch (error) {
     if (error?.code === "TransactionCanceledException" || error?.code === "ConditionalCheckFailedException") {
-      return invalidResetTokenResponse();
+      return invalidResetTokenResponse(event);
     }
 
     console.error("Reset password error:", error);

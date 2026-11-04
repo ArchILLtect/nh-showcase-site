@@ -12,6 +12,7 @@ All notable project changes are recorded here.
 ### Security
 
 - Updated the production dependency lockfile to remediate the audited `follow-redirects` and `source-map-js` findings.
+- Replaced wildcard browser CORS responses in all authentication Lambdas with production-domain and Netlify deploy-preview allowlisting; unknown browser origins are rejected.
 
 ### Tooling
 

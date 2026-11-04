@@ -74,7 +74,7 @@
 - [x] Repair ESLint and enforce it in CI (`npm run lint`).
 - [ ] Evaluate route-level code splitting if bundle size becomes a practical concern.
 - [ ] Decide whether the optional local Express stub should remain in the repository.
-- [ ] Consider narrowing wildcard Lambda CORS during later auth hardening.
+- [x] Narrow Lambda browser CORS to the production domains and the known Netlify deploy-preview hostname pattern; deploy and API Gateway verification remain required.
 - [ ] Regenerate and reintroduce repository structure documentation through TreeMark when useful.
 
 ## Deferred: Full Showcase Site SEO audit

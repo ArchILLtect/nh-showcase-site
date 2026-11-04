@@ -5,14 +5,30 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const USERS_TABLE_NAME = process.env.USERS_TABLE_NAME || "Users";
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
-const jsonResponse = (statusCode, payload) => ({
-  statusCode,
-  headers: {
+const ALLOWED_CORS_ORIGINS = new Set([
+  "https://nickhanson.me",
+  "https://www.nickhanson.me",
+]);
+const NETLIFY_DEPLOY_PREVIEW_ORIGIN =
+  /^https:\/\/deploy-preview-\d+--resonant-ganache-9efedd\.netlify\.app$/;
+
+const getCorsHeaders = (event) => {
+  const origin = event?.headers?.origin || event?.headers?.Origin || "";
+  const isAllowedOrigin =
+    !origin || ALLOWED_CORS_ORIGINS.has(origin) || NETLIFY_DEPLOY_PREVIEW_ORIGIN.test(origin);
+
+  return {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    ...(isAllowedOrigin ? { "Access-Control-Allow-Origin": origin || "*" } : {}),
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-  },
+    ...(origin ? { Vary: "Origin" } : {}),
+  };
+};
+
+const createJsonResponse = (event, statusCode, payload) => ({
+  statusCode,
+  headers: getCorsHeaders(event),
   body: JSON.stringify(payload),
 });
 
@@ -30,6 +46,8 @@ const getBearerToken = (authorizationHeader) => {
 };
 
 export const handler = async (event) => {
+  const jsonResponse = (statusCode, payload) => createJsonResponse(event, statusCode, payload);
+
   if (event?.requestContext?.http?.method === "OPTIONS") {
     return jsonResponse(200, { message: "OK" });
   }

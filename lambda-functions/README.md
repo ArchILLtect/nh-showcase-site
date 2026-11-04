@@ -26,6 +26,18 @@ This folder contains the current source-of-truth code for deployed Lambda functi
 6. Verify alias and API Gateway integration still point to the expected function/alias (prefer `prod` alias over fixed version ARN).
 7. Run smoke tests for success and failure cases.
 
+## CORS Policy
+
+The auth handlers return CORS headers only for browser requests from these origins:
+
+- `https://nickhanson.me`
+- `https://www.nickhanson.me`
+- Netlify deploy previews matching `https://deploy-preview-<number>--resonant-ganache-9efedd.netlify.app`
+
+Requests without an `Origin` header retain the existing `*` response for Lambda-console and non-browser checks. An unrecognized browser origin receives no `Access-Control-Allow-Origin` header, so the browser blocks cross-origin access.
+
+When deploying this source change, verify the API Gateway route/stage CORS configuration does not independently return `*` or override Lambda proxy headers. Smoke-test production, one Netlify deploy preview, and an intentionally unrecognized origin after publishing the new Lambda versions and API stage.
+
 ## Deploy Workflow (Scripted)
 Use the helper script from repo root to archive current source and build the deployment zip:
 

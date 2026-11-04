@@ -274,6 +274,9 @@ test("OPTIONS preflight returns 200 with CORS headers", async () => {
 
   const handler = await loadHandler();
   const result = await handler({
+    headers: {
+      origin: "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+    },
     requestContext: {
       http: {
         method: "OPTIONS",
@@ -283,11 +286,36 @@ test("OPTIONS preflight returns 200 with CORS headers", async () => {
 
   assert.equal(result.statusCode, 200);
   assert.equal(result.headers["Content-Type"], "application/json");
-  assert.equal(result.headers["Access-Control-Allow-Origin"], "*");
+  assert.equal(
+    result.headers["Access-Control-Allow-Origin"],
+    "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+  );
   assert.equal(result.headers["Access-Control-Allow-Methods"], "POST, OPTIONS");
+  assert.equal(result.headers.Vary, "Origin");
 
   const payload = parseBody(result);
   assert.equal(payload.message, "OK");
+});
+
+test("OPTIONS preflight omits allow-origin for an unrecognized browser origin", async () => {
+  applyBaseEnv();
+  setMockState();
+
+  const handler = await loadHandler();
+  const result = await handler({
+    headers: {
+      origin: "https://untrusted.example",
+    },
+    requestContext: {
+      http: {
+        method: "OPTIONS",
+      },
+    },
+  });
+
+  assert.equal(result.statusCode, 200);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], undefined);
+  assert.equal(result.headers.Vary, "Origin");
 });
 
 test("post-create verification failure still returns 201 with verificationEmailSent=false", async () => {
