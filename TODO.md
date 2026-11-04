@@ -3,7 +3,7 @@
 
 - [ ] Add Plinth project to the portfolio section of the site.
 
-- [ ] Mobile layout issue: Clicking the X button on the mobile menu doesn't close the menu. (P0), it attempts to but fails and the menu reopens immediately. This is a critical bug that needs to be fixed as soon as possible.
+- [ ] Verify the mobile menu close-toggle fix on-device: the header is now stacked above the backdrop, and the close-toggle behavior is included in the [mobile navbar QA checklist](docs/MOBILE_NAVBAR_QA_CHECKLIST.md).
 
 
 - [ ] Implement GitHub repository cards without exposing a client-side token.
@@ -74,7 +74,7 @@
 - [x] Repair ESLint and enforce it in CI (`npm run lint`).
 - [ ] Evaluate route-level code splitting if bundle size becomes a practical concern.
 - [ ] Decide whether the optional local Express stub should remain in the repository.
-- [x] Narrow Lambda browser CORS to the production domains and the known Netlify deploy-preview hostname pattern; deploy and API Gateway verification remain required.
+- [x] Narrow Lambda browser CORS to production domains and the Netlify deploy-preview hostname pattern; deploy Lambda versions, point auth routes at `prod` aliases, and verify API Gateway CORS/preflight behavior. Broader route-specific CORS ownership remains tracked in [GitHub issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
 - [ ] Regenerate and reintroduce repository structure documentation through TreeMark when useful.
 
 ## Deferred: Full Showcase Site SEO audit

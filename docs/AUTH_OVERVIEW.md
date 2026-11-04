@@ -1,6 +1,6 @@
 # Auth Overview (Current State)
 
-Last updated: 2026-03-10
+Last updated: 2026-11-04
 
 Purpose: provide one fast, root-level reference for the current authentication and account recovery system.
 
@@ -35,6 +35,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - Reset tokens are single-use, short-lived, and hash-at-rest.
 - Password reset increments `tokenVersion` to invalidate stale sessions.
 - Protected routes call server-side session validation (`/session/validate`) and end the browser session when validation cannot be confirmed.
+- Browser CORS is allowlisted in the auth Lambda handlers and API Gateway; the current API Gateway preview allowlist is limited to the specifically verified Netlify preview origin. See [Lambda deployment notes](../lambda-functions/README.md) and [issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7) for the remaining route-specific CORS ownership work.
 - Abuse controls are enabled (per-account cooldown + per-account/per-IP limits).
 - Structured CloudWatch logs are in place for recovery events.
 
@@ -54,6 +55,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - Limiting: `RESET_RATE_LIMITS_TABLE_NAME` plus forgot/reset limiter tuning vars
 
 ## Operations Snapshot
+- Auth Lambda deployments and API Gateway CORS/alias routing were verified on 2026-11-04; see the [deployment notes](../lambda-functions/README.md) for tested origins and smoke-check results.
 - SES sender identity verified and production access granted in `us-east-2`.
 - CloudWatch retention is set to 2 weeks for recovery-related log groups.
 - Registration verification flow validated: register -> resend -> verify token consume -> verified state reflected in UI.
