@@ -18,11 +18,11 @@ The initial deployed packages were found to lack server-side authorization and u
 
 The historical `getAllVisits` package scanned the full visit-log table, and the historical `getUserVisits` package trusted caller-provided IP filters. These records include visitor IP, user agent, path, and timestamp. The deployed remediation derives per-user scope from the session validator and requires an admin role for full-site reads. No analytics data endpoint was invoked during the remediation smoke check.
 
-The visit-logging handler is also unauthenticated, as expected for public telemetry, but accepts client-provided `ip`, `userAgent`, and `path` without validation/rate limiting in the inspected handler. Its error response does not include CORS headers.
+The historical visit-logging package accepted client-provided `ip`, `userAgent`, and `path` without validation/rate limiting, and its error response omitted CORS headers. The deployed source now derives IP and user-agent from API Gateway request metadata; rate limiting and explicit error-response CORS remain follow-up work.
 
 ## Temporary containment
 
-On 2026-11-04, reserved concurrency was set to `0` for `ssaf-analytics-trackVisit`, `ssaf-analytics-getUserVisits`, and `ssaf-analytics-getAllVisits`; read-back confirmed all three settings. Their prior reserved-concurrency setting was unset, and inspection found no event-source mappings or Lambda Function URLs. This blocks all three functions, including every API Gateway route to the two read handlers, while preserving their code, routes, and stored data. Visit collection and dashboard reads are unavailable until the proper fix is deployed.
+On 2026-11-04, reserved concurrency was set to `0` for `ssaf-analytics-trackVisit`, `ssaf-analytics-getUserVisits`, and `ssaf-analytics-getAllVisits`; read-back confirmed all three settings. Their prior reserved-concurrency setting was unset, and inspection found no event-source mappings or Lambda Function URLs. This blocks all three functions, including every API Gateway route to the two read handlers, while preserving their code, routes, and stored data. Visit collection and dashboard reads remain unavailable pending valid authenticated-session testing and an explicit decision to restore concurrency.
 
 ## Remediation deployed; analytics traffic remains paused
 
