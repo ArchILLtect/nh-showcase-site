@@ -96,11 +96,20 @@ const Certificates = () => {
       <h1 className="text-4xl font-bold text-center text-gray-700 dark:text-gray-200 my-6">
         Certifications
       </h1>
+      {!loadingCerts && certs.filter((cert) => cert.type === 'track').map((track) => (
+        <section key={track.certificateId} className="mb-8 mx-auto max-w-4xl rounded-lg border-2 border-amber-500 bg-white dark:bg-gray-700 p-6 text-center shadow-md" aria-label="Completed learning track">
+          <p className="text-sm font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 mb-2">Completed Codefinity track</p>
+          <img src={track.image} alt={`${track.title} track certificate`} className="w-full max-w-2xl max-h-80 object-contain mx-auto mb-3" />
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{track.title}</h2>
+          <p className="text-gray-700 dark:text-gray-200">{track.issuer} · {track.date}</p>
+          <p className="text-xs text-gray-600 dark:text-gray-300 mt-2 break-all">Certificate ID: {track.certificateId}</p>
+        </section>
+      ))}
       {loadingCerts ? (
         <LoadingSpinner />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-6 border-2 border-gray-700 dark:border-gray-700 p-8 rounded-lg">
-          {certs.map((cert, idx) => (
+          {certs.filter((cert) => cert.type !== 'track').map((cert, idx) => (
             <div
               key={idx}
               className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden p-4 flex flex-col justify-between"
@@ -114,17 +123,22 @@ const Certificates = () => {
                 {cert.title}
               </h2>
               <p className="text-sm text-center text-gray-600 dark:text-gray-300">
-                {cert.issuer} · {cert.date}
+                {cert.issuer}{cert.date ? ` · ${cert.date}` : ''}
               </p>
+              {cert.certificateId && (
+                <p className="text-xs text-center text-gray-500 dark:text-gray-300 mt-2 break-all">Certificate ID: {cert.certificateId}</p>
+              )}
               <div className="flex justify-center mt-4">
-                <a
-                  href={cert.certUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
+                {cert.certUrl && (
+                  <a
+                    href={cert.certUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold text-center"
                   >
-                  Verify Certificate
+                    Verify Certificate
                   </a>
+                )}
               </div>
             </div>
           ))}
