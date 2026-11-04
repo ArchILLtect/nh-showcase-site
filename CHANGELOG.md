@@ -4,11 +4,14 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
-### Analytics security (prepared; not deployed)
+### Analytics security and reliability
 
 - Added source-controlled analytics Lambda handlers with server-side session validation, user-bound personal visit filters, and admin-only full-site reads.
 - Changed visit ingestion to use API Gateway's source IP and user-agent headers instead of client-submitted identity or a third-party IP lookup.
-- Added authenticated browser requests and removed persistent browser caching of analytics records. Deployment and API Gateway CORS updates remain pending; analytics Lambdas remain paused in AWS.
+- Added authenticated browser requests and removed persistent browser caching of analytics records.
+- Migrated all analytics Lambdas to AWS SDK v3; the visit writer now bounds DynamoDB request time and logs safe progress/error metadata.
+- The browser tracker now treats non-2xx responses as failures and only applies its cooldown after a successful write.
+- Deployed the analytics readers and visit writer with no reserved-concurrency cap; API Gateway CORS behavior was verified for the allowed site and preview origins.
 
 ### Authentication
 

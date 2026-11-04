@@ -24,7 +24,7 @@ This folder contains the current source-of-truth code for deployed Lambda functi
 1. `cd` into target function folder.
 2. Run `npm ci`.
 3. Include `package.json`, `package-lock.json`, all top-level `.mjs` source modules, and `node_modules` when required by the function.
-4. Update Lambda code in AWS for the selected function; analytics readers must remain at reserved concurrency `0` until the auth/API smoke tests and CORS configuration are verified.
+4. Update Lambda code in AWS for the selected function. Do not use reserved concurrency `0` as a waiting state for analytics functions; it disables all invocations and can surface as an API Gateway 5xx. Leave reserved concurrency unconfigured unless an intentional concurrency cap is required.
 5. Publish a new Lambda version.
 6. Verify alias and API Gateway integration still point to the expected function/alias (prefer `prod` alias over fixed version ARN).
 7. Run smoke tests for success and failure cases.
