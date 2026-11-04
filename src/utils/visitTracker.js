@@ -68,11 +68,14 @@ export async function trackVisit() {
             path,
         };
 
-        await fetch(VISIT_API_ENDPOINT, {
+        const response = await fetch(VISIT_API_ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(visitData),
         });
+        if (!response.ok) {
+            throw new Error(`Visit API returned HTTP ${response.status}`);
+        }
 
         // Only set session key if it doesn't exist or session expired
         if (!sessionActive) {
@@ -82,7 +85,7 @@ export async function trackVisit() {
         // Always update visit timestamp
         localStorage.setItem(visitCooldownKey, now.toString());
 
-        console.log(`[visitTracker] Visit logged for ${path}`);
+        console.log(`[visitTracker] Visit recorded for ${path}`);
     } catch (err) {
         console.warn("[visitTracker] Visit log failed:", err);
     }
