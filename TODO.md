@@ -10,7 +10,8 @@
 
 - [ ] Implement GitHub repository cards without exposing a client-side token.
 - [ ] Make a DB for JSON files and implement it across the site to make it easier to add new items and maintain existing ones.
-- [ ] Add missing certs from Coursera and codefinity, etc.
+- [x] Recover and add the seven unique Codefinity credentials (six courses plus completed Web Developer track); see `docs/dev/codefinity-certificate-recovery.md` (pending PR merge/production verification).
+- [ ] Review any other missing Coursera or third-party credentials separately; do not assume this recovery completes the broader certificate backlog.
 - [ ] Add Dean's List letters to achievements page.
 
 - [x] Add server-side validation and duplicate prevention to registration Lambda. Completed; see `docs/dev/auth/REGISTRATION_HARDENING_CHECKLIST.md`.
