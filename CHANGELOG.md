@@ -4,6 +4,12 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
+### Analytics security (prepared; not deployed)
+
+- Added source-controlled analytics Lambda handlers with server-side session validation, user-bound personal visit filters, and admin-only full-site reads.
+- Changed visit ingestion to use API Gateway's source IP and user-agent headers instead of client-submitted identity or a third-party IP lookup.
+- Added authenticated browser requests and removed persistent browser caching of analytics records. Deployment and API Gateway CORS updates remain pending; analytics Lambdas remain paused in AWS.
+
 ### Authentication
 
 - End browser sessions when server-side session validation cannot be confirmed instead of trusting locally stored session state.
