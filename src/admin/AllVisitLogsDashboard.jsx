@@ -30,9 +30,6 @@ import { checkRecent } from "../utils/time";
 import PropTypes from "prop-types";
 
 const API_ENDPOINT = "https://ldlg09zoq7.execute-api.us-east-2.amazonaws.com/dev/admin";
-const CACHE_KEY = "allVisits_cache";
-const TIMESTAMP_KEY = "allVisits_cache_timestamp";
-const CACHE_LIFETIME = 1000 * 60 * 60 * 24; // 24 hours
 const HIGHLIGHT_WINDOW = 1000 * 60 * 60 * 24; // 24 hours
 
 const AllVisitLogsDashboard = () => {
@@ -43,18 +40,20 @@ const AllVisitLogsDashboard = () => {
   const [error, setError] = useState(null);
   const [sortField, setSortField] = useState("timestamp");
   const [sortOrder, setSortOrder] = useState("desc");
-  const lastUpdated = localStorage.getItem(TIMESTAMP_KEY);
-
   const fetchFromAPI = async () => {
     try {
       setLoading(true);
-      const response = await fetch(API_ENDPOINT);
+      const token = localStorage.getItem("authToken");
+      if (!token) throw new Error("Please sign in again to view visit logs.");
+      const response = await fetch(API_ENDPOINT, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.status === 401) throw new Error("Your session expired. Please sign in again.");
+      if (response.status === 403) throw new Error("You are not authorized to view all visit logs.");
       if (!response.ok) throw new Error("Failed to fetch all visit logs");
 
       const data = await response.json();
       setVisits(data);
-      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      localStorage.setItem(TIMESTAMP_KEY, Date.now().toString());
     } catch (err) {
       setError(err.message);
     } finally {
@@ -62,30 +61,12 @@ const AllVisitLogsDashboard = () => {
     }
   };
 
-  const loadFromCache = () => {
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      setVisits(JSON.parse(cached));
-      setLoading(false);
-    }
-  };
-
-  const isCacheFresh = () => {
-    const timestamp = localStorage.getItem(TIMESTAMP_KEY);
-    if (!timestamp) return false;
-    return Date.now() - parseInt(timestamp, 10) < CACHE_LIFETIME;
-  };
-
   const handleRefresh = () => {
     fetchFromAPI();
   };
 
   useEffect(() => {
-    if (isCacheFresh()) {
-      loadFromCache();
-    } else {
-      fetchFromAPI();
-    }
+    fetchFromAPI();
   }, []);
 
     useEffect(() => {
@@ -165,11 +146,6 @@ const AllVisitLogsDashboard = () => {
           All Site Visit Logs
         </h2>
         <div className="flex gap-5 items-center">
-          {lastUpdated && (
-            <p className="text-md text-right text-gray-600 dark:text-gray-200">
-              <strong>Last updated: </strong>{new Date(parseInt(lastUpdated, 10)).toLocaleString()}
-            </p>
-          )}
           <button
             onClick={handleRefresh}
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-1 rounded"

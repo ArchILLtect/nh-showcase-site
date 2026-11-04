@@ -64,13 +64,7 @@ export async function trackVisit() {
             return;
         }
 
-        // Send IP + visit info
-        const ipResponse = await fetch("https://api.ipify.org?format=json");
-        const { ip } = await ipResponse.json();
-
         const visitData = {
-            ip,
-            userAgent: navigator.userAgent,
             path,
         };
 

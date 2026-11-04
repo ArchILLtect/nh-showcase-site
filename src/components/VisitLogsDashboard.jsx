@@ -36,9 +36,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 const API_BASE_URL = "https://ldlg09zoq7.execute-api.us-east-2.amazonaws.com/dev/";
-const CACHE_KEY = "visitLogs_cache";
-const TIMESTAMP_KEY = "visitLogs_timestamp";
-const CACHE_LIFETIME = 1000 * 60 * 60 * 24; // 24 hours
 
 const VisitLogsDashboard = ({ ipInfo }) => {
   const [visits, setVisits] = useState([]);
@@ -48,44 +45,31 @@ const VisitLogsDashboard = ({ ipInfo }) => {
   const [sortOrder, setSortOrder] = useState("desc");
 
   const knownIps = ipInfo?.map(entry => entry.ip).filter(Boolean) || [];
-  const lastUpdated = localStorage.getItem("visitLogs_timestamp");
-
   const fetchFromAPI = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("authToken");
+      if (!token) throw new Error("Please sign in again to view visit logs.");
       const response = await fetch(API_BASE_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ knownIps }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: "{}",
       });
 
+      if (response.status === 401) throw new Error("Your session expired. Please sign in again.");
+      if (response.status === 403) throw new Error("You are not authorized to view visit logs.");
       if (!response.ok) throw new Error("Failed to fetch visit logs");
 
       const data = await response.json();
       setVisits(data);
-
-      // Cache it locally
-      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      localStorage.setItem(TIMESTAMP_KEY, Date.now().toString());
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  };
-
-  const loadFromCache = () => {
-    const cachedData = localStorage.getItem(CACHE_KEY);
-    if (cachedData) {
-      setVisits(JSON.parse(cachedData));
-      setLoading(false);
-    }
-  };
-
-  const isCacheFresh = () => {
-    const timestamp = localStorage.getItem(TIMESTAMP_KEY);
-    if (!timestamp) return false;
-    return Date.now() - parseInt(timestamp, 10) < CACHE_LIFETIME;
   };
 
   const handleRefresh = () => {
@@ -94,11 +78,10 @@ const VisitLogsDashboard = ({ ipInfo }) => {
 
   useEffect(() => {
     if (knownIps.length > 0) {
-      if (isCacheFresh()) {
-        loadFromCache();
-      } else {
-        fetchFromAPI();
-      }
+      fetchFromAPI();
+    } else {
+      setVisits([]);
+      setLoading(false);
     }
   }, [ipInfo]);
 
@@ -163,11 +146,6 @@ const VisitLogsDashboard = ({ ipInfo }) => {
                 Your Visit Logs
             </h2>
             <div className="flex gap-5 items-center">
-                {lastUpdated && (
-                    <div className="text-md text-right text-gray-600 dark:text-gray-400">
-                        <strong>Last updated:</strong> {new Date(parseInt(lastUpdated, 10)).toLocaleString()}
-                    </div>
-                )}
                 <button
                 onClick={handleRefresh}
                 className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"

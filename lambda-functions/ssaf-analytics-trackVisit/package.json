@@ -1,0 +1,9 @@
+{
+  "name": "ssaf-analytics-track-visit",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "test": "node --test" },
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  }
+}

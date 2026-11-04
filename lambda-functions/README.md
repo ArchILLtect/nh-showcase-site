@@ -10,6 +10,9 @@ This folder contains the current source-of-truth code for deployed Lambda functi
 - `showcaseForgotPassword/` - forgot-password Lambda source
 - `showcaseResetPassword/` - reset-password Lambda source
 - `showcaseSessionValidate/` - session validation Lambda source (`tokenVersion` stale-session check)
+- `ssaf-analytics-trackVisit/` - public-consent visit ingestion (source IP comes from API Gateway)
+- `ssaf-analytics-getUserVisits/` - signed-in user's visit logs, filtered by server-validated known IPs
+- `ssaf-analytics-getAllVisits/` - administrator-only full visit-log reader
 - `archive/` - historical snapshots (optional, typically ignored from git)
 
 ## Conventions
@@ -21,7 +24,7 @@ This folder contains the current source-of-truth code for deployed Lambda functi
 1. `cd` into target function folder.
 2. Run `npm ci`.
 3. Include `package.json`, `package-lock.json`, all top-level `.mjs` source modules, and `node_modules` when required by the function.
-4. Update Lambda code in AWS (`showcaseRegistration`, `showcaseLogin`, `showcaseVerifyEmail`, `showcaseResendVerification`, `showcaseForgotPassword`, `showcaseResetPassword`, or `showcaseSessionValidate`).
+4. Update Lambda code in AWS for the selected function; analytics readers must remain at reserved concurrency `0` until the auth/API smoke tests and CORS configuration are verified.
 5. Publish a new Lambda version.
 6. Verify alias and API Gateway integration still point to the expected function/alias (prefer `prod` alias over fixed version ARN).
 7. Run smoke tests for success and failure cases.

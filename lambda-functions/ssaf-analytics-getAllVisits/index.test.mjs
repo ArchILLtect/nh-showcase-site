@@ -1,0 +1,31 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { createHandler } from "./index.mjs";
+
+const event = (authorization) => ({ headers: { origin: "https://nickhanson.me", ...(authorization ? { authorization } : {}) } });
+
+test("requires a bearer token", async () => {
+  const result = await createHandler({ fetchFn: () => assert.fail("must not call validator") })(event());
+  assert.equal(result.statusCode, 401);
+});
+
+test("forbids authenticated non-admin users", async () => {
+  const handler = createHandler({ fetchFn: async () => ({ ok: true, status: 200, json: async () => ({ valid: true, user: { role: "user" } }) }), getDocumentClient: () => assert.fail("must not scan") });
+  const result = await handler(event("Bearer user-token"));
+  assert.equal(result.statusCode, 403);
+});
+
+test("allows admins and paginates the full scan", async () => {
+  let calls = 0;
+  const handler = createHandler({
+    fetchFn: async () => ({ ok: true, status: 200, json: async () => ({ valid: true, user: { role: "admin" } }) }),
+    getDocumentClient: () => ({ scan: ({ ExclusiveStartKey }) => ({ promise: async () => {
+      calls += 1;
+      return ExclusiveStartKey ? { Items: [{ visitId: "2" }] } : { Items: [{ visitId: "1" }], LastEvaluatedKey: { visitId: "1" } };
+    } }) }),
+  });
+  const result = await handler(event("Bearer admin-token"));
+  assert.equal(result.statusCode, 200);
+  assert.equal(JSON.parse(result.body).length, 2);
+  assert.equal(calls, 2);
+});
