@@ -20,6 +20,12 @@ The `getAllVisits` handler scans and returns the full visit-log table. The `getU
 
 The visit-logging handler is also unauthenticated, as expected for public telemetry, but accepts client-provided `ip`, `userAgent`, and `path` without validation/rate limiting in the inspected handler. Its error response does not include CORS headers.
 
+## Temporary containment
+
+On 2026-11-04, reserved concurrency was set to `0` for `ssaf-analytics-trackVisit`, `ssaf-analytics-getUserVisits`, and `ssaf-analytics-getAllVisits`; read-back confirmed all three settings. Their prior reserved-concurrency setting was unset, and inspection found no event-source mappings or Lambda Function URLs. This blocks all three functions, including every API Gateway route to the two read handlers, while preserving their code, routes, and stored data. Visit collection and dashboard reads are unavailable until the proper fix is deployed.
+
+This is an emergency shutoff, not the permanent authorization/CORS fix. API Gateway methods and HTTP API routes remain publicly configured with no authorizer, and preflight responses remain wildcard. Do not restore Lambda concurrency until server-side authorization, route ownership, and explicit CORS behavior are fixed and verified. Because the prior setting was unset, restoration should delete the temporary reserved-concurrency setting (`DeleteFunctionConcurrency`) for each function rather than assign an arbitrary limit.
+
 ## Live preflight verification
 
 Read-only `OPTIONS` requests were sent on 2026-11-04 to the visit logger root (`POST`), dashboard root (`POST`), and dashboard `/admin` (`GET`) using both `https://nickhanson.me` and `https://untrusted.example` as the `Origin`. All six returned HTTP 200 with `Access-Control-Allow-Origin: *`. The actual Lambda response headers were verified by inspecting the deployed packages, not by invoking the endpoints.
