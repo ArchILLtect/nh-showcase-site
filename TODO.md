@@ -3,7 +3,7 @@
 
 - [ ] Add Plinth project to the portfolio section of the site.
 
-- [ ] Verify the mobile menu close-toggle fix on-device: the header is now stacked above the backdrop, and the close-toggle behavior is included in the [mobile navbar QA checklist](docs/MOBILE_NAVBAR_QA_CHECKLIST.md).
+- [x] Verify the mobile menu close-toggle fix on-device: confirmed on a phone after opening the hamburger menu and tapping X; the menu closed and stayed closed. See the [mobile navbar QA checklist](docs/MOBILE_NAVBAR_QA_CHECKLIST.md).
 
 
 - [ ] Implement GitHub repository cards without exposing a client-side token.
