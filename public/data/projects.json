@@ -10,6 +10,12 @@
       "status": "v1.0.0 Released"
     },
     {
+      "title": "Plinth",
+      "description": "A configurable small-business web and business platform designed to offer a more coherent, ownership-friendly path between rigid off-the-shelf products and fully bespoke development. I’m building it around reusable capabilities that businesses can adopt and grow into incrementally.",
+      "techStack": ["React", "ASP.NET Core", "PostgreSQL", "Entity Framework Core", "Amazon Cognito"],
+      "status": "In active development"
+    },
+    {
       "title": "CodeForge",
       "image": "../images/codeforge-logo.png",
       "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",

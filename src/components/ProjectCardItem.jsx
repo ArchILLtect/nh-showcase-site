@@ -37,11 +37,17 @@ const ProjectCardItem = ({ project }) => {
     return (
       <div className="bg-gray-200 dark:bg-gray-800 border border-gray-300
           rounded-lg shadow-md dark:shadow-dark overflow-hidden">
-        <img
-          src={project.image}
-          alt={`${project.title} thumbnail`}
-          className="w-full h-48 object-contain"
-        />
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={`${project.title} thumbnail`}
+            className="w-full h-48 object-contain"
+          />
+        ) : (
+          <div className="flex h-48 items-center justify-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-800 text-3xl font-bold tracking-[0.25em] text-indigo-100" aria-label={`${project.title} project title`}>
+            {project.title}
+          </div>
+        )}
         <div className="p-4">
           <h2 className="text-gray-700 dark:text-gray-200 text-xl font-semibold mb-2">
             {project.title}
@@ -147,7 +153,7 @@ ProjectCardItem.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     techStack: PropTypes.arrayOf(PropTypes.string).isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     liveDemo: PropTypes.string,
     siteLink: PropTypes.string,
     projectPage: PropTypes.string,

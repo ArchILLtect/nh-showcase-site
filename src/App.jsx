@@ -49,6 +49,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import FutureProjects from "./pages/FutureProjects";
 import TreeMark from "./pages/TreeMark";
+import GitHub from "./pages/GitHub";
 
 function App() {
     return (
@@ -59,6 +60,7 @@ function App() {
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/projects/treemark" element={<TreeMark />} />
+                    <Route path="/github" element={<GitHub />} />
                     <Route path="/future-projects" element={<FutureProjects />} />
                     <Route path="/about" element={<AboutMe />} />
                     <Route path="/experience" element={<Experience />} />
