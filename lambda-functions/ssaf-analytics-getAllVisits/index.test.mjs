@@ -7,6 +7,15 @@ const event = (authorization) => ({ headers: { origin: "https://nickhanson.me", 
 test("requires a bearer token", async () => {
   const result = await createHandler({ fetchFn: () => assert.fail("must not call validator") })(event());
   assert.equal(result.statusCode, 401);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], "https://nickhanson.me");
+});
+
+test("omits CORS permission for an unapproved Netlify preview", async () => {
+  const result = await createHandler({ fetchFn: () => assert.fail("must not call validator") })(
+    { headers: { origin: "https://deploy-preview-12--resonant-ganache-9efedd.netlify.app" } },
+  );
+  assert.equal(result.statusCode, 403);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], undefined);
 });
 
 test("forbids authenticated non-admin users", async () => {

@@ -14,13 +14,15 @@ test("records the gateway source IP and ignores client-supplied identity", async
     requestContext: { identity: { sourceIp: "203.0.113.4" } },
   });
   assert.equal(result.statusCode, 201);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], "https://nickhanson.me");
   assert.deepEqual(saved, { visitId: "generated-id", ip: "203.0.113.4", userAgent: "browser", path: "/dashboard", timestamp: "2026-11-04T12:00:00.000Z" });
 });
 
-test("rejects an unapproved browser origin", async () => {
+test("rejects an unapproved Netlify preview origin", async () => {
   const handler = createHandler({ getDocumentClient: () => assert.fail("must not write") });
-  const result = await handler({ headers: { origin: "https://untrusted.example" }, body: "{}" });
+  const result = await handler({ headers: { origin: "https://deploy-preview-12--resonant-ganache-9efedd.netlify.app" }, body: "{}" });
   assert.equal(result.statusCode, 403);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], undefined);
 });
 
 test("returns a server error when DynamoDB rejects a visit write", async () => {
