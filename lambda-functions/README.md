@@ -43,6 +43,8 @@ Deployment and verification (2026-11-04, `us-east-2`): all seven auth Lambda fun
 
 The three analytics handlers use the same exact five-origin allowlist as the auth HTTP API: the production domains above and Netlify previews 6, 9, and 10. Analytics browser requests from other origins are rejected; requests without an `Origin` header retain the existing non-browser behavior. The REST API mock preflights dynamically echo an approved origin and add `Vary: Origin`; unapproved origins receive no allow-origin response header. When a preview URL changes, update the REST API preflight mapping templates, all three analytics Lambda allowlists, and the HTTP API CORS policy together, then verify the deployed `dev` stage.
 
+The public `ssaf-analytics-visitManager` root `POST` stage method is throttled at 5 requests/second with a burst limit of 10. API Gateway throttling is best-effort and aggregate for the method, so it protects backend capacity without distinguishing clients; a sustained per-IP abuse problem would need a separate WAF or application-level limiter.
+
 ## Deploy Workflow (Scripted)
 Use the helper script from repo root to archive source and build the deployment zip. It includes all top-level `.mjs` modules (not only `index.mjs`) and aborts if `npm ci` fails:
 
