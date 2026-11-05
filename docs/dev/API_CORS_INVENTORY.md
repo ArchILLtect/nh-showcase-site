@@ -1,6 +1,6 @@
 # Showcase API CORS Inventory
 
-Last verified: 2026-11-04 (`us-east-2`; includes live analytics write/read smoke checks).
+Last verified: 2026-11-05 (`us-east-2`; includes analytics CORS and route configuration checks).
 
 This is a point-in-time inventory of browser-facing API Gateway resources used by this repository. AWS configuration is not yet defined by infrastructure-as-code here; do not treat this document as a deployment recipe.
 
@@ -12,7 +12,7 @@ This is a point-in-time inventory of browser-facing API Gateway resources used b
 | Visit logging (`src/utils/visitTracker.js`) | REST API `ssaf-analytics-visitManager` (`9hxx3na0o7`), stage `dev` | Root `OPTIONS` mock response echoes only an exact approved origin; approved responses include `Vary: Origin`. Unapproved origins receive no `Access-Control-Allow-Origin`. | Root `POST` invokes source-controlled `ssaf-analytics-trackVisit`. |
 | Visit log dashboard (`src/components/VisitLogsDashboard.jsx`) | REST API `showcaseAnalytics` (`ldlg09zoq7`), stage `dev` | Root `OPTIONS` and `/admin` `OPTIONS` mock responses echo only exact approved origins; approved responses include `Vary: Origin`. Unapproved origins receive no `Access-Control-Allow-Origin`. | Root `POST` invokes source-controlled `ssaf-analytics-getUserVisits`; `/admin` `GET` invokes source-controlled `ssaf-analytics-getAllVisits`. |
 
-The HTTP API also has a `POST /tracking` route to `ssaf-analytics-getUserVisits`, but the current frontend source does not call it. Confirm whether another client owns this route before changing or removing it.
+The historical auth API baseline documents a discovered `POST /tracking` route, but does not identify a caller or intended use. No current frontend or backend source references the route. It was removed from the API configuration on 2026-11-05 and both `$default` and `prod` stages now point to a deployment whose exported routes omit it. Historical baseline files are retained as snapshots, not current configuration.
 
 ## Authorization and analytics runtime
 
