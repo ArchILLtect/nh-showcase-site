@@ -9,37 +9,43 @@ const formatUpdatedDate = (value) => {
 };
 
 const GitHubRepoCard = ({ repository }) => (
-  <article className="flex h-full flex-col rounded-lg border border-gray-600 bg-gray-800 p-5 text-gray-100 shadow-md transition-shadow hover:shadow-lg hover:shadow-blue-900/30">
-    <h2 className="mb-2 break-words text-xl font-bold text-blue-200">{repository.name}</h2>
-    <p className="mb-5 flex-1 text-gray-300">
+  <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-gray-600 bg-gray-800 text-gray-100 shadow-md transition duration-200 hover:-translate-y-1 hover:border-blue-400/70 hover:shadow-xl hover:shadow-blue-950/30">
+    <div className="h-1 bg-gradient-to-r from-cyan-300 via-blue-500 to-indigo-500 opacity-80 transition-opacity group-hover:opacity-100" />
+    <div className="flex flex-1 flex-col p-5">
+    <div className="mb-2 flex items-start justify-between gap-3">
+      <h3 className="break-words text-xl font-bold text-blue-100">{repository.name}</h3>
+      {repository.language && (
+        <span className="shrink-0 rounded-full border border-gray-600 bg-gray-900/50 px-2.5 py-1 text-xs font-medium text-cyan-100">
+          {repository.language}
+        </span>
+      )}
+    </div>
+    <p className="mb-5 flex-1 leading-6 text-gray-300">
       {repository.description || "A public project repository."}
     </p>
-    <dl className="mb-5 grid grid-cols-2 gap-3 text-sm text-gray-300">
-      <div>
-        <dt className="text-gray-400">Language</dt>
-        <dd>{repository.language || "Not specified"}</dd>
-      </div>
+    <dl className="mb-5 grid grid-cols-2 gap-3 border-y border-gray-700 py-4 text-sm text-gray-300">
       <div>
         <dt className="text-gray-400">Stars</dt>
-        <dd>{repository.stargazers_count}</dd>
+        <dd className="font-semibold text-gray-100">{repository.stargazers_count}</dd>
       </div>
       <div>
         <dt className="text-gray-400">Open issues</dt>
-        <dd>{repository.open_issues_count}</dd>
+        <dd className="font-semibold text-gray-100">{repository.open_issues_count}</dd>
       </div>
-      <div>
+      <div className="col-span-2">
         <dt className="text-gray-400">Activity</dt>
-        <dd>{formatUpdatedDate(repository.updated_at)}</dd>
+        <dd className="font-medium text-gray-200">{formatUpdatedDate(repository.updated_at)}</dd>
       </div>
     </dl>
     <a
       href={repository.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex min-h-11 w-fit items-center rounded bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+      className="inline-flex min-h-11 w-fit items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
     >
-      View repository
+      View repository <span aria-hidden="true">↗</span>
     </a>
+    </div>
   </article>
 );
 

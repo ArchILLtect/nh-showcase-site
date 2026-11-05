@@ -86,8 +86,8 @@ const ProjectCardItem = ({ project }) => {
             )}
             {!project.projectPage && !project.siteLink && !project.liveDemo && (
               <div className="flex items-center">
-                <p className="dark:text-red-500 text-red-700">
-                  No Live Demo Available Yet
+                <p className="rounded-full border border-gray-400/40 px-3 py-1 text-sm text-gray-600 dark:border-gray-500/40 dark:text-gray-300">
+                  Preview not available yet
                 </p>
               </div>
             )}

@@ -72,10 +72,15 @@ const GitHub = () => {
 
   return (
     <main className="mx-auto mb-32 max-w-6xl px-4 py-8 sm:px-8">
-      <header className="mb-8 text-center">
-        <h1 className="mb-3 text-4xl font-bold text-gray-800 dark:text-gray-100">GitHub Projects</h1>
-        <p className="mx-auto max-w-3xl text-gray-700 dark:text-gray-300">
-          Explore public repositories and the work behind them. Project details are loaded from GitHub’s public API.
+      <header className="mb-10 text-center">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-cyan-300">
+          Open-source work
+        </p>
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl">
+          GitHub Projects
+        </h1>
+        <p className="mx-auto max-w-2xl text-base leading-7 text-gray-700 dark:text-gray-300">
+          A selection of public repositories behind my projects, experiments, and tools.
         </p>
       </header>
 
@@ -90,9 +95,21 @@ const GitHub = () => {
           )}
 
           <section aria-labelledby="repositories-heading">
-            <h2 id="repositories-heading" className="mb-5 text-2xl font-bold text-gray-800 dark:text-gray-100">
-              Public repositories
-            </h2>
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-2 border-b border-gray-300 pb-3 dark:border-gray-700">
+              <div>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                  From the portfolio
+                </p>
+                <h2 id="repositories-heading" className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                  Selected repositories
+                </h2>
+              </div>
+              {repositories.length > 0 && (
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {repositories.length} {repositories.length === 1 ? "repository" : "repositories"}
+                </p>
+              )}
+            </div>
             {repositoriesError ? (
               <p role="alert" className="rounded bg-red-100 p-4 text-red-800 dark:bg-red-950 dark:text-red-200">
                 {repositoriesError}
@@ -107,7 +124,7 @@ const GitHub = () => {
               <p className="text-gray-700 dark:text-gray-300">No public repositories are available to display.</p>
             )}
           </section>
-          <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-8 border-t border-gray-200 pt-4 text-center text-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
             GitHub’s unauthenticated API has a public rate limit. If it is reached, this page will recover when the limit resets.
           </p>
         </>

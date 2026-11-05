@@ -11,6 +11,7 @@
     },
     {
       "title": "Plinth",
+      "image": "/images/plinth/plinth-card.svg",
       "description": "A configurable small-business web and business platform designed to offer a more coherent, ownership-friendly path between rigid off-the-shelf products and fully bespoke development. I’m building it around reusable capabilities that businesses can adopt and grow into incrementally.",
       "techStack": ["React", "ASP.NET Core", "PostgreSQL", "Entity Framework Core", "Amazon Cognito"],
       "status": "In active development"
