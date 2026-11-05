@@ -247,6 +247,9 @@ const NavBar = () => {
                   <NavLink to="/future-projects" onClick={handleMobileLinkSelect} className={mobileNestedLinkClass}>
                     Future Projects
                   </NavLink>
+                  <NavLink to="/github" onClick={handleMobileLinkSelect} className={mobileNestedLinkClass}>
+                    GitHub Projects
+                  </NavLink>
                 </div>
               </div>
             </li>

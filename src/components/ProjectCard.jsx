@@ -35,7 +35,7 @@ ProjectCard.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     techStack: PropTypes.arrayOf(PropTypes.string).isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     liveDemo: PropTypes.string,
     siteLink: PropTypes.string,
     projectPage: PropTypes.string,
