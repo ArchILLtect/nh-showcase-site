@@ -20,9 +20,15 @@ const scanPage = (client, params) =>
     ? client.scan(params).promise()
     : client.send(new ScanCommand(params));
 
-const allowedOrigin = (origin) =>
-  !origin || origin === "https://nickhanson.me" || origin === "https://www.nickhanson.me" ||
-  /^https:\/\/deploy-preview-\d+--resonant-ganache-9efedd\.netlify\.app$/.test(origin);
+const ALLOWED_ORIGINS = new Set([
+  "https://nickhanson.me",
+  "https://www.nickhanson.me",
+  "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+  "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
+  "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+]);
+
+const allowedOrigin = (origin) => !origin || ALLOWED_ORIGINS.has(origin);
 
 const response = (event, statusCode, payload) => {
   const origin = event?.headers?.origin || event?.headers?.Origin || "";
@@ -50,6 +56,9 @@ export const createHandler = ({ fetchFn = fetch, getDocumentClient } = {}) => as
   if (event?.httpMethod === "OPTIONS" || event?.requestContext?.http?.method === "OPTIONS") {
     return response(event, 200, { message: "OK" });
   }
+
+  const origin = event?.headers?.origin || event?.headers?.Origin || "";
+  if (!allowedOrigin(origin)) return response(event, 403, { code: "FORBIDDEN", message: "Origin not allowed" });
 
   const token = getBearerToken(event);
   if (!token) return response(event, 401, { code: "UNAUTHORIZED", message: "Missing bearer token" });

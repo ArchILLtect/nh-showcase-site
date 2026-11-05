@@ -15,9 +15,15 @@ const dynamoClient = DynamoDBDocumentClient.from(new DynamoDBClient({
 
 console.info("Visit writer AWS SDK v3 modules loaded");
 
-const allowedOrigin = (origin) =>
-  !origin || origin === "https://nickhanson.me" || origin === "https://www.nickhanson.me" ||
-  /^https:\/\/deploy-preview-\d+--resonant-ganache-9efedd\.netlify\.app$/.test(origin);
+const ALLOWED_ORIGINS = new Set([
+  "https://nickhanson.me",
+  "https://www.nickhanson.me",
+  "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+  "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
+  "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+]);
+
+const allowedOrigin = (origin) => !origin || ALLOWED_ORIGINS.has(origin);
 
 const response = (event, statusCode, payload) => {
   const origin = event?.headers?.origin || event?.headers?.Origin || "";

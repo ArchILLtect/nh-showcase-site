@@ -41,6 +41,8 @@ Requests without an `Origin` header retain the existing `*` response for Lambda-
 
 Deployment and verification (2026-11-04, `us-east-2`): all seven auth Lambda functions were updated and their `prod` aliases target published versions; auth API routes use those aliases. The session-validator `prod` alias targets version `4`. API Gateway CORS allows the production domains and the exact Netlify preview origins `https://deploy-preview-6--resonant-ganache-9efedd.netlify.app`, `https://deploy-preview-9--resonant-ganache-9efedd.netlify.app`, and `https://deploy-preview-10--resonant-ganache-9efedd.netlify.app`; add other preview origins deliberately when needed. Preview-9 preflight returned 204, and a missing-token session-validation request returned 401 with the expected CORS header. Route-specific CORS ownership remains an open follow-up in [GitHub issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
 
+The three analytics handlers use the same exact five-origin allowlist as the auth HTTP API: the production domains above and Netlify previews 6, 9, and 10. Analytics browser requests from other origins are rejected; requests without an `Origin` header retain the existing non-browser behavior. The REST API mock preflights dynamically echo an approved origin and add `Vary: Origin`; unapproved origins receive no allow-origin response header. When a preview URL changes, update the REST API preflight mapping templates, all three analytics Lambda allowlists, and the HTTP API CORS policy together, then verify the deployed `dev` stage.
+
 ## Deploy Workflow (Scripted)
 Use the helper script from repo root to archive source and build the deployment zip. It includes all top-level `.mjs` modules (not only `index.mjs`) and aborts if `npm ci` fails:
 
