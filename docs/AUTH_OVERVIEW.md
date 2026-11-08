@@ -1,6 +1,6 @@
 # Auth Overview (Current State)
 
-Last updated: 2026-11-04
+Last updated: 2026-11-08
 
 Purpose: provide one fast, root-level reference for the current authentication and account recovery system.
 
@@ -17,7 +17,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - Frontend: React routes/pages (`/login`, `/register`, `/forgot-password`, `/reset-password`).
 - API: AWS API Gateway routes invoking Lambda handlers.
 - Data: DynamoDB tables for users, reset tokens, and rate limits.
-- Email: Amazon SES for reset and password-changed notifications.
+- Email: Amazon SES for verification, password-reset, and password-changed notifications.
 
 ## Key Endpoints
 - `POST /register`
