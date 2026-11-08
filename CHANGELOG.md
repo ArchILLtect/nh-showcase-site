@@ -10,7 +10,8 @@ All notable project changes are recorded here.
 - Added original certificate PNG assets and recorded the historical completion dates and certificate IDs in `public/data/certificates.json`.
 - Featured the completed track separately on the Certificates page; certificate verification links now appear only when a real `certUrl` exists.
 - Kept **Advanced CSS Techniques** as the canonical CSS course title. The separately downloaded **CSS Layout, Effects, and Sass** image was an identical certificate, not an eighth credential.
-- Preserved all five existing Coursera credentials. The recovery was merged in [PR #11](https://github.com/ArchILLtect/nh-showcase-site/pull/11) on 2026-11-04; production rendering verification is tracked separately.
+- Preserved all five existing Coursera credentials.
+- Merged the Codefinity credential recovery in [PR #11](https://github.com/ArchILLtect/nh-showcase-site/pull/11) on 2026-11-04; production rendering verification remains a separate open item.
 
 ### Portfolio
 
