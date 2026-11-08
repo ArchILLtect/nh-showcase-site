@@ -27,8 +27,8 @@ Status note (2026-03-09): this checklist has largely been completed by Phase A v
   - Implemented in `lambda-functions/showcaseRegistration/tests/handler.integration.test.mjs` using Node built-in test runner.
 
 ## P2 (Soon After)
-- [x] Add email verification flow and gate account activation/login on verification.
-  - Implemented verification flow; current policy intentionally keeps login soft-enforced (no hard block yet).
+- [x] Add email verification flow and account-confirmation UX.
+  - New accounts start unverified and receive verification links; login remains soft-enforced, so unverified users may log in and see the in-app reminder.
 - [ ] Add monitoring/alerts for registration error spikes and unusual signup patterns.
   - Deferred (cost-aware) with explicit acceptance note in verification/hardening checklist.
 - [x] Add dead-letter/error handling strategy for async notification failures.
