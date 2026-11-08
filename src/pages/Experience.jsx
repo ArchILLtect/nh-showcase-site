@@ -28,6 +28,19 @@ const AboutMe = () => {
 
   const sections = [
     {
+        "companyName": "Daroda Accounting",
+        "jobTitle": "Software Developer Intern",
+        "employmentDates": "Apr 2026—Jul 2026",
+        "jobSummary": "Rebuilt and launched Daroda Accounting’s Wix website as a responsive React/Vite application on Netlify, preserving its core booking and lead-generation workflows. Extended the site with a protected CRM-lite dashboard and serverless APIs to support lead follow-up, operational continuity, and future growth.",
+        "jobHighlights": [
+            "Led the Wix-to-React migration, translating the existing public site into a responsive, maintainable application and supporting its production launch.",
+            "Designed and implemented a CRM-lite backend using Netlify Functions and Neon/PostgreSQL, including lead intake, history, and protected dashboard workflows.",
+            "Integrated Calendly booking workflows and verified webhook processing while preserving existing customer-facing forms and scheduling behavior.",
+            "Built secure admin authentication and session handling, with account-management and operational support features.",
+            "Established automated checks, deployment-preview review, technical documentation, and handoff materials for ongoing maintenance."
+        ]
+    },
+    {
         "companyName": "Stihl Midwest",
         "companyCity": "Cottage Grove",
         "companyState": "WI",
@@ -102,9 +115,16 @@ const AboutMe = () => {
             className="w-full text-left py-2 px-4 font-semibold text-lg flex justify-between items-center"
             onClick={() => toggleSection(index)}
           >
-            <div className="flex justify-between w-full pr-4 font-normal">
-                <div><span className="text-xl font-semibold">{section.companyName} | </span>{section.companyCity}, {section.companyState}</div>
-                <div>{section.employmentDates}</div>
+            <div className="flex w-full justify-between pr-4 font-normal">
+                <div>
+                  <span className="text-xl font-semibold">{section.companyName}</span>
+                  {(section.companyCity || section.companyState) && (
+                    <span className="ml-2 text-gray-600 dark:text-gray-700">
+                      {[section.companyCity, section.companyState].filter(Boolean).join(", ")}
+                    </span>
+                  )}
+                </div>
+                <div className="shrink-0 pl-3">{section.employmentDates}</div>
             </div>
             <span className="text-gray-500 dark:text-gray-800">
               {expanded === index ? "▲" : "▼"}
