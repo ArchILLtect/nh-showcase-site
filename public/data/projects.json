@@ -1,167 +1,131 @@
 [
-  {
-    "title": "TreeMark",
-    "image": "/images/treemark/treemark-projects.jpg",
-    "description": "A cross-platform Node.js CLI for generating deterministic Markdown or ASCII directory trees, safely synchronizing marked documentation regions, and checking generated content in CI.",
-    "techStack": [
-      "TypeScript",
-      "Node.js",
-      "npm",
-      "GitHub Actions"
-    ],
-    "projectPage": "/projects/treemark",
-    "github": "https://github.com/ArchILLtect/treemark",
-    "featured": true,
-    "status": "v1.0.0 Released"
-  },
-  {
-    "title": "Plinth",
-    "image": "/images/plinth/plinth-card.svg",
-    "description": "A configurable small-business web and business platform designed to offer a more coherent, ownership-friendly path between rigid off-the-shelf products and fully bespoke development. I’m building it around reusable capabilities that businesses can adopt and grow into incrementally.",
-    "techStack": [
-      "React",
-      "ASP.NET Core",
-      "PostgreSQL",
-      "Entity Framework Core",
-      "Amazon Cognito"
-    ],
-    "status": "In active development"
-  },
-  {
-    "title": "Daroda Accounting Website",
-    "image": "/images/daroda/daroda-card.svg",
-    "description": "Rebuilt Daroda Accounting’s Wix site as a responsive React/Vite application, preserving its visual direction while adding a custom CRM-lite dashboard and serverless backend for lead management, scheduling, and operations.",
-    "techStack": [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Chakra UI",
-      "Netlify Functions",
-      "Neon PostgreSQL"
-    ],
-    "siteLink": "https://www.darodaaccounting.com/",
-    "designCredit": {
-      "name": "Brandy Riley",
-      "url": "https://www.brandyriley.com"
+    {
+      "title": "TreeMark",
+      "image": "/images/treemark/treemark-projects.jpg",
+      "description": "A cross-platform Node.js CLI for generating deterministic Markdown or ASCII directory trees, safely synchronizing marked documentation regions, and checking generated content in CI.",
+      "techStack": ["TypeScript", "Node.js", "npm", "GitHub Actions"],
+      "projectPage": "/projects/treemark",
+      "github": "https://github.com/ArchILLtect/treemark",
+      "featured": true,
+      "status": "v1.0.0 Released"
     },
-    "status": "Launched"
-  },
-  {
-    "title": "CodeForge",
-    "image": "../images/codeforge-logo.png",
-    "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",
-    "techStack": [
-      "Java",
-      "JSP",
-      "Tomcat",
-      "MySQL",
-      "Elastic Beanstalk",
-      "AWS CloudFront",
-      "Cognito",
-      "Maven"
-    ],
-    "liveDemo": "https://codeforge.nickhanson.me/",
-    "github": "https://github.com/ArchILLtect/code-forge",
-    "status": "MVP In Progress - Evaluation Engine Next"
-  },
-  {
-    "title": "TaskMaster App",
-    "image": "../images/TaskMaster-App-Banner.png",
-    "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
-    "techStack": [
-      "React",
-      "Node.js",
-      "MySQL",
-      "Netlify"
-    ],
-    "liveDemo": "https://taskmaster.nickhanson.me/",
-    "github": "https://github.com/ArchILLtect/taskmaster",
-    "status": "MVP - Work in Progress"
-  },
-  {
-    "title": "Budgeteer",
-    "image": "../images/budgeteer-logo2.png",
-    "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on my showcase site.",
-    "techStack": [
-      "React 19",
-      "JavaScript / TypeScript Hybrid Components",
-      "Vite",
-      "Chakra UI",
-      "Zustand (Persist Middleware)",
-      "Day.js",
-      "PapaParse (CSV Import)",
-      "React Router 6",
-      "Custom JWT Auth",
-      "Netlify",
-      "AWS Lambda / API Gateway (Auth Endpoint)",
-      "LocalStorage Persistence",
-      "Node Utilities for Data Normalization"
-    ],
-    "liveDemo": "https://budgeteer.nickhanson.me",
-    "github": "https://github.com/ArchILLtect/budgeteer",
-    "status": "MVP - Work in Progress"
-  },
-  {
-    "title": "SameBoat Platform",
-    "image": "../images/sameboat-logo.png",
-    "description": "A secure, full-stack mental-health support platform featuring anonymous user authentication, story sharing, trigger-warning safety systems, and an evolving trust metric. Built as a semester-long honors project with production-grade tooling, CI/CD, and cloud deployment.",
-    "techStack": [
-      "React 19",
-      "TypeScript",
-      "Vite",
-      "Chakra UI",
-      "Zustand",
-      "Spring Boot 3 (Java 21)",
-      "PostgreSQL (Neon)",
-      "Flyway",
-      "JPA / Hibernate",
-      "Netlify",
-      "Render",
-      "Docker",
-      "GitHub Actions CI"
-    ],
-    "siteLink": "https://sameboatplatform.com/",
-    "github": "https://github.com/sameboat-platform/",
-    "status": "MVP In Progress – Stories and Trust Metric Next"
-  },
-  {
-    "title": "Cosmic DB",
-    "image": "../images/CosmicDB-header.png",
-    "description": "Track worldbuilding elements for a novel/game project I am working on with some people--including my son.",
-    "techStack": [
-      "PHP",
-      "MySQL/MariaDB",
-      "Bluehost"
-    ],
-    "liveDemo": "https://www.cosmicdb.nickhanson.me/index.php",
-    "github": "https://github.com/ArchILLtect/cosmic-db",
-    "status": "MVP - Work in Progress"
-  },
-  {
-    "title": "My D&D-API-Interface",
-    "image": "../images/D&D-App-logo.jpg",
-    "description": "Displays info using the DnD API.",
-    "techStack": [
-      "React",
-      "Node.js",
-      "MySQL",
-      "GitHub Pages"
-    ],
-    "liveDemo": "https://archilltect.github.io/API_Interface/D&D_API_5e/index.html",
-    "github": "https://github.com/ArchILLtect/API_Interface/tree/main/D%26D_API_5e",
-    "status": "MVP - Work in Progress"
-  },
-  {
-    "title": "C4Devs Project",
-    "image": "../images/Bullpen_Report-Header.png",
-    "description": "Displays info using only AWS services.",
-    "techStack": [
-      "React",
-      "DynamoDB",
-      "S3 Bucket"
-    ],
-    "liveDemo": "https://bullpenreport.nickhanson.me",
-    "github": "https://github.com/ArchILLtect/the-bullpen-report",
-    "status": "MVP - Work in Progress"
-  }
+    {
+      "title": "Plinth",
+      "image": "/images/plinth/plinth-card.svg",
+      "description": "A configurable small-business web and business platform designed to offer a more coherent, ownership-friendly path between rigid off-the-shelf products and fully bespoke development. I’m building it around reusable capabilities that businesses can adopt and grow into incrementally.",
+      "techStack": ["React", "ASP.NET Core", "PostgreSQL", "Entity Framework Core", "Amazon Cognito"],
+      "status": "In active development"
+    },
+    {
+      "title": "Daroda Accounting Website",
+      "image": "/images/daroda/daroda-card.svg",
+      "description": "Rebuilt Daroda Accounting’s Wix site as a responsive React/Vite application, preserving its visual direction while adding a custom CRM-lite dashboard and serverless backend for lead management, scheduling, and operations.",
+      "techStack": ["React", "TypeScript", "Vite", "Chakra UI", "Netlify Functions", "Neon PostgreSQL"],
+      "siteLink": "https://www.darodaaccounting.com/",
+      "designCredit": {
+        "name": "Brandy Riley",
+        "url": "https://www.brandyriley.com"
+      },
+      "status": "Launched"
+    },
+    {
+      "title": "CodeForge",
+      "image": "../images/codeforge-logo.png",
+      "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",
+      "techStack": [
+          "Java",
+          "JSP",
+          "Tomcat",
+          "MySQL",
+          "Elastic Beanstalk",
+          "AWS CloudFront",
+          "Cognito",
+          "Maven"
+      ],
+      "liveDemo": "https://codeforge.nickhanson.me/",
+      "github": "https://github.com/ArchILLtect/code-forge",
+      "status": "MVP In Progress - Evaluation Engine Next"
+    },
+    {
+      "title": "TaskMaster App",
+      "image": "../images/TaskMaster-App-Banner.png",
+      "description": "A simple app to manage your daily tasks with user authentication and database-backed storage.",
+      "techStack": ["React", "Node.js", "MySQL", "Netlify"],
+      "liveDemo": "https://taskmaster.nickhanson.me/",
+      "github": "https://github.com/ArchILLtect/taskmaster",
+      "status": "MVP - Work in Progress"
+    },
+    {
+      "title": "Budgeteer",
+      "image": "../images/budgeteer-logo2.png",
+      "description": "A full-featured personal finance and budgeting platform with scenario planning, month-over-month tracking, CSV-based bank syncing, automatic transaction categorization, savings goals, and real-world budget reconciliation. Includes JWT authentication, session-lock protection, cross-tab token syncing, and a robust state engine powered by Zustand Persistence. Designed as a long-term production-quality application for deployment on my showcase site.",
+      "techStack": [
+          "React 19",
+          "JavaScript / TypeScript Hybrid Components",
+          "Vite",
+          "Chakra UI",
+          "Zustand (Persist Middleware)",
+          "Day.js",
+          "PapaParse (CSV Import)",
+          "React Router 6",
+          "Custom JWT Auth",
+          "Netlify",
+          "AWS Lambda / API Gateway (Auth Endpoint)",
+          "LocalStorage Persistence",
+          "Node Utilities for Data Normalization"
+        ],
+        "liveDemo": "https://budgeteer.nickhanson.me",
+        "github": "https://github.com/ArchILLtect/budgeteer",
+        "status": "MVP - Work in Progress"
+    },
+    {
+      "title": "SameBoat Platform",
+      "image": "../images/sameboat-logo.png",
+      "description": "A secure, full-stack mental-health support platform featuring anonymous user authentication, story sharing, trigger-warning safety systems, and an evolving trust metric. Built as a semester-long honors project with production-grade tooling, CI/CD, and cloud deployment.",
+      "techStack": [
+          "React 19",
+          "TypeScript",
+          "Vite",
+          "Chakra UI",
+          "Zustand",
+          "Spring Boot 3 (Java 21)",
+          "PostgreSQL (Neon)",
+          "Flyway",
+          "JPA / Hibernate",
+          "Netlify",
+          "Render",
+          "Docker",
+          "GitHub Actions CI"
+      ],
+      "siteLink": "https://sameboatplatform.com/",
+      "github": "https://github.com/sameboat-platform/",
+      "status": "MVP In Progress – Stories and Trust Metric Next"
+    },
+    {
+        "title": "Cosmic DB",
+        "image": "../images/CosmicDB-header.png",
+        "description": "Track worldbuilding elements for a novel/game project I am working on with some people--including my son.",
+        "techStack": ["PHP", "MySQL/MariaDB", "Bluehost"],
+        "liveDemo": "https://www.cosmicdb.nickhanson.me/index.php",
+        "github": "https://github.com/ArchILLtect/cosmic-db",
+        "status": "MVP - Work in Progress"
+    },
+    {
+        "title": "My D&D-API-Interface",
+        "image": "../images/D&D-App-logo.jpg",
+        "description": "Displays info using the DnD API.",
+        "techStack": ["React", "Node.js", "MySQL", "GitHub Pages"],
+        "liveDemo": "https://archilltect.github.io/API_Interface/D&D_API_5e/index.html",
+        "github": "https://github.com/ArchILLtect/API_Interface/tree/main/D%26D_API_5e",
+        "status": "MVP - Work in Progress"
+    },
+    {
+        "title": "C4Devs Project",
+        "image": "../images/Bullpen_Report-Header.png",
+        "description": "Displays info using only AWS services.",
+        "techStack": ["React", "DynamoDB", "S3 Bucket"],
+        "liveDemo": "https://bullpenreport.nickhanson.me",
+        "github": "https://github.com/ArchILLtect/the-bullpen-report",
+        "status": "MVP - Work in Progress"
+    }
 ]
