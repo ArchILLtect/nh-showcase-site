@@ -1,15 +1,15 @@
 
 ## TOP Priorities
 
-- [ ] Add Plinth project to the portfolio section of the site.
+- [x] Add Plinth project to the portfolio section of the site.
 
-- [ ] **P1 security:** add server-side authorization to analytics read APIs; prevent public access to visit logs and derive user-specific queries from authenticated identity. Temporary containment is active: all three analytics Lambdas are paused with reserved concurrency `0`; see the local [API CORS and access-control inventory](docs/dev/API_CORS_INVENTORY.md). Do not publish this finding in a public issue before remediation is coordinated.
+- [x] **Analytics read authorization:** the user-visits handler validates the server-side session and scopes results to the authenticated user; the all-visits handler requires a valid admin session. The analytics Lambdas are active with no reserved-concurrency pause configured. See the [API CORS and access-control inventory](docs/dev/API_CORS_INVENTORY.md).
 
 - [x] Verify the mobile menu close-toggle fix on-device: confirmed on a phone after opening the hamburger menu and tapping X; the menu closed and stayed closed. See the [mobile navbar QA checklist](docs/MOBILE_NAVBAR_QA_CHECKLIST.md).
 
 
-- [ ] Implement GitHub repository cards without exposing a client-side token.
-- [ ] Make a DB for JSON files and implement it across the site to make it easier to add new items and maintain existing ones.
+- [x] Implement GitHub repository cards without exposing a client-side token; public profile/repository data is fetched from GitHub's unauthenticated public API.
+- [x] Scope the content database effort before implementation; see [content data and storage scope](docs/dev/content-data-storage-scope.md). Database implementation remains deferred.
 - [x] Recover and add the seven unique Codefinity credentials (six courses plus completed Web Developer track); see `docs/dev/codefinity-certificate-recovery.md` (pending PR merge/production verification).
 - [ ] Review any other missing Coursera or third-party credentials separately; do not assume this recovery completes the broader certificate backlog.
 - [ ] Add Dean's List letters to achievements page.

@@ -112,6 +112,9 @@ function SubMenu({ topic }) {
           <NavLink to="/future-projects" role="menuitem" className={({ isActive }) => submenuItem(isActive)}>
             Future Projects
           </NavLink>
+          <NavLink to="/github" role="menuitem" className={({ isActive }) => submenuItem(isActive)}>
+            GitHub Projects
+          </NavLink>
         </div>
       )}
     </li>

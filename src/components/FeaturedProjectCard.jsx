@@ -23,11 +23,17 @@ import { Link } from 'react-router-dom';
 const FeaturedProjectCard = ({ project }) => {
   return (
     <div className="bg-gray-800 dark:bg-gray-300 p-4 rounded shadow dark:shadow-dark">
-      <img
-        src={project.image}
-        alt={`${project.title} thumbnail`}
-        className="rounded w-full mb-4 text-gray-100 dark:text-gray-800 h-96 object-contain"
-      />
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={`${project.title} thumbnail`}
+          className="rounded w-full mb-4 text-gray-100 dark:text-gray-800 h-96 object-contain"
+        />
+      ) : (
+        <div className="mb-4 flex h-96 items-center justify-center rounded bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-800 text-3xl font-bold tracking-[0.25em] text-indigo-100">
+          {project.title}
+        </div>
+      )}
       <h3 className="text-xl text-gray-100 dark:text-gray-800 font-bold mb-2">{project.title}</h3>
       <p className="text-gray-300 dark:text-gray-700">
         {project.description}
@@ -49,7 +55,7 @@ export default FeaturedProjectCard;
 FeaturedProjectCard.propTypes = {
   project: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     description: PropTypes.string.isRequired,
     projectPage: PropTypes.string,
   }).isRequired,
