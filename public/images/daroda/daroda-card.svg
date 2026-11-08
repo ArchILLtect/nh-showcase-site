@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Daroda Accounting website rebuild</title>
+  <desc id="description">A portfolio illustration showing the Daroda Accounting website rebuilt in React, with its original design credited to Brandy Riley.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f0e7"/>
+      <stop offset="1" stop-color="#e5e9df"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#f8f6ef"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#paper)"/>
+  <circle cx="1050" cy="140" r="230" fill="#789078" opacity=".10"/>
+  <path d="M0 560c210-66 360-49 550-9s385 33 650-61v185H0Z" fill="#657d68" opacity=".10"/>
+  <g transform="translate(88 96)">
+    <text x="0" y="25" fill="#61735d" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="5">DARODA ACCOUNTING</text>
+    <path d="M0 50h450" stroke="#9aa690" stroke-width="2"/>
+    <text x="0" y="132" fill="#26352d" font-family="Georgia, serif" font-size="55" font-weight="600">A full-stack</text>
+    <text x="0" y="196" fill="#26352d" font-family="Georgia, serif" font-size="55" font-weight="600">website rebuild</text>
+    <text x="2" y="244" fill="#566453" font-family="Arial, sans-serif" font-size="21">Wix → React • Public site • CRM-lite • Serverless APIs</text>
+    <rect x="0" y="300" width="170" height="42" rx="21" fill="#657d68"/>
+    <text x="85" y="327" text-anchor="middle" fill="#fffdf8" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5">LAUNCHED</text>
+  </g>
+  <g transform="translate(650 104)">
+    <rect x="0" y="0" width="456" height="405" rx="16" fill="#344237" opacity=".12"/>
+    <rect x="0" y="0" width="456" height="390" rx="16" fill="url(#panel)" stroke="#788775" stroke-width="2"/>
+    <path d="M0 55h456" stroke="#d5d9ce" stroke-width="2"/>
+    <circle cx="28" cy="28" r="6" fill="#be8678"/>
+    <circle cx="50" cy="28" r="6" fill="#d5b06d"/>
+    <circle cx="72" cy="28" r="6" fill="#82957c"/>
+    <rect x="26" y="87" width="180" height="10" rx="5" fill="#6f8069"/>
+    <rect x="26" y="111" width="284" height="7" rx="3.5" fill="#d7dbd1"/>
+    <rect x="26" y="131" width="245" height="7" rx="3.5" fill="#d7dbd1"/>
+    <rect x="26" y="177" width="404" height="116" rx="10" fill="#e8ece3"/>
+    <path d="M57 260V221h42v39M119 260v-58h42v58M181 260v-78h42v78" fill="none" stroke="#72866e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 261h179" stroke="#72866e" stroke-width="4" stroke-linecap="round"/>
+    <rect x="26" y="320" width="134" height="38" rx="19" fill="#657d68"/>
+    <text x="93" y="344" text-anchor="middle" fill="#fffdf8" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1">ACCOUNTING</text>
+    <rect x="176" y="320" width="120" height="38" rx="19" fill="#eef0e9" stroke="#abb4a5"/>
+    <text x="236" y="344" text-anchor="middle" fill="#566453" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1">BOOKKEEPING</text>
+  </g>
+  <text x="88" y="610" fill="#647261" font-family="Arial, sans-serif" font-size="16" letter-spacing="2">ENGINEERING BY NICK HANSON  •  ORIGINAL DESIGN BY BRANDY RILEY</text>
+</svg>
