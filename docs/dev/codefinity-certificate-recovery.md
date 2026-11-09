@@ -60,6 +60,9 @@ curriculum migration caused the discrepancy.
 
 ## Change status
 
-Prepared on feature branch `feat/recover-codefinity-certificates` for
-[PR #11](https://github.com/ArchILLtect/nh-showcase-site/pull/11).
-Not recorded as merged or deployed until those events are verified.
+Merged in [PR #11](https://github.com/ArchILLtect/nh-showcase-site/pull/11) on
+2026-11-04.
+
+The Git history confirms the merge to `main`, but does not by itself confirm
+that all seven cards were visually checked on the production Certificates page.
+Keep that production rendering check as a separate open item until verified.

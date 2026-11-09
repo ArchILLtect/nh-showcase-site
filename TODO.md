@@ -2,6 +2,8 @@
 ## TOP Priorities
 
 - [x] Add Plinth project to the portfolio section of the site.
+- [x] Add Daroda Accounting as a professional Experience entry (PR #15).
+- [x] Add Daroda Accounting’s launched website as a portfolio project, with a public-site link and credit to original designer Brandy Riley (PR #16).
 
 - [x] **Analytics read authorization:** the user-visits handler validates the server-side session and scopes results to the authenticated user; the all-visits handler requires a valid admin session. The analytics Lambdas are active with no reserved-concurrency pause configured. See the [API CORS and access-control inventory](docs/dev/API_CORS_INVENTORY.md).
 
@@ -10,7 +12,8 @@
 
 - [x] Implement GitHub repository cards without exposing a client-side token; public profile/repository data is fetched from GitHub's unauthenticated public API.
 - [x] Scope the content database effort before implementation; see [content data and storage scope](docs/dev/content-data-storage-scope.md). Database implementation remains deferred.
-- [x] Recover and add the seven unique Codefinity credentials (six courses plus completed Web Developer track); see `docs/dev/codefinity-certificate-recovery.md` (pending PR merge/production verification).
+- [x] Recover and add the seven unique Codefinity credentials (six courses plus completed Web Developer track); merged in [PR #11](https://github.com/ArchILLtect/nh-showcase-site/pull/11). See `docs/dev/codefinity-certificate-recovery.md`.
+- [ ] Verify that all seven Codefinity credentials render correctly on the production Certificates page.
 - [ ] Review any other missing Coursera or third-party credentials separately; do not assume this recovery completes the broader certificate backlog.
 - [ ] Add Dean's List letters to achievements page.
 
@@ -30,7 +33,7 @@
 
 ## Auth / Account Recovery
 - [x] Make frontend session validation fail closed when server confirmation is unavailable.
-- [ ] Add email confirmation during account creation (send verification email + require confirmation before account activation/login).
+- [x] Add email verification and account-confirmation flow for new accounts. Login remains intentionally soft-enforced: unverified users may log in and receive an in-app reminder.
 - [ ] Deferred (cost-aware): Add SES deliverability monitoring + alerting (CloudWatch alarms for Bounce/Complaint + SNS notifications) and a short incident runbook.
 
 ## Deferred: Auth/API Modernization (SSAF alignment)
@@ -40,7 +43,7 @@
 
 ### Phase 1: Discovery + Inventory
 - [ ] Inventory all current auth-related AWS assets (API Gateway routes/stages, Lambda functions, DynamoDB tables/indexes, IAM roles, CloudWatch log groups, secrets/env vars).
-- [ ] Document current contracts for `/login`, `/register`, `/tracking` (request/response payloads, status codes, error formats).
+- [ ] Document request/response contracts for the active authentication, verification, recovery, and session routes (payloads, status codes, and error formats). `/tracking` was removed and is historical only; see the [API CORS inventory](docs/dev/API_CORS_INVENTORY.md).
 - [ ] Capture current naming issues (generic names, inconsistent prefixes, obsolete route/version naming) and define target naming standard.
 
 ### Phase 2: Target Design (SSAF foundation)

@@ -17,6 +17,18 @@
       "status": "In active development"
     },
     {
+      "title": "Daroda Accounting Website",
+      "image": "/images/daroda/daroda-card.svg",
+      "description": "Rebuilt Daroda Accounting’s Wix site as a responsive React/Vite application, preserving its visual direction while adding a custom CRM-lite dashboard and serverless backend for lead management, scheduling, and operations.",
+      "techStack": ["React", "TypeScript", "Vite", "Chakra UI", "Netlify Functions", "Neon PostgreSQL"],
+      "siteLink": "https://www.darodaaccounting.com/",
+      "designCredit": {
+        "name": "Brandy Riley",
+        "url": "https://www.brandyriley.com"
+      },
+      "status": "Launched"
+    },
+    {
       "title": "CodeForge",
       "image": "../images/codeforge-logo.png",
       "description": "A full-stack web platform for practicing coding challenges with authentication, scoring, and real-time evaluation.",

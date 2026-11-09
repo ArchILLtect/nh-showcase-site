@@ -55,6 +55,19 @@ const ProjectCardItem = ({ project }) => {
           <p className="dark:text-gray-300 text-gray-600 mb-4 h-24 overflow-y-auto scrollbar-custom p-0.5">
             {project.description}
           </p>
+          {project.designCredit && (
+            <p className="dark:text-gray-400 text-gray-500 text-sm -mt-2 mb-4">
+              Original design by{" "}
+              <a
+                href={project.designCredit.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-blue-600 dark:hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              >
+                {project.designCredit.name}
+              </a>
+            </p>
+          )}
           <p className="dark:text-gray-300 text-sm text-gray-500 font-semibold mb-4 h-12 overflow-y-auto scrollbar-custom">
             Tech Stack: {project.techStack.join(', ')}
           </p>
@@ -157,6 +170,10 @@ ProjectCardItem.propTypes = {
     liveDemo: PropTypes.string,
     siteLink: PropTypes.string,
     projectPage: PropTypes.string,
+    designCredit: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    }),
     github: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
