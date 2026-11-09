@@ -1,14 +1,14 @@
 # Showcase API CORS Inventory
 
-Last verified: 2026-11-08 (`us-east-2`; includes analytics CORS and route configuration checks).
+Last verified: 2026-11-09 (`us-east-2`; API Gateway definitions and stage settings exported read-only).
 
-This is a point-in-time inventory of browser-facing API Gateway resources used by this repository. AWS configuration is not yet defined by infrastructure-as-code here; do not treat this document as a deployment recipe.
+This is a point-in-time inventory of browser-facing API Gateway resources used by this repository. The live API definitions and stage settings are captured in the [versioned baseline](api-gateway/baselines/2026-11-09/README.md); follow the [deployment and rollback runbook](api-gateway/DEPLOYMENT_RUNBOOK.md) for reviewed changes. The APIs remain manually managed; this is not a full infrastructure-as-code stack.
 
 ## Current API surfaces
 
 | Client call | API | Gateway configuration | Backend |
 | --- | --- | --- | --- |
-| Auth flows (`src/config/api.js`) | HTTP API `ShowcaseRegisterAPI` (`u7fyurbrjc`) | Native API-level CORS allows these exact origins: `https://nickhanson.me`, `https://www.nickhanson.me`, `https://deploy-preview-6--resonant-ganache-9efedd.netlify.app`, `https://deploy-preview-9--resonant-ganache-9efedd.netlify.app`, `https://deploy-preview-10--resonant-ganache-9efedd.netlify.app`, and `https://deploy-preview-17--resonant-ganache-9efedd.netlify.app`; methods `POST`; headers `content-type`, `authorization`. This is an API-wide policy. | Auth Lambdas. With native HTTP API CORS enabled, API Gateway applies the configured policy and ignores integration CORS headers. |
+| Auth flows (`src/config/api.js`) | HTTP API `ShowcaseRegisterAPI` (`u7fyurbrjc`) | The `$default` deployed stage's API-level CORS allows these exact origins: `https://nickhanson.me`, `https://www.nickhanson.me`, `https://deploy-preview-6--resonant-ganache-9efedd.netlify.app`, `https://deploy-preview-9--resonant-ganache-9efedd.netlify.app`, `https://deploy-preview-10--resonant-ganache-9efedd.netlify.app`, and `https://deploy-preview-17--resonant-ganache-9efedd.netlify.app`; methods `POST`; headers `content-type`, `authorization`. This is an API-wide policy. | Auth Lambdas. With native HTTP API CORS enabled, API Gateway applies the configured policy and ignores integration CORS headers. |
 | Visit logging (`src/utils/visitTracker.js`) | REST API `ssaf-analytics-visitManager` (`9hxx3na0o7`), stage `dev` | Root `OPTIONS` mock response echoes only an exact approved origin; approved responses include `Vary: Origin`. Unapproved origins receive no `Access-Control-Allow-Origin`. | Root `POST` invokes source-controlled `ssaf-analytics-trackVisit`. |
 | Visit log dashboard (`src/components/VisitLogsDashboard.jsx`) | REST API `showcaseAnalytics` (`ldlg09zoq7`), stage `dev` | Root `OPTIONS` and `/admin` `OPTIONS` mock responses echo only exact approved origins; approved responses include `Vary: Origin`. Unapproved origins receive no `Access-Control-Allow-Origin`. | Root `POST` invokes source-controlled `ssaf-analytics-getUserVisits`; `/admin` `GET` invokes source-controlled `ssaf-analytics-getAllVisits`. |
 
@@ -26,12 +26,15 @@ On 2026-11-04, successful visit writes were confirmed in DynamoDB and in the wri
 
 The REST API mock preflights and Lambda proxy responses use an exact allowlist: the production domains and Netlify previews 6, 9, 10, and 17. Unapproved browser origins are rejected by the analytics Lambdas and do not receive `Access-Control-Allow-Origin`; approved dynamic origin responses include `Vary: Origin`. Preview-17 API Gateway `OPTIONS` tests returned 200 with the exact origin and `Vary: Origin` on all three routes, and deployed Lambda code hashes matched the packaged artifacts. CORS remains browser policy, not authorization; Lambda session and role checks remain essential. The public visit API root `POST` now has API Gateway stage throttling at 5 requests/second with a burst limit of 10. This is an aggregate, best-effort cap for that method, not a per-IP limiter; per-IP controls can be considered separately if abuse appears.
 
-The auth HTTP API allowlist is shared across its routes. On 2026-11-04, preview-9 session validation preflight returned 204 and a missing-token request returned 401 with the expected allow-origin header. The recorded allowlist contained the production domains and preview-6, preview-9, preview-10, and preview-17. Add a preview origin deliberately when needed; do not assume arbitrary deploy-preview URLs are allowed.
+The auth HTTP API allowlist is shared across its routes. The `$default` stage export captured on 2026-11-09 includes preview-17; the manually deployed `prod` stage was last updated on 2026-11-05 and its export does not include preview-17. Both exports allow the production domains; do not deploy `prod` merely to synchronize a preview origin. On 2026-11-04, preview-9 session validation preflight returned 204 and a missing-token request returned 401 with the expected allow-origin header. Add a preview origin deliberately when needed; do not assume arbitrary deploy-preview URLs are allowed.
 
 The REST API configuration is manually managed and is not represented by infrastructure-as-code in this repository. When adding a preview, add it deliberately to both the REST API mock preflight mapping templates and the three analytics Lambda allowlists; the auth HTTP API policy is independently managed. Verify the deployed stage after API Gateway deployments. Treat CORS as browser policy, never as a replacement for server-side authorization.
 
 ## References
 
+- [API Gateway deployment and rollback runbook](api-gateway/DEPLOYMENT_RUNBOOK.md)
+
 - [AWS: Configure CORS for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
 - [AWS SAM: CORS configuration and proxy integrations](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-api-corsconfiguration.html)
 - [GitHub issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7)
+
