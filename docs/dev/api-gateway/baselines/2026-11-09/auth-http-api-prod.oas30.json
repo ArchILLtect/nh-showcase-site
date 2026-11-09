@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShowcaseRegisterAPI",
+    "version": "2026-11-05 01:48:30UTC"
+  },
+  "servers": [
+    {
+      "url": "https://u7fyurbrjc.execute-api.us-east-2.amazonaws.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "prod"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/forgot-password": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /forgot-password"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseForgotPassword:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /login"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseLogin:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /register"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseRegistration:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    },
+    "/resend-verification": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /resend-verification"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseResendVerification:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    },
+    "/reset-password": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /reset-password"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseResetPassword:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    },
+    "/session/validate": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /session/validate"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseSessionValidate:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    },
+    "/verify-email": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "Default response for POST /verify-email"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "payloadFormatVersion": "2.0",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:010928199012:function:showcaseVerifyEmail:prod/invocations",
+          "connectionType": "INTERNET"
+        }
+      }
+    }
+  },
+  "x-amazon-apigateway-cors": {
+    "allowMethods": [
+      "POST"
+    ],
+    "allowHeaders": [
+      "authorization",
+      "content-type"
+    ],
+    "maxAge": 0,
+    "allowCredentials": false,
+    "allowOrigins": [
+      "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+      "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+      "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
+      "https://nickhanson.me",
+      "https://www.nickhanson.me"
+    ]
+  },
+  "x-amazon-apigateway-importexport-version": "1.0"
+}
+

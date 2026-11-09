@@ -4,6 +4,10 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
+### API Gateway operations
+
+- Captured stage-specific HTTP and REST API Gateway definitions and stage settings in version control, with a reviewed manual deployment, verification, and rollback runbook; no live AWS configuration was changed.
+
 ### Preview access
 
 - Added the exact PR 17 Netlify preview origin to the auth API CORS policy, analytics API preflight responses, and all three analytics Lambda allowlists; unknown preview origins remain rejected.
@@ -57,3 +61,4 @@ All notable project changes are recorded here.
 ### Navigation
 
 - Kept the mobile navigation header and close toggle above the menu backdrop to prevent the backdrop from intercepting close taps.
+

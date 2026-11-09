@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "capturedAtUtc": "2026-11-09",
+  "region": "us-east-2",
+  "captureMethods": [
+    "API Gateway v2 ExportApi/GetApi/GetRoutes/GetIntegrations/GetStages",
+    "API Gateway v1 GetExport/GetRestApi/GetResources/GetStage"
+  ],
+  "definitions": [
+    "analytics-readers-rest-api.oas30.json",
+    "analytics-writer-rest-api.oas30.json",
+    "auth-http-api-default.oas30.json",
+    "auth-http-api-prod.oas30.json"
+  ],
+  "observed": {
+    "authHttpApi": {
+      "id": "u7fyurbrjc",
+      "name": "ShowcaseRegisterAPI",
+      "latestApiConfigurationCors": {
+        "AllowCredentials": false,
+        "AllowHeaders": [
+          "content-type",
+          "authorization"
+        ],
+        "AllowMethods": [
+          "POST"
+        ],
+        "AllowOrigins": [
+          "https://nickhanson.me",
+          "https://www.nickhanson.me",
+          "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+          "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
+          "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+          "https://deploy-preview-17--resonant-ganache-9efedd.netlify.app"
+        ],
+        "MaxAge": 0
+      },
+      "activeRoutes": [
+        {
+          "route": "POST /session/validate",
+          "lambda": "showcaseSessionValidate:prod",
+          "auth": "NONE"
+        },
+        {
+          "route": "POST /reset-password",
+          "lambda": "showcaseResetPassword:prod",
+          "auth": "NONE"
+        },
+        {
+          "route": "POST /login",
+          "lambda": "showcaseLogin:prod",
+          "auth": "NONE"
+        },
+        {
+          "route": "POST /verify-email",
+          "lambda": "showcaseVerifyEmail:prod",
+          "auth": "NONE"
+        },
+        {
+          "route": "POST /resend-verification",
+          "lambda": "showcaseResendVerification:prod",
+          "auth": "NONE"
+        },
+        {
+          "route": "POST /register",
+          "lambda": "showcaseRegistration:prod",
+          "auth": "NONE"
+        },
+        {
+          "route": "POST /forgot-password",
+          "lambda": "showcaseForgotPassword:prod",
+          "auth": "NONE"
+        }
+      ],
+      "stages": [
+        {
+          "name": "$default",
+          "autoDeploy": true,
+          "deploymentIdAtCapture": "xcmhgc",
+          "lastUpdatedDate": "2026-11-09T01:02:50+00:00",
+          "defaultRouteSettings": {
+            "DetailedMetricsEnabled": false
+          },
+          "routeSettings": {},
+          "stageVariables": {}
+        },
+        {
+          "name": "prod",
+          "autoDeploy": false,
+          "deploymentIdAtCapture": "cujeh7",
+          "lastUpdatedDate": "2026-11-05T01:51:36+00:00",
+          "defaultRouteSettings": {
+            "DetailedMetricsEnabled": false
+          },
+          "routeSettings": {},
+          "stageVariables": {}
+        }
+      ],
+      "stageExports": {
+        "$default": {
+          "file": "auth-http-api-default.oas30.json",
+          "exportVersion": "2026-11-09 01:02:50UTC",
+          "cors": {
+            "allowMethods": [
+              "POST"
+            ],
+            "allowHeaders": [
+              "authorization",
+              "content-type"
+            ],
+            "maxAge": 0,
+            "allowCredentials": false,
+            "allowOrigins": [
+              "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+              "https://deploy-preview-17--resonant-ganache-9efedd.netlify.app",
+              "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+              "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
+              "https://nickhanson.me",
+              "https://www.nickhanson.me"
+            ]
+          },
+          "routePaths": [
+            "/forgot-password",
+            "/login",
+            "/register",
+            "/resend-verification",
+            "/reset-password",
+            "/session/validate",
+            "/verify-email"
+          ]
+        },
+        "prod": {
+          "file": "auth-http-api-prod.oas30.json",
+          "exportVersion": "2026-11-05 01:48:30UTC",
+          "cors": {
+            "allowMethods": [
+              "POST"
+            ],
+            "allowHeaders": [
+              "authorization",
+              "content-type"
+            ],
+            "maxAge": 0,
+            "allowCredentials": false,
+            "allowOrigins": [
+              "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+              "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
+              "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
+              "https://nickhanson.me",
+              "https://www.nickhanson.me"
+            ]
+          },
+          "routePaths": [
+            "/forgot-password",
+            "/login",
+            "/register",
+            "/resend-verification",
+            "/reset-password",
+            "/session/validate",
+            "/verify-email"
+          ]
+        }
+      }
+    },
+    "analyticsWriter": {
+      "id": "9hxx3na0o7",
+      "name": "ssaf-analytics-visitManager",
+      "api": {
+        "id": "9hxx3na0o7",
+        "name": "ssaf-analytics-visitManager",
+        "createdDate": "2025-05-22T13:14:15+00:00",
+        "apiKeySource": "HEADER",
+        "endpointConfiguration": {
+          "types": [
+            "REGIONAL"
+          ],
+          "ipAddressType": "ipv4"
+        },
+        "tags": {},
+        "disableExecuteApiEndpoint": false,
+        "rootResourceId": "kvrdiakqk1",
+        "securityPolicy": "TLS_1_0",
+        "apiStatus": "AVAILABLE"
+      },
+      "routes": [
+        {
+          "path": "/",
+          "method": "OPTIONS",
+          "integrationType": "MOCK",
+          "lambda": "MOCK",
+          "authorization": "NONE",
+          "apiKeyRequired": false
+        },
+        {
+          "path": "/",
+          "method": "POST",
+          "integrationType": "AWS_PROXY",
+          "lambda": "ssaf-analytics-trackVisit",
+          "authorization": "NONE",
+          "apiKeyRequired": false
+        }
+      ],
+      "stageConfiguration": {
+        "deploymentId": "17k45d",
+        "stageName": "dev",
+        "cacheClusterEnabled": false,
+        "cacheClusterSize": "0.5",
+        "cacheClusterStatus": "NOT_AVAILABLE",
+        "methodSettings": {
+          "~1/POST": {
+            "metricsEnabled": false,
+            "dataTraceEnabled": false,
+            "throttlingBurstLimit": 10,
+            "throttlingRateLimit": 5,
+            "cachingEnabled": false,
+            "cacheTtlInSeconds": 300,
+            "cacheDataEncrypted": false,
+            "requireAuthorizationForCacheControl": true,
+            "unauthorizedCacheControlHeaderStrategy": "SUCCEED_WITH_RESPONSE_HEADER"
+          }
+        },
+        "tracingEnabled": false,
+        "createdDate": "2025-05-22T13:16:09+00:00",
+        "lastUpdatedDate": "2026-11-09T01:02:51+00:00"
+      }
+    },
+    "analyticsReaders": {
+      "id": "ldlg09zoq7",
+      "name": "showcaseAnalytics",
+      "api": {
+        "id": "ldlg09zoq7",
+        "name": "showcaseAnalytics",
+        "createdDate": "2025-05-22T23:53:15+00:00",
+        "apiKeySource": "HEADER",
+        "endpointConfiguration": {
+          "types": [
+            "REGIONAL"
+          ],
+          "ipAddressType": "ipv4"
+        },
+        "tags": {},
+        "disableExecuteApiEndpoint": false,
+        "rootResourceId": "tnhvvjxotl",
+        "securityPolicy": "TLS_1_0",
+        "apiStatus": "AVAILABLE"
+      },
+      "routes": [
+        {
+          "path": "/admin",
+          "method": "GET",
+          "integrationType": "AWS_PROXY",
+          "lambda": "ssaf-analytics-getAllVisits",
+          "authorization": "NONE",
+          "apiKeyRequired": false
+        },
+        {
+          "path": "/admin",
+          "method": "OPTIONS",
+          "integrationType": "MOCK",
+          "lambda": "MOCK",
+          "authorization": "NONE",
+          "apiKeyRequired": false
+        },
+        {
+          "path": "/",
+          "method": "OPTIONS",
+          "integrationType": "MOCK",
+          "lambda": "MOCK",
+          "authorization": "NONE",
+          "apiKeyRequired": false
+        },
+        {
+          "path": "/",
+          "method": "POST",
+          "integrationType": "AWS_PROXY",
+          "lambda": "ssaf-analytics-getUserVisits",
+          "authorization": "NONE",
+          "apiKeyRequired": false
+        }
+      ],
+      "stageConfiguration": {
+        "deploymentId": "yjopbx",
+        "stageName": "dev",
+        "cacheClusterEnabled": false,
+        "cacheClusterSize": "0.5",
+        "cacheClusterStatus": "NOT_AVAILABLE",
+        "methodSettings": {},
+        "tracingEnabled": false,
+        "createdDate": "2025-05-22T23:54:23+00:00",
+        "lastUpdatedDate": "2026-11-09T01:04:23+00:00"
+      }
+    }
+  },
+  "notes": [
+    "AWS reported fourteen integrations on the auth HTTP API while seven active routes target seven integrations. Stage-specific OpenAPI exports include the effective active routes; seven unreferenced integration objects remain in AWS, were not deleted, and are intentionally excluded.",
+    "At capture, $default was updated on 2026-11-09 and includes preview 17; prod was last updated 2026-11-05 and its stage export does not include preview 17. Production origins are present in both stage exports. Do not sync prod automatically.",
+    "Deployment IDs are point-in-time references for audit/rollback. Capture fresh stage settings immediately before each change.",
+    "OpenAPI exports do not fully represent stage-level deployment settings. The writer throttle is recorded separately in the REST stage configuration."
+  ]
+}
+
