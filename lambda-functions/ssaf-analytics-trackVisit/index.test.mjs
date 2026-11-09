@@ -37,3 +37,11 @@ test("returns a server error when DynamoDB rejects a visit write", async () => {
   assert.equal(result.statusCode, 500);
   assert.equal(JSON.parse(result.body).code, "INTERNAL_ERROR");
 });
+
+test("allows the current PR preview origin", async () => {
+  const origin = "https://deploy-preview-17--resonant-ganache-9efedd.netlify.app";
+  const handler = createHandler({ getDocumentClient: () => ({ send: async () => ({}) }) });
+  const result = await handler({ headers: { origin }, body: JSON.stringify({ path: "/preview-check" }) });
+  assert.equal(result.statusCode, 201);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], origin);
+});
