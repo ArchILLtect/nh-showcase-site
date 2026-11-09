@@ -40,3 +40,12 @@ test("fails closed when session validation is unavailable", async () => {
   const result = await handler(event("Bearer token"));
   assert.equal(result.statusCode, 503);
 });
+
+test("allows the current PR preview origin", async () => {
+  const origin = "https://deploy-preview-17--resonant-ganache-9efedd.netlify.app";
+  const result = await createHandler({ fetchFn: () => assert.fail("missing token should stop first") })(
+    { headers: { origin } },
+  );
+  assert.equal(result.statusCode, 401);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], origin);
+});

@@ -35,7 +35,7 @@ Purpose: provide one fast, root-level reference for the current authentication a
 - Reset tokens are single-use, short-lived, and hash-at-rest.
 - Password reset increments `tokenVersion` to invalidate stale sessions.
 - Protected routes call server-side session validation (`/session/validate`) and end the browser session when validation cannot be confirmed.
-- Browser CORS is allowlisted in the auth Lambda handlers and API Gateway; the current API Gateway preview allowlist is limited to the specifically verified Netlify preview origin. See [Lambda deployment notes](../lambda-functions/README.md) and [issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7) for the remaining route-specific CORS ownership work.
+- Browser CORS uses explicit allowlists in the auth Lambda handlers and API Gateway; the current approved production and preview origins are recorded in the [API CORS inventory](dev/API_CORS_INVENTORY.md). CORS remediation is complete. [Issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7) now tracks fresh analytics read-path verification and making the manually managed API Gateway configuration reproducible.
 - Abuse controls are enabled (per-account cooldown + per-account/per-IP limits).
 - Structured CloudWatch logs are in place for recovery events.
 

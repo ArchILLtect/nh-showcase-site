@@ -21,6 +21,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://deploy-preview-6--resonant-ganache-9efedd.netlify.app",
   "https://deploy-preview-9--resonant-ganache-9efedd.netlify.app",
   "https://deploy-preview-10--resonant-ganache-9efedd.netlify.app",
+  "https://deploy-preview-17--resonant-ganache-9efedd.netlify.app",
 ]);
 
 const allowedOrigin = (origin) => !origin || ALLOWED_ORIGINS.has(origin);

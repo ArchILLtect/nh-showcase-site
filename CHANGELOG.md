@@ -4,6 +4,11 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
+### Preview access
+
+- Added the exact PR 17 Netlify preview origin to the auth API CORS policy, analytics API preflight responses, and all three analytics Lambda allowlists; unknown preview origins remain rejected.
+- Added Lambda regression tests for the approved preview origin and verified all three deployed API Gateway preflights and Lambda package hashes.
+
 ### Certificates and portfolio content
 
 - Recovered seven unique Codefinity credentials from archived 2023 certificate images: six completed courses and the **Becoming a Web Developer** track.
@@ -40,7 +45,7 @@ All notable project changes are recorded here.
 
 - Updated the production dependency lockfile to remediate the audited `follow-redirects` and `source-map-js` findings.
 - Replaced wildcard browser CORS responses in all authentication Lambdas with production-domain and Netlify deploy-preview allowlisting; unknown browser origins are rejected.
-- Restricted API Gateway CORS to production domains and explicitly approved Netlify deploy-preview origins. Broader route-specific CORS ownership remains tracked in [issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
+- Restricted API Gateway CORS to production domains and explicitly approved Netlify deploy-preview origins; CORS remediation is complete. [Issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7) now tracks analytics read-path verification and reproducible API Gateway configuration.
 
 ### Tooling
 
