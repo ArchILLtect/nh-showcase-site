@@ -4,6 +4,11 @@ All notable project changes are recorded here.
 
 ## Unreleased
 
+### Preview access
+
+- Added the exact PR 17 Netlify preview origin to the auth API CORS policy, analytics API preflight responses, and all three analytics Lambda allowlists; unknown preview origins remain rejected.
+- Added Lambda regression tests for the approved preview origin and verified all three deployed API Gateway preflights and Lambda package hashes.
+
 ### Certificates and portfolio content
 
 - Recovered seven unique Codefinity credentials from archived 2023 certificate images: six completed courses and the **Becoming a Web Developer** track.
