@@ -38,3 +38,12 @@ test("allows admins and paginates the full scan", async () => {
   assert.equal(JSON.parse(result.body).length, 2);
   assert.equal(calls, 2);
 });
+
+test("allows the current PR preview origin", async () => {
+  const origin = "https://deploy-preview-17--resonant-ganache-9efedd.netlify.app";
+  const result = await createHandler({ fetchFn: () => assert.fail("missing token should stop first") })(
+    { headers: { origin } },
+  );
+  assert.equal(result.statusCode, 401);
+  assert.equal(result.headers["Access-Control-Allow-Origin"], origin);
+});
