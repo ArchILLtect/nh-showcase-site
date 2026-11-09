@@ -40,7 +40,7 @@ All notable project changes are recorded here.
 
 - Updated the production dependency lockfile to remediate the audited `follow-redirects` and `source-map-js` findings.
 - Replaced wildcard browser CORS responses in all authentication Lambdas with production-domain and Netlify deploy-preview allowlisting; unknown browser origins are rejected.
-- Restricted API Gateway CORS to production domains and explicitly approved Netlify deploy-preview origins. Broader route-specific CORS ownership remains tracked in [issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7).
+- Restricted API Gateway CORS to production domains and explicitly approved Netlify deploy-preview origins; CORS remediation is complete. [Issue #7](https://github.com/ArchILLtect/nh-showcase-site/issues/7) now tracks analytics read-path verification and reproducible API Gateway configuration.
 
 ### Tooling
 
